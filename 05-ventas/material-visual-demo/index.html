@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexus — Material Visual de Demo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-900 text-white min-h-screen">
+  <div class="max-w-6xl mx-auto px-8 py-16">
+    <header class="mb-16">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-teal-500 rounded-xl flex items-center justify-center text-white font-bold">N</div>
+        <span class="text-2xl font-bold">Nexus</span>
+        <span class="text-slate-500 text-sm ml-2">(provisional)</span>
+      </div>
+      <h1 class="text-5xl font-bold mb-4">Material Visual de Demo</h1>
+      <p class="text-xl text-slate-400 max-w-3xl">Mockups para usar en llamadas de diagnóstico con prospectos. Click cada uno para abrirlo en el browser. Para slides: Cmd+Shift+4 para screenshot.</p>
+    </header>
+
+    <div class="grid grid-cols-2 gap-6">
+      <!-- Slide 4 capas -->
+      <a href="slide-4-capas.html" class="block bg-slate-800 hover:bg-slate-700 transition rounded-xl p-8 border border-slate-700 hover:border-blue-500 group">
+        <div class="text-xs text-blue-400 font-semibold uppercase tracking-wider mb-3">SLIDE — formato 16:9</div>
+        <h2 class="text-2xl font-bold mb-2">Las 4 Capas del Moat</h2>
+        <p class="text-slate-400 mb-6">Diagrama central que explica por qué los clientes no se van. Para mostrar al inicio del demo de stickiness.</p>
+        <div class="text-blue-400 text-sm font-semibold group-hover:translate-x-1 transition-transform">Abrir →</div>
+      </a>
+
+      <!-- Mockup 1 -->
+      <a href="dashboard-home.html" class="block bg-slate-800 hover:bg-slate-700 transition rounded-xl p-8 border border-slate-700 hover:border-teal-500 group">
+        <div class="text-xs text-teal-400 font-semibold uppercase tracking-wider mb-3">MOCKUP 1 — desktop dashboard</div>
+        <h2 class="text-2xl font-bold mb-2">Dashboard del Lunes en la Mañana</h2>
+        <p class="text-slate-400 mb-6">Lo que el abogado/CPA ve al abrir el sistema cada lunes. KPIs, priority inbox, calendario, activity feed.</p>
+        <div class="text-teal-400 text-sm font-semibold group-hover:translate-x-1 transition-transform">Abrir →</div>
+      </a>
+
+      <!-- Mockup 2 - el más importante -->
+      <a href="client-detail.html" class="block bg-slate-800 hover:bg-slate-700 transition rounded-xl p-8 border border-slate-700 hover:border-purple-500 group relative">
+        <div class="absolute top-4 right-4 bg-purple-500 text-white text-xs px-2 py-1 rounded-full font-bold">⭐ El más importante</div>
+        <div class="text-xs text-purple-400 font-semibold uppercase tracking-wider mb-3">MOCKUP 2 — desktop dashboard</div>
+        <h2 class="text-2xl font-bold mb-2">Vista Profunda de Cliente</h2>
+        <p class="text-slate-400 mb-6">Demuestra el lock-in por contexto. Incluye el panel <strong class="text-purple-300">"Sofia knows about María"</strong> que es el momento mágico del demo.</p>
+        <div class="text-purple-400 text-sm font-semibold group-hover:translate-x-1 transition-transform">Abrir →</div>
+      </a>
+
+      <!-- Mockup 3 -->
+      <a href="document-search.html" class="block bg-slate-800 hover:bg-slate-700 transition rounded-xl p-8 border border-slate-700 hover:border-amber-500 group">
+        <div class="text-xs text-amber-400 font-semibold uppercase tracking-wider mb-3">MOCKUP 3 — desktop dashboard</div>
+        <h2 class="text-2xl font-bold mb-2">Búsqueda Global de Documentos</h2>
+        <p class="text-slate-400 mb-6">Demuestra el lock-in por volumen. 8,247 documentos clasificados, indexados y con extracción automática.</p>
+        <div class="text-amber-400 text-sm font-semibold group-hover:translate-x-1 transition-transform">Abrir →</div>
+      </a>
+    </div>
+
+    <div class="mt-16 bg-slate-800/50 border border-slate-700 rounded-xl p-6">
+      <h3 class="text-sm font-semibold uppercase tracking-wider text-slate-400 mb-4">Cómo usarlos</h3>
+      <ul class="space-y-2 text-slate-300 text-sm">
+        <li class="flex gap-3"><span class="text-blue-400">1.</span><span>Para <strong>screenshots</strong>: abre cualquier mockup, presiona <kbd class="bg-slate-700 px-2 py-0.5 rounded text-xs">Cmd+Shift+4</kbd>, selecciona el área. Pega en Keynote/PowerPoint.</span></li>
+        <li class="flex gap-3"><span class="text-blue-400">2.</span><span>Para <strong>demo en vivo en Zoom</strong>: abre el mockup en pantalla completa y comparte ventana del browser.</span></li>
+        <li class="flex gap-3"><span class="text-blue-400">3.</span><span>Para <strong>compartir link</strong> con prospecto: deploy gratis en Vercel/Netlify con drag & drop de la carpeta.</span></li>
+        <li class="flex gap-3"><span class="text-blue-400">4.</span><span>El <strong>guión exacto</strong> para usar estos mockups en demo está en <code class="text-blue-400">05-ventas/demo-stickiness.md</code>.</span></li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="meta.title">Nexus — Enterprise AI for the firms that deserve it</title>
+  <meta name="description" data-i18n-attr="content" data-i18n="meta.description" content="AI agents built specifically for immigration attorneys, accounting practices, and logistics companies. Enterprise depth. Bilingual by design.">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Background orbs -->
+  <div class="fixed inset-0 grid-pattern pointer-events-none z-0"></div>
+  <div class="fixed inset-0 pointer-events-none z-0">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- ─────────────────────────────────── NAV ─────────────────────────────────── -->
+  <nav id="nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <div class="w-9 h-9 bg-gradient-to-br from-teal-500 to-blue-600 rounded-lg flex items-center justify-center font-black text-white text-lg">N</div>
+        <span class="text-xl font-bold tracking-tight">Nexus</span>
+      </a>
+
+      <div class="hidden md:flex items-center gap-8 text-sm">
+        <a href="mission.html" class="text-slate-300 hover:text-white transition" data-i18n="nav.mission">Mission</a>
+        <a href="what-we-build.html" class="text-slate-300 hover:text-white transition" data-i18n="nav.offer">What we build</a>
+        <a href="industries.html" class="text-slate-300 hover:text-white transition" data-i18n="nav.industries">Industries</a>
+        <a href="demo.html" class="text-teal-400 font-semibold transition" data-i18n="nav.demo">Demo</a>
+        <a href="pricing.html" class="text-slate-300 hover:text-white transition" data-i18n="nav.pricing">Pricing</a>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <div class="flex gap-1 bg-slate-800/60 backdrop-blur p-1 rounded-lg text-xs">
+          <button onclick="setLang('en')" id="lang-en" class="px-3 py-1 rounded font-bold text-white bg-slate-700">EN</button>
+          <button onclick="setLang('es')" id="lang-es" class="px-3 py-1 rounded font-bold text-slate-400 hover:text-white">ES</button>
+        </div>
+        <a href="contact.html" class="hidden md:inline-block px-4 py-2 bg-gradient-to-r from-teal-500 to-blue-600 rounded-lg font-semibold text-sm hover:shadow-lg hover:shadow-teal-500/30 transition-all" data-i18n="nav.cta">Book a call</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ─────────────────────────────────── DEMO HERO ─────────────────────────────────── -->
+  <section class="relative pt-40 pb-32 px-6 z-10">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-20">
+        <div class="text-sm font-bold text-teal-400 uppercase tracking-widest mb-4 reveal" data-i18n="demo.label">Live Demo</div>
+        <h1 class="heading-display text-6xl md:text-7xl font-black mb-6 reveal">
+          Don't take our word.<br><span class="gradient-text">See it work.</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-slate-300 max-w-2xl mx-auto leading-relaxed reveal" data-i18n="demo.sub">
+          Interactive product demos. Click any view to explore exactly how your firm would operate with Nexus.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- The Moat Slide -->
+        <a href="../../05-ventas/material-visual-demo/slide-4-capas.html" target="_blank" class="demo-card glass-card rounded-3xl p-8 group reveal flex flex-col justify-between">
+          <div>
+            <div class="aspect-video bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl mb-6 flex items-center justify-center text-5xl overflow-hidden relative">
+              <div class="space-y-2 w-full px-12 z-10">
+                <div class="h-3 rounded bg-gradient-to-r from-orange-400 to-orange-600 ml-16"></div>
+                <div class="h-3 rounded bg-gradient-to-r from-purple-400 to-purple-600 ml-10"></div>
+                <div class="h-3 rounded bg-gradient-to-r from-blue-400 to-blue-600 ml-5"></div>
+                <div class="h-3 rounded bg-gradient-to-r from-teal-400 to-teal-600"></div>
+              </div>
+            </div>
+            <div class="text-xs font-bold text-teal-400 uppercase tracking-widest mb-2" data-i18n="demo.card1.label">Conceptual</div>
+            <h3 class="text-2xl font-bold mb-3 text-white" data-i18n="demo.card1.title">The 4 Layers of Lock-in</h3>
+            <p class="text-slate-300 text-base mb-6" data-i18n="demo.card1.body">Visual explanation of why our clients stay. The moat that compounds over time.</p>
+          </div>
+          <div>
+            <span class="text-teal-400 text-sm font-semibold group-hover:gap-3 inline-flex items-center gap-2 transition-all" data-i18n="demo.open">Open demo →</span>
+          </div>
+        </a>
+
+        <!-- Dashboard Home -->
+        <a href="../../05-ventas/material-visual-demo/dashboard-home.html" target="_blank" class="demo-card glass-card rounded-3xl p-8 group reveal flex flex-col justify-between">
+          <div>
+            <div class="aspect-video bg-gradient-to-br from-slate-100 to-white rounded-2xl mb-6 p-4 overflow-hidden relative flex items-center">
+              <div class="bg-white rounded-xl shadow-lg border border-slate-200/50 h-full w-full p-4 space-y-3">
+                <div class="grid grid-cols-4 gap-2">
+                  <div class="bg-slate-100 rounded h-8"></div>
+                  <div class="bg-slate-100 rounded h-8"></div>
+                  <div class="bg-red-50 rounded h-8 border border-red-200/50"></div>
+                  <div class="bg-slate-100 rounded h-8"></div>
+                </div>
+                <div class="space-y-2">
+                  <div class="bg-slate-100 rounded h-4 w-full"></div>
+                  <div class="bg-slate-100 rounded h-4 w-5/6"></div>
+                  <div class="bg-amber-50 rounded h-4 w-11/12 border border-amber-200/50"></div>
+                </div>
+              </div>
+            </div>
+            <div class="text-xs font-bold text-teal-400 uppercase tracking-widest mb-2" data-i18n="demo.card2.label">Daily view</div>
+            <h3 class="text-2xl font-bold mb-3 text-white" data-i18n="demo.card2.title">Monday Morning Dashboard</h3>
+            <p class="text-slate-300 text-base mb-6" data-i18n="demo.card2.body">What your team sees when they open Nexus each Monday. Priority inbox, deadlines, automated activity.</p>
+          </div>
+          <div>
+            <span class="text-teal-400 text-sm font-semibold group-hover:gap-3 inline-flex items-center gap-2 transition-all" data-i18n="demo.open">Open demo →</span>
+          </div>
+        </a>
+
+        <!-- Client Detail -->
+        <a href="../../05-ventas/material-visual-demo/client-detail.html" target="_blank" class="demo-card glass-card rounded-3xl p-8 group reveal relative flex flex-col justify-between">
+          <div class="absolute top-6 right-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs px-3 py-1.5 rounded-full font-bold" data-i18n="demo.card3.badge">⭐ Most impactful</div>
+          <div>
+            <div class="aspect-video bg-gradient-to-br from-slate-100 to-white rounded-2xl mb-6 p-4 overflow-hidden relative flex items-center">
+              <div class="bg-white rounded-xl shadow-lg border border-slate-200/50 h-full w-full p-4 space-y-3">
+                <div class="bg-purple-50 rounded-lg h-10 border border-purple-200/50"></div>
+                <div class="grid grid-cols-2 gap-2">
+                  <div class="bg-slate-100 rounded h-20"></div>
+                  <div class="bg-teal-50 rounded-lg h-20 border-2 border-teal-400/80"></div>
+                </div>
+              </div>
+            </div>
+            <div class="text-xs font-bold text-teal-400 uppercase tracking-widest mb-2" data-i18n="demo.card3.label">Deep view</div>
+            <h3 class="text-2xl font-bold mb-3 text-white" data-i18n="demo.card3.title">Client Profile — The Moat</h3>
+            <p class="text-slate-300 text-base mb-6" data-i18n="demo.card3.body">See the "Sofia knows" panel — 24 months of context that no competitor can replicate quickly.</p>
+          </div>
+          <div>
+            <span class="text-teal-400 text-sm font-semibold group-hover:gap-3 inline-flex items-center gap-2 transition-all" data-i18n="demo.open">Open demo →</span>
+          </div>
+        </a>
+
+        <!-- Document Search -->
+        <a href="../../05-ventas/material-visual-demo/document-search.html" target="_blank" class="demo-card glass-card rounded-3xl p-8 group reveal flex flex-col justify-between">
+          <div>
+            <div class="aspect-video bg-gradient-to-br from-slate-100 to-white rounded-2xl mb-6 p-4 overflow-hidden relative flex items-center">
+              <div class="bg-white rounded-xl shadow-lg border border-slate-200/50 h-full w-full p-4 space-y-3">
+                <div class="bg-blue-50 rounded h-6 border border-blue-200/50"></div>
+                <div class="grid grid-cols-3 gap-2">
+                  <div class="space-y-1 col-span-1">
+                    <div class="bg-slate-100 rounded h-3"></div>
+                    <div class="bg-slate-100 rounded h-3"></div>
+                    <div class="bg-blue-100 rounded h-3"></div>
+                  </div>
+                  <div class="col-span-2 space-y-2">
+                    <div class="bg-amber-50 rounded-lg h-12 border border-amber-200/50"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="text-xs font-bold text-teal-400 uppercase tracking-widest mb-2" data-i18n="demo.card4.label">Knowledge base</div>
+            <h3 class="text-2xl font-bold mb-3 text-white" data-i18n="demo.card4.title">Global Document Search</h3>
+            <p class="text-slate-300 text-base mb-6" data-i18n="demo.card4.body">8,247 documents indexed, tagged, and intelligent. Find any record in 0.3 seconds.</p>
+          </div>
+          <div>
+            <span class="text-teal-400 text-sm font-semibold group-hover:gap-3 inline-flex items-center gap-2 transition-all" data-i18n="demo.open">Open demo →</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────── FOOTER ─────────────────────────────────── -->
+  <footer class="relative py-16 px-6 border-t border-white/10 z-10">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-4 gap-12 mb-12">
+        <div>
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-9 h-9 bg-gradient-to-br from-teal-500 to-blue-600 rounded-lg flex items-center justify-center font-black text-white">N</div>
+            <span class="text-xl font-bold">Nexus</span>
+          </div>
+          <p class="text-sm text-slate-400 leading-relaxed" data-i18n="footer.tagline">Enterprise AI for the firms that deserve it. Built in Mexico, deployed in the US.</p>
+        </div>
+
+        <div>
+          <div class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4" data-i18n="footer.industries.label">Industries</div>
+          <ul class="space-y-2 text-sm">
+            <li><a href="industries.html" class="text-slate-300 hover:text-white" data-i18n="footer.industries.attorneys">Immigration attorneys</a></li>
+            <li><a href="industries.html" class="text-slate-300 hover:text-white" data-i18n="footer.industries.accountants">Accounting practices</a></li>
+            <li><a href="industries.html" class="text-slate-300 hover:text-white" data-i18n="footer.industries.logistics">Logistics companies</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4" data-i18n="footer.company.label">Company</div>
+          <ul class="space-y-2 text-sm">
+            <li><a href="mission.html" class="text-slate-300 hover:text-white" data-i18n="footer.company.about">About</a></li>
+            <li><a href="demo.html" class="text-slate-300 hover:text-white" data-i18n="footer.company.demo">Live demo</a></li>
+            <li><a href="contact.html" class="text-slate-300 hover:text-white" data-i18n="footer.company.contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4" data-i18n="footer.legal.label">Legal</div>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="text-slate-300 hover:text-white" data-i18n="footer.legal.privacy">Privacy Policy</a></li>
+            <li><a href="#" class="text-slate-300 hover:text-white" data-i18n="footer.legal.terms">Terms of Service</a></li>
+            <li><a href="#" class="text-slate-300 hover:text-white" data-i18n="footer.legal.data">Data export</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pt-8 border-t border-white/10 flex flex-wrap justify-between items-center gap-4 text-sm text-slate-500">
+        <div data-i18n="footer.copyright">© 2026 Nexus. Built in Mexico for the US market.</div>
+        <div data-i18n="footer.contact">contact@nexus.ai</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

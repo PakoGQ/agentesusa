@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document Search — Nexus</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; background: #F8FAFC; }
+    .pdf-thumb {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border: 1px solid #f59e0b;
+      position: relative;
+    }
+    .pdf-thumb::before {
+      content: 'PDF';
+      position: absolute; top: 6px; right: 6px;
+      background: #dc2626; color: white;
+      font-size: 9px; font-weight: 700;
+      padding: 2px 5px; border-radius: 3px;
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+
+  <!-- Top header -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-10">
+    <div class="max-w-[1400px] mx-auto px-8 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 bg-gradient-to-br from-blue-500 to-teal-500 rounded-lg flex items-center justify-center text-white font-bold">N</div>
+        <span class="text-xl font-bold text-slate-900">Nexus</span>
+        <nav class="ml-8 flex gap-1">
+          <button class="px-4 py-1.5 text-sm text-slate-600 hover:bg-slate-100 rounded-lg">Dashboard</button>
+          <button class="px-4 py-1.5 text-sm text-slate-600 hover:bg-slate-100 rounded-lg">Clients</button>
+          <button class="px-4 py-1.5 text-sm font-semibold text-slate-900 bg-slate-100 rounded-lg">Documents</button>
+          <button class="px-4 py-1.5 text-sm text-slate-600 hover:bg-slate-100 rounded-lg">Calendar</button>
+          <button class="px-4 py-1.5 text-sm text-slate-600 hover:bg-slate-100 rounded-lg">Reports</button>
+        </nav>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="text-xs text-blue-600 hover:underline">← demo index</a>
+        <div class="w-9 h-9 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center text-white font-bold text-sm">CH</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-[1400px] mx-auto px-8 py-6">
+
+    <!-- Search bar -->
+    <div class="mb-4">
+      <div class="bg-white rounded-xl border border-slate-200 px-5 py-4 flex items-center gap-3 shadow-sm">
+        <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        <input type="text" value='medical bills 2024' class="flex-1 outline-none text-base font-medium text-slate-900" />
+        <span class="text-xs text-slate-500 bg-slate-100 px-2 py-1 rounded">⌘K</span>
+      </div>
+      <div class="text-sm text-slate-500 mt-2 px-1 flex items-center gap-3">
+        <span><strong class="text-slate-900">47 results</strong> in 0.3s</span>
+        <span class="text-slate-400">•</span>
+        <span>Searching <strong class="text-slate-900">8,247 documents</strong> across all clients</span>
+        <span class="text-slate-400">•</span>
+        <span class="text-teal-700 bg-teal-50 px-2 py-0.5 rounded text-xs font-semibold">Sofia indexed all docs</span>
+      </div>
+    </div>
+
+    <!-- Body: Filters + Results -->
+    <div class="grid grid-cols-12 gap-6">
+
+      <!-- Filters sidebar -->
+      <aside class="col-span-3 bg-white rounded-xl border border-slate-200 p-5 h-fit sticky top-24">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="font-bold text-slate-900 uppercase tracking-wider text-xs">Filters</h3>
+          <button class="text-xs text-blue-600 hover:underline">Reset</button>
+        </div>
+
+        <!-- Type filter -->
+        <div class="mb-5 pb-5 border-b border-slate-100">
+          <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Type</div>
+          <div class="space-y-1.5">
+            <label class="flex items-center gap-2 text-sm cursor-pointer">
+              <input type="checkbox" class="rounded border-slate-300 text-blue-600">
+              <span class="flex-1 text-slate-700">Invoice</span>
+              <span class="text-xs text-slate-400">23</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer">
+              <input type="checkbox" checked class="rounded border-slate-300 text-blue-600">
+              <span class="flex-1 text-slate-900 font-semibold">Medical bill</span>
+              <span class="text-xs text-slate-400">47</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer">
+              <input type="checkbox" class="rounded border-slate-300 text-blue-600">
+              <span class="flex-1 text-slate-700">W-2</span>
+              <span class="text-xs text-slate-400">8</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer">
+              <input type="checkbox" class="rounded border-slate-300 text-blue-600">
+              <span class="flex-1 text-slate-700">1099</span>
+              <span class="text-xs text-slate-400">12</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer">
+              <input type="checkbox" class="rounded border-slate-300 text-blue-600">
+              <span class="flex-1 text-slate-700">IRS notice</span>
+              <span class="text-xs text-slate-400">3</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer">
+              <input type="checkbox" class="rounded border-slate-300 text-blue-600">
+              <span class="flex-1 text-slate-700">USCIS notice</span>
+              <span class="text-xs text-slate-400">14</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Year -->
+        <div class="mb-5 pb-5 border-b border-slate-100">
+          <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Year</div>
+          <div class="space-y-1.5">
+            <label class="flex items-center gap-2 text-sm cursor-pointer">
+              <input type="checkbox" class="rounded border-slate-300 text-blue-600">
+              <span class="flex-1 text-slate-700">2025</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer">
+              <input type="checkbox" checked class="rounded border-slate-300 text-blue-600">
+              <span class="flex-1 text-slate-900 font-semibold">2024</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer">
+              <input type="checkbox" class="rounded border-slate-300 text-blue-600">
+              <span class="flex-1 text-slate-700">2023</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Client -->
+        <div class="mb-5 pb-5 border-b border-slate-100">
+          <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Client</div>
+          <div class="space-y-1.5">
+            <label class="flex items-center gap-2 text-sm cursor-pointer">
+              <input type="radio" name="client" class="border-slate-300 text-blue-600">
+              <span class="flex-1 text-slate-700">All clients</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer">
+              <input type="radio" name="client" checked class="border-slate-300 text-blue-600">
+              <span class="flex-1 text-slate-900 font-semibold">Active cases only</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer">
+              <input type="radio" name="client" class="border-slate-300 text-blue-600">
+              <span class="flex-1 text-slate-700">Closed cases</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Tag -->
+        <div class="mb-5 pb-5 border-b border-slate-100">
+          <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Case Tag</div>
+          <div class="space-y-1.5">
+            <label class="flex items-center gap-2 text-sm cursor-pointer">
+              <input type="checkbox" checked class="rounded border-slate-300 text-blue-600">
+              <span class="flex-1 text-slate-900 font-semibold">PI case</span>
+              <span class="text-xs text-slate-400">47</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer">
+              <input type="checkbox" class="rounded border-slate-300 text-blue-600">
+              <span class="flex-1 text-slate-700">Auto accident</span>
+              <span class="text-xs text-slate-400">23</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer">
+              <input type="checkbox" class="rounded border-slate-300 text-blue-600">
+              <span class="flex-1 text-slate-700">Slip & fall</span>
+              <span class="text-xs text-slate-400">11</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer">
+              <input type="checkbox" class="rounded border-slate-300 text-blue-600">
+              <span class="flex-1 text-slate-700">Tax return</span>
+              <span class="text-xs text-slate-400">52</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer">
+              <input type="checkbox" class="rounded border-slate-300 text-blue-600">
+              <span class="flex-1 text-slate-700">Audit</span>
+              <span class="text-xs text-slate-400">3</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Source -->
+        <div>
+          <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Source</div>
+          <div class="space-y-1.5">
+            <label class="flex items-center gap-2 text-sm cursor-pointer">
+              <input type="checkbox" class="rounded border-slate-300 text-blue-600">
+              <span class="flex-1 text-slate-700">📱 WhatsApp</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer">
+              <input type="checkbox" class="rounded border-slate-300 text-blue-600">
+              <span class="flex-1 text-slate-700">📧 Email</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer">
+              <input type="checkbox" class="rounded border-slate-300 text-blue-600">
+              <span class="flex-1 text-slate-700">🖥 Web upload</span>
+            </label>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Results -->
+      <section class="col-span-9 space-y-4">
+
+        <!-- Result 1 -->
+        <div class="bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-md transition">
+          <div class="p-5 flex gap-5">
+            <div class="pdf-thumb w-32 h-44 rounded-lg flex items-center justify-center text-amber-800 font-bold text-2xl flex-shrink-0">📄</div>
+            <div class="flex-1">
+              <div class="flex items-start justify-between mb-2">
+                <div>
+                  <h3 class="font-bold text-slate-900 text-base">Cedars-Sinai_Bill_2024-08-15.pdf</h3>
+                  <div class="text-sm text-slate-500 mt-0.5">Hospital invoice · 2 pages · 1.2 MB</div>
+                </div>
+                <div class="flex gap-2">
+                  <button class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg hover:bg-slate-100 font-medium">Open</button>
+                  <button class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg hover:bg-slate-100 font-medium">Download</button>
+                </div>
+              </div>
+
+              <!-- Metadata grid -->
+              <div class="grid grid-cols-3 gap-x-4 gap-y-1 mb-3 text-sm">
+                <div><span class="text-slate-500">Client:</span> <span class="font-semibold text-slate-900">María Rodríguez</span></div>
+                <div><span class="text-slate-500">Date:</span> <span class="font-semibold text-slate-900">Aug 15, 2024</span></div>
+                <div><span class="text-slate-500">Amount:</span> <span class="font-semibold text-slate-900">$12,450.00</span></div>
+                <div class="col-span-3 mt-1 flex gap-2 flex-wrap">
+                  <span class="text-xs bg-purple-100 text-purple-800 px-2 py-0.5 rounded font-semibold">PI case</span>
+                  <span class="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded font-semibold">Auto accident</span>
+                  <span class="text-xs bg-slate-100 text-slate-700 px-2 py-0.5 rounded">Hospital</span>
+                  <span class="text-xs bg-slate-100 text-slate-700 px-2 py-0.5 rounded">CA</span>
+                </div>
+              </div>
+
+              <!-- Extracted by Sofia/Marco — THE MAGIC -->
+              <div class="bg-gradient-to-r from-teal-50 to-blue-50 border border-teal-200 rounded-lg p-3 mt-3">
+                <div class="text-xs font-bold text-teal-800 uppercase tracking-wider mb-2 flex items-center gap-1">
+                  <span>🧠</span> Extracted by Sofia
+                </div>
+                <div class="grid grid-cols-2 gap-x-6 gap-y-1 text-sm">
+                  <div><span class="text-slate-500">CPT codes:</span> <span class="font-mono text-slate-900">99284, 73721</span></div>
+                  <div><span class="text-slate-500">Treatment:</span> <span class="text-slate-900">ER + MRI</span></div>
+                  <div><span class="text-slate-500">Insurance billed:</span> <span class="text-slate-900">$8,450</span></div>
+                  <div><span class="text-slate-500">Patient responsibility:</span> <span class="text-slate-900 font-semibold">$4,000</span></div>
+                  <div class="col-span-2 pt-1 mt-1 border-t border-teal-200">
+                    <span class="text-slate-500">Lien tracking:</span>
+                    <span class="text-amber-700 font-semibold"> ⚠ Active lien — added to settlement calculator</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Result 2 -->
+        <div class="bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-md transition">
+          <div class="p-5 flex gap-5">
+            <div class="pdf-thumb w-32 h-44 rounded-lg flex items-center justify-center text-amber-800 font-bold text-2xl flex-shrink-0">📄</div>
+            <div class="flex-1">
+              <div class="flex items-start justify-between mb-2">
+                <div>
+                  <h3 class="font-bold text-slate-900 text-base">UCLA_Med_Center_2024-09-22.pdf</h3>
+                  <div class="text-sm text-slate-500 mt-0.5">Outpatient invoice · 1 page · 480 KB</div>
+                </div>
+                <div class="flex gap-2">
+                  <button class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg hover:bg-slate-100 font-medium">Open</button>
+                  <button class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg hover:bg-slate-100 font-medium">Download</button>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-3 gap-x-4 gap-y-1 mb-3 text-sm">
+                <div><span class="text-slate-500">Client:</span> <span class="font-semibold text-slate-900">Roberto Méndez</span></div>
+                <div><span class="text-slate-500">Date:</span> <span class="font-semibold text-slate-900">Sep 22, 2024</span></div>
+                <div><span class="text-slate-500">Amount:</span> <span class="font-semibold text-slate-900">$3,890.00</span></div>
+                <div class="col-span-3 mt-1 flex gap-2 flex-wrap">
+                  <span class="text-xs bg-purple-100 text-purple-800 px-2 py-0.5 rounded font-semibold">PI case</span>
+                  <span class="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded font-semibold">Slip & fall</span>
+                  <span class="text-xs bg-slate-100 text-slate-700 px-2 py-0.5 rounded">Outpatient</span>
+                </div>
+              </div>
+
+              <div class="bg-gradient-to-r from-teal-50 to-blue-50 border border-teal-200 rounded-lg p-3 mt-3">
+                <div class="text-xs font-bold text-teal-800 uppercase tracking-wider mb-2 flex items-center gap-1">
+                  <span>🧠</span> Extracted by Sofia
+                </div>
+                <div class="grid grid-cols-2 gap-x-6 gap-y-1 text-sm">
+                  <div><span class="text-slate-500">CPT codes:</span> <span class="font-mono text-slate-900">99213, 97110</span></div>
+                  <div><span class="text-slate-500">Treatment:</span> <span class="text-slate-900">PT session #4</span></div>
+                  <div><span class="text-slate-500">Insurance:</span> <span class="text-slate-900">PIP exhausted</span></div>
+                  <div><span class="text-slate-500">Patient responsibility:</span> <span class="text-slate-900 font-semibold">$3,890</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Result 3 -->
+        <div class="bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-md transition">
+          <div class="p-5 flex gap-5">
+            <div class="pdf-thumb w-32 h-44 rounded-lg flex items-center justify-center text-amber-800 font-bold text-2xl flex-shrink-0">📄</div>
+            <div class="flex-1">
+              <div class="flex items-start justify-between mb-2">
+                <div>
+                  <h3 class="font-bold text-slate-900 text-base">Kaiser_Permanente_2024-11-04.pdf</h3>
+                  <div class="text-sm text-slate-500 mt-0.5">Specialist visit · 3 pages · 1.8 MB</div>
+                </div>
+                <div class="flex gap-2">
+                  <button class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg hover:bg-slate-100 font-medium">Open</button>
+                  <button class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg hover:bg-slate-100 font-medium">Download</button>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-3 gap-x-4 gap-y-1 mb-3 text-sm">
+                <div><span class="text-slate-500">Client:</span> <span class="font-semibold text-slate-900">Diego Vargas</span></div>
+                <div><span class="text-slate-500">Date:</span> <span class="font-semibold text-slate-900">Nov 4, 2024</span></div>
+                <div><span class="text-slate-500">Amount:</span> <span class="font-semibold text-slate-900">$5,720.00</span></div>
+                <div class="col-span-3 mt-1 flex gap-2 flex-wrap">
+                  <span class="text-xs bg-purple-100 text-purple-800 px-2 py-0.5 rounded font-semibold">PI case</span>
+                  <span class="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded font-semibold">Auto accident</span>
+                  <span class="text-xs bg-red-100 text-red-700 px-2 py-0.5 rounded font-semibold">⚠ Duplicate suspected</span>
+                </div>
+              </div>
+
+              <div class="bg-gradient-to-r from-amber-50 to-red-50 border border-amber-300 rounded-lg p-3 mt-3">
+                <div class="text-xs font-bold text-amber-800 uppercase tracking-wider mb-2 flex items-center gap-1">
+                  <span>⚠</span> Sofia detected anomaly
+                </div>
+                <div class="text-sm text-slate-700">
+                  This invoice appears to be 87% similar to <span class="font-semibold text-slate-900">Kaiser_Permanente_2024-10-28.pdf</span>. Same CPT code, same provider, $20 amount difference. Possible billing error or duplicate.
+                  <button class="block mt-2 text-amber-800 hover:underline font-semibold text-xs">Compare side-by-side →</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="flex items-center justify-between bg-white rounded-xl border border-slate-200 px-5 py-3">
+          <div class="text-sm text-slate-500">Showing <strong class="text-slate-900">3</strong> of <strong class="text-slate-900">47</strong> results</div>
+          <div class="flex gap-2">
+            <button class="px-3 py-1.5 text-sm border border-slate-300 rounded-lg hover:bg-slate-100 font-medium">Load more</button>
+            <button class="px-3 py-1.5 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium">Export filtered (CSV)</button>
+          </div>
+        </div>
+
+      </section>
+    </div>
+
+    <!-- Demo footer note -->
+    <div class="mt-8 text-center text-xs text-slate-400">
+      Mockup demostrativo · Datos ficticios · <a href="index.html" class="text-blue-600 hover:underline">← volver al index</a>
+    </div>
+
+  </main>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Home — Nexus</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; background: #F8FAFC; }
+  </style>
+</head>
+<body class="min-h-screen">
+
+  <!-- Top header -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-10">
+    <div class="max-w-[1400px] mx-auto px-8 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 bg-gradient-to-br from-blue-500 to-teal-500 rounded-lg flex items-center justify-center text-white font-bold">N</div>
+        <span class="text-xl font-bold text-slate-900">Nexus</span>
+        <nav class="ml-8 flex gap-1">
+          <button class="px-4 py-1.5 text-sm font-semibold text-slate-900 bg-slate-100 rounded-lg">Dashboard</button>
+          <button class="px-4 py-1.5 text-sm text-slate-600 hover:bg-slate-100 rounded-lg">Clients</button>
+          <button class="px-4 py-1.5 text-sm text-slate-600 hover:bg-slate-100 rounded-lg">Documents</button>
+          <button class="px-4 py-1.5 text-sm text-slate-600 hover:bg-slate-100 rounded-lg">Calendar</button>
+          <button class="px-4 py-1.5 text-sm text-slate-600 hover:bg-slate-100 rounded-lg">Reports</button>
+        </nav>
+      </div>
+      <div class="text-center">
+        <div class="text-base font-semibold text-slate-900">Welcome back, Carlos</div>
+        <div class="text-xs text-slate-500">Monday, March 11, 2026</div>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="text-xs text-blue-600 hover:underline">← demo index</a>
+        <button class="relative p-2 hover:bg-slate-100 rounded-lg">
+          <svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+          <span class="absolute -top-0.5 -right-0.5 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center font-bold">2</span>
+        </button>
+        <div class="w-9 h-9 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center text-white font-bold text-sm">CH</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-[1400px] mx-auto px-8 py-6">
+
+    <!-- KPI Cards -->
+    <div class="grid grid-cols-4 gap-4 mb-6">
+      <div class="bg-white rounded-xl border border-slate-200 p-5">
+        <div class="text-xs uppercase tracking-wider text-slate-500 font-semibold mb-2">Needs attention</div>
+        <div class="text-4xl font-bold text-slate-900 mb-1">5</div>
+        <div class="text-xs text-slate-500">clients today</div>
+      </div>
+      <div class="bg-white rounded-xl border border-slate-200 p-5">
+        <div class="text-xs uppercase tracking-wider text-slate-500 font-semibold mb-2">Docs pending</div>
+        <div class="text-4xl font-bold text-slate-900 mb-1">12</div>
+        <div class="text-xs text-slate-500">from 8 clients</div>
+      </div>
+      <div class="bg-white rounded-xl border border-slate-200 p-5">
+        <div class="text-xs uppercase tracking-wider text-slate-500 font-semibold mb-2">Deadlines &lt;7 days</div>
+        <div class="text-4xl font-bold text-red-600 mb-1">3</div>
+        <div class="text-xs text-slate-500">critical</div>
+      </div>
+      <div class="bg-white rounded-xl border border-slate-200 p-5">
+        <div class="text-xs uppercase tracking-wider text-slate-500 font-semibold mb-2">New leads</div>
+        <div class="text-4xl font-bold text-slate-900 mb-1">2</div>
+        <div class="text-xs text-slate-500">this week</div>
+      </div>
+    </div>
+
+    <!-- Main grid: Priority Inbox + This Week -->
+    <div class="grid grid-cols-5 gap-6 mb-6">
+
+      <!-- Priority Inbox -->
+      <div class="col-span-3 bg-white rounded-xl border border-slate-200 overflow-hidden">
+        <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between">
+          <h2 class="font-bold text-slate-900 uppercase tracking-wider text-sm flex items-center gap-2">
+            <span>🔥</span> Priority Inbox
+          </h2>
+          <span class="text-xs text-slate-500">5 items</span>
+        </div>
+        <div class="divide-y divide-slate-100">
+
+          <a href="client-detail.html" class="flex items-start gap-4 p-5 hover:bg-slate-50 transition cursor-pointer">
+            <div class="w-2.5 h-2.5 bg-red-500 rounded-full mt-2 flex-shrink-0"></div>
+            <div class="flex-1 min-w-0">
+              <div class="font-semibold text-slate-900">María Rodríguez</div>
+              <div class="text-sm text-slate-700 mt-0.5">USCIS deadline in 4 days</div>
+              <div class="text-xs text-slate-500 mt-1">Last contact: 8 days ago · I-130 family case · Spanish</div>
+            </div>
+            <div class="flex gap-2 flex-shrink-0">
+              <button class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg hover:bg-slate-100 font-medium">Review</button>
+              <button class="px-3 py-1.5 text-xs bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium">Contact now</button>
+            </div>
+          </a>
+
+          <div class="flex items-start gap-4 p-5 hover:bg-slate-50 transition cursor-pointer">
+            <div class="w-2.5 h-2.5 bg-amber-500 rounded-full mt-2 flex-shrink-0"></div>
+            <div class="flex-1 min-w-0">
+              <div class="font-semibold text-slate-900">Roberto Méndez</div>
+              <div class="text-sm text-slate-700 mt-0.5">Missing 3 docs for 2024 tax return</div>
+              <div class="text-xs text-slate-500 mt-1">Sofia has reminded 2× this week · Pattern: usually responds Thursdays</div>
+            </div>
+            <div class="flex gap-2 flex-shrink-0">
+              <button class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg hover:bg-slate-100 font-medium">Review</button>
+              <button class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg hover:bg-slate-100 font-medium">Override</button>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 p-5 hover:bg-slate-50 transition cursor-pointer">
+            <div class="w-2.5 h-2.5 bg-amber-500 rounded-full mt-2 flex-shrink-0"></div>
+            <div class="flex-1 min-w-0">
+              <div class="font-semibold text-slate-900">Ana López</div>
+              <div class="text-sm text-slate-700 mt-0.5">Severance offer expires in 6 days</div>
+              <div class="text-xs text-slate-500 mt-1">Workers comp + retaliation case · Employer pushing for signature</div>
+            </div>
+            <div class="flex gap-2 flex-shrink-0">
+              <button class="px-3 py-1.5 text-xs bg-amber-500 text-white rounded-lg hover:bg-amber-600 font-medium">Review urgent</button>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 p-5 hover:bg-slate-50 transition cursor-pointer">
+            <div class="w-2.5 h-2.5 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
+            <div class="flex-1 min-w-0">
+              <div class="font-semibold text-slate-900">Carlos Hernández</div>
+              <div class="text-sm text-slate-700 mt-0.5">Asked status 3×, response sent automatically</div>
+              <div class="text-xs text-slate-500 mt-1">Sofia handled with last week's update · No action needed</div>
+            </div>
+            <div class="flex gap-2 flex-shrink-0">
+              <button class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg hover:bg-slate-100 font-medium">View thread</button>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 p-5 hover:bg-slate-50 transition cursor-pointer">
+            <div class="w-2.5 h-2.5 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
+            <div class="flex-1 min-w-0">
+              <div class="font-semibold text-slate-900">Patricia Ruiz</div>
+              <div class="text-sm text-slate-700 mt-0.5">Document received: W-2 ✓</div>
+              <div class="text-xs text-slate-500 mt-1">2024 tax return now 100% complete · Ready to file</div>
+            </div>
+            <div class="flex gap-2 flex-shrink-0">
+              <button class="px-3 py-1.5 text-xs bg-green-600 text-white rounded-lg hover:bg-green-700 font-medium">Approve & file</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- This Week sidebar -->
+      <div class="col-span-2 bg-white rounded-xl border border-slate-200 overflow-hidden">
+        <div class="px-6 py-4 border-b border-slate-200">
+          <h2 class="font-bold text-slate-900 uppercase tracking-wider text-sm flex items-center gap-2">
+            <span>📅</span> This Week
+          </h2>
+        </div>
+        <div class="divide-y divide-slate-100">
+          <div class="p-4">
+            <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">TUE Mar 12</div>
+            <div class="font-semibold text-slate-900 mt-1">10:00 AM</div>
+            <div class="text-sm text-slate-600">José L. — Initial consultation</div>
+            <div class="text-xs text-slate-500 mt-1">Migratorio · Video call</div>
+          </div>
+          <div class="p-4">
+            <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">WED Mar 13</div>
+            <div class="font-semibold text-slate-900 mt-1">2:30 PM</div>
+            <div class="text-sm text-slate-600">Court hearing — García case</div>
+            <div class="text-xs text-slate-500 mt-1">LA Superior Court Dept 5</div>
+          </div>
+          <div class="p-4">
+            <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">THU Mar 14</div>
+            <div class="font-semibold text-slate-900 mt-1">9:00 AM</div>
+            <div class="text-sm text-slate-600">Mendoza intake (new lead)</div>
+            <div class="text-xs text-slate-500 mt-1">Personal injury · In person</div>
+          </div>
+          <div class="p-4 bg-red-50 border-l-4 border-red-500">
+            <div class="text-xs font-bold text-red-600 uppercase tracking-wider">FRI Mar 15 · 🚨 DEADLINE</div>
+            <div class="font-semibold text-slate-900 mt-1">S-Corp filing deadline</div>
+            <div class="text-sm text-slate-600">4 returns to file today</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Activity Feed -->
+    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+      <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between">
+        <h2 class="font-bold text-slate-900 uppercase tracking-wider text-sm flex items-center gap-2">
+          <span>📈</span> Recent Activity
+          <span class="ml-2 text-xs text-teal-700 bg-teal-100 px-2 py-0.5 rounded-full font-semibold normal-case tracking-normal">Sofia & Marco automated</span>
+        </h2>
+        <button class="text-xs text-blue-600 hover:underline font-medium">View all →</button>
+      </div>
+      <div class="divide-y divide-slate-100">
+        <div class="px-6 py-3 flex items-start gap-4">
+          <div class="text-xs text-slate-500 font-mono w-20 flex-shrink-0 pt-0.5">6:42 AM</div>
+          <div class="flex-1 text-sm">
+            <span class="text-slate-900 font-medium">Marco analyzed 3 receipts from Mendoza Construction</span>
+            <span class="text-slate-500"> — Found: 1 duplicate, 1 vendor missing W-9 (alert sent to CPA)</span>
+          </div>
+        </div>
+        <div class="px-6 py-3 flex items-start gap-4">
+          <div class="text-xs text-slate-500 font-mono w-20 flex-shrink-0 pt-0.5">5:18 AM</div>
+          <div class="flex-1 text-sm">
+            <span class="text-slate-900 font-medium">Marco sent reminder to Roberto M.</span>
+            <span class="text-slate-500"> — 3rd reminder this week (custom: simpler tone for him)</span>
+          </div>
+        </div>
+        <div class="px-6 py-3 flex items-start gap-4">
+          <div class="text-xs text-slate-500 font-mono w-20 flex-shrink-0 pt-0.5">11:32 PM</div>
+          <div class="flex-1 text-sm">
+            <span class="text-slate-900 font-medium">Sofia answered status question from Ana López</span>
+            <span class="text-slate-500"> — Bilingual: detected Spanish from message, responded in Spanish</span>
+          </div>
+        </div>
+        <div class="px-6 py-3 flex items-start gap-4">
+          <div class="text-xs text-slate-500 font-mono w-20 flex-shrink-0 pt-0.5">10:15 PM</div>
+          <div class="flex-1 text-sm">
+            <span class="text-slate-900 font-medium">Sofia processed I-130 receipt notice for María R.</span>
+            <span class="text-slate-500"> — Extracted: receipt #MSC2519823, deadline tracker updated</span>
+          </div>
+        </div>
+        <div class="px-6 py-3 flex items-start gap-4">
+          <div class="text-xs text-slate-500 font-mono w-20 flex-shrink-0 pt-0.5">8:50 PM</div>
+          <div class="flex-1 text-sm">
+            <span class="text-slate-900 font-medium">Sofia rescheduled García meeting</span>
+            <span class="text-slate-500"> — Client requested move from Wed 9am to Thu 11am</span>
+          </div>
+        </div>
+        <div class="px-6 py-3 flex items-start gap-4">
+          <div class="text-xs text-slate-500 font-mono w-20 flex-shrink-0 pt-0.5">3:22 PM</div>
+          <div class="flex-1 text-sm">
+            <span class="text-slate-900 font-medium">Marco flagged unusual cash deposit ($12,400)</span>
+            <span class="text-slate-500"> — Mendoza Construction Mar 8 · Above CTR threshold, recommend review</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Demo footer note -->
+    <div class="mt-8 text-center text-xs text-slate-400">
+      Mockup demostrativo · Datos ficticios · <a href="index.html" class="text-blue-600 hover:underline">← volver al index</a>
+    </div>
+
+  </main>
+</body>
+</html>
