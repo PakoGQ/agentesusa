@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="meta.title">Nexus — Enterprise AI for the firms that deserve it</title>
+  <meta name="description" data-i18n-attr="content" data-i18n="meta.description" content="AI agents built specifically for immigration attorneys, accounting practices, and logistics companies. Enterprise depth. Bilingual by design.">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Background orbs & Grid -->
+  <div class="fixed inset-0 grid-pattern pointer-events-none z-0"></div>
+  <div class="fixed inset-0 pointer-events-none z-0">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- ─────────────────────────────────── NAV ─────────────────────────────────── -->
+  <nav id="nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <div class="w-9 h-9 bg-gradient-to-br from-teal-500 to-blue-600 rounded-lg flex items-center justify-center font-black text-white text-lg">N</div>
+        <span class="text-xl font-bold tracking-tight">Nexus</span>
+      </a>
+
+      <div class="hidden md:flex items-center gap-8 text-sm">
+        <a href="mission.html" class="text-slate-300 hover:text-white transition" data-i18n="nav.mission">Mission</a>
+        <a href="what-we-build.html" class="text-slate-300 hover:text-white transition" data-i18n="nav.offer">What we build</a>
+        <a href="industries.html" class="text-slate-300 hover:text-white transition" data-i18n="nav.industries">Industries</a>
+        <a href="demo.html" class="text-slate-300 hover:text-white transition" data-i18n="nav.demo">Demo</a>
+        <a href="pricing.html" class="text-slate-300 hover:text-white transition" data-i18n="nav.pricing">Pricing</a>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <div class="flex gap-1 bg-slate-800/60 backdrop-blur p-1 rounded-lg text-xs">
+          <button onclick="setLang('en')" id="lang-en" class="px-3 py-1 rounded font-bold text-white bg-slate-700">EN</button>
+          <button onclick="setLang('es')" id="lang-es" class="px-3 py-1 rounded font-bold text-slate-400 hover:text-white">ES</button>
+        </div>
+        <a href="contact.html" class="hidden md:inline-block px-4 py-2 bg-gradient-to-r from-teal-500 to-blue-600 rounded-lg font-semibold text-sm hover:shadow-lg hover:shadow-teal-500/30 transition-all" data-i18n="nav.cta">Book a call</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ─────────────────────────────────── HERO ─────────────────────────────────── -->
+  <section class="relative min-h-screen flex items-center pt-24 pb-20 px-6 overflow-hidden z-10">
+    <canvas id="hero-canvas"></canvas>
+    
+    <div class="max-w-7xl mx-auto w-full grid lg:grid-cols-12 gap-12 items-center relative z-10">
+      
+      <!-- Hero Content -->
+      <div class="lg:col-span-7 space-y-8">
+        <div class="inline-flex items-center gap-2 bg-teal-500/10 border border-teal-500/30 px-4 py-1.5 rounded-full text-xs font-bold text-teal-400 tracking-wide" data-i18n="hero.badge">
+          Now serving immigration attorneys, accountants, and logistics companies
+        </div>
+        
+        <h1 class="heading-display text-5xl md:text-7xl font-black text-white" data-i18n="hero.headline">
+          The AI advantage<br>your firm <span class="gradient-text">deserves.</span>
+        </h1>
+        
+        <p class="text-lg md:text-xl text-slate-300 max-w-2xl leading-relaxed" data-i18n="hero.sub">
+          We build AI allies — not chatbots — for the firms that have been priced out of enterprise software. Bilingual by design. Sector-specialized. Built in Mexico, deployed in the US.
+        </p>
+        
+        <div class="flex flex-wrap gap-4">
+          <a href="contact.html" class="px-8 py-4 bg-gradient-to-r from-teal-500 to-blue-600 rounded-xl font-bold hover:shadow-lg hover:shadow-teal-500/30 transition" data-i18n="hero.cta_primary">
+            Schedule strategy call
+          </a>
+          <a href="demo.html" class="px-8 py-4 glass-card hover:bg-slate-800/80 rounded-xl font-bold transition" data-i18n="hero.cta_secondary">
+            See the live demo
+          </a>
+        </div>
+        
+        <!-- Quick stats preview grid -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8 border-t border-white/10">
+          <div>
+            <div class="text-3xl font-black text-white">24/7</div>
+            <div class="text-xs text-slate-400 font-medium" data-i18n="hero.stat1">Bilingual coverage</div>
+          </div>
+          <div>
+            <div class="text-3xl font-black text-white">14d</div>
+            <div class="text-xs text-slate-400 font-medium" data-i18n="hero.stat2">From signing to live</div>
+          </div>
+          <div>
+            <div class="text-3xl font-black text-white">3</div>
+            <div class="text-xs text-slate-400 font-medium" data-i18n="hero.stat3">Specialized industries</div>
+          </div>
+          <div>
+            <div class="text-3xl font-black text-white">-90%</div>
+            <div class="text-xs text-slate-400 font-medium" data-i18n="hero.stat4">Cost advantage</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Interactive Mockup Feed (WOW factor) -->
+      <div class="lg:col-span-5 relative">
+        <div class="glass-card rounded-3xl p-6 border border-white/10 shadow-2xl relative overflow-hidden backdrop-blur-2xl">
+          <!-- Mockup Header -->
+          <div class="flex items-center justify-between border-b border-white/5 pb-4 mb-4">
+            <div class="flex items-center gap-2">
+              <span class="w-3.5 h-3.5 rounded-full bg-teal-500 flex items-center justify-center text-[10px] font-bold text-slate-900">S</span>
+              <div>
+                <span class="text-sm font-bold text-white">Sofia AI Agent</span>
+                <span class="block text-[10px] text-teal-400 font-semibold uppercase tracking-wider">Active Workspace</span>
+              </div>
+            </div>
+            <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
+          </div>
+          
+          <!-- Mockup Live Simulation Chat Feed -->
+          <div class="space-y-4 font-mono text-[11px] leading-relaxed mb-6">
+            <div class="bg-slate-900/60 p-3.5 rounded-2xl border border-white/5 space-y-1">
+              <div class="text-slate-400 flex justify-between"><span>[09:31:02] Client WhatsApp (US)</span> <span class="text-slate-500">English</span></div>
+              <div class="text-slate-200">"Hey, just checking on my case. Did you get the sponsorship files I sent yesterday?"</div>
+            </div>
+            
+            <div class="bg-teal-500/5 p-3.5 rounded-2xl border border-teal-500/20 space-y-1">
+              <div class="text-teal-400 flex justify-between"><span>[09:31:04] Sofia Agent</span> <span class="text-teal-500">Autonomous</span></div>
+              <div class="text-teal-100">"Hi! Yes, I received your 3 PDF files. I already scanned them and updated your dossier on the dashboard. I did spot a slight typo on page 4 of the W2; your SSN has one digit switched. I've flagged this for the attorney's review."</div>
+            </div>
+
+            <div class="bg-slate-900/60 p-3.5 rounded-2xl border border-white/5 space-y-1">
+              <div class="text-slate-400 flex justify-between"><span>[09:31:40] Client WhatsApp (MX)</span> <span class="text-slate-500">Spanish</span></div>
+              <div class="text-slate-200">"Hola, ¿cuándo tengo que entregar el pedimento definitivo para el cruce de mañana?"</div>
+            </div>
+            
+            <div class="bg-teal-500/5 p-3.5 rounded-2xl border border-teal-500/20 space-y-1">
+              <div class="text-teal-400 flex justify-between"><span>[09:31:42] Sofia Agent</span> <span class="text-teal-500">Autonomous</span></div>
+              <div class="text-teal-100">"¡Hola! El pedimento definitivo debe subirse antes de las 18:00 hrs de hoy para evitar retrasos en la aduana de Laredo. Ya generé la alerta en el portal."</div>
+            </div>
+          </div>
+
+          <!-- Live metrics simulation -->
+          <div class="grid grid-cols-2 gap-4 border-t border-white/5 pt-4">
+            <div class="bg-slate-900/40 p-3.5 rounded-xl border border-white/5">
+              <div class="text-[10px] text-slate-500 uppercase tracking-widest font-semibold">Docs Scanned</div>
+              <div class="text-xl font-black text-teal-400 mt-1">12,842</div>
+            </div>
+            <div class="bg-slate-900/40 p-3.5 rounded-xl border border-white/5">
+              <div class="text-[10px] text-slate-500 uppercase tracking-widest font-semibold">Response Time</div>
+              <div class="text-xl font-black text-blue-400 mt-1">0.4s</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────── TEASER: WHAT WE BUILD ─────────────────────────────────── -->
+  <section class="relative py-28 px-6 z-10 border-t border-white/5">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <div class="text-sm font-bold text-teal-400 uppercase tracking-widest mb-2" data-i18n="offer.label">What we build</div>
+        <h2 class="heading-display text-4xl md:text-5xl font-black text-white">Three layers of intelligence</h2>
+        <p class="text-slate-400 mt-4 max-w-xl mx-auto text-sm" data-i18n="offer.sub">Each layer compounds on the previous one. After 12 months, this is how your firm runs.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Layer 1 Teaser -->
+        <div class="glass-card rounded-2xl p-8 flex flex-col justify-between reveal">
+          <div>
+            <div class="text-3xl font-black text-teal-400 mb-4">01</div>
+            <h3 class="text-xl font-bold mb-3 text-white" data-i18n="offer.layer1.label">Communication Layer</h3>
+            <p class="text-slate-400 text-sm leading-relaxed mb-6" data-i18n="offer.layer1.body">Available 24/7 on WhatsApp, web, and email. Detects language automatically. Schedules, reminds, follows up.</p>
+          </div>
+          <a href="what-we-build.html" class="text-teal-400 text-sm font-semibold hover:underline">Explore layer 1 →</a>
+        </div>
+
+        <!-- Layer 2 Teaser -->
+        <div class="glass-card rounded-2xl p-8 flex flex-col justify-between reveal">
+          <div>
+            <div class="text-3xl font-black text-blue-400 mb-4">02</div>
+            <h3 class="text-xl font-bold mb-3 text-white" data-i18n="offer.layer2.label">Automation Layer</h3>
+            <p class="text-slate-400 text-sm leading-relaxed mb-6" data-i18n="offer.layer2.body">The agent reads contracts, classifies invoices, prepares case files, detects inconsistencies. Every document is tagged.</p>
+          </div>
+          <a href="what-we-build.html" class="text-blue-400 text-sm font-semibold hover:underline">Explore layer 2 →</a>
+        </div>
+
+        <!-- Layer 3 Teaser -->
+        <div class="glass-card rounded-2xl p-8 flex flex-col justify-between reveal">
+          <div>
+            <div class="text-3xl font-black text-purple-400 mb-4">03</div>
+            <h3 class="text-xl font-bold mb-3 text-white" data-i18n="offer.layer3.label">Intelligence Layer</h3>
+            <p class="text-slate-400 text-sm leading-relaxed mb-6" data-i18n="offer.layer3.body">Dashboards that turn months of operational data into clear decisions. Identify bottlenecks before they happen.</p>
+          </div>
+          <a href="what-we-build.html" class="text-purple-400 text-sm font-semibold hover:underline">Explore layer 3 →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────── TEASER: INDUSTRIES ─────────────────────────────────── -->
+  <section class="relative py-28 px-6 z-10 border-t border-white/5">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-12 gap-12 items-center">
+      <div class="md:col-span-5 space-y-6">
+        <div class="text-sm font-bold text-teal-400 uppercase tracking-widest" data-i18n="industries.label">Industries</div>
+        <h2 class="heading-display text-4xl md:text-5xl font-black text-white" data-i18n="industries.headline">
+          Built for these industries. <span class="gradient-text">No others.</span>
+        </h2>
+        <p class="text-slate-300 leading-relaxed text-sm" data-i18n="industries.sub">
+          We say no to everyone else. That's how we go deeper than any generalist could.
+        </p>
+        <a href="industries.html" class="inline-block px-6 py-3 bg-gradient-to-r from-teal-500 to-blue-600 rounded-xl font-bold text-sm hover:shadow-lg transition">
+          View custom solutions
+        </a>
+      </div>
+
+      <div class="md:col-span-7 space-y-4">
+        <a href="industries.html" class="glass-card rounded-2xl p-6 border border-white/5 flex items-center gap-6 hover:border-teal-500/40 transition block">
+          <div class="text-4xl">⚖️</div>
+          <div>
+            <h4 class="font-bold text-white text-base" data-i18n="industries.attorneys.title">Immigration & multi-practice law firms</h4>
+            <p class="text-slate-400 text-xs mt-1" data-i18n="industries.attorneys.body">Sofia handles communication, organizes documents, flags what needs your attention.</p>
+          </div>
+        </a>
+
+        <a href="industries.html" class="glass-card rounded-2xl p-6 border border-white/5 flex items-center gap-6 hover:border-teal-500/40 transition block">
+          <div class="text-4xl">📊</div>
+          <div>
+            <h4 class="font-bold text-white text-base" data-i18n="industries.accountants.title">Bilingual accounting practices</h4>
+            <p class="text-slate-400 text-xs mt-1" data-i18n="industries.accountants.body">Marco chases documents, classifies expenses, flags IRS notices.</p>
+          </div>
+        </a>
+
+        <a href="industries.html" class="glass-card rounded-2xl p-6 border border-white/5 flex items-center gap-6 hover:border-teal-500/40 transition block">
+          <div class="text-4xl">🚛</div>
+          <div>
+            <h4 class="font-bold text-white text-base" data-i18n="industries.logistics.title">Mexico-USA corridor specialists</h4>
+            <p class="text-slate-400 text-xs mt-1" data-i18n="industries.logistics.body">Our agent speaks both languages fluently, reads pedimentos and bills of lading.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────── TEASER: DEMO ─────────────────────────────────── -->
+  <section class="relative py-28 px-6 z-10 border-t border-white/5">
+    <div class="max-w-6xl mx-auto text-center">
+      <div class="text-sm font-bold text-teal-400 uppercase tracking-widest mb-2" data-i18n="demo.label">Live Demo</div>
+      <h2 class="heading-display text-4xl md:text-5xl font-black text-white mb-6">See the system in action</h2>
+      <p class="text-slate-400 max-w-lg mx-auto text-sm mb-12" data-i18n="demo.sub">Interactive product demos. Click any view to explore exactly how your firm would operate with Nexus.</p>
+      
+      <div class="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+        <a href="demo.html" class="glass-card rounded-xl p-5 hover:border-teal-500/40 transition text-left block">
+          <div class="text-2xl mb-3">🛡️</div>
+          <h4 class="font-bold text-white text-sm" data-i18n="demo.card1.title">The 4 Layers of Lock-in</h4>
+        </a>
+        <a href="demo.html" class="glass-card rounded-xl p-5 hover:border-teal-500/40 transition text-left block">
+          <div class="text-2xl mb-3">📅</div>
+          <h4 class="font-bold text-white text-sm" data-i18n="demo.card2.title">Monday Morning Dashboard</h4>
+        </a>
+        <a href="demo.html" class="glass-card rounded-xl p-5 hover:border-teal-500/40 transition text-left block">
+          <div class="text-2xl mb-3">👤</div>
+          <h4 class="font-bold text-white text-sm" data-i18n="demo.card3.title">Client Profile — The Moat</h4>
+        </a>
+        <a href="demo.html" class="glass-card rounded-xl p-5 hover:border-teal-500/40 transition text-left block">
+          <div class="text-2xl mb-3">🔍</div>
+          <h4 class="font-bold text-white text-sm" data-i18n="demo.card4.title">Global Document Search</h4>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────── TEASER: PRICING ─────────────────────────────────── -->
+  <section class="relative py-28 px-6 z-10 border-t border-white/5 bg-slate-900/30">
+    <div class="max-w-4xl mx-auto text-center space-y-6">
+      <div class="text-sm font-bold text-teal-400 uppercase tracking-widest" data-i18n="pricing.label">Pricing</div>
+      <h2 class="heading-display text-4xl md:text-5xl font-black text-white" data-i18n="pricing.headline">Simple pricing. <span class="gradient-text">No surprises.</span></h2>
+      <p class="text-slate-300 max-w-lg mx-auto text-sm leading-relaxed" data-i18n="pricing.sub">Three packages per industry. Start with what makes sense, upgrade when you're ready.</p>
+      <div class="pt-6">
+        <a href="pricing.html" class="inline-block px-8 py-4 bg-gradient-to-r from-teal-500 to-blue-600 rounded-xl font-bold text-sm hover:shadow-lg transition">
+          Compare plans & options
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────── CTA ─────────────────────────────────── -->
+  <section class="relative py-32 px-6 z-10">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="heading-display text-5xl md:text-7xl font-black mb-8 reveal" data-i18n="cta.headline">
+        Ready to see what your firm <span class="gradient-text">would look like?</span>
+      </h2>
+      <p class="text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed mb-12 reveal" data-i18n="cta.body">
+        30-minute strategy call with Francisco. No sales pitch. We map your operation and show you exactly how it would work for your firm.
+      </p>
+      <div class="flex flex-wrap gap-4 justify-center reveal">
+        <a href="contact.html" class="px-10 py-5 bg-gradient-to-r from-teal-500 to-blue-600 rounded-xl font-bold text-lg hover:shadow-2xl hover:shadow-teal-500/40 transition hover:-translate-y-1">
+          <span data-i18n="cta.button">Book your strategy call</span> →
+        </a>
+      </div>
+      <p class="text-sm text-slate-500 mt-6 reveal" data-i18n="cta.note">Available in English and Spanish · Limited slots per week</p>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────── FOOTER ─────────────────────────────────── -->
+  <footer class="relative py-16 px-6 border-t border-white/10 z-10">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-4 gap-12 mb-12">
+        <div>
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-9 h-9 bg-gradient-to-br from-teal-500 to-blue-600 rounded-lg flex items-center justify-center font-black text-white">N</div>
+            <span class="text-xl font-bold">Nexus</span>
+          </div>
+          <p class="text-sm text-slate-400 leading-relaxed" data-i18n="footer.tagline">Enterprise AI for the firms that deserve it. Built in Mexico, deployed in the US.</p>
+        </div>
+
+        <div>
+          <div class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4" data-i18n="footer.industries.label">Industries</div>
+          <ul class="space-y-2 text-sm">
+            <li><a href="industries.html" class="text-slate-300 hover:text-white" data-i18n="footer.industries.attorneys">Immigration attorneys</a></li>
+            <li><a href="industries.html" class="text-slate-300 hover:text-white" data-i18n="footer.industries.accountants">Accounting practices</a></li>
+            <li><a href="industries.html" class="text-slate-300 hover:text-white" data-i18n="footer.industries.logistics">Logistics companies</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4" data-i18n="footer.company.label">Company</div>
+          <ul class="space-y-2 text-sm">
+            <li><a href="mission.html" class="text-slate-300 hover:text-white" data-i18n="footer.company.about">About</a></li>
+            <li><a href="demo.html" class="text-slate-300 hover:text-white" data-i18n="footer.company.demo">Live demo</a></li>
+            <li><a href="contact.html" class="text-slate-300 hover:text-white" data-i18n="footer.company.contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4" data-i18n="footer.legal.label">Legal</div>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="text-slate-300 hover:text-white" data-i18n="footer.legal.privacy">Privacy Policy</a></li>
+            <li><a href="#" class="text-slate-300 hover:text-white" data-i18n="footer.legal.terms">Terms of Service</a></li>
+            <li><a href="#" class="text-slate-300 hover:text-white" data-i18n="footer.legal.data">Data export</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pt-8 border-t border-white/10 flex flex-wrap justify-between items-center gap-4 text-sm text-slate-500">
+        <div data-i18n="footer.copyright">© 2026 Nexus. Built in Mexico for the US market.</div>
+        <div data-i18n="footer.contact">contact@nexus.ai</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

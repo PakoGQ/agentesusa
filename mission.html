@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="meta.title">Nexus — Enterprise AI for the firms that deserve it</title>
+  <meta name="description" data-i18n-attr="content" data-i18n="meta.description" content="AI agents built specifically for immigration attorneys, accounting practices, and logistics companies. Enterprise depth. Bilingual by design.">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Background orbs -->
+  <div class="fixed inset-0 grid-pattern pointer-events-none z-0"></div>
+  <div class="fixed inset-0 pointer-events-none z-0">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- ─────────────────────────────────── NAV ─────────────────────────────────── -->
+  <nav id="nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <div class="w-9 h-9 bg-gradient-to-br from-teal-500 to-blue-600 rounded-lg flex items-center justify-center font-black text-white text-lg">N</div>
+        <span class="text-xl font-bold tracking-tight">Nexus</span>
+      </a>
+
+      <div class="hidden md:flex items-center gap-8 text-sm">
+        <a href="mission.html" class="text-teal-400 font-semibold transition" data-i18n="nav.mission">Mission</a>
+        <a href="what-we-build.html" class="text-slate-300 hover:text-white transition" data-i18n="nav.offer">What we build</a>
+        <a href="industries.html" class="text-slate-300 hover:text-white transition" data-i18n="nav.industries">Industries</a>
+        <a href="demo.html" class="text-slate-300 hover:text-white transition" data-i18n="nav.demo">Demo</a>
+        <a href="pricing.html" class="text-slate-300 hover:text-white transition" data-i18n="nav.pricing">Pricing</a>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <div class="flex gap-1 bg-slate-800/60 backdrop-blur p-1 rounded-lg text-xs">
+          <button onclick="setLang('en')" id="lang-en" class="px-3 py-1 rounded font-bold text-white bg-slate-700">EN</button>
+          <button onclick="setLang('es')" id="lang-es" class="px-3 py-1 rounded font-bold text-slate-400 hover:text-white">ES</button>
+        </div>
+        <a href="contact.html" class="hidden md:inline-block px-4 py-2 bg-gradient-to-r from-teal-500 to-blue-600 rounded-lg font-semibold text-sm hover:shadow-lg hover:shadow-teal-500/30 transition-all" data-i18n="nav.cta">Book a call</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ─────────────────────────────────── MISSION HERO ─────────────────────────────────── -->
+  <section class="relative pt-40 pb-20 px-6 z-10">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-sm font-bold text-teal-400 uppercase tracking-widest mb-4 reveal" data-i18n="mission.label">Our Mission</div>
+      <h1 class="heading-display text-6xl md:text-7xl font-black mb-8 reveal" data-i18n="mission.headline">
+        Enterprise AI was<br>built for the few.<br><span class="gradient-text">We're changing that.</span>
+      </h1>
+      <p class="text-xl md:text-2xl text-slate-300 max-w-3xl mb-16 leading-relaxed reveal" data-i18n="mission.body">
+        For decades, the most powerful AI tools have lived inside Fortune 500 companies and their $50K/month consultants. Small and medium firms — the ones that drive most of the economy — have been locked out by cost and complexity. We exist to break that lock.
+      </p>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="glass-card rounded-2xl p-8 reveal">
+          <div class="w-12 h-12 bg-gradient-to-br from-teal-500/20 to-blue-600/20 rounded-xl flex items-center justify-center mb-6 text-2xl">⚙️</div>
+          <h3 class="text-xl font-bold mb-3" data-i18n="mission.pillar1.title">Build, don't sell</h3>
+          <p class="text-slate-400 leading-relaxed" data-i18n="mission.pillar1.body">We construct your AI infrastructure end-to-end. You own the data, the workflows, the intelligence. We just keep making it better.</p>
+        </div>
+
+        <div class="glass-card rounded-2xl p-8 reveal">
+          <div class="w-12 h-12 bg-gradient-to-br from-teal-500/20 to-blue-600/20 rounded-xl flex items-center justify-center mb-6 text-2xl">🎯</div>
+          <h3 class="text-xl font-bold mb-3" data-i18n="mission.pillar2.title">Specialize, don't generalize</h3>
+          <p class="text-slate-400 leading-relaxed" data-i18n="mission.pillar2.body">We serve only 3 industries. Each agent knows the workflow, vocabulary, and edge cases of that sector deeper than any generic AI agency could.</p>
+        </div>
+
+        <div class="glass-card rounded-2xl p-8 reveal">
+          <div class="w-12 h-12 bg-gradient-to-br from-teal-500/20 to-blue-600/20 rounded-xl flex items-center justify-center mb-6 text-2xl">🤝</div>
+          <h3 class="text-xl font-bold mb-3" data-i18n="mission.pillar3.title">Ally, don't vendor</h3>
+          <p class="text-slate-400 leading-relaxed" data-i18n="mission.pillar3.body">Long-term partnerships, not transactions. Your operational reality shapes our roadmap. We win when you win.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────── PHILOSOPHY ─────────────────────────────────── -->
+  <section class="relative py-20 px-6 z-10">
+    <div class="max-w-6xl mx-auto">
+      <div class="glass-card rounded-3xl p-12 md:p-16 reveal">
+        <div class="text-sm font-bold text-teal-400 uppercase tracking-widest mb-4" data-i18n="alliance.label">Our Philosophy</div>
+        <h2 class="heading-display text-4xl md:text-5xl font-black mb-8">
+          Not just a service.<br><span class="gradient-text">A real alliance.</span>
+        </h2>
+        <p class="text-lg text-slate-300 max-w-3xl mb-12 leading-relaxed" data-i18n="alliance.body">
+          Most software vendors disappear after the contract is signed. We do the opposite. Every client onboarding is the start of a multi-year alliance where your success and ours are tied together. Your business grows, ours grows. Your operation improves, ours gets sharper. You don't pay us to deliver software — you pay us to be in your corner.
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <div>
+            <div class="text-3xl font-black gradient-text mb-2">01</div>
+            <h4 class="font-bold mb-2" data-i18n="alliance.point1.title">Skin in the game</h4>
+            <p class="text-slate-400 text-sm leading-relaxed" data-i18n="alliance.point1.body">Volume-based pricing means we earn more when your business grows. We're not optimizing for the next sale — we're optimizing for your next decade.</p>
+          </div>
+
+          <div>
+            <div class="text-3xl font-black gradient-text mb-2">02</div>
+            <h4 class="font-bold mb-2" data-i18n="alliance.point2.title">Shared roadmap</h4>
+            <p class="text-slate-400 text-sm leading-relaxed" data-i18n="alliance.point2.body">Your edge cases become our features. Your operational pain becomes our priority. Quarterly reviews where we listen first.</p>
+          </div>
+
+          <div>
+            <div class="text-3xl font-black gradient-text mb-2">03</div>
+            <h4 class="font-bold mb-2" data-i18n="alliance.point3.title">No lock-in. Just commitment.</h4>
+            <p class="text-slate-400 text-sm leading-relaxed" data-i18n="alliance.point3.body">You own your data. Export anytime, by contract. Our clients stay because they want to, not because they're trapped.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────── FOUNDER ─────────────────────────────────── -->
+  <section class="relative py-20 pb-32 px-6 z-10">
+    <div class="max-w-5xl mx-auto">
+      <div class="glass-card rounded-3xl p-12 md:p-16 reveal grid md:grid-cols-12 gap-8 items-center">
+        <div class="md:col-span-8 text-lg text-slate-300 space-y-6 leading-relaxed">
+          <div class="text-sm font-bold text-teal-400 uppercase tracking-widest mb-2" data-i18n="founder.label">The founder</div>
+          <h2 class="heading-display text-4xl md:text-5xl font-black text-white" data-i18n="founder.headline">
+            Built by someone who's <span class="gradient-text">lived both worlds.</span>
+          </h2>
+          <p data-i18n="founder.body1">Francisco Gaitan was born in Los Angeles in 1984. He's spent his life moving between LA and Guadalajara — speaking English and Spanish natively, understanding both business cultures from the inside, running real businesses on both sides of the border.</p>
+          <p data-i18n="founder.body2">Nexus exists because Francisco saw the gap firsthand: bilingual Latino professionals in the US — attorneys, accountants, logistics companies — are running their businesses with tools designed for someone else. The Fortune 500 has enterprise AI consultants. They have generic chatbots. We close that gap.</p>
+          <p class="text-xl text-white font-semibold" data-i18n="founder.body3">"My clients aren't customers. They're partners. We build for the long game — because if we do this right, we're building together for the next decade."</p>
+          <p class="text-sm text-slate-400" data-i18n="founder.attribution">— Francisco Gaitan, Founder</p>
+        </div>
+        <div class="md:col-span-4 flex justify-center">
+          <div class="w-64 h-64 rounded-2xl bg-gradient-to-br from-teal-500/20 to-blue-600/20 border border-white/10 flex items-center justify-center text-8xl relative overflow-hidden group">
+            <span class="z-10 filter grayscale group-hover:grayscale-0 transition-all duration-500">👨‍💼</span>
+            <div class="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-transparent opacity-60 z-0"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────── FOOTER ─────────────────────────────────── -->
+  <footer class="relative py-16 px-6 border-t border-white/10 z-10">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-4 gap-12 mb-12">
+        <div>
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-9 h-9 bg-gradient-to-br from-teal-500 to-blue-600 rounded-lg flex items-center justify-center font-black text-white">N</div>
+            <span class="text-xl font-bold">Nexus</span>
+          </div>
+          <p class="text-sm text-slate-400 leading-relaxed" data-i18n="footer.tagline">Enterprise AI for the firms that deserve it. Built in Mexico, deployed in the US.</p>
+        </div>
+
+        <div>
+          <div class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4" data-i18n="footer.industries.label">Industries</div>
+          <ul class="space-y-2 text-sm">
+            <li><a href="industries.html" class="text-slate-300 hover:text-white" data-i18n="footer.industries.attorneys">Immigration attorneys</a></li>
+            <li><a href="industries.html" class="text-slate-300 hover:text-white" data-i18n="footer.industries.accountants">Accounting practices</a></li>
+            <li><a href="industries.html" class="text-slate-300 hover:text-white" data-i18n="footer.industries.logistics">Logistics companies</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4" data-i18n="footer.company.label">Company</div>
+          <ul class="space-y-2 text-sm">
+            <li><a href="mission.html" class="text-slate-300 hover:text-white" data-i18n="footer.company.about">About</a></li>
+            <li><a href="demo.html" class="text-slate-300 hover:text-white" data-i18n="footer.company.demo">Live demo</a></li>
+            <li><a href="contact.html" class="text-slate-300 hover:text-white" data-i18n="footer.company.contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4" data-i18n="footer.legal.label">Legal</div>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="text-slate-300 hover:text-white" data-i18n="footer.legal.privacy">Privacy Policy</a></li>
+            <li><a href="#" class="text-slate-300 hover:text-white" data-i18n="footer.legal.terms">Terms of Service</a></li>
+            <li><a href="#" class="text-slate-300 hover:text-white" data-i18n="footer.legal.data">Data export</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pt-8 border-t border-white/10 flex flex-wrap justify-between items-center gap-4 text-sm text-slate-500">
+        <div data-i18n="footer.copyright">© 2026 Nexus. Built in Mexico for the US market.</div>
+        <div data-i18n="footer.contact">contact@nexus.ai</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
