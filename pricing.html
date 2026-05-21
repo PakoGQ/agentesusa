@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="meta.title">Nexus — Enterprise AI for the firms that deserve it</title>
+  <meta name="description" data-i18n-attr="content" data-i18n="meta.description" content="AI agents built specifically for law firms of all practice areas, accounting practices, and logistics companies. Enterprise depth. Bilingual by design.">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Background orbs -->
+  <div class="fixed inset-0 grid-pattern pointer-events-none z-0"></div>
+  <div class="fixed inset-0 pointer-events-none z-0">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- ─────────────────────────────────── NAV ─────────────────────────────────── -->
+  <nav id="nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <div class="w-9 h-9 bg-gradient-to-br from-teal-500 to-blue-600 rounded-lg flex items-center justify-center font-black text-white text-lg">N</div>
+        <span class="text-xl font-bold tracking-tight">Nexus</span>
+      </a>
+
+      <div class="hidden md:flex items-center gap-8 text-sm">
+        <a href="mission.html" class="text-slate-300 hover:text-white transition" data-i18n="nav.mission">Mission</a>
+        <a href="what-we-build.html" class="text-slate-300 hover:text-white transition" data-i18n="nav.offer">What we build</a>
+        <a href="industries.html" class="text-slate-300 hover:text-white transition" data-i18n="nav.industries">Industries</a>
+        <a href="demo.html" class="text-slate-300 hover:text-white transition" data-i18n="nav.demo">Demo</a>
+        <a href="pricing.html" class="text-teal-400 font-semibold transition" data-i18n="nav.pricing">Pricing</a>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <div class="flex gap-1 bg-slate-800/60 backdrop-blur p-1 rounded-lg text-xs">
+          <button onclick="setLang('en')" id="lang-en" class="px-3 py-1 rounded font-bold text-white bg-slate-700">EN</button>
+          <button onclick="setLang('es')" id="lang-es" class="px-3 py-1 rounded font-bold text-slate-400 hover:text-white">ES</button>
+        </div>
+        <a href="contact.html" class="hidden md:inline-block px-4 py-2 bg-gradient-to-r from-teal-500 to-blue-600 rounded-lg font-semibold text-sm hover:shadow-lg hover:shadow-teal-500/30 transition-all" data-i18n="nav.cta">Book a call</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ─────────────────────────────────── PRICING HERO ─────────────────────────────────── -->
+  <section class="relative pt-40 pb-32 px-6 z-10">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <div class="text-sm font-bold text-teal-400 uppercase tracking-widest mb-4 reveal" data-i18n="pricing.label">Pricing</div>
+        <h1 class="heading-display text-6xl md:text-7xl font-black mb-6 reveal">
+          Simple pricing.<br><span class="gradient-text">No surprises.</span>
+        </h1>
+        <p class="text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed reveal" data-i18n="pricing.sub">
+          Three packages per industry. Start with what makes sense, upgrade when you're ready.
+        </p>
+
+        <div class="inline-flex gap-1 bg-slate-800/60 backdrop-blur p-1.5 rounded-2xl mt-12 border border-white/5 reveal">
+          <button onclick="setVertical('accountants')" id="vert-accountants" class="px-6 py-3 rounded-xl font-bold text-sm bg-slate-700 text-white transition-all">Accountants</button>
+          <button onclick="setVertical('attorneys')" id="vert-attorneys" class="px-6 py-3 rounded-xl font-bold text-sm text-slate-400 hover:text-white transition-all">Attorneys</button>
+          <button onclick="setVertical('logistics')" id="vert-logistics" class="px-6 py-3 rounded-xl font-bold text-sm text-slate-400 hover:text-white transition-all">Logistics</button>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 items-stretch max-w-6xl mx-auto">
+        <!-- Essential -->
+        <div class="glass-card rounded-3xl p-8 md:p-10 reveal flex flex-col justify-between h-full">
+          <div>
+            <div class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4" data-i18n="pricing.essential.label">Essential</div>
+            <div class="mb-6">
+              <span class="text-5xl font-black text-white" id="price-essential-monthly">$1,200</span>
+              <span class="text-slate-400 text-sm" data-i18n="pricing.per_month">/month</span>
+            </div>
+            <div class="text-sm text-slate-400 mb-8 pb-6 border-b border-white/5">
+              <span data-i18n="pricing.setup">Setup:</span> <span id="price-essential-setup" class="text-white font-semibold">$1,500</span> one-time
+            </div>
+            <ul class="space-y-4 mb-8 text-sm">
+              <li class="flex gap-3 text-slate-300"><span class="text-teal-400 font-bold">✓</span><span data-i18n="pricing.feature.layer1_full">Layer 1: Full communication</span></li>
+              <li class="flex gap-3 text-slate-300"><span class="text-teal-400 font-bold">✓</span><span data-i18n="pricing.feature.layer2_basic">Layer 2: Basic automation</span></li>
+              <li class="flex gap-3 text-slate-500"><span>✗</span><span data-i18n="pricing.feature.layer3_none">Layer 3: Not included</span></li>
+              <li class="flex gap-3 text-slate-500"><span>✗</span><span data-i18n="pricing.feature.layer4_none">Integrations: Not included</span></li>
+            </ul>
+          </div>
+          <div>
+            <a href="contact.html" class="block w-full py-4 text-center glass-card hover:bg-slate-800/60 rounded-xl font-bold text-sm transition-all" data-i18n="pricing.get_started">Get started</a>
+          </div>
+        </div>
+
+        <!-- Pro (highlighted) -->
+        <div class="glass-card pricing-pro rounded-3xl p-8 md:p-10 reveal flex flex-col justify-between h-full">
+          <div>
+            <div class="text-sm font-bold text-teal-400 uppercase tracking-widest mb-4" data-i18n="pricing.pro.label">Pro</div>
+            <div class="mb-6">
+              <span class="text-5xl font-black gradient-text" id="price-pro-monthly">$2,200</span>
+              <span class="text-slate-400 text-sm" data-i18n="pricing.per_month">/month</span>
+            </div>
+            <div class="text-sm text-slate-400 mb-8 pb-6 border-b border-white/5">
+              <span data-i18n="pricing.setup">Setup:</span> <span id="price-pro-setup" class="text-white font-semibold">$2,500</span> one-time
+            </div>
+            <ul class="space-y-4 mb-8 text-sm">
+              <li class="flex gap-3 text-slate-300"><span class="text-teal-400 font-bold">✓</span><span data-i18n="pricing.feature.layer1_full">Layer 1: Full communication</span></li>
+              <li class="flex gap-3 text-slate-300"><span class="text-teal-400 font-bold">✓</span><span data-i18n="pricing.feature.layer2_full">Layer 2: Full automation</span></li>
+              <li class="flex gap-3 text-slate-300"><span class="text-teal-400 font-bold">✓</span><span data-i18n="pricing.feature.layer3_basic">Layer 3: Basic intelligence</span></li>
+              <li class="flex gap-3 text-slate-500"><span>✗</span><span data-i18n="pricing.feature.layer4_none">Integrations: Not included</span></li>
+            </ul>
+          </div>
+          <div>
+            <a href="contact.html" class="block w-full py-4 text-center bg-gradient-to-r from-teal-500 to-blue-600 rounded-xl font-bold text-sm hover:shadow-2xl hover:shadow-teal-500/30 transition-all hover:-translate-y-0.5" data-i18n="pricing.get_started">Get started</a>
+          </div>
+        </div>
+
+        <!-- Elite -->
+        <div class="glass-card rounded-3xl p-8 md:p-10 reveal flex flex-col justify-between h-full">
+          <div>
+            <div class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4" data-i18n="pricing.elite.label">Elite</div>
+            <div class="mb-6">
+              <span class="text-5xl font-black text-white" id="price-elite-monthly">$3,800</span>
+              <span class="text-slate-400 text-sm" data-i18n="pricing.per_month">/month</span>
+            </div>
+            <div class="text-sm text-slate-400 mb-8 pb-6 border-b border-white/5">
+              <span data-i18n="pricing.setup">Setup:</span> <span id="price-elite-setup" class="text-white font-semibold">$4,000</span> one-time
+            </div>
+            <ul class="space-y-4 mb-8 text-sm">
+              <li class="flex gap-3 text-slate-300"><span class="text-teal-400 font-bold">✓</span><span data-i18n="pricing.feature.layer1_full">Layer 1: Full communication</span></li>
+              <li class="flex gap-3 text-slate-300"><span class="text-teal-400 font-bold">✓</span><span data-i18n="pricing.feature.layer2_full">Layer 2: Full automation</span></li>
+              <li class="flex gap-3 text-slate-300"><span class="text-teal-400 font-bold">✓</span><span data-i18n="pricing.feature.layer3_full">Layer 3: Full intelligence</span></li>
+              <li class="flex gap-3 text-slate-300"><span class="text-teal-400 font-bold">✓</span><span id="elite-integration" data-i18n="pricing.feature.layer4_quickbooks">Integration: QuickBooks/Xero</span></li>
+            </ul>
+          </div>
+          <div>
+            <a href="contact.html" class="block w-full py-4 text-center glass-card hover:bg-slate-800/60 rounded-xl font-bold text-sm transition-all" data-i18n="pricing.get_started">Get started</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-12 text-sm text-slate-500 reveal" data-i18n="pricing.footnote">
+        + volume fee for documents processed above plan limit · SMS and Voice add-ons available Pro+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────── FOOTER ─────────────────────────────────── -->
+  <footer class="relative py-16 px-6 border-t border-white/10 z-10">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-4 gap-12 mb-12">
+        <div>
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-9 h-9 bg-gradient-to-br from-teal-500 to-blue-600 rounded-lg flex items-center justify-center font-black text-white">N</div>
+            <span class="text-xl font-bold">Nexus</span>
+          </div>
+          <p class="text-sm text-slate-400 leading-relaxed" data-i18n="footer.tagline">Enterprise AI for the firms that deserve it. Built in Mexico, deployed in the US.</p>
+        </div>
+
+        <div>
+          <div class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4" data-i18n="footer.industries.label">Industries</div>
+          <ul class="space-y-2 text-sm">
+            <li><a href="industries.html" class="text-slate-300 hover:text-white" data-i18n="footer.industries.attorneys">Immigration attorneys</a></li>
+            <li><a href="industries.html" class="text-slate-300 hover:text-white" data-i18n="footer.industries.accountants">Accounting practices</a></li>
+            <li><a href="industries.html" class="text-slate-300 hover:text-white" data-i18n="footer.industries.logistics">Logistics companies</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4" data-i18n="footer.company.label">Company</div>
+          <ul class="space-y-2 text-sm">
+            <li><a href="mission.html" class="text-slate-300 hover:text-white" data-i18n="footer.company.about">About</a></li>
+            <li><a href="demo.html" class="text-slate-300 hover:text-white" data-i18n="footer.company.demo">Live demo</a></li>
+            <li><a href="contact.html" class="text-slate-300 hover:text-white" data-i18n="footer.company.contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4" data-i18n="footer.legal.label">Legal</div>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="text-slate-300 hover:text-white" data-i18n="footer.legal.privacy">Privacy Policy</a></li>
+            <li><a href="#" class="text-slate-300 hover:text-white" data-i18n="footer.legal.terms">Terms of Service</a></li>
+            <li><a href="#" class="text-slate-300 hover:text-white" data-i18n="footer.legal.data">Data export</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pt-8 border-t border-white/10 flex flex-wrap justify-between items-center gap-4 text-sm text-slate-500">
+        <div data-i18n="footer.copyright">© 2026 Nexus. Built in Mexico for the US market.</div>
+        <div data-i18n="footer.contact">contact@nexus.ai</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

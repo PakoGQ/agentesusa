@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="meta.title">Nexus — Enterprise AI for the firms that deserve it</title>
+  <meta name="description" data-i18n-attr="content" data-i18n="meta.description" content="AI agents built specifically for law firms of all practice areas, accounting practices, and logistics companies. Enterprise depth. Bilingual by design.">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Background orbs -->
+  <div class="fixed inset-0 grid-pattern pointer-events-none z-0"></div>
+  <div class="fixed inset-0 pointer-events-none z-0">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- ─────────────────────────────────── NAV ─────────────────────────────────── -->
+  <nav id="nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <div class="w-9 h-9 bg-gradient-to-br from-teal-500 to-blue-600 rounded-lg flex items-center justify-center font-black text-white text-lg">N</div>
+        <span class="text-xl font-bold tracking-tight">Nexus</span>
+      </a>
+
+      <div class="hidden md:flex items-center gap-8 text-sm">
+        <a href="mission.html" class="text-slate-300 hover:text-white transition" data-i18n="nav.mission">Mission</a>
+        <a href="what-we-build.html" class="text-teal-400 font-semibold transition" data-i18n="nav.offer">What we build</a>
+        <a href="industries.html" class="text-slate-300 hover:text-white transition" data-i18n="nav.industries">Industries</a>
+        <a href="demo.html" class="text-slate-300 hover:text-white transition" data-i18n="nav.demo">Demo</a>
+        <a href="pricing.html" class="text-slate-300 hover:text-white transition" data-i18n="nav.pricing">Pricing</a>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <div class="flex gap-1 bg-slate-800/60 backdrop-blur p-1 rounded-lg text-xs">
+          <button onclick="setLang('en')" id="lang-en" class="px-3 py-1 rounded font-bold text-white bg-slate-700">EN</button>
+          <button onclick="setLang('es')" id="lang-es" class="px-3 py-1 rounded font-bold text-slate-400 hover:text-white">ES</button>
+        </div>
+        <a href="contact.html" class="hidden md:inline-block px-4 py-2 bg-gradient-to-r from-teal-500 to-blue-600 rounded-lg font-semibold text-sm hover:shadow-lg hover:shadow-teal-500/30 transition-all" data-i18n="nav.cta">Book a call</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ─────────────────────────────────── WHAT WE BUILD HERO ─────────────────────────────────── -->
+  <section class="relative pt-40 pb-32 px-6 z-10">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-20">
+        <div class="text-sm font-bold text-teal-400 uppercase tracking-widest mb-4 reveal" data-i18n="offer.label">What we build</div>
+        <h1 class="heading-display text-6xl md:text-7xl font-black mb-6 reveal">
+          Three layers of intelligence.<br><span class="gradient-text">One system that grows.</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto leading-relaxed reveal" data-i18n="offer.sub">
+          Each layer compounds on the previous one. After 12 months, this is how your firm runs.
+        </p>
+      </div>
+
+      <div class="space-y-12">
+        <!-- Layer 1 -->
+        <div class="glass-card rounded-3xl p-8 md:p-16 grid md:grid-cols-12 gap-8 items-center reveal">
+          <div class="md:col-span-2 flex justify-center md:justify-start">
+            <div class="text-8xl font-black gradient-text">1</div>
+          </div>
+          <div class="md:col-span-6">
+            <div class="text-xs font-bold text-teal-400 uppercase tracking-widest mb-2" data-i18n="offer.layer1.label">Communication Layer</div>
+            <h3 class="text-3xl md:text-4xl font-bold mb-4" data-i18n="offer.layer1.title">Your bilingual agent handles everything front-end</h3>
+            <p class="text-slate-300 leading-relaxed text-base md:text-lg" data-i18n="offer.layer1.body">Available 24/7 on WhatsApp, web, and email. Detects language automatically. Schedules, reminds, follows up, and escalates only what truly needs your attention. Your clients always get an answer — you only see what matters.</p>
+          </div>
+          <div class="md:col-span-4 space-y-3 bg-slate-900/40 p-6 rounded-2xl border border-white/5">
+            <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-3" data-i18n="offer.layer1.features_label">What it does</div>
+            <div class="flex items-center gap-2 text-sm text-slate-300"><span class="text-teal-400">✓</span><span data-i18n="offer.layer1.feature1">24/7 multilingual response</span></div>
+            <div class="flex items-center gap-2 text-sm text-slate-300"><span class="text-teal-400">✓</span><span data-i18n="offer.layer1.feature2">Automatic appointment scheduling</span></div>
+            <div class="flex items-center gap-2 text-sm text-slate-300"><span class="text-teal-400">✓</span><span data-i18n="offer.layer1.feature3">Urgent case escalation</span></div>
+            <div class="flex items-center gap-2 text-sm text-slate-300"><span class="text-teal-400">✓</span><span data-i18n="offer.layer1.feature4">Proactive client follow-up</span></div>
+          </div>
+        </div>
+
+        <!-- Layer 2 -->
+        <div class="glass-card rounded-3xl p-8 md:p-16 grid md:grid-cols-12 gap-8 items-center reveal">
+          <div class="md:col-span-2 flex justify-center md:justify-start">
+            <div class="text-8xl font-black gradient-text">2</div>
+          </div>
+          <div class="md:col-span-6">
+            <div class="text-xs font-bold text-teal-400 uppercase tracking-widest mb-2" data-i18n="offer.layer2.label">Automation Layer</div>
+            <h3 class="text-3xl md:text-4xl font-bold mb-4" data-i18n="offer.layer2.title">Internal work that disappears</h3>
+            <p class="text-slate-300 leading-relaxed text-base md:text-lg" data-i18n="offer.layer2.body">The agent reads contracts, classifies invoices, prepares case files, detects inconsistencies. Every document is tagged, indexed, and searchable. After 12 months your firm has a complete digital memory that no competitor can replicate in a hurry.</p>
+          </div>
+          <div class="md:col-span-4 space-y-3 bg-slate-900/40 p-6 rounded-2xl border border-white/5">
+            <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-3" data-i18n="offer.layer2.features_label">What it does</div>
+            <div class="flex items-center gap-2 text-sm text-slate-300"><span class="text-teal-400">✓</span><span data-i18n="offer.layer2.feature1">Document extraction & tagging</span></div>
+            <div class="flex items-center gap-2 text-sm text-slate-300"><span class="text-teal-400">✓</span><span data-i18n="offer.layer2.feature2">Inconsistency detection</span></div>
+            <div class="flex items-center gap-2 text-sm text-slate-300"><span class="text-teal-400">✓</span><span data-i18n="offer.layer2.feature3">Searchable knowledge base</span></div>
+            <div class="flex items-center gap-2 text-sm text-slate-300"><span class="text-teal-400">✓</span><span data-i18n="offer.layer2.feature4">Sector-specific intelligence</span></div>
+          </div>
+        </div>
+
+        <!-- Layer 3 -->
+        <div class="glass-card rounded-3xl p-8 md:p-16 grid md:grid-cols-12 gap-8 items-center reveal">
+          <div class="md:col-span-2 flex justify-center md:justify-start">
+            <div class="text-8xl font-black gradient-text">3</div>
+          </div>
+          <div class="md:col-span-6">
+            <div class="text-xs font-bold text-teal-400 uppercase tracking-widest mb-2" data-i18n="offer.layer3.label">Intelligence Layer</div>
+            <h3 class="text-3xl md:text-4xl font-bold mb-4" data-i18n="offer.layer3.title">Your daily decisions, powered by data</h3>
+            <p class="text-slate-300 leading-relaxed text-base md:text-lg" data-i18n="offer.layer3.body">Dashboards that turn months of operational data into clear decisions. Identify bottlenecks before they happen. Predict capacity needs. Catch clients at risk of churn. This is what your team opens every morning instead of email.</p>
+          </div>
+          <div class="md:col-span-4 space-y-3 bg-slate-900/40 p-6 rounded-2xl border border-white/5">
+            <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-3" data-i18n="offer.layer3.features_label">What it does</div>
+            <div class="flex items-center gap-2 text-sm text-slate-300"><span class="text-teal-400">✓</span><span data-i18n="offer.layer3.feature1">Executive dashboard</span></div>
+            <div class="flex items-center gap-2 text-sm text-slate-300"><span class="text-teal-400">✓</span><span data-i18n="offer.layer3.feature2">Pattern detection & alerts</span></div>
+            <div class="flex items-center gap-2 text-sm text-slate-300"><span class="text-teal-400">✓</span><span data-i18n="offer.layer3.feature3">Profitability per case/client</span></div>
+            <div class="flex items-center gap-2 text-sm text-slate-300"><span class="text-teal-400">✓</span><span data-i18n="offer.layer3.feature4">Workload forecasting</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────── FOOTER ─────────────────────────────────── -->
+  <footer class="relative py-16 px-6 border-t border-white/10 z-10">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-4 gap-12 mb-12">
+        <div>
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-9 h-9 bg-gradient-to-br from-teal-500 to-blue-600 rounded-lg flex items-center justify-center font-black text-white">N</div>
+            <span class="text-xl font-bold">Nexus</span>
+          </div>
+          <p class="text-sm text-slate-400 leading-relaxed" data-i18n="footer.tagline">Enterprise AI for the firms that deserve it. Built in Mexico, deployed in the US.</p>
+        </div>
+
+        <div>
+          <div class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4" data-i18n="footer.industries.label">Industries</div>
+          <ul class="space-y-2 text-sm">
+            <li><a href="industries.html" class="text-slate-300 hover:text-white" data-i18n="footer.industries.attorneys">Immigration attorneys</a></li>
+            <li><a href="industries.html" class="text-slate-300 hover:text-white" data-i18n="footer.industries.accountants">Accounting practices</a></li>
+            <li><a href="industries.html" class="text-slate-300 hover:text-white" data-i18n="footer.industries.logistics">Logistics companies</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4" data-i18n="footer.company.label">Company</div>
+          <ul class="space-y-2 text-sm">
+            <li><a href="mission.html" class="text-slate-300 hover:text-white" data-i18n="footer.company.about">About</a></li>
+            <li><a href="demo.html" class="text-slate-300 hover:text-white" data-i18n="footer.company.demo">Live demo</a></li>
+            <li><a href="contact.html" class="text-slate-300 hover:text-white" data-i18n="footer.company.contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4" data-i18n="footer.legal.label">Legal</div>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="text-slate-300 hover:text-white" data-i18n="footer.legal.privacy">Privacy Policy</a></li>
+            <li><a href="#" class="text-slate-300 hover:text-white" data-i18n="footer.legal.terms">Terms of Service</a></li>
+            <li><a href="#" class="text-slate-300 hover:text-white" data-i18n="footer.legal.data">Data export</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pt-8 border-t border-white/10 flex flex-wrap justify-between items-center gap-4 text-sm text-slate-500">
+        <div data-i18n="footer.copyright">© 2026 Nexus. Built in Mexico for the US market.</div>
+        <div data-i18n="footer.contact">contact@nexus.ai</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="meta.title">Nexus — Enterprise AI for the firms that deserve it</title>
+  <meta name="description" data-i18n-attr="content" data-i18n="meta.description" content="AI agents built specifically for law firms of all practice areas, accounting practices, and logistics companies. Enterprise depth. Bilingual by design.">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Background orbs -->
+  <div class="fixed inset-0 grid-pattern pointer-events-none z-0"></div>
+  <div class="fixed inset-0 pointer-events-none z-0">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- ─────────────────────────────────── NAV ─────────────────────────────────── -->
+  <nav id="nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <div class="w-9 h-9 bg-gradient-to-br from-teal-500 to-blue-600 rounded-lg flex items-center justify-center font-black text-white text-lg">N</div>
+        <span class="text-xl font-bold tracking-tight">Nexus</span>
+      </a>
+
+      <div class="hidden md:flex items-center gap-8 text-sm">
+        <a href="mission.html" class="text-slate-300 hover:text-white transition" data-i18n="nav.mission">Mission</a>
+        <a href="what-we-build.html" class="text-slate-300 hover:text-white transition" data-i18n="nav.offer">What we build</a>
+        <a href="industries.html" class="text-teal-400 font-semibold transition" data-i18n="nav.industries">Industries</a>
+        <a href="demo.html" class="text-slate-300 hover:text-white transition" data-i18n="nav.demo">Demo</a>
+        <a href="pricing.html" class="text-slate-300 hover:text-white transition" data-i18n="nav.pricing">Pricing</a>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <div class="flex gap-1 bg-slate-800/60 backdrop-blur p-1 rounded-lg text-xs">
+          <button onclick="setLang('en')" id="lang-en" class="px-3 py-1 rounded font-bold text-white bg-slate-700">EN</button>
+          <button onclick="setLang('es')" id="lang-es" class="px-3 py-1 rounded font-bold text-slate-400 hover:text-white">ES</button>
+        </div>
+        <a href="contact.html" class="hidden md:inline-block px-4 py-2 bg-gradient-to-r from-teal-500 to-blue-600 rounded-lg font-semibold text-sm hover:shadow-lg hover:shadow-teal-500/30 transition-all" data-i18n="nav.cta">Book a call</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ─────────────────────────────────── INDUSTRIES HERO ─────────────────────────────────── -->
+  <section class="relative pt-40 pb-32 px-6 z-10">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-20">
+        <div class="text-sm font-bold text-teal-400 uppercase tracking-widest mb-4 reveal" data-i18n="industries.label">Industries</div>
+        <h1 class="heading-display text-6xl md:text-7xl font-black mb-6 reveal">
+          Built for these industries.<br><span class="gradient-text">No others.</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-slate-300 max-w-2xl mx-auto leading-relaxed reveal" data-i18n="industries.sub">
+          We say no to everyone else. That's how we go deeper than any generalist could.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Attorneys -->
+        <div class="glass-card rounded-3xl p-8 hover:border-teal-500/50 transition-all duration-300 reveal group flex flex-col justify-between h-full">
+          <div>
+            <div class="text-6xl mb-6">⚖️</div>
+            <div class="text-xs font-bold text-teal-400 uppercase tracking-widest mb-2" data-i18n="industries.attorneys.label">For attorneys</div>
+            <h3 class="text-2xl font-bold mb-4 text-white" data-i18n="industries.attorneys.title">Law firms of all practice areas</h3>
+            <p class="text-slate-300 leading-relaxed mb-6" data-i18n="industries.attorneys.body">Your clients are stressed. Your caseload is heavy. Sofia handles the communication, organizes the documents, flags what truly needs your attention — bilingual, empathetic, never sleeps.</p>
+            
+            <div class="pt-6 border-t border-white/5 space-y-2 mb-8">
+              <div class="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-2">Practice Areas Included</div>
+              <div class="text-sm text-slate-300 flex items-start gap-2">
+                <span class="text-teal-400">•</span>
+                <span data-i18n="industries.attorneys.area1">Immigration · Personal Injury · Family · Labor · Corporate · Criminal</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <a href="contact.html" class="inline-flex items-center gap-2 text-teal-400 hover:text-teal-300 font-semibold text-sm group-hover:gap-3 transition-all" data-i18n="industries.attorneys.cta">Learn more →</a>
+          </div>
+        </div>
+
+        <!-- Accountants -->
+        <div class="glass-card rounded-3xl p-8 hover:border-teal-500/50 transition-all duration-300 reveal group flex flex-col justify-between h-full">
+          <div>
+            <div class="text-6xl mb-6">📊</div>
+            <div class="text-xs font-bold text-teal-400 uppercase tracking-widest mb-2" data-i18n="industries.accountants.label">For accountants</div>
+            <h3 class="text-2xl font-bold mb-4 text-white" data-i18n="industries.accountants.title">Bilingual accounting practices</h3>
+            <p class="text-slate-300 leading-relaxed mb-6" data-i18n="industries.accountants.body">Tax season shouldn't mean 80-hour weeks. Marco chases documents, classifies expenses, flags IRS notices the moment they arrive — so you focus on the work that requires your expertise.</p>
+            
+            <div class="pt-6 border-t border-white/5 space-y-2 mb-8">
+              <div class="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-2">Capabilities Included</div>
+              <div class="text-sm text-slate-300 flex items-start gap-2">
+                <span class="text-teal-400">•</span>
+                <span data-i18n="industries.accountants.area1">Individual returns · Business bookkeeping · Payroll · IRS representation</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <a href="contact.html" class="inline-flex items-center gap-2 text-teal-400 hover:text-teal-300 font-semibold text-sm group-hover:gap-3 transition-all" data-i18n="industries.accountants.cta">Learn more →</a>
+          </div>
+        </div>
+
+        <!-- Logistics -->
+        <div class="glass-card rounded-3xl p-8 hover:border-teal-500/50 transition-all duration-300 reveal group flex flex-col justify-between h-full">
+          <div>
+            <div class="text-6xl mb-6">🚛</div>
+            <div class="text-xs font-bold text-teal-400 uppercase tracking-widest mb-2" data-i18n="industries.logistics.label">For logistics</div>
+            <h3 class="text-2xl font-bold mb-4 text-white" data-i18n="industries.logistics.title">Mexico-USA corridor specialists</h3>
+            <p class="text-slate-300 leading-relaxed mb-6" data-i18n="industries.logistics.body">Two languages, two timezones, two regulatory systems. Our agent speaks both fluently, reads pedimentos and bills of lading, catches inconsistencies before they hit customs.</p>
+            
+            <div class="pt-6 border-t border-white/5 space-y-2 mb-8">
+              <div class="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-2">Focus Areas Included</div>
+              <div class="text-sm text-slate-300 flex items-start gap-2">
+                <span class="text-teal-400">•</span>
+                <span data-i18n="industries.logistics.area1">Cross-border freight · Customs · Documentation · TMS integration</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <a href="contact.html" class="inline-flex items-center gap-2 text-teal-400 hover:text-teal-300 font-semibold text-sm group-hover:gap-3 transition-all" data-i18n="industries.logistics.cta">Learn more →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────── FOOTER ─────────────────────────────────── -->
+  <footer class="relative py-16 px-6 border-t border-white/10 z-10">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-4 gap-12 mb-12">
+        <div>
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-9 h-9 bg-gradient-to-br from-teal-500 to-blue-600 rounded-lg flex items-center justify-center font-black text-white">N</div>
+            <span class="text-xl font-bold">Nexus</span>
+          </div>
+          <p class="text-sm text-slate-400 leading-relaxed" data-i18n="footer.tagline">Enterprise AI for the firms that deserve it. Built in Mexico, deployed in the US.</p>
+        </div>
+
+        <div>
+          <div class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4" data-i18n="footer.industries.label">Industries</div>
+          <ul class="space-y-2 text-sm">
+            <li><a href="industries.html" class="text-slate-300 hover:text-white" data-i18n="footer.industries.attorneys">Immigration attorneys</a></li>
+            <li><a href="industries.html" class="text-slate-300 hover:text-white" data-i18n="footer.industries.accountants">Accounting practices</a></li>
+            <li><a href="industries.html" class="text-slate-300 hover:text-white" data-i18n="footer.industries.logistics">Logistics companies</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4" data-i18n="footer.company.label">Company</div>
+          <ul class="space-y-2 text-sm">
+            <li><a href="mission.html" class="text-slate-300 hover:text-white" data-i18n="footer.company.about">About</a></li>
+            <li><a href="demo.html" class="text-slate-300 hover:text-white" data-i18n="footer.company.demo">Live demo</a></li>
+            <li><a href="contact.html" class="text-slate-300 hover:text-white" data-i18n="footer.company.contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4" data-i18n="footer.legal.label">Legal</div>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="text-slate-300 hover:text-white" data-i18n="footer.legal.privacy">Privacy Policy</a></li>
+            <li><a href="#" class="text-slate-300 hover:text-white" data-i18n="footer.legal.terms">Terms of Service</a></li>
+            <li><a href="#" class="text-slate-300 hover:text-white" data-i18n="footer.legal.data">Data export</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pt-8 border-t border-white/10 flex flex-wrap justify-between items-center gap-4 text-sm text-slate-500">
+        <div data-i18n="footer.copyright">© 2026 Nexus. Built in Mexico for the US market.</div>
+        <div data-i18n="footer.contact">contact@nexus.ai</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
