@@ -41,6 +41,17 @@ const translations = {
   'hero.stat3': { en: 'Specialized industries', es: 'Industrias especializadas' },
   'hero.stat4': { en: 'Cost advantage', es: 'Ventaja en costo' },
 
+  // Hero mockup tabs & agent labels
+  'hero.tab.sofia':    { en: '⚖️ For Law Firms',   es: '⚖️ Para Despachos Legales' },
+  'hero.tab.marco':    { en: '📊 For Accountants',  es: '📊 Para Contadores' },
+  'hero.sofia.name':   { en: 'Sofia — Law Firm Agent',      es: 'Sofia — Agente Legal' },
+  'hero.sofia.sub':    { en: 'Corporate · Family · Labor · Criminal', es: 'Corporativo · Familiar · Laboral · Penal' },
+  'hero.marco.name':   { en: 'Marco — Accounting Agent',    es: 'Marco — Agente Contable' },
+  'hero.marco.sub':    { en: 'Tax Returns · Bookkeeping · IRS · Payroll', es: 'Declaraciones · Contabilidad · IRS · Nómina' },
+  'hero.metric.cases': { en: 'Cases Managed',   es: 'Casos Activos' },
+  'hero.metric.docs':  { en: 'Docs Processed',  es: 'Docs Procesados' },
+  'hero.metric.time':  { en: 'Response Time',   es: 'Tiempo de Respuesta' },
+
   // Mission
   'mission.label': { en: 'Our Mission', es: 'Nuestra Misión' },
   'mission.headline': {
@@ -94,7 +105,13 @@ const translations = {
   },
 
   // Offer (3 layers)
-  'offer.label': { en: 'What we build', es: 'Qué construimos' },
+  'offer.label':     { en: 'What we build', es: 'Qué construimos' },
+  'offer.headline':  { en: 'Three layers of intelligence', es: 'Tres capas de inteligencia' },
+  'offer.explore1':  { en: 'Explore layer 1 →', es: 'Explorar capa 1 →' },
+  'offer.explore2':  { en: 'Explore layer 2 →', es: 'Explorar capa 2 →' },
+  'offer.explore3':  { en: 'Explore layer 3 →', es: 'Explorar capa 3 →' },
+  'industries.view_cta':  { en: 'View custom solutions', es: 'Ver soluciones por sector' },
+  'pricing.view_cta':     { en: 'Compare plans & options', es: 'Comparar planes y opciones' },
   'offer.headline': {
     en: 'Three layers of intelligence.<br><span class="gradient-text">One system that grows.</span>',
     es: 'Tres capas de inteligencia.<br><span class="gradient-text">Un sistema que crece contigo.</span>'
