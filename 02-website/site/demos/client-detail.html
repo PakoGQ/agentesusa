@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Detail — María Rodríguez | Nexus</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; background: #F8FAFC; }
+    .timeline-line { position: absolute; left: 11px; top: 8px; bottom: 8px; width: 2px; background: #E2E8F0; }
+  </style>
+</head>
+<body class="min-h-screen">
+
+  <!-- Top header -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-10">
+    <div class="max-w-[1400px] mx-auto px-8 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 bg-gradient-to-br from-blue-500 to-teal-500 rounded-lg flex items-center justify-center text-white font-bold">N</div>
+        <span class="text-xl font-bold text-slate-900">Nexus</span>
+        <nav class="ml-8 flex gap-1">
+          <button class="px-4 py-1.5 text-sm text-slate-600 hover:bg-slate-100 rounded-lg">Dashboard</button>
+          <button class="px-4 py-1.5 text-sm font-semibold text-slate-900 bg-slate-100 rounded-lg">Clients</button>
+          <button class="px-4 py-1.5 text-sm text-slate-600 hover:bg-slate-100 rounded-lg">Documents</button>
+          <button class="px-4 py-1.5 text-sm text-slate-600 hover:bg-slate-100 rounded-lg">Calendar</button>
+          <button class="px-4 py-1.5 text-sm text-slate-600 hover:bg-slate-100 rounded-lg">Reports</button>
+        </nav>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="text-xs text-blue-600 hover:underline">← demo index</a>
+        <button class="relative p-2 hover:bg-slate-100 rounded-lg">
+          <svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+          <span class="absolute -top-0.5 -right-0.5 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center font-bold">2</span>
+        </button>
+        <div class="w-9 h-9 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center text-white font-bold text-sm">CH</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-[1400px] mx-auto px-8 py-6">
+
+    <!-- Back link -->
+    <a href="dashboard-home.html" class="text-blue-600 text-sm flex items-center gap-1 mb-4 hover:text-blue-700 font-medium">← Back to inbox</a>
+
+    <!-- Client header card -->
+    <div class="bg-white rounded-xl border border-slate-200 p-6 mb-6">
+      <div class="flex items-start justify-between flex-wrap gap-4">
+        <div class="flex items-start gap-5">
+          <div class="w-16 h-16 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-xl flex-shrink-0">MR</div>
+          <div>
+            <h1 class="text-3xl font-bold text-slate-900">María Rodríguez</h1>
+            <div class="text-sm text-slate-600 flex items-center gap-3 mt-1 flex-wrap">
+              <span>Client since: March 2024 (24 months)</span>
+              <span class="text-slate-400">•</span>
+              <span class="text-green-700 bg-green-100 px-2 py-0.5 rounded text-xs font-semibold">Active</span>
+              <span class="text-slate-400">•</span>
+              <span class="text-amber-700 bg-amber-100 px-2 py-0.5 rounded text-xs font-semibold">🔴 Deadline 4 days</span>
+            </div>
+            <div class="text-sm text-slate-600 mt-2 flex items-center gap-3 flex-wrap">
+              <span>🌐 Spanish</span>
+              <span class="text-slate-400">•</span>
+              <span>📱 WhatsApp +1 213-***-1234</span>
+              <span class="text-slate-400">•</span>
+              <span>📧 maria.r@***.com</span>
+            </div>
+          </div>
+        </div>
+        <div class="flex gap-2 flex-wrap">
+          <button class="px-3 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50 font-medium">📞 Call</button>
+          <button class="px-3 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50 font-medium">💬 Message</button>
+          <button class="px-3 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50 font-medium">📅 Schedule</button>
+          <button class="px-3 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50 font-medium">📁 Documents</button>
+          <button class="px-3 py-2 text-sm bg-slate-100 hover:bg-slate-200 rounded-lg font-medium">⬇ Export</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="flex gap-1 border-b border-slate-200 mb-6">
+      <button class="px-4 py-2.5 font-semibold text-slate-900 border-b-2 border-blue-600">Overview</button>
+      <button class="px-4 py-2.5 text-slate-500 hover:text-slate-900">Documents <span class="text-xs text-slate-400 ml-1">87</span></button>
+      <button class="px-4 py-2.5 text-slate-500 hover:text-slate-900">Communications <span class="text-xs text-slate-400 ml-1">243</span></button>
+      <button class="px-4 py-2.5 text-slate-500 hover:text-slate-900">Cases</button>
+      <button class="px-4 py-2.5 text-slate-500 hover:text-slate-900">Notes</button>
+      <button class="px-4 py-2.5 text-slate-500 hover:text-slate-900">Billing</button>
+    </div>
+
+    <!-- Two cards: Active Case + SOFIA KNOWS -->
+    <div class="grid grid-cols-2 gap-6 mb-6">
+
+      <!-- Active Case -->
+      <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+        <div class="px-6 py-4 border-b border-slate-200">
+          <h2 class="font-bold text-slate-900 uppercase tracking-wider text-sm flex items-center gap-2">
+            <span>📋</span> Active Case
+          </h2>
+        </div>
+        <div class="p-6 space-y-3">
+          <div class="flex justify-between text-sm"><span class="text-slate-500">Type:</span><span class="font-semibold text-slate-900">I-130 Family Petition</span></div>
+          <div class="flex justify-between text-sm"><span class="text-slate-500">Filed:</span><span class="font-semibold text-slate-900">January 15, 2025</span></div>
+          <div class="flex justify-between text-sm"><span class="text-slate-500">Priority Date:</span><span class="font-semibold text-slate-900">August 3, 2024</span></div>
+          <div class="flex justify-between text-sm"><span class="text-slate-500">Receipt #:</span><span class="font-semibold text-slate-900 font-mono">MSC2519823746</span></div>
+          <div class="flex justify-between text-sm"><span class="text-slate-500">Status:</span><span class="font-semibold text-blue-700 bg-blue-50 px-2 py-0.5 rounded text-xs">Awaiting USCIS Response</span></div>
+          <div class="flex justify-between text-sm"><span class="text-slate-500">Lead Attorney:</span><span class="font-semibold text-slate-900">Carlos Hernández</span></div>
+          <div class="flex justify-between text-sm"><span class="text-slate-500">Deadline:</span><span class="font-semibold text-red-600">March 15 · 4 days</span></div>
+
+          <div class="pt-4 mt-2 border-t border-slate-200">
+            <div class="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-2">Last Update</div>
+            <div class="text-sm text-slate-700">Receipt notice received Feb 28. Sofia processed and tagged. Awaiting RFE or approval.</div>
+          </div>
+
+          <button class="w-full mt-4 px-4 py-2.5 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 text-sm">View full case →</button>
+        </div>
+      </div>
+
+      <!-- SOFIA KNOWS — THE MOAT -->
+      <div class="bg-white rounded-xl border-2 border-teal-500 overflow-hidden relative shadow-lg shadow-teal-100">
+        <div class="absolute top-3 right-3 bg-teal-500 text-white text-xs px-2.5 py-1 rounded-full font-bold flex items-center gap-1">
+          <span>⭐</span> THE MOAT
+        </div>
+        <div class="px-6 py-4 border-b border-teal-100 bg-gradient-to-r from-teal-50 to-blue-50">
+          <h2 class="font-bold text-teal-900 uppercase tracking-wider text-sm flex items-center gap-2">
+            <span>🧠</span> Sofia knows about María
+          </h2>
+          <p class="text-xs text-teal-700 mt-1 normal-case tracking-normal">Built over 24 months of conversations & documents</p>
+        </div>
+        <div class="p-6">
+          <div class="grid grid-cols-1 gap-2.5">
+            <div class="flex gap-2 text-sm"><span class="text-teal-600 font-bold">▸</span><span class="text-slate-700">Spanish-only communication (never write in English)</span></div>
+            <div class="flex gap-2 text-sm"><span class="text-teal-600 font-bold">▸</span><span class="text-slate-700">Strongly prefers WhatsApp over email or calls</span></div>
+            <div class="flex gap-2 text-sm"><span class="text-teal-600 font-bold">▸</span><span class="text-slate-700">Single mother, 2 children (María Jr. 8, Diego 5)</span></div>
+            <div class="flex gap-2 text-sm"><span class="text-teal-600 font-bold">▸</span><span class="text-slate-700">Husband (Luis) passed away December 2024</span></div>
+            <div class="flex gap-2 text-sm"><span class="text-teal-600 font-bold">▸</span><span class="text-slate-700">Anxiety: needs reassurance; pattern of catastrophic thinking</span></div>
+            <div class="flex gap-2 text-sm"><span class="text-teal-600 font-bold">▸</span><span class="text-slate-700">Always sends docs same day requested (highly responsive)</span></div>
+            <div class="flex gap-2 text-sm"><span class="text-teal-600 font-bold">▸</span><span class="text-slate-700">Asks status update weekly even when nothing has changed</span></div>
+            <div class="flex gap-2 text-sm"><span class="text-teal-600 font-bold">▸</span><span class="text-slate-700">Daughter María Jr. qualifies for derivative benefits</span></div>
+            <div class="flex gap-2 text-sm"><span class="text-teal-600 font-bold">▸</span><span class="text-slate-700">Works as housekeeper, paid in cash (relevant for sponsorship)</span></div>
+            <div class="flex gap-2 text-sm"><span class="text-teal-600 font-bold">▸</span><span class="text-slate-700">Sister Carmen in Mexico City — emergency contact</span></div>
+            <div class="flex gap-2 text-sm"><span class="text-teal-600 font-bold">▸</span><span class="text-slate-700">Cried on Aug 2024 call when Luis was diagnosed (handle with care)</span></div>
+            <div class="flex gap-2 text-sm"><span class="text-teal-600 font-bold">▸</span><span class="text-slate-700">Religious (mentions praying) — empathy with this framing helps</span></div>
+          </div>
+          <div class="mt-5 pt-4 border-t border-teal-200 bg-teal-50/50 -mx-6 -mb-6 px-6 py-3 rounded-b-xl">
+            <p class="text-xs text-teal-800 italic">
+              👉 <strong>This is what a new system wouldn't know.</strong> 24 months of context cannot be exported as a CSV.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden mb-6">
+      <div class="px-6 py-4 border-b border-slate-200">
+        <h2 class="font-bold text-slate-900 uppercase tracking-wider text-sm flex items-center gap-2">
+          <span>📅</span> Key Moments Timeline
+        </h2>
+      </div>
+      <div class="p-6">
+        <div class="relative pl-2">
+          <div class="timeline-line"></div>
+          <ul class="space-y-4 relative">
+
+            <li class="flex gap-4 items-start">
+              <div class="w-6 h-6 bg-slate-300 rounded-full flex-shrink-0 z-10 ring-4 ring-white"></div>
+              <div class="pt-0.5">
+                <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Mar 2024</div>
+                <div class="text-sm text-slate-900">Initial consultation — referred by sister-in-law</div>
+              </div>
+            </li>
+
+            <li class="flex gap-4 items-start">
+              <div class="w-6 h-6 bg-slate-300 rounded-full flex-shrink-0 z-10 ring-4 ring-white"></div>
+              <div class="pt-0.5">
+                <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Apr 2024</div>
+                <div class="text-sm text-slate-900">I-130 strategy decided · Engagement signed</div>
+              </div>
+            </li>
+
+            <li class="flex gap-4 items-start">
+              <div class="w-6 h-6 bg-slate-300 rounded-full flex-shrink-0 z-10 ring-4 ring-white"></div>
+              <div class="pt-0.5">
+                <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Jun 2024</div>
+                <div class="text-sm text-slate-900">Documents from Mexico received (birth certs, marriage cert)</div>
+              </div>
+            </li>
+
+            <li class="flex gap-4 items-start">
+              <div class="w-6 h-6 bg-slate-300 rounded-full flex-shrink-0 z-10 ring-4 ring-white"></div>
+              <div class="pt-0.5">
+                <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Aug 2024</div>
+                <div class="text-sm text-slate-900">I-130 filed · Priority Date set · 🟢 Receipt notice received</div>
+              </div>
+            </li>
+
+            <li class="flex gap-4 items-start">
+              <div class="w-6 h-6 bg-amber-400 rounded-full flex-shrink-0 z-10 ring-4 ring-white"></div>
+              <div class="pt-0.5">
+                <div class="text-xs font-bold text-amber-700 uppercase tracking-wider">Dec 2024</div>
+                <div class="text-sm text-slate-900 font-medium">⚠️ Husband (Luis) passed away · Strategy adjusted to widow path</div>
+              </div>
+            </li>
+
+            <li class="flex gap-4 items-start">
+              <div class="w-6 h-6 bg-slate-300 rounded-full flex-shrink-0 z-10 ring-4 ring-white"></div>
+              <div class="pt-0.5">
+                <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Jan 2025</div>
+                <div class="text-sm text-slate-900">I-360 filed (widow petition path) · Replaces I-130</div>
+              </div>
+            </li>
+
+            <li class="flex gap-4 items-start">
+              <div class="w-6 h-6 bg-slate-300 rounded-full flex-shrink-0 z-10 ring-4 ring-white"></div>
+              <div class="pt-0.5">
+                <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Feb 2025</div>
+                <div class="text-sm text-slate-900">Latest update — receipt notice for I-360 received and processed</div>
+              </div>
+            </li>
+
+            <li class="flex gap-4 items-start">
+              <div class="w-6 h-6 bg-red-500 rounded-full flex-shrink-0 z-10 ring-4 ring-red-100 animate-pulse"></div>
+              <div class="pt-0.5">
+                <div class="text-xs font-bold text-red-600 uppercase tracking-wider">Today · March 11, 2026</div>
+                <div class="text-sm text-slate-900 font-bold">🔴 Response due in 4 days · Action needed</div>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Documents -->
+    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+      <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between">
+        <h2 class="font-bold text-slate-900 uppercase tracking-wider text-sm flex items-center gap-2">
+          <span>📂</span> Recent Documents
+        </h2>
+        <a href="document-search.html" class="text-xs text-blue-600 hover:underline font-medium">View all 87 →</a>
+      </div>
+      <div class="divide-y divide-slate-100">
+
+        <div class="px-6 py-3 flex items-center justify-between hover:bg-slate-50">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center text-blue-700">📄</div>
+            <div>
+              <div class="font-semibold text-slate-900 text-sm">USCIS Receipt Notice (I-360)</div>
+              <div class="text-xs text-slate-500">02/28/2026 · Tagged: Migratorio, USCIS</div>
+            </div>
+          </div>
+          <div class="flex gap-2">
+            <button class="text-xs text-blue-600 hover:underline font-medium">View</button>
+            <button class="text-xs text-blue-600 hover:underline font-medium">Download</button>
+          </div>
+        </div>
+
+        <div class="px-6 py-3 flex items-center justify-between hover:bg-slate-50">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center text-blue-700">📄</div>
+            <div>
+              <div class="font-semibold text-slate-900 text-sm">I-360 Application (filed)</div>
+              <div class="text-xs text-slate-500">01/15/2025 · Tagged: Migratorio, Widow petition</div>
+            </div>
+          </div>
+          <div class="flex gap-2">
+            <button class="text-xs text-blue-600 hover:underline font-medium">View</button>
+            <button class="text-xs text-blue-600 hover:underline font-medium">Download</button>
+          </div>
+        </div>
+
+        <div class="px-6 py-3 flex items-center justify-between hover:bg-slate-50">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center text-amber-700">📄</div>
+            <div>
+              <div class="font-semibold text-slate-900 text-sm">Death certificate (Luis Rodríguez)</div>
+              <div class="text-xs text-slate-500">12/03/2024 · Tagged: Permanent, Civil records</div>
+            </div>
+          </div>
+          <div class="flex gap-2">
+            <button class="text-xs text-blue-600 hover:underline font-medium">View</button>
+            <button class="text-xs text-blue-600 hover:underline font-medium">Download</button>
+          </div>
+        </div>
+
+        <div class="px-6 py-3 flex items-center justify-between hover:bg-slate-50">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center text-purple-700">📄</div>
+            <div>
+              <div class="font-semibold text-slate-900 text-sm">Marriage certificate</div>
+              <div class="text-xs text-slate-500">06/12/2024 · Tagged: Permanent, Civil records · MX origin</div>
+            </div>
+          </div>
+          <div class="flex gap-2">
+            <button class="text-xs text-blue-600 hover:underline font-medium">View</button>
+            <button class="text-xs text-blue-600 hover:underline font-medium">Download</button>
+          </div>
+        </div>
+
+        <div class="px-6 py-3 flex items-center justify-between hover:bg-slate-50">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center text-purple-700">📄</div>
+            <div>
+              <div class="font-semibold text-slate-900 text-sm">Birth certificate (María Rodríguez Jr.)</div>
+              <div class="text-xs text-slate-500">06/12/2024 · Tagged: Permanent, Dependents</div>
+            </div>
+          </div>
+          <div class="flex gap-2">
+            <button class="text-xs text-blue-600 hover:underline font-medium">View</button>
+            <button class="text-xs text-blue-600 hover:underline font-medium">Download</button>
+          </div>
+        </div>
+
+        <div class="px-6 py-3 text-center text-sm text-slate-500 hover:bg-slate-50 cursor-pointer">
+          ... 82 more documents — <a href="document-search.html" class="text-blue-600 hover:underline">browse all</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Demo footer note -->
+    <div class="mt-8 text-center text-xs text-slate-400">
+      Mockup demostrativo · Datos ficticios · <a href="index.html" class="text-blue-600 hover:underline">← volver al index</a>
+    </div>
+
+  </main>
+</body>
+</html>
