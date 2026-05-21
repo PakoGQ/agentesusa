@@ -100,54 +100,107 @@
       
       <!-- Interactive Mockup Feed (WOW factor) -->
       <div class="lg:col-span-5 relative">
-        <div class="glass-card rounded-3xl p-6 border border-white/10 shadow-2xl relative overflow-hidden backdrop-blur-2xl">
-          <!-- Mockup Header -->
+
+        <!-- Agent Tabs -->
+        <div class="flex gap-2 mb-3">
+          <button onclick="switchAgent('sofia')" id="tab-sofia"
+            class="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs font-bold transition-all bg-teal-500/20 border border-teal-500/50 text-teal-300">
+            ⚖️ <span>For Law Firms</span>
+          </button>
+          <button onclick="switchAgent('marco')" id="tab-marco"
+            class="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs font-bold transition-all bg-slate-800/60 border border-white/10 text-slate-400 hover:text-white">
+            📊 <span>For Accountants</span>
+          </button>
+        </div>
+
+        <!-- SOFIA MOCKUP — Law Firms -->
+        <div id="mockup-sofia" class="glass-card rounded-3xl p-6 border border-white/10 shadow-2xl relative overflow-hidden backdrop-blur-2xl">
           <div class="flex items-center justify-between border-b border-white/5 pb-4 mb-4">
             <div class="flex items-center gap-2">
-              <span class="w-3.5 h-3.5 rounded-full bg-teal-500 flex items-center justify-center text-[10px] font-bold text-slate-900">S</span>
+              <span class="w-7 h-7 rounded-full bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center text-[11px] font-black text-slate-900">S</span>
               <div>
-                <span class="text-sm font-bold text-white">Sofia AI Agent</span>
-                <span class="block text-[10px] text-teal-400 font-semibold uppercase tracking-wider">Active Workspace</span>
+                <span class="text-sm font-bold text-white">Sofia — Law Firm Agent</span>
+                <span class="block text-[10px] text-teal-400 font-semibold uppercase tracking-wider">Corporate · Family · Labor · Criminal</span>
               </div>
             </div>
             <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
           </div>
-          
-          <!-- Mockup Live Simulation Chat Feed -->
-          <div class="space-y-4 font-mono text-[11px] leading-relaxed mb-6">
-            <div class="bg-slate-900/60 p-3.5 rounded-2xl border border-white/5 space-y-1">
-              <div class="text-slate-400 flex justify-between"><span>[09:31:02] Client WhatsApp (US)</span> <span class="text-slate-500">English</span></div>
-              <div class="text-slate-200">"Hi, just checking — did you receive the signed contract I sent last night? What's the next step?"</div>
-            </div>
 
-            <div class="bg-teal-500/5 p-3.5 rounded-2xl border border-teal-500/20 space-y-1">
-              <div class="text-teal-400 flex justify-between"><span>[09:31:04] Sofia Agent</span> <span class="text-teal-500">Autonomous</span></div>
-              <div class="text-teal-100">"Hi! Yes, I received your signed contract and added it to your file. I noticed clause 8 has an open date — I've flagged it for the attorney's review before your next appointment on Thursday at 10am."</div>
+          <div class="space-y-3 font-mono text-[11px] leading-relaxed mb-5">
+            <div class="bg-slate-900/60 p-3 rounded-2xl border border-white/5 space-y-1">
+              <div class="text-slate-400 flex justify-between"><span>[09:31:02] Client · WhatsApp</span><span class="text-slate-500">EN</span></div>
+              <div class="text-slate-200">"Hi, did you receive the signed contract I sent last night? What's next?"</div>
             </div>
-
-            <div class="bg-slate-900/60 p-3.5 rounded-2xl border border-white/5 space-y-1">
-              <div class="text-slate-400 flex justify-between"><span>[09:31:40] Client WhatsApp (MX)</span> <span class="text-slate-500">Spanish</span></div>
-              <div class="text-slate-200">"Hola, ¿me pueden decir en qué etapa va mi caso y qué documentos me faltan?"</div>
+            <div class="bg-teal-500/5 p-3 rounded-2xl border border-teal-500/20 space-y-1">
+              <div class="text-teal-400 flex justify-between"><span>[09:31:04] Sofia</span><span class="text-teal-500">Autonomous</span></div>
+              <div class="text-teal-100">"Got it! Clause 8 has an open date — flagged for your attorney before Thursday 10am."</div>
             </div>
-
-            <div class="bg-teal-500/5 p-3.5 rounded-2xl border border-teal-500/20 space-y-1">
-              <div class="text-teal-400 flex justify-between"><span>[09:31:42] Sofia Agent</span> <span class="text-teal-500">Autonomous</span></div>
-              <div class="text-teal-100">"¡Hola! Tu caso está en etapa de revisión de documentos. Aún necesitamos tu identificación oficial y el contrato firmado. ¿Puedes enviarlos antes del viernes para que el abogado los revise la próxima semana?"</div>
+            <div class="bg-slate-900/60 p-3 rounded-2xl border border-white/5 space-y-1">
+              <div class="text-slate-400 flex justify-between"><span>[09:31:40] Cliente · WhatsApp</span><span class="text-slate-500">ES</span></div>
+              <div class="text-slate-200">"¿Qué documentos me faltan para la próxima cita?"</div>
+            </div>
+            <div class="bg-teal-500/5 p-3 rounded-2xl border border-teal-500/20 space-y-1">
+              <div class="text-teal-400 flex justify-between"><span>[09:31:42] Sofia</span><span class="text-teal-500">Autónoma</span></div>
+              <div class="text-teal-100">"Solo falta tu identificación oficial. ¿La puedes enviar antes del viernes?"</div>
             </div>
           </div>
 
-          <!-- Live metrics simulation -->
-          <div class="grid grid-cols-2 gap-4 border-t border-white/5 pt-4">
-            <div class="bg-slate-900/40 p-3.5 rounded-xl border border-white/5">
-              <div class="text-[10px] text-slate-500 uppercase tracking-widest font-semibold">Docs Scanned</div>
-              <div class="text-xl font-black text-teal-400 mt-1">12,842</div>
+          <div class="grid grid-cols-2 gap-3 border-t border-white/5 pt-4">
+            <div class="bg-slate-900/40 p-3 rounded-xl border border-white/5">
+              <div class="text-[10px] text-slate-500 uppercase tracking-widest font-semibold">Cases Managed</div>
+              <div class="text-xl font-black text-teal-400 mt-1">348</div>
             </div>
-            <div class="bg-slate-900/40 p-3.5 rounded-xl border border-white/5">
+            <div class="bg-slate-900/40 p-3 rounded-xl border border-white/5">
               <div class="text-[10px] text-slate-500 uppercase tracking-widest font-semibold">Response Time</div>
               <div class="text-xl font-black text-blue-400 mt-1">0.4s</div>
             </div>
           </div>
         </div>
+
+        <!-- MARCO MOCKUP — Accountants -->
+        <div id="mockup-marco" class="glass-card rounded-3xl p-6 border border-white/10 shadow-2xl relative overflow-hidden backdrop-blur-2xl hidden">
+          <div class="flex items-center justify-between border-b border-white/5 pb-4 mb-4">
+            <div class="flex items-center gap-2">
+              <span class="w-7 h-7 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-[11px] font-black text-slate-900">M</span>
+              <div>
+                <span class="text-sm font-bold text-white">Marco — Accounting Agent</span>
+                <span class="block text-[10px] text-blue-400 font-semibold uppercase tracking-wider">Tax Returns · Bookkeeping · IRS · Payroll</span>
+              </div>
+            </div>
+            <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
+          </div>
+
+          <div class="space-y-3 font-mono text-[11px] leading-relaxed mb-5">
+            <div class="bg-slate-900/60 p-3 rounded-2xl border border-white/5 space-y-1">
+              <div class="text-slate-400 flex justify-between"><span>[10:14:08] Client · Email</span><span class="text-slate-500">EN</span></div>
+              <div class="text-slate-200">"Hey, when is my tax return going to be ready? I sent all my W-2s last week."</div>
+            </div>
+            <div class="bg-blue-500/5 p-3 rounded-2xl border border-blue-500/20 space-y-1">
+              <div class="text-blue-400 flex justify-between"><span>[10:14:10] Marco</span><span class="text-blue-400">Autonomous</span></div>
+              <div class="text-blue-100">"Hi! Got your W-2s. Still missing your 1099-NEC. Send it and your return will be ready within 3 business days."</div>
+            </div>
+            <div class="bg-slate-900/60 p-3 rounded-2xl border border-white/5 space-y-1">
+              <div class="text-slate-400 flex justify-between"><span>[10:14:55] Cliente · WhatsApp</span><span class="text-slate-500">ES</span></div>
+              <div class="text-slate-200">"¿Ya llegó mi reembolso del IRS?"</div>
+            </div>
+            <div class="bg-blue-500/5 p-3 rounded-2xl border border-blue-500/20 space-y-1">
+              <div class="text-blue-400 flex justify-between"><span>[10:14:57] Marco</span><span class="text-blue-400">Autónomo</span></div>
+              <div class="text-blue-100">"Aún no. El IRS tarda 10-21 días desde la fecha de presentación. Revisa Where's My Refund en irs.gov con tu SSN. Te aviso en cuanto se registre."</div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3 border-t border-white/5 pt-4">
+            <div class="bg-slate-900/40 p-3 rounded-xl border border-white/5">
+              <div class="text-[10px] text-slate-500 uppercase tracking-widest font-semibold">Docs Processed</div>
+              <div class="text-xl font-black text-blue-400 mt-1">12,842</div>
+            </div>
+            <div class="bg-slate-900/40 p-3 rounded-xl border border-white/5">
+              <div class="text-[10px] text-slate-500 uppercase tracking-widest font-semibold">Response Time</div>
+              <div class="text-xl font-black text-teal-400 mt-1">0.4s</div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
