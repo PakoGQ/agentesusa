@@ -9,8 +9,8 @@ const translations = {
     es: 'Nexus — IA empresarial para los despachos que la merecen'
   },
   'meta.description': {
-    en: 'AI agents built specifically for immigration attorneys, accounting practices, and logistics companies. Enterprise depth. Bilingual by design.',
-    es: 'Agentes de IA construidos específicamente para abogados migratorios, despachos contables y empresas de logística. Profundidad enterprise. Bilingüe por diseño.'
+    en: 'AI agents built specifically for law firms of all practice areas, accounting practices, and logistics companies. Enterprise depth. Bilingual by design.',
+    es: 'Agentes de IA construidos específicamente para despachos legales de toda práctica, despachos contables y empresas de logística. Profundidad enterprise. Bilingüe por diseño.'
   },
 
   // Nav
@@ -23,8 +23,8 @@ const translations = {
 
   // Hero
   'hero.badge': {
-    en: 'Now serving immigration attorneys, accountants, and logistics companies',
-    es: 'Ahora atendiendo abogados migratorios, contadores y empresas de logística'
+    en: 'Now serving law firms, accountants, and logistics companies',
+    es: 'Ahora atendiendo despachos legales, contadores y empresas de logística'
   },
   'hero.headline': {
     en: 'The AI advantage<br>your firm <span class="gradient-text">deserves.</span>',
@@ -161,16 +161,16 @@ const translations = {
 
   'industries.attorneys.label': { en: 'For attorneys', es: 'Para abogados' },
   'industries.attorneys.title': {
-    en: 'Immigration & multi-practice law firms',
-    es: 'Despachos migratorios y multi-práctica'
+    en: 'Law firms of all practice areas',
+    es: 'Despachos legales de toda práctica'
   },
   'industries.attorneys.body': {
-    en: 'Your clients are stressed. Your caseload is heavy. Sofia handles the communication, organizes the documents, flags what truly needs your attention — bilingual, empathetic, never sleeps.',
-    es: 'Tus clientes están estresados. Tu carga de casos es pesada. Sofia maneja la comunicación, organiza los documentos, marca lo que realmente necesita tu atención — bilingüe, empática, nunca duerme.'
+    en: 'Your clients are stressed. Your caseload is heavy. Sofia handles the communication, organizes the documents, flags what truly needs your attention — bilingual, empathetic, available 24/7 for every practice area you serve.',
+    es: 'Tus clientes están estresados. Tu carga de casos es pesada. Sofia maneja la comunicación, organiza los documentos, marca lo que realmente necesita tu atención — bilingüe, empática, disponible 24/7 para cada área de práctica.'
   },
   'industries.attorneys.area1': {
-    en: 'Immigration · Personal Injury · Family · Labor · Corporate',
-    es: 'Migratorio · Lesiones Personales · Familiar · Laboral · Corporativo'
+    en: 'Immigration · Personal Injury · Family · Labor · Corporate · Criminal',
+    es: 'Migratorio · Lesiones Personales · Familiar · Laboral · Corporativo · Penal'
   },
   'industries.attorneys.cta': { en: 'Learn more →', es: 'Conoce más →' },
 
@@ -380,7 +380,7 @@ const translations = {
     es: 'IA empresarial para los despachos que la merecen. Hecho en México, operado en USA.'
   },
   'footer.industries.label': { en: 'Industries', es: 'Industrias' },
-  'footer.industries.attorneys': { en: 'Immigration attorneys', es: 'Abogados migratorios' },
+  'footer.industries.attorneys': { en: 'Law firms', es: 'Despachos legales' },
   'footer.industries.accountants': { en: 'Accounting practices', es: 'Despachos contables' },
   'footer.industries.logistics': { en: 'Logistics companies', es: 'Empresas de logística' },
   'footer.company.label': { en: 'Company', es: 'Empresa' },
