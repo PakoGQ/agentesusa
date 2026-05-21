@@ -106,7 +106,6 @@ const translations = {
 
   // Offer (3 layers)
   'offer.label':     { en: 'What we build', es: 'Qué construimos' },
-  'offer.headline':  { en: 'Three layers of intelligence', es: 'Tres capas de inteligencia' },
   'offer.explore1':  { en: 'Explore layer 1 →', es: 'Explorar capa 1 →' },
   'offer.explore2':  { en: 'Explore layer 2 →', es: 'Explorar capa 2 →' },
   'offer.explore3':  { en: 'Explore layer 3 →', es: 'Explorar capa 3 →' },
@@ -355,6 +354,19 @@ const translations = {
     en: '+ volume fee for documents processed above plan limit · SMS and Voice add-ons available Pro+',
     es: '+ tarifa por volumen para documentos arriba del límite · Add-ons SMS y Voz disponibles desde Pro'
   },
+
+  // Contact form
+  'contact.label':         { en: 'Book a call', es: 'Agenda una llamada' },
+  'contact.field.name':    { en: 'Name', es: 'Nombre' },
+  'contact.field.email':   { en: 'Email Address', es: 'Correo electrónico' },
+  'contact.field.industry':{ en: 'Industry', es: 'Sector' },
+  'contact.field.lang':    { en: 'Preferred language', es: 'Idioma de preferencia' },
+  'contact.opt.attorneys': { en: 'Law firm / Attorneys', es: 'Despacho legal / Abogados' },
+  'contact.opt.accountants':{ en: 'Accounting practice', es: 'Despacho contable' },
+  'contact.opt.logistics': { en: 'Logistics company', es: 'Empresa de logística' },
+  'contact.opt.other':     { en: 'Other', es: 'Otro' },
+  'contact.lang.en':       { en: 'English', es: 'Inglés' },
+  'contact.lang.es':       { en: 'Spanish', es: 'Español' },
 
   // Founder
   'founder.label': { en: 'The founder', es: 'El fundador' },
