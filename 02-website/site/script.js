@@ -169,8 +169,8 @@ const translations = {
     es: 'Tus clientes están estresados. Tu carga de casos es pesada. Sofia maneja la comunicación, organiza los documentos, marca lo que realmente necesita tu atención — bilingüe, empática, disponible 24/7 para cada área de práctica.'
   },
   'industries.attorneys.area1': {
-    en: 'Immigration · Personal Injury · Family · Labor · Corporate · Criminal',
-    es: 'Migratorio · Lesiones Personales · Familiar · Laboral · Corporativo · Penal'
+    en: 'Corporate · Family · Labor · Personal Injury · Criminal · Immigration',
+    es: 'Corporativo · Familiar · Laboral · Lesiones Personales · Penal · Migratorio'
   },
   'industries.attorneys.cta': { en: 'Learn more →', es: 'Conoce más →' },
 
