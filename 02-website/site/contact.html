@@ -80,35 +80,35 @@
             
             <form onsubmit="event.preventDefault(); alert('Strategy call booked! We will email you shortly.');" class="space-y-6">
               <div>
-                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Name / Nombre</label>
+                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2" data-i18n="contact.field.name">Name</label>
                 <input type="text" required class="w-full bg-slate-900/60 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-teal-500 transition-all" placeholder="John Doe">
               </div>
 
               <div>
-                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Email Address / Correo</label>
+                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2" data-i18n="contact.field.email">Email Address</label>
                 <input type="email" required class="w-full bg-slate-900/60 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-teal-500 transition-all" placeholder="john@yourfirm.com">
               </div>
 
               <div>
-                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Industry / Sector</label>
+                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2" data-i18n="contact.field.industry">Industry</label>
                 <select class="w-full bg-slate-900/60 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-teal-500 transition-all">
-                  <option value="attorneys">Attorneys / Abogados</option>
-                  <option value="accountants">Accountants / Contadores</option>
-                  <option value="logistics">Logistics / Logística</option>
-                  <option value="other">Other / Otro</option>
+                  <option value="attorneys" data-i18n="contact.opt.attorneys">Law firm / Attorneys</option>
+                  <option value="accountants" data-i18n="contact.opt.accountants">Accounting practice</option>
+                  <option value="logistics" data-i18n="contact.opt.logistics">Logistics company</option>
+                  <option value="other" data-i18n="contact.opt.other">Other</option>
                 </select>
               </div>
 
               <div>
-                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Language preference / Idioma</label>
+                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2" data-i18n="contact.field.lang">Preferred language</label>
                 <div class="grid grid-cols-2 gap-3">
                   <label class="flex items-center gap-2 bg-slate-900/40 border border-white/5 rounded-xl px-4 py-3 cursor-pointer hover:border-teal-500/30 transition-all">
                     <input type="radio" name="lang_pref" checked class="accent-teal-500">
-                    <span class="text-sm text-slate-300">English</span>
+                    <span class="text-sm text-slate-300" data-i18n="contact.lang.en">English</span>
                   </label>
                   <label class="flex items-center gap-2 bg-slate-900/40 border border-white/5 rounded-xl px-4 py-3 cursor-pointer hover:border-teal-500/30 transition-all">
                     <input type="radio" name="lang_pref" class="accent-teal-500">
-                    <span class="text-sm text-slate-300">Español</span>
+                    <span class="text-sm text-slate-300" data-i18n="contact.lang.es">Spanish</span>
                   </label>
                 </div>
               </div>
