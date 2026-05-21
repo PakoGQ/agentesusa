@@ -639,6 +639,31 @@ window.addEventListener('scroll', () => {
 });
 
 // ────────────────────────────────────────────────────────────
+// HERO AGENT SWITCHER
+// ────────────────────────────────────────────────────────────
+
+function switchAgent(agent) {
+  const sofia   = document.getElementById('mockup-sofia');
+  const marco   = document.getElementById('mockup-marco');
+  const tabSofia = document.getElementById('tab-sofia');
+  const tabMarco = document.getElementById('tab-marco');
+
+  if (!sofia || !marco) return;
+
+  if (agent === 'sofia') {
+    sofia.classList.remove('hidden');
+    marco.classList.add('hidden');
+    tabSofia.className = 'flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs font-bold transition-all bg-teal-500/20 border border-teal-500/50 text-teal-300';
+    tabMarco.className = 'flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs font-bold transition-all bg-slate-800/60 border border-white/10 text-slate-400 hover:text-white';
+  } else {
+    marco.classList.remove('hidden');
+    sofia.classList.add('hidden');
+    tabMarco.className = 'flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs font-bold transition-all bg-blue-500/20 border border-blue-500/50 text-blue-300';
+    tabSofia.className = 'flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs font-bold transition-all bg-slate-800/60 border border-white/10 text-slate-400 hover:text-white';
+  }
+}
+
+// ────────────────────────────────────────────────────────────
 // INITIALIZATION
 // ────────────────────────────────────────────────────────────
 
