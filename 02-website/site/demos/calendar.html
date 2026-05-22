@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendar — Nexus</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; background: #F8FAFC; }
+    .event-block { transition: all 0.15s; cursor: pointer; }
+    .event-block:hover { filter: brightness(1.05); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+    .es-text { display: none; }
+    .modal-enter { animation: scaleUp 0.2s ease; }
+    @keyframes scaleUp { from { opacity:0; transform:scale(0.95); } to { opacity:1; transform:scale(1); } }
+  </style>
+</head>
+<body class="min-h-screen">
+
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-10">
+    <div class="max-w-[1400px] mx-auto px-8 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 bg-gradient-to-br from-blue-500 to-teal-500 rounded-lg flex items-center justify-center text-white font-bold">N</div>
+        <span class="text-xl font-bold text-slate-900">Nexus</span>
+        <nav class="ml-8 flex gap-1" id="demo-nav-links"></nav>
+      </div>
+      <div class="text-center">
+        <div class="text-sm font-semibold text-slate-900"><span class="en-text">March 2026</span><span class="es-text">Marzo 2026</span></div>
+        <div class="text-xs text-slate-500"><span class="en-text">Week view · Mon Mar 11 – Sat Mar 16</span><span class="es-text">Vista semanal · Lun 11 – Sáb 16 Mar</span></div>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="../demo.html" class="text-xs text-blue-600 hover:underline"><span class="en-text">← All demos</span><span class="es-text">← Todos los demos</span></a>
+        <div class="flex gap-1 bg-slate-800/80 p-1 rounded-lg">
+          <button id="lang-btn-en" onclick="setDemoLang('en')" class="px-3 py-1 rounded font-bold text-xs text-white bg-slate-700 lang-btn">EN</button>
+          <button id="lang-btn-es" onclick="setDemoLang('es')" class="px-3 py-1 rounded font-bold text-xs text-slate-400 hover:text-white lang-btn">ES</button>
+        </div>
+        <button onclick="showEventModal()" class="px-4 py-2 bg-blue-600 text-white text-sm rounded-lg font-semibold hover:bg-blue-700 flex items-center gap-2">
+          + <span class="en-text">New event</span><span class="es-text">Nuevo evento</span>
+        </button>
+        <div class="w-9 h-9 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center text-white font-bold text-sm">CH</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-[1400px] mx-auto px-8 py-6">
+
+    <!-- Week nav + view toggle -->
+    <div class="flex items-center justify-between mb-4">
+      <div class="flex items-center gap-2">
+        <button onclick="showToast('📅 '+(getDemoLang()==='es'?'Semana anterior':'Previous week'), 'blue')" class="p-2 hover:bg-white border border-slate-200 rounded-lg transition">←</button>
+        <span class="text-sm font-semibold text-slate-900 px-2"><span class="en-text">Week of Mar 11, 2026</span><span class="es-text">Semana del 11 Mar 2026</span></span>
+        <button onclick="showToast('📅 '+(getDemoLang()==='es'?'Semana siguiente':'Next week'), 'blue')" class="p-2 hover:bg-white border border-slate-200 rounded-lg transition">→</button>
+        <button onclick="showToast('📅 '+(getDemoLang()==='es'?'Hoy: lunes 11 de marzo':'Today: Monday March 11'), 'blue')" class="ml-2 px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-sm font-medium hover:bg-slate-50"><span class="en-text">Today</span><span class="es-text">Hoy</span></button>
+      </div>
+      <div class="flex items-center gap-4 text-xs">
+        <span class="flex items-center gap-1.5"><span class="w-3 h-3 bg-blue-500 rounded-sm"></span><span class="en-text">Consultation</span><span class="es-text">Consulta</span></span>
+        <span class="flex items-center gap-1.5"><span class="w-3 h-3 bg-purple-500 rounded-sm"></span><span class="en-text">Court</span><span class="es-text">Audiencia</span></span>
+        <span class="flex items-center gap-1.5"><span class="w-3 h-3 bg-red-500 rounded-sm"></span><span class="en-text">Deadline</span><span class="es-text">Plazo</span></span>
+        <span class="flex items-center gap-1.5"><span class="w-3 h-3 bg-teal-500 rounded-sm"></span><span class="en-text">Auto-scheduled by Sofia</span><span class="es-text">Auto-agendado por Sofia</span></span>
+      </div>
+    </div>
+
+    <!-- Calendar grid -->
+    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+
+      <!-- Day headers -->
+      <div class="grid grid-cols-7 border-b border-slate-200">
+        <div class="py-3 px-4 text-xs font-bold text-slate-400 uppercase border-r border-slate-100 w-16"></div>
+        <div class="py-3 px-4 text-center border-r border-slate-100">
+          <div class="text-xs font-bold text-slate-400 uppercase"><span class="en-text">Mon</span><span class="es-text">Lun</span></div>
+          <div class="text-2xl font-black text-blue-600 mt-0.5">11</div>
+          <div class="text-xs text-blue-400 font-semibold"><span class="en-text">Today</span><span class="es-text">Hoy</span></div>
+        </div>
+        <div class="py-3 px-4 text-center border-r border-slate-100">
+          <div class="text-xs font-bold text-slate-400 uppercase"><span class="en-text">Tue</span><span class="es-text">Mar</span></div>
+          <div class="text-2xl font-black text-slate-900 mt-0.5">12</div>
+        </div>
+        <div class="py-3 px-4 text-center border-r border-slate-100">
+          <div class="text-xs font-bold text-slate-400 uppercase"><span class="en-text">Wed</span><span class="es-text">Mié</span></div>
+          <div class="text-2xl font-black text-slate-900 mt-0.5">13</div>
+        </div>
+        <div class="py-3 px-4 text-center border-r border-slate-100">
+          <div class="text-xs font-bold text-slate-400 uppercase"><span class="en-text">Thu</span><span class="es-text">Jue</span></div>
+          <div class="text-2xl font-black text-slate-900 mt-0.5">14</div>
+        </div>
+        <div class="py-3 px-4 text-center border-r border-slate-100">
+          <div class="text-xs font-bold text-red-500 uppercase"><span class="en-text">Fri</span><span class="es-text">Vie</span></div>
+          <div class="text-2xl font-black text-red-600 mt-0.5">15</div>
+          <div class="text-xs text-red-400 font-semibold"><span class="en-text">Deadline</span><span class="es-text">Plazo</span></div>
+        </div>
+        <div class="py-3 px-4 text-center">
+          <div class="text-xs font-bold text-slate-300 uppercase"><span class="en-text">Sat</span><span class="es-text">Sáb</span></div>
+          <div class="text-2xl font-black text-slate-300 mt-0.5">16</div>
+        </div>
+      </div>
+
+      <!-- Time slots -->
+      <div class="grid grid-cols-7">
+        <div class="border-r border-slate-100">
+          <!-- Time labels -->
+          <div class="h-16 border-b border-slate-50 flex items-start pt-2 px-3"><span class="text-xs text-slate-400 font-mono">8 AM</span></div>
+          <div class="h-16 border-b border-slate-50 flex items-start pt-2 px-3"><span class="text-xs text-slate-400 font-mono">9 AM</span></div>
+          <div class="h-16 border-b border-slate-50 flex items-start pt-2 px-3"><span class="text-xs text-slate-400 font-mono">10 AM</span></div>
+          <div class="h-16 border-b border-slate-50 flex items-start pt-2 px-3"><span class="text-xs text-slate-400 font-mono">11 AM</span></div>
+          <div class="h-16 border-b border-slate-50 flex items-start pt-2 px-3"><span class="text-xs text-slate-400 font-mono">12 PM</span></div>
+          <div class="h-16 border-b border-slate-50 flex items-start pt-2 px-3"><span class="text-xs text-slate-400 font-mono">1 PM</span></div>
+          <div class="h-16 border-b border-slate-50 flex items-start pt-2 px-3"><span class="text-xs text-slate-400 font-mono">2 PM</span></div>
+          <div class="h-16 border-b border-slate-50 flex items-start pt-2 px-3"><span class="text-xs text-slate-400 font-mono">3 PM</span></div>
+          <div class="h-16 border-b border-slate-50 flex items-start pt-2 px-3"><span class="text-xs text-slate-400 font-mono">4 PM</span></div>
+          <div class="h-16 flex items-start pt-2 px-3"><span class="text-xs text-slate-400 font-mono">5 PM</span></div>
+        </div>
+
+        <!-- MON 11 -->
+        <div class="border-r border-slate-100 relative">
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16 border-b border-slate-50 px-1 pt-1">
+            <div onclick="openEvent('Mon-1')" class="event-block bg-teal-500 text-white text-xs rounded-lg px-2 py-1.5 h-full">
+              <div class="font-bold"><span class="en-text">Axel — Lead</span><span class="es-text">Axel — Lead</span></div>
+              <div class="opacity-80">9 AM · Pedro V.</div>
+            </div>
+          </div>
+          <div class="h-16 border-b border-slate-50 px-1 pt-1">
+            <div onclick="openEvent('Mon-2')" class="event-block bg-blue-500 text-white text-xs rounded-lg px-2 py-1.5 h-full">
+              <div class="font-bold"><span class="en-text">Strategy call</span><span class="es-text">Llamada estratégica</span></div>
+              <div class="opacity-80">10 AM · Pérez LLC</div>
+            </div>
+          </div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16 border-b border-slate-50 px-1 pt-1">
+            <div onclick="openEvent('Mon-3')" class="event-block bg-teal-400 text-white text-xs rounded-lg px-2 py-1.5">
+              <div class="font-bold"><span class="en-text">Auto-reminder sent</span><span class="es-text">Recordatorio enviado</span></div>
+              <div class="opacity-80">12 PM · María R.</div>
+            </div>
+          </div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16"></div>
+        </div>
+
+        <!-- TUE 12 -->
+        <div class="border-r border-slate-100">
+          <div class="h-16 border-b border-slate-50 px-1 pt-1">
+            <div onclick="openEvent('Tue-1')" class="event-block bg-teal-500 text-white text-xs rounded-lg px-2 py-1.5 h-full">
+              <div class="font-bold"><span class="en-text">Sofia scheduled</span><span class="es-text">Sofia agendó</span></div>
+              <div class="opacity-80">8 AM · Vargas family</div>
+            </div>
+          </div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16 border-b border-slate-50 px-1 pt-1">
+            <div onclick="openEvent('Tue-2')" class="event-block bg-blue-500 text-white text-xs rounded-lg px-2 py-1.5 h-full">
+              <div class="font-bold"><span class="en-text">Consultation</span><span class="es-text">Consulta</span></div>
+              <div class="opacity-80">10 AM · José L. · Zoom</div>
+            </div>
+          </div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16 border-b border-slate-50 px-1 pt-1">
+            <div onclick="openEvent('Tue-3')" class="event-block bg-slate-500 text-white text-xs rounded-lg px-2 py-1.5">
+              <div class="font-bold"><span class="en-text">Team check-in</span><span class="es-text">Reunión de equipo</span></div>
+              <div class="opacity-80">1 PM · Internal</div>
+            </div>
+          </div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16"></div>
+        </div>
+
+        <!-- WED 13 -->
+        <div class="border-r border-slate-100">
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16 border-b border-slate-50 px-1 pt-1">
+            <div onclick="openEvent('Wed-1')" class="event-block bg-blue-500 text-white text-xs rounded-lg px-2 py-1.5 h-full">
+              <div class="font-bold"><span class="en-text">Consultation</span><span class="es-text">Consulta</span></div>
+              <div class="opacity-80">10 AM · Mendoza LLC</div>
+            </div>
+          </div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16 border-b border-slate-50 px-1 pt-1 row-span-2">
+            <div onclick="openEvent('Wed-2')" class="event-block bg-purple-600 text-white text-xs rounded-lg px-2 py-1.5 h-32 mt-0">
+              <div class="font-bold"><span class="en-text">Court hearing</span><span class="es-text">Audiencia</span></div>
+              <div class="opacity-80">2:30 PM · García case</div>
+              <div class="opacity-70 mt-1">LA Superior Dept 5</div>
+            </div>
+          </div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16"></div>
+        </div>
+
+        <!-- THU 14 -->
+        <div class="border-r border-slate-100">
+          <div class="h-16 border-b border-slate-50 px-1 pt-1">
+            <div onclick="openEvent('Thu-1')" class="event-block bg-teal-500 text-white text-xs rounded-lg px-2 py-1.5 h-full">
+              <div class="font-bold"><span class="en-text">Auto prep</span><span class="es-text">Prep automática</span></div>
+              <div class="opacity-80">8 AM · Sofia on Mendoza</div>
+            </div>
+          </div>
+          <div class="h-16 border-b border-slate-50 px-1 pt-1">
+            <div onclick="openEvent('Thu-2')" class="event-block bg-blue-500 text-white text-xs rounded-lg px-2 py-1.5 h-full">
+              <div class="font-bold"><span class="en-text">Intake — new lead</span><span class="es-text">Intake — lead nuevo</span></div>
+              <div class="opacity-80">9 AM · Mendoza · PI</div>
+            </div>
+          </div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16 border-b border-slate-50 px-1 pt-1">
+            <div onclick="openEvent('Thu-3')" class="event-block bg-blue-400 text-white text-xs rounded-lg px-2 py-1.5">
+              <div class="font-bold"><span class="en-text">Follow-up call</span><span class="es-text">Llamada seguimiento</span></div>
+              <div class="opacity-80">1 PM · Carlos H.</div>
+            </div>
+          </div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16"></div>
+        </div>
+
+        <!-- FRI 15 — DEADLINE -->
+        <div class="border-r border-slate-100 bg-red-50/30">
+          <div class="px-1 pt-1 h-16 border-b border-slate-50">
+            <div class="bg-red-100 border border-red-200 text-red-700 text-xs rounded-lg px-2 py-1.5 h-full">
+              <div class="font-bold">🚨 <span class="en-text">S-Corp deadline</span><span class="es-text">Plazo S-Corp</span></div>
+              <div class="opacity-70"><span class="en-text">4 returns due TODAY</span><span class="es-text">4 declaraciones hoy</span></div>
+            </div>
+          </div>
+          <div class="h-16 border-b border-slate-50 px-1 pt-1">
+            <div onclick="openEvent('Fri-1')" class="event-block bg-red-500 text-white text-xs rounded-lg px-2 py-1.5 h-full">
+              <div class="font-bold"><span class="en-text">Filing block</span><span class="es-text">Bloque declaraciones</span></div>
+              <div class="opacity-80">9 AM — 12 PM</div>
+            </div>
+          </div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16 border-b border-slate-50 px-1 pt-1">
+            <div onclick="openEvent('Fri-2')" class="event-block bg-blue-500 text-white text-xs rounded-lg px-2 py-1.5">
+              <div class="font-bold"><span class="en-text">Consultation</span><span class="es-text">Consulta</span></div>
+              <div class="opacity-80">12 PM · New client</div>
+            </div>
+          </div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16"></div>
+        </div>
+
+        <!-- SAT 16 -->
+        <div class="bg-slate-50/50">
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16 border-b border-slate-50"></div>
+          <div class="h-16 text-center pt-4 text-xs text-slate-300 font-medium"><span class="en-text">No events</span><span class="es-text">Sin eventos</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Week summary -->
+    <div class="grid grid-cols-4 gap-4 mt-6">
+      <div class="bg-white rounded-xl border border-slate-200 p-4">
+        <div class="text-xs text-slate-500 uppercase font-semibold mb-1"><span class="en-text">Appointments</span><span class="es-text">Citas</span></div>
+        <div class="text-3xl font-black text-slate-900">8</div>
+        <div class="text-xs text-teal-600 mt-1"><span class="en-text">3 scheduled by Sofia</span><span class="es-text">3 agendadas por Sofia</span></div>
+      </div>
+      <div class="bg-white rounded-xl border border-slate-200 p-4">
+        <div class="text-xs text-slate-500 uppercase font-semibold mb-1"><span class="en-text">Reminders sent</span><span class="es-text">Recordatorios enviados</span></div>
+        <div class="text-3xl font-black text-slate-900">12</div>
+        <div class="text-xs text-teal-600 mt-1"><span class="en-text">All automated ✓</span><span class="es-text">Todos automatizados ✓</span></div>
+      </div>
+      <div class="bg-white rounded-xl border border-slate-200 p-4">
+        <div class="text-xs text-red-500 uppercase font-semibold mb-1"><span class="en-text">Deadlines this week</span><span class="es-text">Plazos esta semana</span></div>
+        <div class="text-3xl font-black text-red-600">3</div>
+        <div class="text-xs text-slate-500 mt-1"><span class="en-text">1 past, 2 upcoming</span><span class="es-text">1 pasado, 2 próximos</span></div>
+      </div>
+      <div class="bg-white rounded-xl border border-slate-200 p-4">
+        <div class="text-xs text-slate-500 uppercase font-semibold mb-1"><span class="en-text">Attendance rate</span><span class="es-text">Tasa de asistencia</span></div>
+        <div class="text-3xl font-black text-green-600">94%</div>
+        <div class="text-xs text-teal-600 mt-1"><span class="en-text">Reminders reduce no-shows</span><span class="es-text">Recordatorios reducen inasistencias</span></div>
+      </div>
+    </div>
+
+    <div class="mt-8 text-center text-xs text-slate-400">
+      <span class="en-text">Interactive demo · Fictional data · </span><span class="es-text">Demo interactivo · Datos ficticios · </span>
+      <a href="../demo.html" class="text-blue-600 hover:underline"><span class="en-text">← back to demos</span><span class="es-text">← volver a demos</span></a>
+    </div>
+  </main>
+
+  <!-- Event detail modal -->
+  <div id="event-modal" class="hidden fixed inset-0 bg-black/50 z-40 flex items-center justify-center p-6">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full modal-enter overflow-hidden">
+      <div class="px-6 py-4 border-b border-slate-200 flex justify-between items-center">
+        <h3 class="font-bold text-slate-900" id="modal-title">Event</h3>
+        <button onclick="document.getElementById('event-modal').classList.add('hidden')" class="text-slate-400 hover:text-slate-600 text-xl font-bold">×</button>
+      </div>
+      <div class="p-6 space-y-3" id="modal-body"></div>
+      <div class="px-6 pb-6 flex gap-2">
+        <button onclick="document.getElementById('event-modal').classList.add('hidden')" class="flex-1 py-2.5 border border-slate-300 rounded-xl font-semibold text-sm hover:bg-slate-50"><span class="en-text">Close</span><span class="es-text">Cerrar</span></button>
+        <button onclick="showToast(getDemoLang()==='es'?'✅ Evento confirmado.':'✅ Event confirmed.', 'green'); document.getElementById('event-modal').classList.add('hidden')" class="flex-1 py-2.5 bg-blue-600 text-white rounded-xl font-semibold text-sm"><span class="en-text">Confirm</span><span class="es-text">Confirmar</span></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- New event modal -->
+  <div id="new-event-modal" class="hidden fixed inset-0 bg-black/50 z-40 flex items-center justify-center p-6">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-sm w-full modal-enter overflow-hidden">
+      <div class="px-6 py-4 border-b border-slate-200 flex justify-between items-center">
+        <h3 class="font-bold text-slate-900"><span class="en-text">New event</span><span class="es-text">Nuevo evento</span></h3>
+        <button onclick="document.getElementById('new-event-modal').classList.add('hidden')" class="text-slate-400 text-xl font-bold">×</button>
+      </div>
+      <div class="p-6 space-y-3">
+        <input class="w-full border border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Title / Client">
+        <div class="grid grid-cols-2 gap-2">
+          <input type="date" value="2026-03-11" class="border border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <input type="time" value="10:00" class="border border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+        <select class="w-full border border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option><span class="en-text">Consultation</span></option>
+          <option>Court hearing</option>
+          <option>Deadline</option>
+          <option>Internal</option>
+        </select>
+        <div class="bg-teal-50 border border-teal-200 rounded-xl p-3 text-xs text-teal-800">
+          🤖 <span class="en-text">Sofia will send confirmation + reminder automatically</span><span class="es-text">Sofia enviará confirmación + recordatorio automáticamente</span>
+        </div>
+      </div>
+      <div class="px-6 pb-6 flex gap-2">
+        <button onclick="document.getElementById('new-event-modal').classList.add('hidden')" class="flex-1 py-2.5 border border-slate-300 rounded-xl font-semibold text-sm"><span class="en-text">Cancel</span><span class="es-text">Cancelar</span></button>
+        <button onclick="showToast(getDemoLang()==='es'?'✅ Evento creado. Sofia enviará confirmación.':'✅ Event created. Sofia will send confirmation.', 'green'); document.getElementById('new-event-modal').classList.add('hidden')" class="flex-1 py-2.5 bg-blue-600 text-white rounded-xl font-semibold text-sm"><span class="en-text">Create</span><span class="es-text">Crear</span></button>
+      </div>
+    </div>
+  </div>
+
+  <script src="demo-shared.js"></script>
+  <script>
+    initDemoNav('calendar');
+
+    const events = {
+      'Mon-1': { en: 'Axel — Lead Follow-up', es: 'Axel — Seguimiento de lead', details: { en: '9:00 AM · Pedro Vázquez · Scheduled by Axel automatically after chat inquiry. Immigration consultation.', es: '9:00 AM · Pedro Vázquez · Agendado por Axel automáticamente tras consulta por chat.' } },
+      'Mon-2': { en: 'Strategy Call — Pérez LLC', es: 'Llamada estratégica — Pérez LLC', details: { en: '10:00 AM · Corporate case · Video call · Pérez LLC needs employment contract review.', es: '10:00 AM · Caso corporativo · Video · Pérez LLC necesita revisión de contratos laborales.' } },
+      'Mon-3': { en: 'Auto-reminder: María Rodríguez', es: 'Recordatorio automático: María Rodríguez', details: { en: '12:00 PM · Sofia sent weekly status update automatically. No attorney action needed.', es: '12:00 PM · Sofia envió actualización semanal de forma automática. Sin acción del abogado.' } },
+      'Tue-1': { en: 'Sofia-scheduled: Vargas family', es: 'Sofia agendó: familia Vargas', details: { en: '8:00 AM · Sofia scheduled this appointment from a WhatsApp conversation at 11pm. Widow petition case.', es: '8:00 AM · Sofia agendó esta cita desde conversación de WhatsApp a las 11pm. Caso petición viuda.' } },
+      'Tue-2': { en: 'Consultation — José López', es: 'Consulta — José López', details: { en: '10:00 AM · Zoom · Immigration case · Initial consultation. Sofia sent Zoom link and reminder 24h + 1h before.', es: '10:00 AM · Zoom · Migratorio · Consulta inicial. Sofia envió link y recordatorio 24h + 1h antes.' } },
+      'Tue-3': { en: 'Team Check-in', es: 'Reunión de equipo', details: { en: '1:00 PM · Internal meeting · Weekly case review. Sofia prepared summary of 12 active cases automatically.', es: '1:00 PM · Reunión interna · Revisión semanal. Sofia preparó resumen de 12 casos activos.' } },
+      'Wed-1': { en: 'Consultation — Mendoza LLC', es: 'Consulta — Mendoza LLC', details: { en: '10:00 AM · Corporate · Employment dispute. Marco prepared financial summary before the meeting.', es: '10:00 AM · Corporativo · Disputa laboral. Marco preparó resumen financiero antes de la reunión.' } },
+      'Wed-2': { en: 'Court Hearing — García case', es: 'Audiencia — caso García', details: { en: '2:30 PM — 4:00 PM · LA Superior Court Dept 5 · Workers comp case. Sofia notified client 24h before.', es: '2:30 PM — 4:00 PM · LA Superior Court Dept 5 · Compensación laboral. Sofia notificó al cliente 24h antes.' } },
+      'Thu-1': { en: 'Auto-prep: Mendoza intake', es: 'Prep automática: intake Mendoza', details: { en: '8:00 AM · Sofia automatically prepared case summary and document checklist before the 9am intake.', es: '8:00 AM · Sofia preparó automáticamente resumen y checklist de docs antes del intake de las 9am.' } },
+      'Thu-2': { en: 'Intake — Mendoza (Personal Injury)', es: 'Intake — Mendoza (Daños personales)', details: { en: '9:00 AM · In person · New lead qualified by Axel. Auto-accident case, strong liability.', es: '9:00 AM · Presencial · Lead calificado por Axel. Accidente automovilístico, responsabilidad clara.' } },
+      'Thu-3': { en: 'Follow-up — Carlos Hernández', es: 'Seguimiento — Carlos Hernández', details: { en: '1:00 PM · Phone call · Workers comp case update. Sofia prepared case timeline.', es: '1:00 PM · Llamada · Actualización workers comp. Sofia preparó cronología del caso.' } },
+      'Fri-1': { en: 'S-Corp Filing Block', es: 'Bloque declaraciones S-Corp', details: { en: '9:00 AM — 12:00 PM · DEADLINE · 4 S-Corp returns due today. Marco has all docs ready and organized.', es: '9:00 AM — 12:00 PM · PLAZO · 4 declaraciones S-Corp vencen hoy. Marco tiene todos los docs listos.' } },
+      'Fri-2': { en: 'Consultation — New client', es: 'Consulta — Cliente nuevo', details: { en: '12:00 PM · Sofia scheduled from web chat. Family law case. Bilingual consultation.', es: '12:00 PM · Sofia agendó desde chat web. Caso de familia. Consulta bilingüe.' } },
+    };
+
+    function openEvent(id) {
+      const ev = events[id]; if (!ev) return;
+      const l = getDemoLang();
+      document.getElementById('modal-title').textContent = ev[l] || ev.en;
+      document.getElementById('modal-body').innerHTML = `
+        <p class="text-sm text-slate-700 leading-relaxed">${ev.details[l] || ev.details.en}</p>
+        <div class="bg-teal-50 border border-teal-200 rounded-xl p-3 text-xs text-teal-800">
+          🤖 <span class="en-text">Sofia handled scheduling and all client communication for this event.</span>
+          <span class="es-text">Sofia manejó el agendamiento y toda la comunicación con el cliente para este evento.</span>
+        </div>`;
+      // Apply lang to modal body
+      setDemoLang(getDemoLang());
+      document.getElementById('event-modal').classList.remove('hidden');
+    }
+
+    function showEventModal() {
+      document.getElementById('new-event-modal').classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
