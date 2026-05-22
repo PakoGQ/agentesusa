@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,12 +13,9 @@
     .tab-content.active { display: block; }
     .moat-item { transition: background 0.2s, padding-left 0.2s; }
     .moat-item:hover { background: #f0fdfa; padding-left: 6px; border-radius: 6px; }
-    .toast { animation: slideIn 0.35s ease; }
-    @keyframes slideIn { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-    .toast-exit { animation: slideOut 0.35s ease forwards; }
-    @keyframes slideOut { from { opacity: 1; } to { opacity: 0; transform: translateX(120%); } }
     .modal-enter { animation: fadeUp 0.25s ease; }
     @keyframes fadeUp { from { opacity: 0; transform: scale(0.96) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+    .es-text { display: none; }
   </style>
 </head>
 <body class="min-h-screen">
@@ -31,7 +28,6 @@
         <nav id="demo-nav-links" class="flex items-center gap-1"></nav>
       </div>
       <div class="flex items-center gap-3">
-        <!-- Language toggle -->
         <div class="flex items-center gap-1 bg-slate-100 rounded-lg px-1 py-1">
           <button id="lang-btn-en" onclick="setDemoLang('en')" class="px-3 py-1 rounded font-bold text-xs transition lang-btn active text-white bg-slate-700">EN</button>
           <button id="lang-btn-es" onclick="setDemoLang('es')" class="px-3 py-1 rounded font-bold text-xs transition lang-btn text-slate-400 hover:text-white">ES</button>
@@ -43,7 +39,9 @@
 
   <main class="max-w-[1400px] mx-auto px-8 py-6">
 
-    <a href="dashboard-home.html" class="text-blue-600 text-sm flex items-center gap-1 mb-4 hover:text-blue-700 font-medium">← Back to inbox</a>
+    <a href="dashboard-home.html" class="text-blue-600 text-sm flex items-center gap-1 mb-4 hover:text-blue-700 font-medium">
+      ← <span class="en-text">Back to dashboard</span><span class="es-text">Volver al dashboard</span>
+    </a>
 
     <!-- Client header card -->
     <div class="bg-white rounded-xl border border-slate-200 p-6 mb-6">
@@ -53,14 +51,14 @@
           <div>
             <h1 class="text-3xl font-bold text-slate-900">María Rodríguez</h1>
             <div class="text-sm text-slate-600 flex items-center gap-3 mt-1 flex-wrap">
-              <span>Client since: March 2024 (24 months)</span>
+              <span><span class="en-text">Client since: March 2024 (24 months)</span><span class="es-text">Clienta desde: marzo 2024 (24 meses)</span></span>
               <span class="text-slate-400">•</span>
-              <span class="text-green-700 bg-green-100 px-2 py-0.5 rounded text-xs font-semibold">Active</span>
+              <span class="text-green-700 bg-green-100 px-2 py-0.5 rounded text-xs font-semibold"><span class="en-text">Active</span><span class="es-text">Activa</span></span>
               <span class="text-slate-400">•</span>
-              <span class="text-amber-700 bg-amber-100 px-2 py-0.5 rounded text-xs font-semibold">🔴 Deadline 4 days</span>
+              <span class="text-amber-700 bg-amber-100 px-2 py-0.5 rounded text-xs font-semibold">🔴 <span class="en-text">Deadline 4 days</span><span class="es-text">Plazo 4 días</span></span>
             </div>
             <div class="text-sm text-slate-600 mt-2 flex items-center gap-3 flex-wrap">
-              <span>🌐 Spanish only</span>
+              <span>🌐 <span class="en-text">Spanish only</span><span class="es-text">Solo español</span></span>
               <span class="text-slate-400">•</span>
               <span>📱 WhatsApp +1 213-***-1234</span>
               <span class="text-slate-400">•</span>
@@ -69,22 +67,22 @@
           </div>
         </div>
         <div class="flex gap-2 flex-wrap">
-          <button onclick="actionModal('call')" class="px-3 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50 font-medium">📞 Call</button>
-          <button onclick="actionModal('message')" class="px-3 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50 font-medium">💬 Message</button>
-          <button onclick="actionModal('schedule')" class="px-3 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50 font-medium">📅 Schedule</button>
-          <button onclick="switchTab('tab-docs')" class="px-3 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50 font-medium">📁 Documents</button>
-          <button onclick="toast('📥 Exporting María Rodríguez full file as PDF...', 'blue')" class="px-3 py-2 text-sm bg-slate-100 hover:bg-slate-200 rounded-lg font-medium">⬇ Export</button>
+          <button onclick="actionModal('call')" class="px-3 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50 font-medium">📞 <span class="en-text">Call</span><span class="es-text">Llamar</span></button>
+          <button onclick="actionModal('message')" class="px-3 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50 font-medium">💬 <span class="en-text">Message</span><span class="es-text">Mensaje</span></button>
+          <button onclick="actionModal('schedule')" class="px-3 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50 font-medium">📅 <span class="en-text">Schedule</span><span class="es-text">Agendar</span></button>
+          <button onclick="switchTab('tab-docs')" class="px-3 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50 font-medium">📁 <span class="en-text">Documents</span><span class="es-text">Documentos</span></button>
+          <button onclick="showToast(getDemoLang()==='es'?'📥 Exportando expediente de María Rodríguez en PDF...':'📥 Exporting María Rodríguez full file as PDF...','blue')" class="px-3 py-2 text-sm bg-slate-100 hover:bg-slate-200 rounded-lg font-medium">⬇ <span class="en-text">Export</span><span class="es-text">Exportar</span></button>
         </div>
       </div>
     </div>
 
     <!-- Tabs -->
     <div class="flex gap-1 border-b border-slate-200 mb-6" id="tabs">
-      <button onclick="switchTab('tab-overview')" id="btn-tab-overview" class="px-4 py-2.5 font-semibold text-slate-900 border-b-2 border-blue-600">Overview</button>
-      <button onclick="switchTab('tab-docs')" id="btn-tab-docs" class="px-4 py-2.5 text-slate-500 hover:text-slate-900 border-b-2 border-transparent">Documents <span class="text-xs text-slate-400 ml-1">87</span></button>
-      <button onclick="switchTab('tab-comms')" id="btn-tab-comms" class="px-4 py-2.5 text-slate-500 hover:text-slate-900 border-b-2 border-transparent">Communications <span class="text-xs text-slate-400 ml-1">243</span></button>
-      <button onclick="switchTab('tab-notes')" id="btn-tab-notes" class="px-4 py-2.5 text-slate-500 hover:text-slate-900 border-b-2 border-transparent">Notes</button>
-      <button onclick="switchTab('tab-billing')" id="btn-tab-billing" class="px-4 py-2.5 text-slate-500 hover:text-slate-900 border-b-2 border-transparent">Billing</button>
+      <button onclick="switchTab('tab-overview')" id="btn-tab-overview" class="px-4 py-2.5 font-semibold text-slate-900 border-b-2 border-blue-600"><span class="en-text">Overview</span><span class="es-text">Resumen</span></button>
+      <button onclick="switchTab('tab-docs')" id="btn-tab-docs" class="px-4 py-2.5 text-slate-500 hover:text-slate-900 border-b-2 border-transparent"><span class="en-text">Documents</span><span class="es-text">Documentos</span> <span class="text-xs text-slate-400 ml-1">87</span></button>
+      <button onclick="switchTab('tab-comms')" id="btn-tab-comms" class="px-4 py-2.5 text-slate-500 hover:text-slate-900 border-b-2 border-transparent"><span class="en-text">Communications</span><span class="es-text">Comunicaciones</span> <span class="text-xs text-slate-400 ml-1">243</span></button>
+      <button onclick="switchTab('tab-notes')" id="btn-tab-notes" class="px-4 py-2.5 text-slate-500 hover:text-slate-900 border-b-2 border-transparent"><span class="en-text">Notes</span><span class="es-text">Notas</span></button>
+      <button onclick="switchTab('tab-billing')" id="btn-tab-billing" class="px-4 py-2.5 text-slate-500 hover:text-slate-900 border-b-2 border-transparent"><span class="en-text">Billing</span><span class="es-text">Facturación</span></button>
     </div>
 
     <!-- OVERVIEW TAB -->
@@ -94,48 +92,48 @@
         <!-- Active Case -->
         <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
           <div class="px-6 py-4 border-b border-slate-200">
-            <h2 class="font-bold text-slate-900 uppercase tracking-wider text-sm flex items-center gap-2"><span>📋</span> Active Case</h2>
+            <h2 class="font-bold text-slate-900 uppercase tracking-wider text-sm flex items-center gap-2">📋 <span class="en-text">Active Case</span><span class="es-text">Caso Activo</span></h2>
           </div>
           <div class="p-6 space-y-3">
-            <div class="flex justify-between text-sm"><span class="text-slate-500">Type:</span><span class="font-semibold text-slate-900">I-360 Widow Petition</span></div>
-            <div class="flex justify-between text-sm"><span class="text-slate-500">Filed:</span><span class="font-semibold text-slate-900">January 15, 2025</span></div>
-            <div class="flex justify-between text-sm"><span class="text-slate-500">Priority Date:</span><span class="font-semibold text-slate-900">August 3, 2024</span></div>
-            <div class="flex justify-between text-sm"><span class="text-slate-500">Receipt #:</span><span class="font-semibold text-slate-900 font-mono">MSC2519823746</span></div>
-            <div class="flex justify-between text-sm"><span class="text-slate-500">Status:</span><span class="font-semibold text-blue-700 bg-blue-50 px-2 py-0.5 rounded text-xs">Awaiting USCIS Response</span></div>
-            <div class="flex justify-between text-sm"><span class="text-slate-500">Lead Attorney:</span><span class="font-semibold text-slate-900">Carlos Hernández</span></div>
-            <div class="flex justify-between text-sm"><span class="text-slate-500">Deadline:</span><span class="font-semibold text-red-600">March 15 · 4 days</span></div>
+            <div class="flex justify-between text-sm"><span class="text-slate-500"><span class="en-text">Type:</span><span class="es-text">Tipo:</span></span><span class="font-semibold text-slate-900">I-360 <span class="en-text">Widow Petition</span><span class="es-text">Petición de viuda</span></span></div>
+            <div class="flex justify-between text-sm"><span class="text-slate-500"><span class="en-text">Filed:</span><span class="es-text">Presentado:</span></span><span class="font-semibold text-slate-900"><span class="en-text">January 15, 2025</span><span class="es-text">15 de enero de 2025</span></span></div>
+            <div class="flex justify-between text-sm"><span class="text-slate-500"><span class="en-text">Priority Date:</span><span class="es-text">Fecha de prioridad:</span></span><span class="font-semibold text-slate-900"><span class="en-text">August 3, 2024</span><span class="es-text">3 de agosto de 2024</span></span></div>
+            <div class="flex justify-between text-sm"><span class="text-slate-500"><span class="en-text">Receipt #:</span><span class="es-text">Recibo #:</span></span><span class="font-semibold text-slate-900 font-mono">MSC2519823746</span></div>
+            <div class="flex justify-between text-sm"><span class="text-slate-500"><span class="en-text">Status:</span><span class="es-text">Estado:</span></span><span class="font-semibold text-blue-700 bg-blue-50 px-2 py-0.5 rounded text-xs"><span class="en-text">Awaiting USCIS Response</span><span class="es-text">Esperando respuesta de USCIS</span></span></div>
+            <div class="flex justify-between text-sm"><span class="text-slate-500"><span class="en-text">Lead Attorney:</span><span class="es-text">Abogado principal:</span></span><span class="font-semibold text-slate-900">Carlos Hernández</span></div>
+            <div class="flex justify-between text-sm"><span class="text-slate-500"><span class="en-text">Deadline:</span><span class="es-text">Plazo:</span></span><span class="font-semibold text-red-600"><span class="en-text">March 15 · 4 days</span><span class="es-text">15 de marzo · 4 días</span></span></div>
             <div class="pt-4 mt-2 border-t border-slate-200">
-              <div class="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-2">Last Update</div>
-              <div class="text-sm text-slate-700">Receipt notice received Feb 28. Sofia processed and tagged. Awaiting RFE or approval.</div>
+              <div class="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-2"><span class="en-text">Last Update</span><span class="es-text">Última actualización</span></div>
+              <div class="text-sm text-slate-700"><span class="en-text">Receipt notice received Feb 28. Sofia processed and tagged. Awaiting RFE or approval.</span><span class="es-text">Aviso de recibo recibido el 28 feb. Sofia procesó y etiquetó. Esperando RFE o aprobación.</span></div>
             </div>
-            <button onclick="toast('📋 Full case file opened — 87 documents, 24 months of history.', 'blue')" class="w-full mt-4 px-4 py-2.5 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 text-sm">View full case →</button>
+            <button onclick="showToast(getDemoLang()==='es'?'📋 Expediente completo abierto — 87 documentos, 24 meses de historial.':'📋 Full case file opened — 87 documents, 24 months of history.','blue')" class="w-full mt-4 px-4 py-2.5 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 text-sm"><span class="en-text">View full case →</span><span class="es-text">Ver expediente completo →</span></button>
           </div>
         </div>
 
         <!-- SOFIA KNOWS — THE MOAT -->
         <div class="bg-white rounded-xl border-2 border-teal-500 overflow-hidden relative shadow-lg shadow-teal-100">
-          <div class="absolute top-3 right-3 bg-teal-500 text-white text-xs px-2.5 py-1 rounded-full font-bold flex items-center gap-1"><span>⭐</span> THE MOAT</div>
+          <div class="absolute top-3 right-3 bg-teal-500 text-white text-xs px-2.5 py-1 rounded-full font-bold flex items-center gap-1">⭐ <span class="en-text">THE MOAT</span><span class="es-text">EL MOAT</span></div>
           <div class="px-6 py-4 border-b border-teal-100 bg-gradient-to-r from-teal-50 to-blue-50">
-            <h2 class="font-bold text-teal-900 uppercase tracking-wider text-sm flex items-center gap-2"><span>🧠</span> Sofia knows about María</h2>
-            <p class="text-xs text-teal-700 mt-1 normal-case tracking-normal">Built over 24 months of conversations & documents · Hover each item</p>
+            <h2 class="font-bold text-teal-900 uppercase tracking-wider text-sm flex items-center gap-2">🧠 <span class="en-text">Sofia knows about María</span><span class="es-text">Lo que Sofia sabe sobre María</span></h2>
+            <p class="text-xs text-teal-700 mt-1 normal-case tracking-normal"><span class="en-text">Built over 24 months of conversations & documents · Hover each item</span><span class="es-text">Construido en 24 meses de conversaciones y documentos · Pasa el cursor sobre cada punto</span></p>
           </div>
           <div class="p-6">
             <div class="grid grid-cols-1 gap-1.5">
-              <div class="moat-item flex gap-2 text-sm p-1 cursor-default"><span class="text-teal-600 font-bold">▸</span><span class="text-slate-700">Spanish-only communication (never write in English)</span></div>
-              <div class="moat-item flex gap-2 text-sm p-1 cursor-default"><span class="text-teal-600 font-bold">▸</span><span class="text-slate-700">Strongly prefers WhatsApp over email or calls</span></div>
-              <div class="moat-item flex gap-2 text-sm p-1 cursor-default"><span class="text-teal-600 font-bold">▸</span><span class="text-slate-700">Single mother, 2 children (María Jr. 8, Diego 5)</span></div>
-              <div class="moat-item flex gap-2 text-sm p-1 cursor-default"><span class="text-teal-600 font-bold">▸</span><span class="text-slate-700">Husband (Luis) passed away December 2024</span></div>
-              <div class="moat-item flex gap-2 text-sm p-1 cursor-default"><span class="text-teal-600 font-bold">▸</span><span class="text-slate-700">Anxiety: needs reassurance; pattern of catastrophic thinking</span></div>
-              <div class="moat-item flex gap-2 text-sm p-1 cursor-default"><span class="text-teal-600 font-bold">▸</span><span class="text-slate-700">Always sends docs same day requested (highly responsive)</span></div>
-              <div class="moat-item flex gap-2 text-sm p-1 cursor-default"><span class="text-teal-600 font-bold">▸</span><span class="text-slate-700">Asks status weekly even when nothing has changed</span></div>
-              <div class="moat-item flex gap-2 text-sm p-1 cursor-default"><span class="text-teal-600 font-bold">▸</span><span class="text-slate-700">Daughter María Jr. qualifies for derivative benefits</span></div>
-              <div class="moat-item flex gap-2 text-sm p-1 cursor-default"><span class="text-teal-600 font-bold">▸</span><span class="text-slate-700">Works as housekeeper, paid in cash (relevant for sponsorship)</span></div>
-              <div class="moat-item flex gap-2 text-sm p-1 cursor-default"><span class="text-teal-600 font-bold">▸</span><span class="text-slate-700">Sister Carmen in Mexico City — emergency contact</span></div>
-              <div class="moat-item flex gap-2 text-sm p-1 cursor-default"><span class="text-teal-600 font-bold">▸</span><span class="text-slate-700">Cried on Aug 2024 call when Luis was diagnosed (handle with care)</span></div>
-              <div class="moat-item flex gap-2 text-sm p-1 cursor-default"><span class="text-teal-600 font-bold">▸</span><span class="text-slate-700">Religious — empathy with this framing helps</span></div>
+              <div class="moat-item flex gap-2 text-sm p-1 cursor-default"><span class="text-teal-600 font-bold">▸</span><span class="text-slate-700"><span class="en-text">Spanish-only communication (never write in English)</span><span class="es-text">Comunicación solo en español (nunca escribirle en inglés)</span></span></div>
+              <div class="moat-item flex gap-2 text-sm p-1 cursor-default"><span class="text-teal-600 font-bold">▸</span><span class="text-slate-700"><span class="en-text">Strongly prefers WhatsApp over email or calls</span><span class="es-text">Prefiere WhatsApp sobre correo o llamadas</span></span></div>
+              <div class="moat-item flex gap-2 text-sm p-1 cursor-default"><span class="text-teal-600 font-bold">▸</span><span class="text-slate-700"><span class="en-text">Single mother, 2 children (María Jr. 8, Diego 5)</span><span class="es-text">Madre soltera, 2 hijos (María Jr. 8 años, Diego 5 años)</span></span></div>
+              <div class="moat-item flex gap-2 text-sm p-1 cursor-default"><span class="text-teal-600 font-bold">▸</span><span class="text-slate-700"><span class="en-text">Husband (Luis) passed away December 2024</span><span class="es-text">Esposo (Luis) falleció en diciembre de 2024</span></span></div>
+              <div class="moat-item flex gap-2 text-sm p-1 cursor-default"><span class="text-teal-600 font-bold">▸</span><span class="text-slate-700"><span class="en-text">Anxiety: needs reassurance; pattern of catastrophic thinking</span><span class="es-text">Ansiedad: necesita tranquilización; tendencia al pensamiento catastrófico</span></span></div>
+              <div class="moat-item flex gap-2 text-sm p-1 cursor-default"><span class="text-teal-600 font-bold">▸</span><span class="text-slate-700"><span class="en-text">Always sends docs same day requested (highly responsive)</span><span class="es-text">Siempre envía documentos el mismo día que se piden (muy responsiva)</span></span></div>
+              <div class="moat-item flex gap-2 text-sm p-1 cursor-default"><span class="text-teal-600 font-bold">▸</span><span class="text-slate-700"><span class="en-text">Asks for case status weekly even when nothing has changed</span><span class="es-text">Pide estatus del caso semanalmente aunque no haya cambios</span></span></div>
+              <div class="moat-item flex gap-2 text-sm p-1 cursor-default"><span class="text-teal-600 font-bold">▸</span><span class="text-slate-700"><span class="en-text">Daughter María Jr. qualifies for derivative benefits</span><span class="es-text">Hija María Jr. califica para beneficios derivados</span></span></div>
+              <div class="moat-item flex gap-2 text-sm p-1 cursor-default"><span class="text-teal-600 font-bold">▸</span><span class="text-slate-700"><span class="en-text">Works as housekeeper, paid in cash (relevant for sponsorship)</span><span class="es-text">Trabaja como empleada doméstica, pago en efectivo (relevante para patrocinio)</span></span></div>
+              <div class="moat-item flex gap-2 text-sm p-1 cursor-default"><span class="text-teal-600 font-bold">▸</span><span class="text-slate-700"><span class="en-text">Sister Carmen in Mexico City — emergency contact</span><span class="es-text">Hermana Carmen en Ciudad de México — contacto de emergencia</span></span></div>
+              <div class="moat-item flex gap-2 text-sm p-1 cursor-default"><span class="text-teal-600 font-bold">▸</span><span class="text-slate-700"><span class="en-text">Cried during Aug 2024 call when Luis was diagnosed (handle with care)</span><span class="es-text">Lloró en llamada de ago 2024 cuando Luis fue diagnosticado (manejar con cuidado)</span></span></div>
+              <div class="moat-item flex gap-2 text-sm p-1 cursor-default"><span class="text-teal-600 font-bold">▸</span><span class="text-slate-700"><span class="en-text">Religious — empathy with this framing helps</span><span class="es-text">Religiosa — la empatía con este enfoque ayuda</span></span></div>
             </div>
             <div class="mt-5 pt-4 border-t border-teal-200 bg-teal-50/50 -mx-6 -mb-6 px-6 py-3 rounded-b-xl">
-              <p class="text-xs text-teal-800 italic">👉 <strong>This is what a new system wouldn't know.</strong> 24 months of context cannot be exported as a CSV.</p>
+              <p class="text-xs text-teal-800 italic">👉 <strong><span class="en-text">This is what a new system wouldn't know.</span><span class="es-text">Esto es lo que un sistema nuevo no sabría.</span></strong> <span class="en-text">24 months of context cannot be exported as a CSV.</span><span class="es-text">24 meses de contexto no se pueden exportar como CSV.</span></p>
             </div>
           </div>
         </div>
@@ -144,43 +142,67 @@
       <!-- Timeline -->
       <div class="bg-white rounded-xl border border-slate-200 overflow-hidden mb-6">
         <div class="px-6 py-4 border-b border-slate-200">
-          <h2 class="font-bold text-slate-900 uppercase tracking-wider text-sm flex items-center gap-2"><span>📅</span> Key Moments Timeline</h2>
+          <h2 class="font-bold text-slate-900 uppercase tracking-wider text-sm flex items-center gap-2">📅 <span class="en-text">Key Moments Timeline</span><span class="es-text">Cronología de Momentos Clave</span></h2>
         </div>
         <div class="p-6">
           <div class="relative pl-2">
             <div class="timeline-line"></div>
             <ul class="space-y-4 relative">
-              <li class="flex gap-4 items-start cursor-pointer hover:bg-slate-50 rounded-lg p-2 -ml-2" onclick="toast('📋 Mar 2024: Referred by sister-in-law Lucía. First consultation was 45 min. Paid $250.', 'blue')">
+              <li class="flex gap-4 items-start cursor-pointer hover:bg-slate-50 rounded-lg p-2 -ml-2" onclick="showToast(getDemoLang()==='es'?'📋 Mar 2024: Referida por cuñada Lucía. Primera consulta 45 min. Pagó $250.':'📋 Mar 2024: Referred by sister-in-law Lucía. First consultation 45 min. Paid $250.','blue')">
                 <div class="w-6 h-6 bg-slate-300 rounded-full flex-shrink-0 z-10 ring-4 ring-white"></div>
-                <div class="pt-0.5"><div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Mar 2024</div><div class="text-sm text-slate-900">Initial consultation — referred by sister-in-law</div></div>
+                <div class="pt-0.5">
+                  <div class="text-xs font-bold text-slate-500 uppercase tracking-wider"><span class="en-text">Mar 2024</span><span class="es-text">Mar 2024</span></div>
+                  <div class="text-sm text-slate-900"><span class="en-text">Initial consultation — referred by sister-in-law</span><span class="es-text">Consulta inicial — referida por cuñada</span></div>
+                </div>
               </li>
-              <li class="flex gap-4 items-start cursor-pointer hover:bg-slate-50 rounded-lg p-2 -ml-2" onclick="toast('📋 Apr 2024: Engagement signed. Strategy: I-130 family petition. Setup fee collected.', 'blue')">
+              <li class="flex gap-4 items-start cursor-pointer hover:bg-slate-50 rounded-lg p-2 -ml-2" onclick="showToast(getDemoLang()==='es'?'📋 Abr 2024: Contrato firmado. Estrategia: petición I-130. Honorario inicial cobrado.':'📋 Apr 2024: Engagement signed. Strategy: I-130 family petition. Setup fee collected.','blue')">
                 <div class="w-6 h-6 bg-slate-300 rounded-full flex-shrink-0 z-10 ring-4 ring-white"></div>
-                <div class="pt-0.5"><div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Apr 2024</div><div class="text-sm text-slate-900">I-130 strategy decided · Engagement signed</div></div>
+                <div class="pt-0.5">
+                  <div class="text-xs font-bold text-slate-500 uppercase tracking-wider"><span class="en-text">Apr 2024</span><span class="es-text">Abr 2024</span></div>
+                  <div class="text-sm text-slate-900"><span class="en-text">I-130 strategy decided · Engagement signed</span><span class="es-text">Estrategia I-130 definida · Contrato firmado</span></div>
+                </div>
               </li>
-              <li class="flex gap-4 items-start cursor-pointer hover:bg-slate-50 rounded-lg p-2 -ml-2" onclick="toast('📋 Jun 2024: Sofia coordinated collection of 7 documents from Mexico (birth certs, marriage cert, apostilles).', 'blue')">
+              <li class="flex gap-4 items-start cursor-pointer hover:bg-slate-50 rounded-lg p-2 -ml-2" onclick="showToast(getDemoLang()==='es'?'📋 Jun 2024: Sofia coordinó recopilación de 7 documentos desde México (actas de nacimiento, acta matrimonial, apostillas).':'📋 Jun 2024: Sofia coordinated collection of 7 documents from Mexico (birth certs, marriage cert, apostilles).','blue')">
                 <div class="w-6 h-6 bg-slate-300 rounded-full flex-shrink-0 z-10 ring-4 ring-white"></div>
-                <div class="pt-0.5"><div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Jun 2024</div><div class="text-sm text-slate-900">Documents from Mexico received (birth certs, marriage cert)</div></div>
+                <div class="pt-0.5">
+                  <div class="text-xs font-bold text-slate-500 uppercase tracking-wider"><span class="en-text">Jun 2024</span><span class="es-text">Jun 2024</span></div>
+                  <div class="text-sm text-slate-900"><span class="en-text">Documents from Mexico received (birth certs, marriage cert)</span><span class="es-text">Documentos de México recibidos (actas de nacimiento, acta matrimonial)</span></div>
+                </div>
               </li>
-              <li class="flex gap-4 items-start cursor-pointer hover:bg-slate-50 rounded-lg p-2 -ml-2" onclick="toast('📋 Aug 2024: I-130 filed. Priority Date: Aug 3, 2024. Receipt MSC2519823746 received.', 'blue')">
+              <li class="flex gap-4 items-start cursor-pointer hover:bg-slate-50 rounded-lg p-2 -ml-2" onclick="showToast(getDemoLang()==='es'?'📋 Ago 2024: I-130 presentado. Fecha de prioridad: 3 ago 2024. Recibo MSC2519823746 recibido.':'📋 Aug 2024: I-130 filed. Priority Date: Aug 3, 2024. Receipt MSC2519823746 received.','blue')">
                 <div class="w-6 h-6 bg-slate-300 rounded-full flex-shrink-0 z-10 ring-4 ring-white"></div>
-                <div class="pt-0.5"><div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Aug 2024</div><div class="text-sm text-slate-900">I-130 filed · Priority Date set · 🟢 Receipt notice received</div></div>
+                <div class="pt-0.5">
+                  <div class="text-xs font-bold text-slate-500 uppercase tracking-wider"><span class="en-text">Aug 2024</span><span class="es-text">Ago 2024</span></div>
+                  <div class="text-sm text-slate-900"><span class="en-text">I-130 filed · Priority Date set · 🟢 Receipt notice received</span><span class="es-text">I-130 presentado · Fecha de prioridad establecida · 🟢 Aviso de recibo recibido</span></div>
+                </div>
               </li>
-              <li class="flex gap-4 items-start cursor-pointer hover:bg-slate-50 rounded-lg p-2 -ml-2" onclick="toast('⚠️ Dec 2024: Luis Rodríguez passed away. Strategy pivoted to widow petition (I-360) — stronger path. Sofia flagged this automatically.', 'amber')">
+              <li class="flex gap-4 items-start cursor-pointer hover:bg-slate-50 rounded-lg p-2 -ml-2" onclick="showToast(getDemoLang()==='es'?'⚠️ Dic 2024: Luis Rodríguez falleció el 3 dic. Estrategia cambiada a petición de viuda (I-360) — ruta más sólida. Sofia detectó esto automáticamente.':'⚠️ Dec 2024: Luis Rodríguez passed away Dec 3. Strategy pivoted to widow petition (I-360) — stronger path. Sofia flagged this automatically.','amber')">
                 <div class="w-6 h-6 bg-amber-400 rounded-full flex-shrink-0 z-10 ring-4 ring-white"></div>
-                <div class="pt-0.5"><div class="text-xs font-bold text-amber-700 uppercase tracking-wider">Dec 2024</div><div class="text-sm text-slate-900 font-medium">⚠️ Husband (Luis) passed away · Strategy adjusted to widow path</div></div>
+                <div class="pt-0.5">
+                  <div class="text-xs font-bold text-amber-700 uppercase tracking-wider"><span class="en-text">Dec 2024</span><span class="es-text">Dic 2024</span></div>
+                  <div class="text-sm text-slate-900 font-medium">⚠️ <span class="en-text">Husband (Luis) passed away · Strategy adjusted to widow path</span><span class="es-text">Esposo (Luis) falleció · Estrategia ajustada a ruta de viuda</span></div>
+                </div>
               </li>
-              <li class="flex gap-4 items-start cursor-pointer hover:bg-slate-50 rounded-lg p-2 -ml-2" onclick="toast('📋 Jan 2025: I-360 filed. Replaces I-130. Widow petition allows independent path to green card.', 'blue')">
+              <li class="flex gap-4 items-start cursor-pointer hover:bg-slate-50 rounded-lg p-2 -ml-2" onclick="showToast(getDemoLang()==='es'?'📋 Ene 2025: I-360 presentado. Reemplaza I-130. Petición de viuda permite ruta independiente a residencia.':'📋 Jan 2025: I-360 filed. Replaces I-130. Widow petition allows independent path to green card.','blue')">
                 <div class="w-6 h-6 bg-slate-300 rounded-full flex-shrink-0 z-10 ring-4 ring-white"></div>
-                <div class="pt-0.5"><div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Jan 2025</div><div class="text-sm text-slate-900">I-360 filed (widow petition path) · Replaces I-130</div></div>
+                <div class="pt-0.5">
+                  <div class="text-xs font-bold text-slate-500 uppercase tracking-wider"><span class="en-text">Jan 2025</span><span class="es-text">Ene 2025</span></div>
+                  <div class="text-sm text-slate-900"><span class="en-text">I-360 filed (widow petition path) · Replaces I-130</span><span class="es-text">I-360 presentado (ruta petición de viuda) · Reemplaza I-130</span></div>
+                </div>
               </li>
-              <li class="flex gap-4 items-start cursor-pointer hover:bg-slate-50 rounded-lg p-2 -ml-2" onclick="toast('📋 Feb 2025: Receipt notice for I-360 arrived. Sofia extracted receipt #, filed in system, updated deadline tracker.', 'blue')">
+              <li class="flex gap-4 items-start cursor-pointer hover:bg-slate-50 rounded-lg p-2 -ml-2" onclick="showToast(getDemoLang()==='es'?'📋 Feb 2025: Aviso de recibo del I-360 llegó. Sofia extrajo número de recibo, lo archivó en el sistema y actualizó el seguimiento de plazos.':'📋 Feb 2025: Receipt notice for I-360 arrived. Sofia extracted receipt #, filed in system, updated deadline tracker.','blue')">
                 <div class="w-6 h-6 bg-slate-300 rounded-full flex-shrink-0 z-10 ring-4 ring-white"></div>
-                <div class="pt-0.5"><div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Feb 2025</div><div class="text-sm text-slate-900">Receipt notice for I-360 received and processed by Sofia</div></div>
+                <div class="pt-0.5">
+                  <div class="text-xs font-bold text-slate-500 uppercase tracking-wider"><span class="en-text">Feb 2025</span><span class="es-text">Feb 2025</span></div>
+                  <div class="text-sm text-slate-900"><span class="en-text">Receipt notice for I-360 received and processed by Sofia</span><span class="es-text">Aviso de recibo del I-360 recibido y procesado por Sofia</span></div>
+                </div>
               </li>
-              <li class="flex gap-4 items-start cursor-pointer hover:bg-red-50 rounded-lg p-2 -ml-2" onclick="toast('🚨 TODAY: Response due March 15. 4 days left. Recommend immediate client contact.', 'red')">
+              <li class="flex gap-4 items-start cursor-pointer hover:bg-red-50 rounded-lg p-2 -ml-2" onclick="showToast(getDemoLang()==='es'?'🚨 HOY: Respuesta requerida antes del 15 de marzo. Quedan 4 días. Recomendado: contactar al cliente de inmediato.':'🚨 TODAY: Response due March 15. 4 days left. Recommend immediate client contact.','red')">
                 <div class="w-6 h-6 bg-red-500 rounded-full flex-shrink-0 z-10 ring-4 ring-red-100 animate-pulse"></div>
-                <div class="pt-0.5"><div class="text-xs font-bold text-red-600 uppercase tracking-wider">Today · March 11, 2026</div><div class="text-sm text-slate-900 font-bold">🔴 Response due in 4 days · Action needed</div></div>
+                <div class="pt-0.5">
+                  <div class="text-xs font-bold text-red-600 uppercase tracking-wider"><span class="en-text">Today · March 11, 2026</span><span class="es-text">Hoy · 11 de marzo de 2026</span></div>
+                  <div class="text-sm text-slate-900 font-bold">🔴 <span class="en-text">Response due in 4 days · Action needed</span><span class="es-text">Respuesta requerida en 4 días · Acción necesaria</span></div>
+                </div>
               </li>
             </ul>
           </div>
@@ -192,52 +214,65 @@
     <div id="tab-docs" class="tab-content">
       <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
         <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between">
-          <h2 class="font-bold text-slate-900 uppercase tracking-wider text-sm flex items-center gap-2"><span>📂</span> Documents — María Rodríguez</h2>
-          <a href="document-search.html" class="text-xs text-blue-600 hover:underline font-medium">Search all 8,247 docs →</a>
+          <h2 class="font-bold text-slate-900 uppercase tracking-wider text-sm flex items-center gap-2">📂 <span class="en-text">Documents — María Rodríguez</span><span class="es-text">Documentos — María Rodríguez</span></h2>
+          <a href="document-search.html" class="text-xs text-blue-600 hover:underline font-medium"><span class="en-text">Search all 8,247 docs →</span><span class="es-text">Buscar los 8,247 docs →</span></a>
         </div>
         <div class="divide-y divide-slate-100">
-          <div class="px-6 py-3 flex items-center justify-between hover:bg-slate-50 cursor-pointer" onclick="toast('📄 Opening: USCIS Receipt Notice (I-360) — Feb 28, 2026', 'blue')">
+          <div class="px-6 py-3 flex items-center justify-between hover:bg-slate-50 cursor-pointer" onclick="showToast(getDemoLang()==='es'?'📄 Abriendo: Aviso de recibo USCIS (I-360) — 28 feb 2026':'📄 Opening: USCIS Receipt Notice (I-360) — Feb 28, 2026','blue')">
             <div class="flex items-center gap-3">
               <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center text-blue-700">📄</div>
-              <div><div class="font-semibold text-slate-900 text-sm">USCIS Receipt Notice (I-360)</div><div class="text-xs text-slate-500">02/28/2026 · Tagged: Immigration, USCIS · Processed by Sofia ✓</div></div>
+              <div>
+                <div class="font-semibold text-slate-900 text-sm"><span class="en-text">USCIS Receipt Notice (I-360)</span><span class="es-text">Aviso de recibo USCIS (I-360)</span></div>
+                <div class="text-xs text-slate-500">02/28/2026 · <span class="en-text">Tagged: Immigration, USCIS · Processed by Sofia ✓</span><span class="es-text">Etiquetado: Migración, USCIS · Procesado por Sofia ✓</span></div>
+              </div>
             </div>
             <div class="flex gap-2">
-              <button class="text-xs text-blue-600 hover:underline font-medium">View</button>
-              <button onclick="event.stopPropagation(); toast('📥 Downloading receipt notice...', 'blue')" class="text-xs text-blue-600 hover:underline font-medium">Download</button>
+              <button class="text-xs text-blue-600 hover:underline font-medium"><span class="en-text">View</span><span class="es-text">Ver</span></button>
+              <button onclick="event.stopPropagation(); showToast(getDemoLang()==='es'?'📥 Descargando aviso de recibo...':'📥 Downloading receipt notice...','blue')" class="text-xs text-blue-600 hover:underline font-medium"><span class="en-text">Download</span><span class="es-text">Descargar</span></button>
             </div>
           </div>
-          <div class="px-6 py-3 flex items-center justify-between hover:bg-slate-50 cursor-pointer" onclick="toast('📄 Opening: I-360 Widow Petition — Filed Jan 15, 2025. 14 pages.', 'blue')">
+          <div class="px-6 py-3 flex items-center justify-between hover:bg-slate-50 cursor-pointer" onclick="showToast(getDemoLang()==='es'?'📄 Abriendo: Solicitud I-360 — Presentada 15 ene 2025. 14 páginas.':'📄 Opening: I-360 Widow Petition — Filed Jan 15, 2025. 14 pages.','blue')">
             <div class="flex items-center gap-3">
               <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center text-blue-700">📄</div>
-              <div><div class="font-semibold text-slate-900 text-sm">I-360 Application (filed)</div><div class="text-xs text-slate-500">01/15/2025 · Tagged: Immigration, Widow petition</div></div>
+              <div>
+                <div class="font-semibold text-slate-900 text-sm"><span class="en-text">I-360 Application (filed)</span><span class="es-text">Solicitud I-360 (presentada)</span></div>
+                <div class="text-xs text-slate-500">01/15/2025 · <span class="en-text">Tagged: Immigration, Widow petition</span><span class="es-text">Etiquetado: Migración, Petición de viuda</span></div>
+              </div>
             </div>
             <div class="flex gap-2">
-              <button class="text-xs text-blue-600 hover:underline font-medium">View</button>
-              <button onclick="event.stopPropagation(); toast('📥 Downloading I-360...', 'blue')" class="text-xs text-blue-600 hover:underline font-medium">Download</button>
+              <button class="text-xs text-blue-600 hover:underline font-medium"><span class="en-text">View</span><span class="es-text">Ver</span></button>
+              <button onclick="event.stopPropagation(); showToast(getDemoLang()==='es'?'📥 Descargando I-360...':'📥 Downloading I-360...','blue')" class="text-xs text-blue-600 hover:underline font-medium"><span class="en-text">Download</span><span class="es-text">Descargar</span></button>
             </div>
           </div>
-          <div class="px-6 py-3 flex items-center justify-between hover:bg-slate-50 cursor-pointer" onclick="toast('📄 Death certificate — Luis Rodríguez. Issued: Dec 3, 2024. Apostille confirmed.', 'blue')">
+          <div class="px-6 py-3 flex items-center justify-between hover:bg-slate-50 cursor-pointer" onclick="showToast(getDemoLang()==='es'?'📄 Acta de defunción — Luis Rodríguez. Emitida: 3 dic 2024. Apostilla confirmada.':'📄 Death certificate — Luis Rodríguez. Issued: Dec 3, 2024. Apostille confirmed.','blue')">
             <div class="flex items-center gap-3">
               <div class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center text-amber-700">📄</div>
-              <div><div class="font-semibold text-slate-900 text-sm">Death certificate (Luis Rodríguez)</div><div class="text-xs text-slate-500">12/03/2024 · Tagged: Permanent, Civil records</div></div>
+              <div>
+                <div class="font-semibold text-slate-900 text-sm"><span class="en-text">Death certificate (Luis Rodríguez)</span><span class="es-text">Acta de defunción (Luis Rodríguez)</span></div>
+                <div class="text-xs text-slate-500">12/03/2024 · <span class="en-text">Tagged: Permanent, Civil records</span><span class="es-text">Etiquetado: Permanente, Registros civiles</span></div>
+              </div>
             </div>
             <div class="flex gap-2">
-              <button class="text-xs text-blue-600 hover:underline font-medium">View</button>
-              <button onclick="event.stopPropagation(); toast('📥 Downloading...', 'blue')" class="text-xs text-blue-600 hover:underline font-medium">Download</button>
+              <button class="text-xs text-blue-600 hover:underline font-medium"><span class="en-text">View</span><span class="es-text">Ver</span></button>
+              <button onclick="event.stopPropagation(); showToast(getDemoLang()==='es'?'📥 Descargando...':'📥 Downloading...','blue')" class="text-xs text-blue-600 hover:underline font-medium"><span class="en-text">Download</span><span class="es-text">Descargar</span></button>
             </div>
           </div>
-          <div class="px-6 py-3 flex items-center justify-between hover:bg-slate-50 cursor-pointer" onclick="toast('📄 Marriage certificate — María & Luis Rodríguez. Guadalajara, Jalisco. Apostille ✓', 'blue')">
+          <div class="px-6 py-3 flex items-center justify-between hover:bg-slate-50 cursor-pointer" onclick="showToast(getDemoLang()==='es'?'📄 Acta matrimonial — María & Luis Rodríguez. Guadalajara, Jalisco. Apostilla ✓':'📄 Marriage certificate — María & Luis Rodríguez. Guadalajara, Jalisco. Apostille ✓','blue')">
             <div class="flex items-center gap-3">
               <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center text-purple-700">📄</div>
-              <div><div class="font-semibold text-slate-900 text-sm">Marriage certificate</div><div class="text-xs text-slate-500">06/12/2024 · Tagged: Permanent, Civil records · MX origin</div></div>
+              <div>
+                <div class="font-semibold text-slate-900 text-sm"><span class="en-text">Marriage certificate</span><span class="es-text">Acta matrimonial</span></div>
+                <div class="text-xs text-slate-500">06/12/2024 · <span class="en-text">Tagged: Permanent, Civil records · MX origin</span><span class="es-text">Etiquetado: Permanente, Registros civiles · Origen MX</span></div>
+              </div>
             </div>
             <div class="flex gap-2">
-              <button class="text-xs text-blue-600 hover:underline font-medium">View</button>
-              <button onclick="event.stopPropagation(); toast('📥 Downloading...', 'blue')" class="text-xs text-blue-600 hover:underline font-medium">Download</button>
+              <button class="text-xs text-blue-600 hover:underline font-medium"><span class="en-text">View</span><span class="es-text">Ver</span></button>
+              <button onclick="event.stopPropagation(); showToast(getDemoLang()==='es'?'📥 Descargando...':'📥 Downloading...','blue')" class="text-xs text-blue-600 hover:underline font-medium"><span class="en-text">Download</span><span class="es-text">Descargar</span></button>
             </div>
           </div>
           <div class="px-6 py-3 text-center text-sm text-slate-500 hover:bg-slate-50 cursor-pointer" onclick="window.location='document-search.html'">
-            ... 83 more documents — <span class="text-blue-600 hover:underline">browse all in Document Search</span>
+            <span class="en-text">... 83 more documents — <span class="text-blue-600 hover:underline">browse all in Document Search</span></span>
+            <span class="es-text">... 83 documentos más — <span class="text-blue-600 hover:underline">ver todos en Búsqueda de Documentos</span></span>
           </div>
         </div>
       </div>
@@ -247,16 +282,52 @@
     <div id="tab-comms" class="tab-content">
       <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
         <div class="px-6 py-4 border-b border-slate-200">
-          <h2 class="font-bold text-slate-900 uppercase tracking-wider text-sm">💬 Last 7 days — 243 total messages</h2>
-          <p class="text-xs text-teal-700 mt-1">Sofia handled <strong>238 of 243</strong> messages automatically. Attorney only saw 5.</p>
+          <h2 class="font-bold text-slate-900 uppercase tracking-wider text-sm">💬 <span class="en-text">Last 7 days — 243 total messages</span><span class="es-text">Últimos 7 días — 243 mensajes totales</span></h2>
+          <p class="text-xs text-teal-700 mt-1"><span class="en-text">Sofia handled <strong>238 of 243</strong> messages automatically. Attorney only saw 5.</span><span class="es-text">Sofia manejó <strong>238 de 243</strong> mensajes automáticamente. El abogado solo vio 5.</span></p>
         </div>
         <div class="divide-y divide-slate-100 max-h-96 overflow-y-auto">
-          <div class="p-4 hover:bg-slate-50"><div class="flex items-center gap-2 mb-1"><span class="text-xs bg-teal-100 text-teal-700 px-2 py-0.5 rounded font-semibold">Sofia — auto</span><span class="text-xs text-slate-400">Mar 11, 9:42 AM</span></div><p class="text-sm text-slate-900">Status update sent to María — explained that the response window is 60 days and she's in day 10.</p></div>
-          <div class="p-4 hover:bg-slate-50"><div class="flex items-center gap-2 mb-1"><span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-semibold">Client → WhatsApp</span><span class="text-xs text-slate-400">Mar 11, 9:30 AM</span></div><p class="text-sm text-slate-900">"¿Cuándo van a contestar de USCIS? Ya estoy desesperada."</p></div>
-          <div class="p-4 hover:bg-slate-50"><div class="flex items-center gap-2 mb-1"><span class="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-semibold">Attorney — Carlos H.</span><span class="text-xs text-slate-400">Mar 10, 3:15 PM</span></div><p class="text-sm text-slate-900">Reviewed I-360 receipt notice. Added note: "Response expected by March 15."</p></div>
-          <div class="p-4 hover:bg-slate-50"><div class="flex items-center gap-2 mb-1"><span class="text-xs bg-teal-100 text-teal-700 px-2 py-0.5 rounded font-semibold">Sofia — auto</span><span class="text-xs text-slate-400">Mar 9, 8:00 AM</span></div><p class="text-sm text-slate-900">Weekly status update sent (Monday routine). Confirmed case is on track, no documents needed.</p></div>
-          <div class="p-4 hover:bg-slate-50"><div class="flex items-center gap-2 mb-1"><span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-semibold">Client → WhatsApp</span><span class="text-xs text-slate-400">Mar 8, 11:22 PM</span></div><p class="text-sm text-slate-900">"Oye, ¿mi caso sigue bien verdad? No he sabido nada."</p></div>
-          <div class="p-4 hover:bg-slate-50"><div class="flex items-center gap-2 mb-1"><span class="text-xs bg-teal-100 text-teal-700 px-2 py-0.5 rounded font-semibold">Sofia — auto (11:22 PM)</span><span class="text-xs text-slate-400">Instant</span></div><p class="text-sm text-slate-900">"Hola María, sí, tu caso está en orden. Estamos esperando la respuesta de USCIS — tienes hasta el 15 de marzo. Te aviso en cuanto haya novedades. 🙏"</p></div>
+          <div class="p-4 hover:bg-slate-50">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-xs bg-teal-100 text-teal-700 px-2 py-0.5 rounded font-semibold">Sofia — <span class="en-text">auto</span><span class="es-text">automático</span></span>
+              <span class="text-xs text-slate-400"><span class="en-text">Mar 11, 9:42 AM</span><span class="es-text">11 Mar, 9:42 AM</span></span>
+            </div>
+            <p class="text-sm text-slate-900"><span class="en-text">Status update sent to María — explained the response window is 60 days and she's in day 10.</span><span class="es-text">Actualización de estatus enviada a María — explicó que la ventana de respuesta es de 60 días y ella está en el día 10.</span></p>
+          </div>
+          <div class="p-4 hover:bg-slate-50">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-semibold"><span class="en-text">Client → WhatsApp</span><span class="es-text">Cliente → WhatsApp</span></span>
+              <span class="text-xs text-slate-400"><span class="en-text">Mar 11, 9:30 AM</span><span class="es-text">11 Mar, 9:30 AM</span></span>
+            </div>
+            <p class="text-sm text-slate-900">"¿Cuándo van a contestar de USCIS? Ya estoy desesperada."</p>
+          </div>
+          <div class="p-4 hover:bg-slate-50">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-semibold"><span class="en-text">Attorney — Carlos H.</span><span class="es-text">Abogado — Carlos H.</span></span>
+              <span class="text-xs text-slate-400"><span class="en-text">Mar 10, 3:15 PM</span><span class="es-text">10 Mar, 3:15 PM</span></span>
+            </div>
+            <p class="text-sm text-slate-900"><span class="en-text">Reviewed I-360 receipt notice. Added note: "Response expected by March 15."</span><span class="es-text">Revisó aviso de recibo I-360. Agregó nota: "Respuesta esperada antes del 15 de marzo."</span></p>
+          </div>
+          <div class="p-4 hover:bg-slate-50">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-xs bg-teal-100 text-teal-700 px-2 py-0.5 rounded font-semibold">Sofia — <span class="en-text">auto</span><span class="es-text">automático</span></span>
+              <span class="text-xs text-slate-400"><span class="en-text">Mar 9, 8:00 AM</span><span class="es-text">9 Mar, 8:00 AM</span></span>
+            </div>
+            <p class="text-sm text-slate-900"><span class="en-text">Weekly status update sent (Monday routine). Confirmed case is on track, no documents needed.</span><span class="es-text">Actualización semanal enviada (rutina del lunes). Confirmó que el caso está en curso, sin documentos pendientes.</span></p>
+          </div>
+          <div class="p-4 hover:bg-slate-50">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-semibold"><span class="en-text">Client → WhatsApp</span><span class="es-text">Cliente → WhatsApp</span></span>
+              <span class="text-xs text-slate-400"><span class="en-text">Mar 8, 11:22 PM</span><span class="es-text">8 Mar, 11:22 PM</span></span>
+            </div>
+            <p class="text-sm text-slate-900">"Oye, ¿mi caso sigue bien verdad? No he sabido nada."</p>
+          </div>
+          <div class="p-4 hover:bg-slate-50">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-xs bg-teal-100 text-teal-700 px-2 py-0.5 rounded font-semibold">Sofia — <span class="en-text">auto (11:22 PM)</span><span class="es-text">automático (11:22 PM)</span></span>
+              <span class="text-xs text-slate-400"><span class="en-text">Instant</span><span class="es-text">Inmediato</span></span>
+            </div>
+            <p class="text-sm text-slate-900">"Hola María, sí, tu caso está en orden. Estamos esperando la respuesta de USCIS — tienes hasta el 15 de marzo. Te aviso en cuanto haya novedades. 🙏"</p>
+          </div>
         </div>
       </div>
     </div>
@@ -265,17 +336,17 @@
     <div id="tab-notes" class="tab-content">
       <div class="bg-white rounded-xl border border-slate-200 p-6">
         <div class="flex items-center justify-between mb-4">
-          <h2 class="font-bold text-slate-900 uppercase tracking-wider text-sm">📝 Attorney Notes</h2>
-          <button onclick="toast('✏️ Note editor opened.', 'blue')" class="px-3 py-1.5 text-xs bg-blue-600 text-white rounded-lg font-semibold">+ Add note</button>
+          <h2 class="font-bold text-slate-900 uppercase tracking-wider text-sm">📝 <span class="en-text">Attorney Notes</span><span class="es-text">Notas del Abogado</span></h2>
+          <button onclick="showToast(getDemoLang()==='es'?'✏️ Editor de notas abierto.':'✏️ Note editor opened.','blue')" class="px-3 py-1.5 text-xs bg-blue-600 text-white rounded-lg font-semibold">+ <span class="en-text">Add note</span><span class="es-text">Agregar nota</span></button>
         </div>
         <div class="space-y-4">
           <div class="border border-slate-200 rounded-xl p-4">
-            <div class="flex items-center gap-2 mb-2"><span class="text-xs text-slate-500">Mar 10, 2026 · Carlos H.</span></div>
-            <p class="text-sm text-slate-900">Reviewed I-360 receipt. This is the widow path — stronger than I-130. Should get approved within 6-8 months. Client is anxious but case is solid. Sofia managing communication well.</p>
+            <div class="flex items-center gap-2 mb-2"><span class="text-xs text-slate-500"><span class="en-text">Mar 10, 2026 · Carlos H.</span><span class="es-text">10 Mar 2026 · Carlos H.</span></span></div>
+            <p class="text-sm text-slate-900"><span class="en-text">Reviewed I-360 receipt. This is the widow path — stronger than I-130. Should get approved within 6-8 months. Client is anxious but case is solid. Sofia managing communication well.</span><span class="es-text">Revisé el recibo del I-360. Esta es la ruta de viuda — más sólida que el I-130. Debería aprobarse en 6-8 meses. La cliente está ansiosa pero el caso es sólido. Sofia manejando la comunicación bien.</span></p>
           </div>
           <div class="border border-slate-200 rounded-xl p-4">
-            <div class="flex items-center gap-2 mb-2"><span class="text-xs text-slate-500">Dec 15, 2024 · Carlos H.</span></div>
-            <p class="text-sm text-slate-900">⚠️ Luis Rodríguez passed away Dec 3. Pivoting strategy to I-360 widow petition. Called María personally — she's devastated. Sofia has been instructed to use extra care in all communications. Handle with empathy.</p>
+            <div class="flex items-center gap-2 mb-2"><span class="text-xs text-slate-500"><span class="en-text">Dec 15, 2024 · Carlos H.</span><span class="es-text">15 Dic 2024 · Carlos H.</span></span></div>
+            <p class="text-sm text-slate-900"><span class="en-text">⚠️ Luis Rodríguez passed away Dec 3. Pivoting strategy to I-360 widow petition. Called María personally — she's devastated. Sofia has been instructed to use extra care in all communications. Handle with empathy.</span><span class="es-text">⚠️ Luis Rodríguez falleció el 3 dic. Cambiando estrategia a petición de viuda I-360. Llamé a María personalmente — está destrozada. Instruí a Sofia para usar cuidado extra en todas las comunicaciones. Manejar con empatía.</span></p>
           </div>
         </div>
       </div>
@@ -285,77 +356,89 @@
     <div id="tab-billing" class="tab-content">
       <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
         <div class="px-6 py-4 border-b border-slate-200 flex justify-between items-center">
-          <h2 class="font-bold text-slate-900 uppercase tracking-wider text-sm">💳 Billing Summary</h2>
-          <button onclick="toast('📧 Invoice sent to maría.r@***.com', 'green')" class="px-3 py-1.5 text-xs bg-green-600 text-white rounded-lg font-semibold">Send invoice</button>
+          <h2 class="font-bold text-slate-900 uppercase tracking-wider text-sm">💳 <span class="en-text">Billing Summary</span><span class="es-text">Resumen de Facturación</span></h2>
+          <button onclick="showToast(getDemoLang()==='es'?'📧 Factura enviada a maría.r@***.com':'📧 Invoice sent to maría.r@***.com','green')" class="px-3 py-1.5 text-xs bg-green-600 text-white rounded-lg font-semibold"><span class="en-text">Send invoice</span><span class="es-text">Enviar factura</span></button>
         </div>
         <div class="p-6 grid grid-cols-3 gap-4 mb-4">
-          <div class="bg-slate-50 rounded-xl p-4 text-center"><div class="text-xs text-slate-500 uppercase font-semibold">Total billed</div><div class="text-2xl font-bold text-slate-900 mt-1">$8,750</div></div>
-          <div class="bg-green-50 rounded-xl p-4 text-center"><div class="text-xs text-green-600 uppercase font-semibold">Collected</div><div class="text-2xl font-bold text-green-700 mt-1">$8,250</div></div>
-          <div class="bg-amber-50 rounded-xl p-4 text-center"><div class="text-xs text-amber-600 uppercase font-semibold">Outstanding</div><div class="text-2xl font-bold text-amber-700 mt-1">$500</div></div>
+          <div class="bg-slate-50 rounded-xl p-4 text-center">
+            <div class="text-xs text-slate-500 uppercase font-semibold"><span class="en-text">Total billed</span><span class="es-text">Total facturado</span></div>
+            <div class="text-2xl font-bold text-slate-900 mt-1">$8,750</div>
+          </div>
+          <div class="bg-green-50 rounded-xl p-4 text-center">
+            <div class="text-xs text-green-600 uppercase font-semibold"><span class="en-text">Collected</span><span class="es-text">Cobrado</span></div>
+            <div class="text-2xl font-bold text-green-700 mt-1">$8,250</div>
+          </div>
+          <div class="bg-amber-50 rounded-xl p-4 text-center">
+            <div class="text-xs text-amber-600 uppercase font-semibold"><span class="en-text">Outstanding</span><span class="es-text">Pendiente</span></div>
+            <div class="text-2xl font-bold text-amber-700 mt-1">$500</div>
+          </div>
         </div>
         <div class="divide-y divide-slate-100">
-          <div class="px-6 py-3 flex justify-between text-sm"><span class="text-slate-700">Initial consultation</span><span class="font-semibold">$250 · Paid ✓</span></div>
-          <div class="px-6 py-3 flex justify-between text-sm"><span class="text-slate-700">Engagement + I-130 filing</span><span class="font-semibold">$3,500 · Paid ✓</span></div>
-          <div class="px-6 py-3 flex justify-between text-sm"><span class="text-slate-700">Strategy pivot + I-360 filing</span><span class="font-semibold">$2,500 · Paid ✓</span></div>
-          <div class="px-6 py-3 flex justify-between text-sm"><span class="text-slate-700">Additional documentation</span><span class="font-semibold">$2,000 · Paid ✓</span></div>
-          <div class="px-6 py-3 flex justify-between text-sm text-amber-700"><span>Response deadline review</span><span class="font-semibold">$500 · Pending</span></div>
+          <div class="px-6 py-3 flex justify-between text-sm"><span class="text-slate-700"><span class="en-text">Initial consultation</span><span class="es-text">Consulta inicial</span></span><span class="font-semibold"><span class="en-text">$250 · Paid ✓</span><span class="es-text">$250 · Pagado ✓</span></span></div>
+          <div class="px-6 py-3 flex justify-between text-sm"><span class="text-slate-700"><span class="en-text">Engagement + I-130 filing</span><span class="es-text">Contrato + presentación I-130</span></span><span class="font-semibold"><span class="en-text">$3,500 · Paid ✓</span><span class="es-text">$3,500 · Pagado ✓</span></span></div>
+          <div class="px-6 py-3 flex justify-between text-sm"><span class="text-slate-700"><span class="en-text">Strategy pivot + I-360 filing</span><span class="es-text">Cambio de estrategia + presentación I-360</span></span><span class="font-semibold"><span class="en-text">$2,500 · Paid ✓</span><span class="es-text">$2,500 · Pagado ✓</span></span></div>
+          <div class="px-6 py-3 flex justify-between text-sm"><span class="text-slate-700"><span class="en-text">Additional documentation</span><span class="es-text">Documentación adicional</span></span><span class="font-semibold"><span class="en-text">$2,000 · Paid ✓</span><span class="es-text">$2,000 · Pagado ✓</span></span></div>
+          <div class="px-6 py-3 flex justify-between text-sm text-amber-700"><span><span class="en-text">Response deadline review</span><span class="es-text">Revisión de plazo de respuesta</span></span><span class="font-semibold"><span class="en-text">$500 · Pending</span><span class="es-text">$500 · Pendiente</span></span></div>
         </div>
       </div>
     </div>
 
   </main>
 
-  <!-- Action modals -->
+  <!-- CALL MODAL -->
   <div id="modal-call" class="hidden fixed inset-0 bg-black/50 z-40 flex items-center justify-center p-6">
     <div class="bg-white rounded-2xl shadow-2xl max-w-sm w-full modal-enter">
       <div class="px-6 py-4 border-b border-slate-200 flex justify-between items-center">
-        <h3 class="font-bold text-slate-900">📞 Call María Rodríguez</h3>
+        <h3 class="font-bold text-slate-900">📞 <span class="en-text">Call María Rodríguez</span><span class="es-text">Llamar a María Rodríguez</span></h3>
         <button onclick="closeModal('modal-call')" class="text-slate-400 hover:text-slate-600 text-xl font-bold">×</button>
       </div>
       <div class="p-6">
-        <p class="text-sm text-slate-600 mb-4">⚠️ Sofia note: María prefers Spanish. She has anxiety — open with reassurance before case details.</p>
-        <div class="bg-slate-50 rounded-xl p-3 mb-4 text-sm"><span class="font-semibold">📱 WhatsApp:</span> +1 213-***-1234<br><span class="text-slate-500 text-xs">Last call: Feb 18, 2026 (21 days ago)</span></div>
-        <button onclick="closeModal('modal-call'); toast('📞 Calling María Rodríguez on WhatsApp...', 'green')" class="w-full py-2.5 bg-green-600 text-white rounded-xl font-semibold text-sm hover:bg-green-700">Start call via WhatsApp</button>
+        <p class="text-sm text-slate-600 mb-4">⚠️ Sofia: <span class="en-text">María prefers Spanish. She has anxiety — open with reassurance before case details.</span><span class="es-text">María prefiere español. Tiene ansiedad — comenzar con tranquilización antes de detalles del caso.</span></p>
+        <div class="bg-slate-50 rounded-xl p-3 mb-4 text-sm">
+          <span class="font-semibold">📱 WhatsApp:</span> +1 213-***-1234<br>
+          <span class="text-slate-500 text-xs"><span class="en-text">Last call: Feb 18, 2026 (21 days ago)</span><span class="es-text">Última llamada: 18 feb 2026 (hace 21 días)</span></span>
+        </div>
+        <button onclick="closeModal('modal-call'); showToast(getDemoLang()==='es'?'📞 Llamando a María Rodríguez por WhatsApp...':'📞 Calling María Rodríguez on WhatsApp...','green')" class="w-full py-2.5 bg-green-600 text-white rounded-xl font-semibold text-sm hover:bg-green-700"><span class="en-text">Start call via WhatsApp</span><span class="es-text">Iniciar llamada por WhatsApp</span></button>
       </div>
     </div>
   </div>
 
+  <!-- MESSAGE MODAL -->
   <div id="modal-message" class="hidden fixed inset-0 bg-black/50 z-40 flex items-center justify-center p-6">
     <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full modal-enter">
       <div class="px-6 py-4 border-b border-slate-200 flex justify-between items-center">
-        <h3 class="font-bold text-slate-900">💬 Message María Rodríguez</h3>
+        <h3 class="font-bold text-slate-900">💬 <span class="en-text">Message María Rodríguez</span><span class="es-text">Mensaje a María Rodríguez</span></h3>
         <button onclick="closeModal('modal-message')" class="text-slate-400 hover:text-slate-600 text-xl font-bold">×</button>
       </div>
       <div class="p-6">
-        <p class="text-xs text-teal-700 bg-teal-50 rounded-lg px-3 py-2 mb-3">🧠 Sofia suggestion: Based on her pattern, send via WhatsApp in Spanish. Open with reassurance.</p>
+        <p class="text-xs text-teal-700 bg-teal-50 rounded-lg px-3 py-2 mb-3">🧠 Sofia: <span class="en-text">Based on her pattern, send via WhatsApp in Spanish. Open with reassurance.</span><span class="es-text">Por su patrón, enviar por WhatsApp en español. Comenzar con tranquilización.</span></p>
         <textarea class="w-full border border-slate-200 rounded-xl p-3 text-sm h-28 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500">Hola María, te escribo para informarte que tu caso sigue en proceso. Estamos pendientes de la respuesta de USCIS antes del 15 de marzo. Cualquier duda, aquí estamos. 🙏</textarea>
         <div class="flex gap-2 mt-3">
-          <button onclick="closeModal('modal-message')" class="flex-1 py-2.5 border border-slate-300 rounded-xl font-semibold text-sm hover:bg-slate-50">Cancel</button>
-          <button onclick="closeModal('modal-message'); toast('📤 Message sent to María via WhatsApp ✓', 'green')" class="flex-1 py-2.5 bg-blue-600 text-white rounded-xl font-semibold text-sm hover:bg-blue-700">Send via WhatsApp</button>
+          <button onclick="closeModal('modal-message')" class="flex-1 py-2.5 border border-slate-300 rounded-xl font-semibold text-sm hover:bg-slate-50"><span class="en-text">Cancel</span><span class="es-text">Cancelar</span></button>
+          <button onclick="closeModal('modal-message'); showToast(getDemoLang()==='es'?'📤 Mensaje enviado a María por WhatsApp ✓':'📤 Message sent to María via WhatsApp ✓','green')" class="flex-1 py-2.5 bg-blue-600 text-white rounded-xl font-semibold text-sm hover:bg-blue-700"><span class="en-text">Send via WhatsApp</span><span class="es-text">Enviar por WhatsApp</span></button>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- SCHEDULE MODAL -->
   <div id="modal-schedule" class="hidden fixed inset-0 bg-black/50 z-40 flex items-center justify-center p-6">
     <div class="bg-white rounded-2xl shadow-2xl max-w-sm w-full modal-enter">
       <div class="px-6 py-4 border-b border-slate-200 flex justify-between items-center">
-        <h3 class="font-bold text-slate-900">📅 Schedule appointment</h3>
+        <h3 class="font-bold text-slate-900">📅 <span class="en-text">Schedule appointment</span><span class="es-text">Agendar cita</span></h3>
         <button onclick="closeModal('modal-schedule')" class="text-slate-400 hover:text-slate-600 text-xl font-bold">×</button>
       </div>
       <div class="p-6 space-y-2">
-        <p class="text-sm text-slate-600 mb-3">Sofia will send the invitation via WhatsApp in Spanish.</p>
-        <button onclick="closeModal('modal-schedule'); toast('📅 Mar 13, 10:00 AM — Invitation sent to María via WhatsApp ✓', 'green')" class="w-full py-3 border border-slate-200 rounded-xl text-sm hover:bg-slate-50 text-left px-4"><strong>Thu Mar 13 · 10:00 AM</strong> — Video call</button>
-        <button onclick="closeModal('modal-schedule'); toast('📅 Mar 14, 2:00 PM — Invitation sent to María via WhatsApp ✓', 'green')" class="w-full py-3 border border-slate-200 rounded-xl text-sm hover:bg-slate-50 text-left px-4"><strong>Fri Mar 14 · 2:00 PM</strong> — Video call</button>
-        <button onclick="closeModal('modal-schedule'); toast('📅 Mar 17, 11:00 AM — Invitation sent to María via WhatsApp ✓', 'green')" class="w-full py-3 border border-slate-200 rounded-xl text-sm hover:bg-slate-50 text-left px-4"><strong>Mon Mar 17 · 11:00 AM</strong> — In person</button>
+        <p class="text-sm text-slate-600 mb-3"><span class="en-text">Sofia will send the invitation via WhatsApp in Spanish.</span><span class="es-text">Sofia enviará la invitación por WhatsApp en español.</span></p>
+        <button onclick="closeModal('modal-schedule'); showToast(getDemoLang()==='es'?'📅 Jue 13 Mar, 10:00 AM — Invitación enviada a María por WhatsApp ✓':'📅 Thu Mar 13, 10:00 AM — Invitation sent to María via WhatsApp ✓','green')" class="w-full py-3 border border-slate-200 rounded-xl text-sm hover:bg-slate-50 text-left px-4"><strong><span class="en-text">Thu Mar 13 · 10:00 AM</span><span class="es-text">Jue 13 Mar · 10:00 AM</span></strong> — <span class="en-text">Video call</span><span class="es-text">Videollamada</span></button>
+        <button onclick="closeModal('modal-schedule'); showToast(getDemoLang()==='es'?'📅 Vie 14 Mar, 2:00 PM — Invitación enviada a María por WhatsApp ✓':'📅 Fri Mar 14, 2:00 PM — Invitation sent to María via WhatsApp ✓','green')" class="w-full py-3 border border-slate-200 rounded-xl text-sm hover:bg-slate-50 text-left px-4"><strong><span class="en-text">Fri Mar 14 · 2:00 PM</span><span class="es-text">Vie 14 Mar · 2:00 PM</span></strong> — <span class="en-text">Video call</span><span class="es-text">Videollamada</span></button>
+        <button onclick="closeModal('modal-schedule'); showToast(getDemoLang()==='es'?'📅 Lun 17 Mar, 11:00 AM — Invitación enviada a María por WhatsApp ✓':'📅 Mon Mar 17, 11:00 AM — Invitation sent to María via WhatsApp ✓','green')" class="w-full py-3 border border-slate-200 rounded-xl text-sm hover:bg-slate-50 text-left px-4"><strong><span class="en-text">Mon Mar 17 · 11:00 AM</span><span class="es-text">Lun 17 Mar · 11:00 AM</span></strong> — <span class="en-text">In person</span><span class="es-text">Presencial</span></button>
       </div>
     </div>
   </div>
 
   <script src="demo-shared.js"></script>
   <script>
-    // toast() alias provided by demo-shared.js as window.showToast / window.toast
-
     document.addEventListener('DOMContentLoaded', function () {
       initDemoNav('clients', 'Carlos');
     });

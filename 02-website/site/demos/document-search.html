@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,26 +8,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Inter', sans-serif; background: #F8FAFC; }
-    .pdf-thumb {
-      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-      border: 1px solid #f59e0b;
-      position: relative;
-    }
-    .pdf-thumb::before {
-      content: 'PDF';
-      position: absolute; top: 6px; right: 6px;
-      background: #dc2626; color: white;
-      font-size: 9px; font-weight: 700;
-      padding: 2px 5px; border-radius: 3px;
-    }
-    .toast { animation: slideIn 0.35s ease; }
-    @keyframes slideIn { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-    .toast-exit { animation: slideOut 0.35s ease forwards; }
-    @keyframes slideOut { from { opacity: 1; } to { opacity: 0; transform: translateX(120%); } }
+    .pdf-thumb { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 1px solid #f59e0b; position: relative; }
+    .pdf-thumb::before { content: 'PDF'; position: absolute; top: 6px; right: 6px; background: #dc2626; color: white; font-size: 9px; font-weight: 700; padding: 2px 5px; border-radius: 3px; }
     .result-item { animation: fadeIn 0.3s ease; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
     .modal-enter { animation: scaleUp 0.2s ease; }
     @keyframes scaleUp { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+    .es-text { display: none; }
   </style>
 </head>
 <body class="min-h-screen">
@@ -40,7 +27,6 @@
         <nav id="demo-nav-links" class="flex items-center gap-1"></nav>
       </div>
       <div class="flex items-center gap-3">
-        <!-- Language toggle -->
         <div class="flex items-center gap-1 bg-slate-100 rounded-lg px-1 py-1">
           <button id="lang-btn-en" onclick="setDemoLang('en')" class="px-3 py-1 rounded font-bold text-xs transition lang-btn active text-white bg-slate-700">EN</button>
           <button id="lang-btn-es" onclick="setDemoLang('es')" class="px-3 py-1 rounded font-bold text-xs transition lang-btn text-slate-400 hover:text-white">ES</button>
@@ -56,25 +42,25 @@
     <div class="mb-4">
       <div class="bg-white rounded-xl border-2 border-blue-200 px-5 py-4 flex items-center gap-3 shadow-sm focus-within:border-blue-500 transition-colors">
         <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-        <input type="text" id="search-input" value="medical bills 2024" oninput="handleSearch(this.value)" class="flex-1 outline-none text-base font-medium text-slate-900 bg-transparent" placeholder="Search documents..." />
+        <input type="text" id="search-input" value="medical bills 2024" oninput="handleSearch(this.value)" class="flex-1 outline-none text-base font-medium text-slate-900 bg-transparent" />
         <button onclick="document.getElementById('search-input').value=''; handleSearch('')" class="text-slate-400 hover:text-slate-600 text-lg leading-none">×</button>
         <span class="text-xs text-slate-500 bg-slate-100 px-2 py-1 rounded font-mono">⌘K</span>
       </div>
       <div class="text-sm text-slate-500 mt-2 px-1 flex items-center gap-3 flex-wrap">
-        <span><strong id="result-count" class="text-slate-900">47</strong> results in <strong id="search-time" class="text-slate-900">0.3s</strong></span>
+        <span><strong id="result-count" class="text-slate-900">47</strong> <span class="en-text">results in</span><span class="es-text">resultados en</span> <strong id="search-time" class="text-slate-900">0.3s</strong></span>
         <span class="text-slate-400">•</span>
-        <span>Searching <strong class="text-slate-900">8,247 documents</strong> across all clients</span>
+        <span><span class="en-text">Searching</span><span class="es-text">Buscando entre</span> <strong class="text-slate-900">8,247 <span class="en-text">documents</span><span class="es-text">documentos</span></strong> <span class="en-text">across all clients</span><span class="es-text">de todos los clientes</span></span>
         <span class="text-slate-400">•</span>
-        <span class="text-teal-700 bg-teal-50 px-2 py-0.5 rounded text-xs font-semibold">Sofia indexed all docs</span>
+        <span class="text-teal-700 bg-teal-50 px-2 py-0.5 rounded text-xs font-semibold"><span class="en-text">Sofia indexed all docs</span><span class="es-text">Sofia indexó todos los docs</span></span>
       </div>
       <!-- Quick suggestions -->
-      <div class="flex gap-2 mt-3 flex-wrap">
-        <span class="text-xs text-slate-500 font-medium pt-1">Try:</span>
-        <button onclick="setSearch('IRS notice 2025')" class="text-xs bg-slate-100 hover:bg-blue-50 hover:text-blue-700 px-3 py-1.5 rounded-full font-medium transition">IRS notice 2025</button>
+      <div class="flex gap-2 mt-3 flex-wrap items-center">
+        <span class="text-xs text-slate-500 font-medium pt-1"><span class="en-text">Try:</span><span class="es-text">Busca:</span></span>
+        <button onclick="setSearch('IRS notice 2025')" class="text-xs bg-slate-100 hover:bg-blue-50 hover:text-blue-700 px-3 py-1.5 rounded-full font-medium transition"><span class="en-text">IRS notice 2025</span><span class="es-text">Aviso IRS 2025</span></button>
         <button onclick="setSearch('W-2 Rodríguez')" class="text-xs bg-slate-100 hover:bg-blue-50 hover:text-blue-700 px-3 py-1.5 rounded-full font-medium transition">W-2 Rodríguez</button>
-        <button onclick="setSearch('contract 2024')" class="text-xs bg-slate-100 hover:bg-blue-50 hover:text-blue-700 px-3 py-1.5 rounded-full font-medium transition">contract 2024</button>
+        <button onclick="setSearch('contract 2024')" class="text-xs bg-slate-100 hover:bg-blue-50 hover:text-blue-700 px-3 py-1.5 rounded-full font-medium transition"><span class="en-text">Contract 2024</span><span class="es-text">Contrato 2024</span></button>
         <button onclick="setSearch('USCIS')" class="text-xs bg-slate-100 hover:bg-blue-50 hover:text-blue-700 px-3 py-1.5 rounded-full font-medium transition">USCIS</button>
-        <button onclick="setSearch('duplicate')" class="text-xs bg-red-50 hover:bg-red-100 text-red-700 px-3 py-1.5 rounded-full font-medium transition">⚠ duplicates</button>
+        <button onclick="setSearch('duplicate')" class="text-xs bg-red-50 hover:bg-red-100 text-red-700 px-3 py-1.5 rounded-full font-medium transition">⚠ <span class="en-text">Duplicates</span><span class="es-text">Duplicados</span></button>
       </div>
     </div>
 
@@ -84,25 +70,25 @@
       <!-- Filters sidebar -->
       <aside class="col-span-3 bg-white rounded-xl border border-slate-200 p-5 h-fit sticky top-24">
         <div class="flex items-center justify-between mb-4">
-          <h3 class="font-bold text-slate-900 uppercase tracking-wider text-xs">Filters</h3>
-          <button onclick="resetFilters()" class="text-xs text-blue-600 hover:underline">Reset</button>
+          <h3 class="font-bold text-slate-900 uppercase tracking-wider text-xs"><span class="en-text">Filters</span><span class="es-text">Filtros</span></h3>
+          <button onclick="resetFilters()" class="text-xs text-blue-600 hover:underline"><span class="en-text">Reset</span><span class="es-text">Limpiar</span></button>
         </div>
 
         <div class="mb-5 pb-5 border-b border-slate-100">
-          <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Type</div>
+          <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2"><span class="en-text">Type</span><span class="es-text">Tipo</span></div>
           <div class="space-y-1.5">
-            <label class="flex items-center gap-2 text-sm cursor-pointer hover:text-slate-900"><input type="checkbox" class="rounded border-slate-300 text-blue-600 filter-check"><span class="flex-1 text-slate-700">Invoice</span><span class="text-xs text-slate-400">23</span></label>
-            <label class="flex items-center gap-2 text-sm cursor-pointer hover:text-slate-900"><input type="checkbox" checked class="rounded border-slate-300 text-blue-600 filter-check"><span class="flex-1 text-slate-900 font-semibold">Medical bill</span><span class="text-xs text-slate-400">47</span></label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer hover:text-slate-900"><input type="checkbox" class="rounded border-slate-300 text-blue-600 filter-check"><span class="flex-1 text-slate-700"><span class="en-text">Invoice</span><span class="es-text">Factura</span></span><span class="text-xs text-slate-400">23</span></label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer hover:text-slate-900"><input type="checkbox" checked class="rounded border-slate-300 text-blue-600 filter-check"><span class="flex-1 text-slate-900 font-semibold"><span class="en-text">Medical bill</span><span class="es-text">Cuenta médica</span></span><span class="text-xs text-slate-400">47</span></label>
             <label class="flex items-center gap-2 text-sm cursor-pointer hover:text-slate-900"><input type="checkbox" class="rounded border-slate-300 text-blue-600 filter-check"><span class="flex-1 text-slate-700">W-2</span><span class="text-xs text-slate-400">8</span></label>
             <label class="flex items-center gap-2 text-sm cursor-pointer hover:text-slate-900"><input type="checkbox" class="rounded border-slate-300 text-blue-600 filter-check"><span class="flex-1 text-slate-700">1099</span><span class="text-xs text-slate-400">12</span></label>
-            <label class="flex items-center gap-2 text-sm cursor-pointer hover:text-slate-900"><input type="checkbox" class="rounded border-slate-300 text-blue-600 filter-check"><span class="flex-1 text-slate-700">IRS notice</span><span class="text-xs text-slate-400">3</span></label>
-            <label class="flex items-center gap-2 text-sm cursor-pointer hover:text-slate-900"><input type="checkbox" class="rounded border-slate-300 text-blue-600 filter-check"><span class="flex-1 text-slate-700">USCIS notice</span><span class="text-xs text-slate-400">14</span></label>
-            <label class="flex items-center gap-2 text-sm cursor-pointer hover:text-slate-900"><input type="checkbox" class="rounded border-slate-300 text-blue-600 filter-check"><span class="flex-1 text-slate-700">Contract</span><span class="text-xs text-slate-400">31</span></label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer hover:text-slate-900"><input type="checkbox" class="rounded border-slate-300 text-blue-600 filter-check"><span class="flex-1 text-slate-700"><span class="en-text">IRS notice</span><span class="es-text">Aviso del IRS</span></span><span class="text-xs text-slate-400">3</span></label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer hover:text-slate-900"><input type="checkbox" class="rounded border-slate-300 text-blue-600 filter-check"><span class="flex-1 text-slate-700"><span class="en-text">USCIS notice</span><span class="es-text">Aviso USCIS</span></span><span class="text-xs text-slate-400">14</span></label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer hover:text-slate-900"><input type="checkbox" class="rounded border-slate-300 text-blue-600 filter-check"><span class="flex-1 text-slate-700"><span class="en-text">Contract</span><span class="es-text">Contrato</span></span><span class="text-xs text-slate-400">31</span></label>
           </div>
         </div>
 
         <div class="mb-5 pb-5 border-b border-slate-100">
-          <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Year</div>
+          <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2"><span class="en-text">Year</span><span class="es-text">Año</span></div>
           <div class="space-y-1.5">
             <label class="flex items-center gap-2 text-sm cursor-pointer"><input type="checkbox" class="rounded border-slate-300 text-blue-600 filter-check"><span class="flex-1 text-slate-700">2026</span></label>
             <label class="flex items-center gap-2 text-sm cursor-pointer"><input type="checkbox" class="rounded border-slate-300 text-blue-600 filter-check"><span class="flex-1 text-slate-700">2025</span></label>
@@ -112,32 +98,30 @@
         </div>
 
         <div class="mb-5 pb-5 border-b border-slate-100">
-          <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Source</div>
+          <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2"><span class="en-text">Source</span><span class="es-text">Fuente</span></div>
           <div class="space-y-1.5">
             <label class="flex items-center gap-2 text-sm cursor-pointer"><input type="checkbox" class="rounded border-slate-300 text-blue-600 filter-check"><span class="flex-1 text-slate-700">📱 WhatsApp</span></label>
-            <label class="flex items-center gap-2 text-sm cursor-pointer"><input type="checkbox" class="rounded border-slate-300 text-blue-600 filter-check"><span class="flex-1 text-slate-700">📧 Email</span></label>
-            <label class="flex items-center gap-2 text-sm cursor-pointer"><input type="checkbox" class="rounded border-slate-300 text-blue-600 filter-check"><span class="flex-1 text-slate-700">🖥 Web upload</span></label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer"><input type="checkbox" class="rounded border-slate-300 text-blue-600 filter-check"><span class="flex-1 text-slate-700">📧 <span class="en-text">Email</span><span class="es-text">Correo</span></span></label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer"><input type="checkbox" class="rounded border-slate-300 text-blue-600 filter-check"><span class="flex-1 text-slate-700">🖥 <span class="en-text">Web upload</span><span class="es-text">Carga web</span></span></label>
           </div>
         </div>
 
         <div>
-          <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Sofia flags</div>
+          <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2"><span class="en-text">Sofia flags</span><span class="es-text">Alertas de Sofia</span></div>
           <div class="space-y-1.5">
-            <label class="flex items-center gap-2 text-sm cursor-pointer"><input type="checkbox" class="rounded border-slate-300 text-red-500 filter-check"><span class="flex-1 text-red-700">⚠ Anomalies only</span></label>
-            <label class="flex items-center gap-2 text-sm cursor-pointer"><input type="checkbox" class="rounded border-slate-300 text-blue-600 filter-check"><span class="flex-1 text-slate-700">Lien active</span></label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer"><input type="checkbox" class="rounded border-slate-300 text-red-500 filter-check"><span class="flex-1 text-red-700">⚠ <span class="en-text">Anomalies only</span><span class="es-text">Solo anomalías</span></span></label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer"><input type="checkbox" class="rounded border-slate-300 text-blue-600 filter-check"><span class="flex-1 text-slate-700"><span class="en-text">Active lien</span><span class="es-text">Gravamen activo</span></span></label>
           </div>
         </div>
       </aside>
 
       <!-- Results -->
-      <section class="col-span-9 space-y-4" id="results-container">
-        <!-- Populated by JS -->
-      </section>
+      <section class="col-span-9 space-y-4" id="results-container"></section>
     </div>
 
-    <!-- Demo footer -->
     <div class="mt-8 text-center text-xs text-slate-400">
-      Interactive demo · Fictional data · <a href="../demo.html" class="text-blue-600 hover:underline">← back to demos</a>
+      <span class="en-text">Interactive demo · Fictional data · </span><span class="es-text">Demo interactivo · Datos ficticios · </span>
+      <a href="../demo.html" class="text-blue-600 hover:underline"><span class="en-text">← back to demos</span><span class="es-text">← volver a demos</span></a>
     </div>
   </main>
 
@@ -145,77 +129,121 @@
   <div id="modal-compare" class="hidden fixed inset-0 bg-black/50 z-40 flex items-center justify-center p-6">
     <div class="bg-white rounded-2xl shadow-2xl max-w-3xl w-full modal-enter overflow-hidden">
       <div class="px-6 py-4 border-b border-slate-200 flex justify-between items-center">
-        <h3 class="font-bold text-slate-900">⚠ Duplicate Detection — Side by Side</h3>
+        <h3 class="font-bold text-slate-900">⚠ <span class="en-text">Duplicate Detection — Side by Side</span><span class="es-text">Detección de Duplicados — Comparación</span></h3>
         <button onclick="document.getElementById('modal-compare').classList.add('hidden')" class="text-slate-400 hover:text-slate-600 text-xl font-bold">×</button>
       </div>
       <div class="p-6 grid grid-cols-2 gap-4">
         <div class="border border-slate-200 rounded-xl p-4">
-          <div class="text-xs font-bold text-slate-500 uppercase mb-3">Document A</div>
+          <div class="text-xs font-bold text-slate-500 uppercase mb-3"><span class="en-text">Document A</span><span class="es-text">Documento A</span></div>
           <div class="text-sm font-semibold">Kaiser_Permanente_2024-10-28.pdf</div>
           <div class="space-y-2 mt-3 text-sm">
-            <div class="flex justify-between"><span class="text-slate-500">Provider:</span><span>Kaiser Permanente</span></div>
-            <div class="flex justify-between"><span class="text-slate-500">Date:</span><span>Oct 28, 2024</span></div>
-            <div class="flex justify-between"><span class="text-slate-500">CPT Code:</span><span class="font-mono">99213</span></div>
-            <div class="flex justify-between"><span class="text-slate-500">Amount:</span><span class="font-bold">$5,700.00</span></div>
-            <div class="flex justify-between"><span class="text-slate-500">Patient:</span><span>Diego Vargas</span></div>
+            <div class="flex justify-between"><span class="text-slate-500"><span class="en-text">Provider:</span><span class="es-text">Proveedor:</span></span><span>Kaiser Permanente</span></div>
+            <div class="flex justify-between"><span class="text-slate-500"><span class="en-text">Date:</span><span class="es-text">Fecha:</span></span><span><span class="en-text">Oct 28, 2024</span><span class="es-text">28 oct 2024</span></span></div>
+            <div class="flex justify-between"><span class="text-slate-500">CPT:</span><span class="font-mono">99213</span></div>
+            <div class="flex justify-between"><span class="text-slate-500"><span class="en-text">Amount:</span><span class="es-text">Monto:</span></span><span class="font-bold">$5,700.00</span></div>
+            <div class="flex justify-between"><span class="text-slate-500"><span class="en-text">Patient:</span><span class="es-text">Paciente:</span></span><span>Diego Vargas</span></div>
           </div>
         </div>
         <div class="border-2 border-red-300 rounded-xl p-4 bg-red-50">
-          <div class="text-xs font-bold text-red-600 uppercase mb-3">Document B — Possible duplicate</div>
+          <div class="text-xs font-bold text-red-600 uppercase mb-3"><span class="en-text">Document B — Possible duplicate</span><span class="es-text">Documento B — Posible duplicado</span></div>
           <div class="text-sm font-semibold">Kaiser_Permanente_2024-11-04.pdf</div>
           <div class="space-y-2 mt-3 text-sm">
-            <div class="flex justify-between"><span class="text-slate-500">Provider:</span><span>Kaiser Permanente</span></div>
-            <div class="flex justify-between"><span class="text-slate-500">Date:</span><span class="font-semibold text-amber-700">Nov 4, 2024 ← different</span></div>
-            <div class="flex justify-between"><span class="text-slate-500">CPT Code:</span><span class="font-mono">99213</span></div>
-            <div class="flex justify-between"><span class="text-slate-500">Amount:</span><span class="font-bold text-red-700">$5,720.00 ← $20 diff</span></div>
-            <div class="flex justify-between"><span class="text-slate-500">Patient:</span><span>Diego Vargas</span></div>
+            <div class="flex justify-between"><span class="text-slate-500"><span class="en-text">Provider:</span><span class="es-text">Proveedor:</span></span><span>Kaiser Permanente</span></div>
+            <div class="flex justify-between"><span class="text-slate-500"><span class="en-text">Date:</span><span class="es-text">Fecha:</span></span><span class="font-semibold text-amber-700"><span class="en-text">Nov 4, 2024 ← different</span><span class="es-text">4 nov 2024 ← diferente</span></span></div>
+            <div class="flex justify-between"><span class="text-slate-500">CPT:</span><span class="font-mono">99213</span></div>
+            <div class="flex justify-between"><span class="text-slate-500"><span class="en-text">Amount:</span><span class="es-text">Monto:</span></span><span class="font-bold text-red-700">$5,720.00 ← $20 <span class="en-text">diff</span><span class="es-text">dif</span></span></div>
+            <div class="flex justify-between"><span class="text-slate-500"><span class="en-text">Patient:</span><span class="es-text">Paciente:</span></span><span>Diego Vargas</span></div>
           </div>
         </div>
       </div>
       <div class="px-6 pb-6">
         <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 mb-4 text-sm text-amber-800">
-          🧠 <strong>Sofia's analysis:</strong> Same provider, same CPT code, same patient. Amount difference of $20 — likely billing error. Recommend contacting Kaiser Permanente to clarify before including in settlement.
+          🧠 <strong>Sofia:</strong>
+          <span class="en-text">Same provider, same CPT code, same patient. Amount difference of $20 — likely billing error. Recommend contacting Kaiser Permanente to clarify before including in settlement.</span>
+          <span class="es-text">Mismo proveedor, mismo código CPT, mismo paciente. Diferencia de $20 — probablemente error de facturación. Recomendado: contactar a Kaiser Permanente antes de incluir en el acuerdo.</span>
         </div>
         <div class="flex gap-2">
-          <button onclick="toast('✅ Document B marked as duplicate and flagged for review.', 'amber'); document.getElementById('modal-compare').classList.add('hidden')" class="flex-1 py-2.5 bg-amber-500 text-white rounded-xl font-semibold text-sm">Mark B as duplicate</button>
-          <button onclick="toast('✅ Both documents kept — attorney will review.', 'blue'); document.getElementById('modal-compare').classList.add('hidden')" class="flex-1 py-2.5 border border-slate-300 rounded-xl font-semibold text-sm hover:bg-slate-50">Keep both, flag for review</button>
+          <button onclick="showToast(getDemoLang()==='es'?'✅ Documento B marcado como duplicado y señalado para revisión.':'✅ Document B marked as duplicate and flagged for review.','amber'); document.getElementById('modal-compare').classList.add('hidden')" class="flex-1 py-2.5 bg-amber-500 text-white rounded-xl font-semibold text-sm"><span class="en-text">Mark B as duplicate</span><span class="es-text">Marcar B como duplicado</span></button>
+          <button onclick="showToast(getDemoLang()==='es'?'✅ Ambos documentos conservados — el abogado revisará.':'✅ Both documents kept — attorney will review.','blue'); document.getElementById('modal-compare').classList.add('hidden')" class="flex-1 py-2.5 border border-slate-300 rounded-xl font-semibold text-sm hover:bg-slate-50"><span class="en-text">Keep both, flag for review</span><span class="es-text">Conservar ambos, señalar para revisión</span></button>
         </div>
       </div>
     </div>
   </div>
 
+  <script src="demo-shared.js"></script>
   <script>
-    // Search datasets
+    initDemoNav('documents', 'Carlos');
+
+    // ─── Bilingual strings ───────────────────────────────────
+    const T = {
+      open:       { en: 'Open',      es: 'Abrir' },
+      download:   { en: 'Download',  es: 'Descargar' },
+      client:     { en: 'Client',    es: 'Cliente' },
+      date:       { en: 'Date',      es: 'Fecha' },
+      amount:     { en: 'Amount',    es: 'Monto' },
+      showing:    { en: 'Showing',   es: 'Mostrando' },
+      of:         { en: 'of',        es: 'de' },
+      results:    { en: 'results',   es: 'resultados' },
+      loadMore:   { en: 'Load more', es: 'Cargar más' },
+      exportCsv:  { en: 'Export filtered (CSV)', es: 'Exportar filtrados (CSV)' },
+      emptyTitle: { en: 'Type to search 8,247 documents', es: 'Escribe para buscar 8,247 documentos' },
+      emptySub:   { en: 'Sofia has indexed and tagged every document across all clients.', es: 'Sofia indexó y etiquetó cada documento de todos los clientes.' },
+      compareSide:{ en: 'Compare side-by-side →', es: 'Comparar lado a lado →' },
+      sofiaSays:  { en: 'Sofia — extracted', es: 'Sofia — extraído' },
+      note:       { en: 'Note', es: 'Nota' },
+    };
+
+    function t(key) {
+      const lang = getDemoLang();
+      return (T[key] && T[key][lang]) || (T[key] && T[key].en) || key;
+    }
+
+    // ─── Datasets (bilingual) ────────────────────────────────
     const datasets = {
       default: {
         query: 'medical bills 2024', count: 47, time: '0.3s',
         results: [
           {
-            name: 'Cedars-Sinai_Bill_2024-08-15.pdf', sub: 'Hospital invoice · 2 pages · 1.2 MB',
-            client: 'María Rodríguez', date: 'Aug 15, 2024', amount: '$12,450.00',
-            tags: ['PI case', 'Auto accident', 'Hospital', 'CA'],
-            tagColors: ['purple', 'blue', 'slate', 'slate'],
-            extracted: { label: 'Extracted by Sofia', color: 'teal',
-              fields: [['CPT codes', '99284, 73721'], ['Treatment', 'ER + MRI'], ['Insurance billed', '$8,450'], ['Patient responsibility', '$4,000']],
-              note: { type: 'warn', text: 'Active lien — added to settlement calculator' } }
+            name: 'Cedars-Sinai_Bill_2024-08-15.pdf',
+            sub:  { en: 'Hospital invoice · 2 pages · 1.2 MB', es: 'Factura hospitalaria · 2 páginas · 1.2 MB' },
+            client: 'María Rodríguez',
+            date: { en: 'Aug 15, 2024', es: '15 ago 2024' },
+            amount: '$12,450.00',
+            tags: { en: ['PI case','Auto accident','Hospital','CA'], es: ['Caso PI','Accidente auto','Hospital','CA'] },
+            tagColors: ['purple','blue','slate','slate'],
+            extracted: {
+              label: { en: 'Extracted by Sofia', es: 'Extraído por Sofia' }, color: 'teal',
+              fields: { en: [['CPT codes','99284, 73721'],['Treatment','ER + MRI'],['Insurance billed','$8,450'],['Patient responsibility','$4,000']], es: [['Códigos CPT','99284, 73721'],['Tratamiento','Urgencias + MRI'],['Facturado al seguro','$8,450'],['Responsabilidad del paciente','$4,000']] },
+              note: { type:'warn', text: { en:'Active lien — added to settlement calculator', es:'Gravamen activo — agregado a la calculadora de acuerdo' } }
+            }
           },
           {
-            name: 'UCLA_Med_Center_2024-09-22.pdf', sub: 'Outpatient invoice · 1 page · 480 KB',
-            client: 'Roberto Méndez', date: 'Sep 22, 2024', amount: '$3,890.00',
-            tags: ['PI case', 'Slip & fall', 'Outpatient'],
-            tagColors: ['purple', 'blue', 'slate'],
-            extracted: { label: 'Extracted by Sofia', color: 'teal',
-              fields: [['CPT codes', '99213, 97110'], ['Treatment', 'PT session #4'], ['Insurance', 'PIP exhausted'], ['Patient responsibility', '$3,890']],
-              note: null }
+            name: 'UCLA_Med_Center_2024-09-22.pdf',
+            sub:  { en: 'Outpatient invoice · 1 page · 480 KB', es: 'Factura ambulatoria · 1 página · 480 KB' },
+            client: 'Roberto Méndez',
+            date: { en: 'Sep 22, 2024', es: '22 sep 2024' },
+            amount: '$3,890.00',
+            tags: { en: ['PI case','Slip & fall','Outpatient'], es: ['Caso PI','Resbalón y caída','Ambulatorio'] },
+            tagColors: ['purple','blue','slate'],
+            extracted: {
+              label: { en: 'Extracted by Sofia', es: 'Extraído por Sofia' }, color: 'teal',
+              fields: { en: [['CPT codes','99213, 97110'],['Treatment','PT session #4'],['Insurance','PIP exhausted'],['Patient responsibility','$3,890']], es: [['Códigos CPT','99213, 97110'],['Tratamiento','Sesión de fisioterapia #4'],['Seguro','PIP agotado'],['Responsabilidad del paciente','$3,890']] },
+              note: null
+            }
           },
           {
-            name: 'Kaiser_Permanente_2024-11-04.pdf', sub: 'Specialist visit · 3 pages · 1.8 MB',
-            client: 'Diego Vargas', date: 'Nov 4, 2024', amount: '$5,720.00',
-            tags: ['PI case', 'Auto accident', '⚠ Duplicate suspected'],
-            tagColors: ['purple', 'blue', 'red'],
-            extracted: { label: '⚠ Sofia detected anomaly', color: 'amber',
+            name: 'Kaiser_Permanente_2024-11-04.pdf',
+            sub:  { en: 'Specialist visit · 3 pages · 1.8 MB', es: 'Visita a especialista · 3 páginas · 1.8 MB' },
+            client: 'Diego Vargas',
+            date: { en: 'Nov 4, 2024', es: '4 nov 2024' },
+            amount: '$5,720.00',
+            tags: { en: ['PI case','Auto accident','⚠ Duplicate suspected'], es: ['Caso PI','Accidente auto','⚠ Posible duplicado'] },
+            tagColors: ['purple','blue','red'],
+            extracted: {
+              label: { en: '⚠ Sofia detected anomaly', es: '⚠ Sofia detectó una anomalía' }, color: 'amber',
               fields: null,
-              note: { type: 'compare', text: 'This invoice appears to be 87% similar to Kaiser_Permanente_2024-10-28.pdf. Same CPT code, same provider, $20 amount difference.' } }
+              note: { type:'compare', text: { en:'This invoice appears to be 87% similar to Kaiser_Permanente_2024-10-28.pdf. Same CPT code, same provider, $20 amount difference.', es:'Esta factura es 87% similar a Kaiser_Permanente_2024-10-28.pdf. Mismo código CPT, mismo proveedor, diferencia de $20.' } }
+            }
           }
         ]
       },
@@ -223,22 +251,32 @@
         query: 'IRS notice 2025', count: 3, time: '0.1s',
         results: [
           {
-            name: 'IRS_CP2000_2025-02-10.pdf', sub: 'IRS Notice · 4 pages · 890 KB',
-            client: 'Mendoza Construction LLC', date: 'Feb 10, 2025', amount: '$8,200 proposed',
-            tags: ['IRS notice', 'CP2000', 'Urgent'],
-            tagColors: ['red', 'red', 'red'],
-            extracted: { label: '🚨 Marco — Immediate action required', color: 'red',
-              fields: [['Notice type', 'CP2000 — Underreported Income'], ['Tax year', '2023'], ['Proposed amount', '$8,200'], ['Response deadline', 'March 15, 2025']],
-              note: { type: 'warn', text: 'ESCALATED to CPA — Response deadline in 33 days. Recommend audit response prep.' } }
+            name: 'IRS_CP2000_2025-02-10.pdf',
+            sub:  { en: 'IRS Notice · 4 pages · 890 KB', es: 'Aviso del IRS · 4 páginas · 890 KB' },
+            client: 'Mendoza Construction LLC',
+            date: { en: 'Feb 10, 2025', es: '10 feb 2025' },
+            amount: { en: '$8,200 proposed', es: '$8,200 propuesto' },
+            tags: { en: ['IRS notice','CP2000','Urgent'], es: ['Aviso IRS','CP2000','Urgente'] },
+            tagColors: ['red','red','red'],
+            extracted: {
+              label: { en: '🚨 Marco — Immediate action required', es: '🚨 Marco — Acción inmediata requerida' }, color: 'red',
+              fields: { en: [['Notice type','CP2000 — Underreported Income'],['Tax year','2023'],['Proposed amount','$8,200'],['Response deadline','March 15, 2025']], es: [['Tipo de aviso','CP2000 — Ingreso no declarado'],['Año fiscal','2023'],['Monto propuesto','$8,200'],['Plazo de respuesta','15 de marzo de 2025']] },
+              note: { type:'warn', text: { en:'ESCALATED to CPA — Response deadline in 33 days. Recommend audit response prep.', es:'ESCALADO al CPA — Plazo de respuesta en 33 días. Se recomienda preparar respuesta a auditoría.' } }
+            }
           },
           {
-            name: 'IRS_CP501_2025-01-05.pdf', sub: 'Balance due reminder · 1 page · 210 KB',
-            client: 'Patricia Ruiz', date: 'Jan 5, 2025', amount: '$1,240 owed',
-            tags: ['IRS notice', 'CP501', 'Balance due'],
-            tagColors: ['red', 'slate', 'amber'],
-            extracted: { label: 'Extracted by Marco', color: 'teal',
-              fields: [['Notice type', 'CP501 — Balance Due'], ['Tax year', '2022'], ['Amount owed', '$1,240'], ['Response deadline', 'Feb 4, 2025']],
-              note: { type: 'info', text: 'Resolved — client paid $1,240 on Jan 28, 2025. Marked closed.' } }
+            name: 'IRS_CP501_2025-01-05.pdf',
+            sub:  { en: 'Balance due reminder · 1 page · 210 KB', es: 'Recordatorio de saldo · 1 página · 210 KB' },
+            client: 'Patricia Ruiz',
+            date: { en: 'Jan 5, 2025', es: '5 ene 2025' },
+            amount: { en: '$1,240 owed', es: '$1,240 adeudado' },
+            tags: { en: ['IRS notice','CP501','Balance due'], es: ['Aviso IRS','CP501','Saldo pendiente'] },
+            tagColors: ['red','slate','amber'],
+            extracted: {
+              label: { en: 'Extracted by Marco', es: 'Extraído por Marco' }, color: 'teal',
+              fields: { en: [['Notice type','CP501 — Balance Due'],['Tax year','2022'],['Amount owed','$1,240'],['Response deadline','Feb 4, 2025']], es: [['Tipo de aviso','CP501 — Saldo pendiente'],['Año fiscal','2022'],['Monto adeudado','$1,240'],['Plazo de respuesta','4 feb 2025']] },
+              note: { type:'info', text: { en:'Resolved — client paid $1,240 on Jan 28, 2025. Marked closed.', es:'Resuelto — cliente pagó $1,240 el 28 ene 2025. Marcado como cerrado.' } }
+            }
           }
         ]
       },
@@ -246,22 +284,32 @@
         query: 'W-2 Rodríguez', count: 8, time: '0.2s',
         results: [
           {
-            name: 'W2_2024_María_Rodríguez.pdf', sub: 'W-2 Form · 1 page · 180 KB',
-            client: 'María Rodríguez', date: 'Jan 31, 2025', amount: 'Income: $32,400',
-            tags: ['W-2', 'Tax 2024', 'Verified ✓'],
-            tagColors: ['blue', 'slate', 'green'],
-            extracted: { label: 'Extracted by Marco', color: 'teal',
-              fields: [['Employer', 'Whole Foods Market #2211'], ['Wages (Box 1)', '$32,400'], ['Federal withheld', '$2,190'], ['State withheld', '$810']],
-              note: { type: 'info', text: 'Income matches client declaration. Included in 2024 tax return.' } }
+            name: 'W2_2024_María_Rodríguez.pdf',
+            sub:  { en: 'W-2 Form · 1 page · 180 KB', es: 'Formulario W-2 · 1 página · 180 KB' },
+            client: 'María Rodríguez',
+            date: { en: 'Jan 31, 2025', es: '31 ene 2025' },
+            amount: { en: 'Income: $32,400', es: 'Ingreso: $32,400' },
+            tags: { en: ['W-2','Tax 2024','Verified ✓'], es: ['W-2','Impuestos 2024','Verificado ✓'] },
+            tagColors: ['blue','slate','green'],
+            extracted: {
+              label: { en: 'Extracted by Marco', es: 'Extraído por Marco' }, color: 'teal',
+              fields: { en: [['Employer','Whole Foods Market #2211'],['Wages (Box 1)','$32,400'],['Federal withheld','$2,190'],['State withheld','$810']], es: [['Empleador','Whole Foods Market #2211'],['Salarios (Casilla 1)','$32,400'],['Retención federal','$2,190'],['Retención estatal','$810']] },
+              note: { type:'info', text: { en:'Income matches client declaration. Included in 2024 tax return.', es:'El ingreso coincide con la declaración del cliente. Incluido en la declaración 2024.' } }
+            }
           },
           {
-            name: 'W2_2024_Roberto_Rodríguez.pdf', sub: 'W-2 Form · 1 page · 175 KB',
-            client: 'Roberto Rodríguez', date: 'Jan 31, 2025', amount: 'Income: $78,600',
-            tags: ['W-2', 'Tax 2024', 'Verified ✓'],
-            tagColors: ['blue', 'slate', 'green'],
-            extracted: { label: 'Extracted by Marco', color: 'teal',
-              fields: [['Employer', 'Amazon Logistics CA'], ['Wages (Box 1)', '$78,600'], ['Federal withheld', '$9,180'], ['State withheld', '$3,140']],
-              note: null }
+            name: 'W2_2024_Roberto_Rodríguez.pdf',
+            sub:  { en: 'W-2 Form · 1 page · 175 KB', es: 'Formulario W-2 · 1 página · 175 KB' },
+            client: 'Roberto Rodríguez',
+            date: { en: 'Jan 31, 2025', es: '31 ene 2025' },
+            amount: { en: 'Income: $78,600', es: 'Ingreso: $78,600' },
+            tags: { en: ['W-2','Tax 2024','Verified ✓'], es: ['W-2','Impuestos 2024','Verificado ✓'] },
+            tagColors: ['blue','slate','green'],
+            extracted: {
+              label: { en: 'Extracted by Marco', es: 'Extraído por Marco' }, color: 'teal',
+              fields: { en: [['Employer','Amazon Logistics CA'],['Wages (Box 1)','$78,600'],['Federal withheld','$9,180'],['State withheld','$3,140']], es: [['Empleador','Amazon Logistics CA'],['Salarios (Casilla 1)','$78,600'],['Retención federal','$9,180'],['Retención estatal','$3,140']] },
+              note: null
+            }
           }
         ]
       },
@@ -269,22 +317,32 @@
         query: 'contract 2024', count: 31, time: '0.4s',
         results: [
           {
-            name: 'Engagement_Agreement_García_LLC.pdf', sub: 'Client contract · 8 pages · 1.4 MB',
-            client: 'García & Associates', date: 'Mar 3, 2024', amount: 'Retainer: $5,000',
-            tags: ['Contract', 'Retainer', 'Active'],
-            tagColors: ['purple', 'slate', 'green'],
-            extracted: { label: 'Extracted by Sofia', color: 'teal',
-              fields: [['Contract type', 'Retainer — ongoing'], ['Start date', 'March 3, 2024'], ['Monthly fee', '$5,000'], ['Scope', 'Corporate + employment law']],
-              note: { type: 'info', text: 'No termination clauses triggered. Auto-renewal Dec 31, 2024 (completed).' } }
+            name: 'Engagement_Agreement_García_LLC.pdf',
+            sub:  { en: 'Client contract · 8 pages · 1.4 MB', es: 'Contrato con cliente · 8 páginas · 1.4 MB' },
+            client: 'García & Associates',
+            date: { en: 'Mar 3, 2024', es: '3 mar 2024' },
+            amount: { en: 'Retainer: $5,000', es: 'Honorario: $5,000' },
+            tags: { en: ['Contract','Retainer','Active'], es: ['Contrato','Honorario','Activo'] },
+            tagColors: ['purple','slate','green'],
+            extracted: {
+              label: { en: 'Extracted by Sofia', es: 'Extraído por Sofia' }, color: 'teal',
+              fields: { en: [['Contract type','Retainer — ongoing'],['Start date','March 3, 2024'],['Monthly fee','$5,000'],['Scope','Corporate + employment law']], es: [['Tipo de contrato','Honorario — continuo'],['Fecha de inicio','3 de marzo de 2024'],['Tarifa mensual','$5,000'],['Alcance','Derecho corporativo y laboral']] },
+              note: { type:'info', text: { en:'No termination clauses triggered. Auto-renewal Dec 31, 2024 (completed).', es:'Ninguna cláusula de terminación activada. Renovación automática dic 31, 2024 (completada).' } }
+            }
           },
           {
-            name: 'Settlement_Agreement_López_v_Employer.pdf', sub: 'Settlement · 12 pages · 2.1 MB',
-            client: 'Ana López', date: 'Oct 15, 2024', amount: '$87,500 settlement',
-            tags: ['Contract', 'Settlement', 'Workers comp'],
-            tagColors: ['purple', 'blue', 'slate'],
-            extracted: { label: 'Extracted by Sofia', color: 'teal',
-              fields: [['Type', 'Workers comp settlement'], ['Gross amount', '$87,500'], ['Attorney fee (33%)', '$28,875'], ['Client net', '$58,625']],
-              note: { type: 'warn', text: 'Severance offer attached (expires Mar 17). Review before accepting.' } }
+            name: 'Settlement_Agreement_López_v_Employer.pdf',
+            sub:  { en: 'Settlement · 12 pages · 2.1 MB', es: 'Acuerdo de conciliación · 12 páginas · 2.1 MB' },
+            client: 'Ana López',
+            date: { en: 'Oct 15, 2024', es: '15 oct 2024' },
+            amount: { en: '$87,500 settlement', es: '$87,500 acuerdo' },
+            tags: { en: ['Contract','Settlement','Workers comp'], es: ['Contrato','Conciliación','Comp. laboral'] },
+            tagColors: ['purple','blue','slate'],
+            extracted: {
+              label: { en: 'Extracted by Sofia', es: 'Extraído por Sofia' }, color: 'teal',
+              fields: { en: [['Type','Workers comp settlement'],['Gross amount','$87,500'],['Attorney fee (33%)','$28,875'],['Client net','$58,625']], es: [['Tipo','Acuerdo de compensación laboral'],['Monto bruto','$87,500'],['Honorario abogado (33%)','$28,875'],['Neto para cliente','$58,625']] },
+              note: { type:'warn', text: { en:'Severance offer attached (expires Mar 17). Review before accepting.', es:'Oferta de indemnización adjunta (vence 17 mar). Revisar antes de aceptar.' } }
+            }
           }
         ]
       },
@@ -292,22 +350,32 @@
         query: 'USCIS', count: 14, time: '0.2s',
         results: [
           {
-            name: 'USCIS_Receipt_I360_MSC2519823.pdf', sub: 'USCIS Receipt · 1 page · 95 KB',
-            client: 'María Rodríguez', date: 'Feb 28, 2026', amount: 'I-360 Petition',
-            tags: ['USCIS', 'I-360', '🔴 Deadline 4 days'],
-            tagColors: ['blue', 'slate', 'red'],
-            extracted: { label: '🧠 Extracted by Sofia — Urgent', color: 'red',
-              fields: [['Receipt #', 'MSC2519823746'], ['Form', 'I-360 Widow Petition'], ['Priority Date', 'August 3, 2024'], ['Response due', 'March 15, 2026 · 4 days']],
-              note: { type: 'warn', text: 'Deadline tracker updated. Attorney notified. Client messaged via WhatsApp.' } }
+            name: 'USCIS_Receipt_I360_MSC2519823.pdf',
+            sub:  { en: 'USCIS Receipt · 1 page · 95 KB', es: 'Recibo USCIS · 1 página · 95 KB' },
+            client: 'María Rodríguez',
+            date: { en: 'Feb 28, 2026', es: '28 feb 2026' },
+            amount: { en: 'I-360 Petition', es: 'Petición I-360' },
+            tags: { en: ['USCIS','I-360','🔴 Deadline 4 days'], es: ['USCIS','I-360','🔴 Plazo 4 días'] },
+            tagColors: ['blue','slate','red'],
+            extracted: {
+              label: { en: '🧠 Extracted by Sofia — Urgent', es: '🧠 Extraído por Sofia — Urgente' }, color: 'red',
+              fields: { en: [['Receipt #','MSC2519823746'],['Form','I-360 Widow Petition'],['Priority Date','August 3, 2024'],['Response due','March 15, 2026 · 4 days']], es: [['Recibo #','MSC2519823746'],['Formulario','I-360 Petición de viuda'],['Fecha de prioridad','3 de agosto de 2024'],['Respuesta requerida','15 mar 2026 · 4 días']] },
+              note: { type:'warn', text: { en:'Deadline tracker updated. Attorney notified. Client messaged via WhatsApp.', es:'Seguimiento de plazos actualizado. Abogado notificado. Cliente avisado por WhatsApp.' } }
+            }
           },
           {
-            name: 'USCIS_EAD_Approval_Pérez.pdf', sub: 'EAD Approval · 2 pages · 340 KB',
-            client: 'Carmen Pérez', date: 'Nov 12, 2025', amount: 'EAD valid 2 years',
-            tags: ['USCIS', 'EAD', 'Approved ✓'],
-            tagColors: ['blue', 'slate', 'green'],
-            extracted: { label: 'Extracted by Sofia', color: 'teal',
-              fields: [['Card type', 'Employment Authorization'], ['Valid from', 'Nov 12, 2025'], ['Expires', 'Nov 12, 2027'], ['Category', 'C09 — Pending AOS']],
-              note: { type: 'info', text: 'Renewal reminder set for Aug 2027 (90 days before expiry).' } }
+            name: 'USCIS_EAD_Approval_Pérez.pdf',
+            sub:  { en: 'EAD Approval · 2 pages · 340 KB', es: 'Aprobación de EAD · 2 páginas · 340 KB' },
+            client: 'Carmen Pérez',
+            date: { en: 'Nov 12, 2025', es: '12 nov 2025' },
+            amount: { en: 'EAD valid 2 years', es: 'EAD válido 2 años' },
+            tags: { en: ['USCIS','EAD','Approved ✓'], es: ['USCIS','EAD','Aprobado ✓'] },
+            tagColors: ['blue','slate','green'],
+            extracted: {
+              label: { en: 'Extracted by Sofia', es: 'Extraído por Sofia' }, color: 'teal',
+              fields: { en: [['Card type','Employment Authorization'],['Valid from','Nov 12, 2025'],['Expires','Nov 12, 2027'],['Category','C09 — Pending AOS']], es: [['Tipo de tarjeta','Autorización de empleo'],['Válido desde','12 nov 2025'],['Vence','12 nov 2027'],['Categoría','C09 — AOS pendiente']] },
+              note: { type:'info', text: { en:'Renewal reminder set for Aug 2027 (90 days before expiry).', es:'Recordatorio de renovación programado para ago 2027 (90 días antes del vencimiento).' } }
+            }
           }
         ]
       },
@@ -315,28 +383,39 @@
         query: 'duplicate', count: 4, time: '0.1s',
         results: [
           {
-            name: 'Kaiser_Permanente_2024-11-04.pdf', sub: '⚠ Suspected duplicate · 3 pages · 1.8 MB',
-            client: 'Diego Vargas', date: 'Nov 4, 2024', amount: '$5,720.00',
-            tags: ['⚠ Duplicate', 'Auto accident', 'Review needed'],
-            tagColors: ['red', 'blue', 'amber'],
-            extracted: { label: '⚠ Sofia detected anomaly', color: 'amber',
+            name: 'Kaiser_Permanente_2024-11-04.pdf',
+            sub:  { en: '⚠ Suspected duplicate · 3 pages · 1.8 MB', es: '⚠ Posible duplicado · 3 páginas · 1.8 MB' },
+            client: 'Diego Vargas',
+            date: { en: 'Nov 4, 2024', es: '4 nov 2024' },
+            amount: '$5,720.00',
+            tags: { en: ['⚠ Duplicate','Auto accident','Review needed'], es: ['⚠ Duplicado','Accidente auto','Requiere revisión'] },
+            tagColors: ['red','blue','amber'],
+            extracted: {
+              label: { en: '⚠ Sofia detected anomaly', es: '⚠ Sofia detectó una anomalía' }, color: 'amber',
               fields: null,
-              note: { type: 'compare', text: '87% match with Kaiser_Permanente_2024-10-28.pdf. Same CPT, same provider, $20 difference.' } }
+              note: { type:'compare', text: { en:'87% match with Kaiser_Permanente_2024-10-28.pdf. Same CPT, same provider, $20 difference.', es:'87% de coincidencia con Kaiser_Permanente_2024-10-28.pdf. Mismo CPT, mismo proveedor, diferencia de $20.' } }
+            }
           },
           {
-            name: 'Cedars_ER_2024-07-15_v2.pdf', sub: '⚠ Suspected duplicate · 2 pages · 1.1 MB',
-            client: 'Roberto Méndez', date: 'Jul 15, 2024', amount: '$4,200.00',
-            tags: ['⚠ Duplicate', 'PI case', 'Resolved'],
-            tagColors: ['red', 'purple', 'green'],
-            extracted: { label: '⚠ Sofia detected anomaly', color: 'amber',
-              fields: [['Duplicate of', 'Cedars_ER_2024-07-15.pdf'], ['Difference', 'Same content, different filename'], ['Action', 'Marked resolved by attorney']],
-              note: { type: 'info', text: 'Resolved March 2, 2026 — same invoice received twice via WhatsApp and email.' } }
+            name: 'Cedars_ER_2024-07-15_v2.pdf',
+            sub:  { en: '⚠ Suspected duplicate · 2 pages · 1.1 MB', es: '⚠ Posible duplicado · 2 páginas · 1.1 MB' },
+            client: 'Roberto Méndez',
+            date: { en: 'Jul 15, 2024', es: '15 jul 2024' },
+            amount: '$4,200.00',
+            tags: { en: ['⚠ Duplicate','PI case','Resolved'], es: ['⚠ Duplicado','Caso PI','Resuelto'] },
+            tagColors: ['red','purple','green'],
+            extracted: {
+              label: { en: '⚠ Sofia detected anomaly', es: '⚠ Sofia detectó una anomalía' }, color: 'amber',
+              fields: { en: [['Duplicate of','Cedars_ER_2024-07-15.pdf'],['Difference','Same content, different filename'],['Action','Marked resolved by attorney']], es: [['Duplicado de','Cedars_ER_2024-07-15.pdf'],['Diferencia','Mismo contenido, nombre de archivo distinto'],['Acción','Marcado resuelto por el abogado']] },
+              note: { type:'info', text: { en:'Resolved March 2, 2026 — same invoice received twice via WhatsApp and email.', es:'Resuelto 2 mar 2026 — misma factura recibida dos veces por WhatsApp y correo.' } }
+            }
           }
         ]
       }
     };
 
     let currentDataset = datasets.default;
+    let currentResults = datasets.default.results;
 
     function setSearch(q) {
       document.getElementById('search-input').value = q;
@@ -346,30 +425,41 @@
     function handleSearch(q) {
       const lower = q.toLowerCase().trim();
       let ds;
-      if (lower.includes('irs')) ds = datasets.irs;
+      if (lower.includes('irs') || lower.includes('aviso irs')) ds = datasets.irs;
       else if (lower.includes('w-2') || lower.includes('w2')) ds = datasets.w2;
-      else if (lower.includes('contract')) ds = datasets.contract;
+      else if (lower.includes('contract') || lower.includes('contrato')) ds = datasets.contract;
       else if (lower.includes('uscis')) ds = datasets.uscis;
-      else if (lower.includes('duplicat')) ds = datasets.duplicate;
+      else if (lower.includes('duplicat') || lower.includes('duplicado')) ds = datasets.duplicate;
       else if (lower === '') ds = { query: '', count: 8247, time: '—', results: [] };
       else ds = datasets.default;
       currentDataset = ds;
+      currentResults = ds.results;
       document.getElementById('result-count').textContent = ds.count;
       document.getElementById('search-time').textContent = ds.time;
       renderResults(ds.results);
     }
 
+    function str(field) {
+      // Returns the bilingual string for the current language
+      const lang = getDemoLang();
+      if (!field) return '';
+      if (typeof field === 'string') return field;
+      return field[lang] || field.en || '';
+    }
+
     function renderResults(results) {
+      const lang = getDemoLang();
       const container = document.getElementById('results-container');
       if (results.length === 0) {
-        container.innerHTML = '<div class="bg-white rounded-xl border border-slate-200 p-12 text-center text-slate-400"><div class="text-4xl mb-3">🔍</div><p class="font-semibold text-slate-600">Type to search 8,247 documents</p><p class="text-sm mt-1">Sofia has indexed and tagged every document across all clients.</p></div>';
+        container.innerHTML = `<div class="bg-white rounded-xl border border-slate-200 p-12 text-center text-slate-400"><div class="text-4xl mb-3">🔍</div><p class="font-semibold text-slate-600">${t('emptyTitle')}</p><p class="text-sm mt-1">${t('emptySub')}</p></div>`;
         return;
       }
 
-      const tagColorMap = { purple: 'bg-purple-100 text-purple-800', blue: 'bg-blue-100 text-blue-800', slate: 'bg-slate-100 text-slate-700', green: 'bg-green-100 text-green-700', red: 'bg-red-100 text-red-700', amber: 'bg-amber-100 text-amber-700' };
+      const tagColorMap = { purple:'bg-purple-100 text-purple-800', blue:'bg-blue-100 text-blue-800', slate:'bg-slate-100 text-slate-700', green:'bg-green-100 text-green-700', red:'bg-red-100 text-red-700', amber:'bg-amber-100 text-amber-700' };
 
       container.innerHTML = results.map((r, i) => {
-        const tags = r.tags.map((t, j) => `<span class="text-xs ${tagColorMap[r.tagColors[j]] || tagColorMap.slate} px-2 py-0.5 rounded font-semibold">${t}</span>`).join('');
+        const tags = r.tags[lang] || r.tags.en;
+        const tagsHtml = tags.map((tag, j) => `<span class="text-xs ${tagColorMap[r.tagColors[j]] || tagColorMap.slate} px-2 py-0.5 rounded font-semibold">${tag}</span>`).join('');
 
         let extractedHtml = '';
         if (r.extracted) {
@@ -378,23 +468,35 @@
 
           let fieldsHtml = '';
           if (r.extracted.fields) {
-            fieldsHtml = `<div class="grid grid-cols-2 gap-x-6 gap-y-1 text-sm">${r.extracted.fields.map(([k,v]) => `<div><span class="text-slate-500">${k}:</span> <span class="${k.includes('deadline') || k.includes('due') ? 'text-red-700 font-bold' : 'text-slate-900'}">${v}</span></div>`).join('')}</div>`;
+            const fields = r.extracted.fields[lang] || r.extracted.fields.en;
+            fieldsHtml = `<div class="grid grid-cols-2 gap-x-6 gap-y-1 text-sm">${fields.map(([k,v]) => `<div><span class="text-slate-500">${k}:</span> <span class="text-slate-900">${v}</span></div>`).join('')}</div>`;
           }
 
           let noteHtml = '';
           if (r.extracted.note) {
+            const noteText = str(r.extracted.note.text);
             if (r.extracted.note.type === 'compare') {
-              noteHtml = `<div class="text-sm text-slate-700 mt-2">${r.extracted.note.text} <button onclick="document.getElementById('modal-compare').classList.remove('hidden')" class="block mt-2 text-amber-800 hover:underline font-semibold text-xs">Compare side-by-side →</button></div>`;
+              noteHtml = `<div class="text-sm text-slate-700 mt-2">${noteText} <button onclick="document.getElementById('modal-compare').classList.remove('hidden')" class="block mt-2 text-amber-800 hover:underline font-semibold text-xs">${t('compareSide')}</button></div>`;
             } else if (r.extracted.note.type === 'warn') {
-              noteHtml = `<div class="col-span-2 pt-1 mt-1 border-t border-teal-200"><span class="text-slate-500">Note:</span><span class="text-amber-700 font-semibold"> ⚠ ${r.extracted.note.text}</span></div>`;
-              if (r.extracted.fields) { fieldsHtml = `<div class="grid grid-cols-2 gap-x-6 gap-y-1 text-sm">${r.extracted.fields.map(([k,v]) => `<div><span class="text-slate-500">${k}:</span> <span class="text-slate-900">${v}</span></div>`).join('')}${noteHtml}</div>`; noteHtml = ''; }
+              const warnRow = `<div class="col-span-2 pt-1 mt-1 border-t border-teal-200"><span class="text-amber-700 font-semibold">⚠ ${noteText}</span></div>`;
+              if (r.extracted.fields) {
+                const fields = r.extracted.fields[lang] || r.extracted.fields.en;
+                fieldsHtml = `<div class="grid grid-cols-2 gap-x-6 gap-y-1 text-sm">${fields.map(([k,v])=>`<div><span class="text-slate-500">${k}:</span> <span class="text-slate-900">${v}</span></div>`).join('')}${warnRow}</div>`;
+              } else {
+                noteHtml = `<div class="mt-2 text-sm text-amber-700 font-semibold">⚠ ${noteText}</div>`;
+              }
             } else {
-              noteHtml = `<div class="col-span-2 pt-1 mt-1 border-t border-teal-200"><span class="text-teal-700 font-semibold">ℹ ${r.extracted.note.text}</span></div>`;
-              if (r.extracted.fields) { fieldsHtml = `<div class="grid grid-cols-2 gap-x-6 gap-y-1 text-sm">${r.extracted.fields.map(([k,v]) => `<div><span class="text-slate-500">${k}:</span> <span class="text-slate-900">${v}</span></div>`).join('')}${noteHtml}</div>`; noteHtml = ''; }
+              const infoRow = `<div class="col-span-2 pt-1 mt-1 border-t border-teal-200"><span class="text-teal-700 font-semibold">ℹ ${noteText}</span></div>`;
+              if (r.extracted.fields) {
+                const fields = r.extracted.fields[lang] || r.extracted.fields.en;
+                fieldsHtml = `<div class="grid grid-cols-2 gap-x-6 gap-y-1 text-sm">${fields.map(([k,v])=>`<div><span class="text-slate-500">${k}:</span> <span class="text-slate-900">${v}</span></div>`).join('')}${infoRow}</div>`;
+              } else {
+                noteHtml = `<div class="mt-2 text-sm text-teal-700">ℹ ${noteText}</div>`;
+              }
             }
           }
 
-          extractedHtml = `<div class="bg-gradient-to-r ${bgColor} border rounded-lg p-3 mt-3"><div class="text-xs font-bold ${labelColor} uppercase tracking-wider mb-2 flex items-center gap-1"><span>🧠</span> ${r.extracted.label}</div>${fieldsHtml}${noteHtml}</div>`;
+          extractedHtml = `<div class="bg-gradient-to-r ${bgColor} border rounded-lg p-3 mt-3"><div class="text-xs font-bold ${labelColor} uppercase tracking-wider mb-2 flex items-center gap-1"><span>🧠</span> ${str(r.extracted.label)}</div>${fieldsHtml}${noteHtml}</div>`;
         }
 
         return `<div class="result-item bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-md transition" style="animation-delay:${i*0.05}s">
@@ -402,42 +504,45 @@
             <div class="pdf-thumb w-28 h-40 rounded-lg flex items-center justify-center text-amber-800 font-bold text-2xl flex-shrink-0">📄</div>
             <div class="flex-1">
               <div class="flex items-start justify-between mb-2">
-                <div><h3 class="font-bold text-slate-900 text-base">${r.name}</h3><div class="text-sm text-slate-500 mt-0.5">${r.sub}</div></div>
+                <div><h3 class="font-bold text-slate-900 text-base">${r.name}</h3><div class="text-sm text-slate-500 mt-0.5">${str(r.sub)}</div></div>
                 <div class="flex gap-2">
-                  <button onclick="toast('📄 Opening ${r.name}...', 'blue')" class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg hover:bg-slate-100 font-medium">Open</button>
-                  <button onclick="toast('📥 Downloading ${r.name}...', 'blue')" class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg hover:bg-slate-100 font-medium">Download</button>
+                  <button onclick="showToast('📄 ${lang==='es'?'Abriendo':'Opening'} ${r.name}...','blue')" class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg hover:bg-slate-100 font-medium">${t('open')}</button>
+                  <button onclick="showToast('📥 ${lang==='es'?'Descargando':'Downloading'} ${r.name}...','blue')" class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg hover:bg-slate-100 font-medium">${t('download')}</button>
                 </div>
               </div>
               <div class="grid grid-cols-3 gap-x-4 gap-y-1 mb-3 text-sm">
-                <div><span class="text-slate-500">Client:</span> <span class="font-semibold text-slate-900">${r.client}</span></div>
-                <div><span class="text-slate-500">Date:</span> <span class="font-semibold text-slate-900">${r.date}</span></div>
-                <div><span class="text-slate-500">Amount:</span> <span class="font-semibold text-slate-900">${r.amount}</span></div>
-                <div class="col-span-3 mt-1 flex gap-2 flex-wrap">${tags}</div>
+                <div><span class="text-slate-500">${t('client')}:</span> <span class="font-semibold text-slate-900">${r.client}</span></div>
+                <div><span class="text-slate-500">${t('date')}:</span> <span class="font-semibold text-slate-900">${str(r.date)}</span></div>
+                <div><span class="text-slate-500">${t('amount')}:</span> <span class="font-semibold text-slate-900">${str(r.amount)}</span></div>
+                <div class="col-span-3 mt-1 flex gap-2 flex-wrap">${tagsHtml}</div>
               </div>
               ${extractedHtml}
             </div>
           </div>
         </div>`;
       }).join('') + `<div class="flex items-center justify-between bg-white rounded-xl border border-slate-200 px-5 py-3">
-        <div class="text-sm text-slate-500">Showing <strong class="text-slate-900">${results.length}</strong> of <strong class="text-slate-900">${currentDataset.count}</strong> results</div>
+        <div class="text-sm text-slate-500">${t('showing')} <strong class="text-slate-900">${results.length}</strong> ${t('of')} <strong class="text-slate-900">${currentDataset.count}</strong> ${t('results')}</div>
         <div class="flex gap-2">
-          <button onclick="toast('📄 Loading more results...', 'blue')" class="px-3 py-1.5 text-sm border border-slate-300 rounded-lg hover:bg-slate-100 font-medium">Load more</button>
-          <button onclick="toast('📊 Exporting filtered results as CSV...', 'green')" class="px-3 py-1.5 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium">Export filtered (CSV)</button>
+          <button onclick="showToast(getDemoLang()==='es'?'📄 Cargando más resultados...':'📄 Loading more results...','blue')" class="px-3 py-1.5 text-sm border border-slate-300 rounded-lg hover:bg-slate-100 font-medium">${t('loadMore')}</button>
+          <button onclick="showToast(getDemoLang()==='es'?'📊 Exportando resultados filtrados como CSV...':'📊 Exporting filtered results as CSV...','green')" class="px-3 py-1.5 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium">${t('exportCsv')}</button>
         </div>
       </div>`;
     }
 
     function resetFilters() {
       document.querySelectorAll('.filter-check').forEach(c => c.checked = false);
-      toast('🔄 Filters reset.', 'blue');
+      showToast(getDemoLang()==='es'?'🔄 Filtros reiniciados.':'🔄 Filters reset.','blue');
     }
+
+    // Re-render results when language changes
+    const _origSetLang = window.setDemoLang;
+    window.setDemoLang = function(lang) {
+      _origSetLang(lang);
+      renderResults(currentResults);
+    };
 
     // Initial render
     renderResults(datasets.default.results);
-  </script>
-  <script src="demo-shared.js"></script>
-  <script>
-    initDemoNav('documents', 'Carlos');
   </script>
 </body>
 </html>
