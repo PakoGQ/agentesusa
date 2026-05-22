@@ -23,30 +23,20 @@
 </head>
 <body class="min-h-screen">
 
-  <!-- Toast container -->
-  <div id="toast-container" class="fixed top-6 right-6 z-50 space-y-2"></div>
-
   <!-- Top header -->
   <header class="bg-white border-b border-slate-200 sticky top-0 z-10">
-    <div class="max-w-[1400px] mx-auto px-8 py-3 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-9 h-9 bg-gradient-to-br from-blue-500 to-teal-500 rounded-lg flex items-center justify-center text-white font-bold">N</div>
-        <span class="text-xl font-bold text-slate-900">Nexus</span>
-        <nav class="ml-8 flex gap-1">
-          <button onclick="toast('🏠 Dashboard', 'blue')" class="px-4 py-1.5 text-sm text-slate-600 hover:bg-slate-100 rounded-lg">Dashboard</button>
-          <button class="px-4 py-1.5 text-sm font-semibold text-slate-900 bg-slate-100 rounded-lg">Clients</button>
-          <button onclick="toast('📂 Documents — 8,247 indexed', 'blue')" class="px-4 py-1.5 text-sm text-slate-600 hover:bg-slate-100 rounded-lg">Documents</button>
-          <button onclick="toast('📅 3 appointments this week', 'blue')" class="px-4 py-1.5 text-sm text-slate-600 hover:bg-slate-100 rounded-lg">Calendar</button>
-          <button onclick="toast('📊 Reports loading...', 'blue')" class="px-4 py-1.5 text-sm text-slate-600 hover:bg-slate-100 rounded-lg">Reports</button>
-        </nav>
+    <div class="max-w-[1400px] mx-auto px-6 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-6">
+        <span class="font-bold text-slate-800 text-lg tracking-tight">Nexus<span class="text-blue-600">AI</span></span>
+        <nav id="demo-nav-links" class="flex items-center gap-1"></nav>
       </div>
       <div class="flex items-center gap-3">
-        <a href="../demo.html" class="text-xs text-blue-600 hover:underline">← All demos</a>
-        <button onclick="toast('🔔 2 unread alerts', 'blue')" class="relative p-2 hover:bg-slate-100 rounded-lg">
-          <svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
-          <span class="absolute -top-0.5 -right-0.5 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center font-bold">2</span>
-        </button>
-        <div class="w-9 h-9 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center text-white font-bold text-sm">CH</div>
+        <!-- Language toggle -->
+        <div class="flex items-center gap-1 bg-slate-100 rounded-lg px-1 py-1">
+          <button id="lang-btn-en" onclick="setDemoLang('en')" class="px-3 py-1 rounded font-bold text-xs transition lang-btn active text-white bg-slate-700">EN</button>
+          <button id="lang-btn-es" onclick="setDemoLang('es')" class="px-3 py-1 rounded font-bold text-xs transition lang-btn text-slate-400 hover:text-white">ES</button>
+        </div>
+        <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold">C</div>
       </div>
     </div>
   </header>
@@ -362,16 +352,13 @@
     </div>
   </div>
 
+  <script src="demo-shared.js"></script>
   <script>
-    function toast(message, color = 'blue') {
-      const colors = { blue: 'bg-blue-600', green: 'bg-green-600', red: 'bg-red-600', amber: 'bg-amber-500' };
-      const container = document.getElementById('toast-container');
-      const div = document.createElement('div');
-      div.className = `toast ${colors[color]} text-white text-sm px-5 py-3 rounded-xl shadow-xl max-w-sm font-medium`;
-      div.textContent = message;
-      container.prepend(div);
-      setTimeout(() => { div.classList.add('toast-exit'); setTimeout(() => div.remove(), 350); }, 3500);
-    }
+    // toast() alias provided by demo-shared.js as window.showToast / window.toast
+
+    document.addEventListener('DOMContentLoaded', function () {
+      initDemoNav('clients', 'Carlos');
+    });
 
     function switchTab(tabId) {
       document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
