@@ -2,6 +2,30 @@
 
 (function () {
 
+  // ─── Inject language CSS immediately (before DOMContentLoaded) ───
+  (function _injectLangCSS() {
+    if (document.getElementById('demo-lang-css')) return;
+    var style = document.createElement('style');
+    style.id = 'demo-lang-css';
+    style.textContent = [
+      '.es-text { display: none; }',
+      'html.lang-es .en-text { display: none !important; }',
+      'html.lang-es .es-text { display: revert !important; }',
+    ].join('\n');
+    // Insert as early as possible — before <head> closes
+    var head = document.head || document.getElementsByTagName('head')[0];
+    if (head) {
+      head.insertBefore(style, head.firstChild);
+    } else {
+      // head not ready yet — use DOMContentLoaded as fallback
+      document.addEventListener('DOMContentLoaded', function () {
+        if (!document.getElementById('demo-lang-css')) {
+          document.head.insertBefore(style, document.head.firstChild);
+        }
+      });
+    }
+  })();
+
   // ─── Pages manifest ───
   const PAGES = [
     { id: 'dashboard', url: 'dashboard-home.html', en: 'Dashboard',  es: 'Dashboard' },
@@ -47,22 +71,28 @@
   window.getDemoLang = function () { return _lang; };
 
   function _applyLang(lang) {
-    // Show/hide .en-text and .es-text elements
-    document.querySelectorAll('.en-text').forEach(function (el) {
-      el.style.display = (lang === 'en') ? '' : 'none';
-    });
-    document.querySelectorAll('.es-text').forEach(function (el) {
-      el.style.display = (lang === 'es') ? '' : 'none';
-    });
+    // Toggle class on <html> — CSS rules handle all .en-text / .es-text visibility
+    if (lang === 'es') {
+      document.documentElement.classList.add('lang-es');
+    } else {
+      document.documentElement.classList.remove('lang-es');
+    }
     // Update toggle buttons
-    var btnEn = document.getElementById('lang-btn-en');
-    var btnEs = document.getElementById('lang-btn-es');
-    if (btnEn) { btnEn.className = btnEn.className.replace(/\bactive\b/, ''); }
-    if (btnEs) { btnEs.className = btnEs.className.replace(/\bactive\b/, ''); }
-    var active = document.getElementById('lang-btn-' + lang);
-    if (active) { active.classList.add('active'); }
+    _updateLangButtons(lang);
     // Rebuild nav labels
     _renderNav();
+  }
+
+  function _updateLangButtons(lang) {
+    var baseClass = 'px-3 py-1 rounded font-bold text-xs transition lang-btn';
+    var btnEn = document.getElementById('lang-btn-en');
+    var btnEs = document.getElementById('lang-btn-es');
+    if (btnEn) {
+      btnEn.className = baseClass + (lang === 'en' ? ' text-white bg-slate-700 active' : ' text-slate-400 hover:text-white');
+    }
+    if (btnEs) {
+      btnEs.className = baseClass + (lang === 'es' ? ' text-white bg-slate-700 active' : ' text-slate-400 hover:text-white');
+    }
   }
 
   // ─── Nav renderer ───
@@ -70,7 +100,7 @@
     _activePage = activePage || 'dashboard';
     _userName = userName || 'Carlos';
     _renderNav();
-    // Inject shared CSS for animations if not present
+    // Inject animation CSS if not present
     if (!document.getElementById('demo-shared-css')) {
       var style = document.createElement('style');
       style.id = 'demo-shared-css';
@@ -80,6 +110,8 @@
       ].join('');
       document.head.appendChild(style);
     }
+    // Apply stored language immediately
+    _applyLang(_lang);
   };
 
   var _activePage = 'dashboard';
@@ -97,15 +129,6 @@
         : 'px-4 py-1.5 text-sm text-slate-600 hover:bg-slate-100 rounded-lg transition';
       return '<a href="' + p.url + '" class="' + cls + '">' + label + '</a>';
     }).join('');
-
-    // Update language toggle buttons if they exist
-    var btnEn = document.getElementById('lang-btn-en');
-    var btnEs = document.getElementById('lang-btn-es');
-    if (btnEn && btnEs) {
-      var baseClass = 'px-3 py-1 rounded font-bold text-xs transition lang-btn';
-      btnEn.className = baseClass + (lang === 'en' ? ' text-white bg-slate-700 active' : ' text-slate-400 hover:text-white');
-      btnEs.className = baseClass + (lang === 'es' ? ' text-white bg-slate-700 active' : ' text-slate-400 hover:text-white');
-    }
   }
 
   // ─── Auto-init on DOM ready ───
