@@ -8,9 +8,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Inter', sans-serif; background: #F8FAFC; }
+    .toast { animation: slideIn 0.35s ease; }
+    @keyframes slideIn { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    .toast-exit { animation: slideOut 0.35s ease forwards; }
+    @keyframes slideOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(120%); opacity: 0; } }
+    .new-activity { animation: fadeDown 0.5s ease; }
+    @keyframes fadeDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
+    .kpi-num { transition: all 0.1s; }
+    .pulse-dot { animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .4; } }
   </style>
 </head>
 <body class="min-h-screen">
+
+  <!-- Toast container -->
+  <div id="toast-container" class="fixed top-6 right-6 z-50 space-y-2"></div>
 
   <!-- Top header -->
   <header class="bg-white border-b border-slate-200 sticky top-0 z-10">
@@ -19,22 +31,25 @@
         <div class="w-9 h-9 bg-gradient-to-br from-blue-500 to-teal-500 rounded-lg flex items-center justify-center text-white font-bold">N</div>
         <span class="text-xl font-bold text-slate-900">Nexus</span>
         <nav class="ml-8 flex gap-1">
-          <button class="px-4 py-1.5 text-sm font-semibold text-slate-900 bg-slate-100 rounded-lg">Dashboard</button>
-          <button class="px-4 py-1.5 text-sm text-slate-600 hover:bg-slate-100 rounded-lg">Clients</button>
-          <button class="px-4 py-1.5 text-sm text-slate-600 hover:bg-slate-100 rounded-lg">Documents</button>
-          <button class="px-4 py-1.5 text-sm text-slate-600 hover:bg-slate-100 rounded-lg">Calendar</button>
-          <button class="px-4 py-1.5 text-sm text-slate-600 hover:bg-slate-100 rounded-lg">Reports</button>
+          <button onclick="navClick(this, 'Dashboard')" class="px-4 py-1.5 text-sm font-semibold text-slate-900 bg-slate-100 rounded-lg">Dashboard</button>
+          <button onclick="navClick(this, 'Clients')" class="px-4 py-1.5 text-sm text-slate-600 hover:bg-slate-100 rounded-lg">Clients</button>
+          <button onclick="navClick(this, 'Documents')" class="px-4 py-1.5 text-sm text-slate-600 hover:bg-slate-100 rounded-lg">Documents</button>
+          <button onclick="navClick(this, 'Calendar')" class="px-4 py-1.5 text-sm text-slate-600 hover:bg-slate-100 rounded-lg">Calendar</button>
+          <button onclick="navClick(this, 'Reports')" class="px-4 py-1.5 text-sm text-slate-600 hover:bg-slate-100 rounded-lg">Reports</button>
         </nav>
       </div>
       <div class="text-center">
         <div class="text-base font-semibold text-slate-900">Welcome back, Carlos</div>
-        <div class="text-xs text-slate-500">Monday, March 11, 2026</div>
+        <div class="text-xs text-slate-500 flex items-center justify-center gap-1.5">
+          <span class="w-1.5 h-1.5 bg-green-500 rounded-full pulse-dot inline-block"></span>
+          Monday, March 11, 2026 · Live
+        </div>
       </div>
       <div class="flex items-center gap-3">
-        <a href="index.html" class="text-xs text-blue-600 hover:underline">← demo index</a>
-        <button class="relative p-2 hover:bg-slate-100 rounded-lg">
+        <a href="../demo.html" class="text-xs text-blue-600 hover:underline">← All demos</a>
+        <button onclick="showNotifications()" class="relative p-2 hover:bg-slate-100 rounded-lg">
           <svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
-          <span class="absolute -top-0.5 -right-0.5 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center font-bold">2</span>
+          <span id="notif-badge" class="absolute -top-0.5 -right-0.5 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center font-bold">2</span>
         </button>
         <div class="w-9 h-9 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center text-white font-bold text-sm">CH</div>
       </div>
@@ -45,24 +60,24 @@
 
     <!-- KPI Cards -->
     <div class="grid grid-cols-4 gap-4 mb-6">
-      <div class="bg-white rounded-xl border border-slate-200 p-5">
+      <div class="bg-white rounded-xl border border-slate-200 p-5 cursor-pointer hover:shadow-md transition" onclick="toast('📋 Showing 5 clients that need attention today.', 'blue')">
         <div class="text-xs uppercase tracking-wider text-slate-500 font-semibold mb-2">Needs attention</div>
-        <div class="text-4xl font-bold text-slate-900 mb-1">5</div>
+        <div class="text-4xl font-bold text-slate-900 mb-1 kpi-num" id="kpi-1">0</div>
         <div class="text-xs text-slate-500">clients today</div>
       </div>
-      <div class="bg-white rounded-xl border border-slate-200 p-5">
+      <div class="bg-white rounded-xl border border-slate-200 p-5 cursor-pointer hover:shadow-md transition" onclick="toast('📂 12 docs pending from Roberto, Patricia, Diego and 5 more.', 'amber')">
         <div class="text-xs uppercase tracking-wider text-slate-500 font-semibold mb-2">Docs pending</div>
-        <div class="text-4xl font-bold text-slate-900 mb-1">12</div>
+        <div class="text-4xl font-bold text-slate-900 mb-1 kpi-num" id="kpi-2">0</div>
         <div class="text-xs text-slate-500">from 8 clients</div>
       </div>
-      <div class="bg-white rounded-xl border border-slate-200 p-5">
+      <div class="bg-white rounded-xl border border-slate-200 p-5 cursor-pointer hover:shadow-md transition" onclick="toast('🚨 Critical: María R. (4d), Ana L. (6d), S-Corp filing (Fri).', 'red')">
         <div class="text-xs uppercase tracking-wider text-slate-500 font-semibold mb-2">Deadlines &lt;7 days</div>
-        <div class="text-4xl font-bold text-red-600 mb-1">3</div>
+        <div class="text-4xl font-bold text-red-600 mb-1 kpi-num" id="kpi-3">0</div>
         <div class="text-xs text-slate-500">critical</div>
       </div>
-      <div class="bg-white rounded-xl border border-slate-200 p-5">
+      <div class="bg-white rounded-xl border border-slate-200 p-5 cursor-pointer hover:shadow-md transition" onclick="toast('🔥 Axel qualified 2 new leads this week. Ready to review.', 'green')">
         <div class="text-xs uppercase tracking-wider text-slate-500 font-semibold mb-2">New leads</div>
-        <div class="text-4xl font-bold text-slate-900 mb-1">2</div>
+        <div class="text-4xl font-bold text-slate-900 mb-1 kpi-num" id="kpi-4">0</div>
         <div class="text-xs text-slate-500">this week</div>
       </div>
     </div>
@@ -76,9 +91,9 @@
           <h2 class="font-bold text-slate-900 uppercase tracking-wider text-sm flex items-center gap-2">
             <span>🔥</span> Priority Inbox
           </h2>
-          <span class="text-xs text-slate-500">5 items</span>
+          <span class="text-xs text-slate-500">5 items — sorted by urgency</span>
         </div>
-        <div class="divide-y divide-slate-100">
+        <div class="divide-y divide-slate-100" id="inbox-list">
 
           <a href="client-detail.html" class="flex items-start gap-4 p-5 hover:bg-slate-50 transition cursor-pointer">
             <div class="w-2.5 h-2.5 bg-red-500 rounded-full mt-2 flex-shrink-0"></div>
@@ -87,9 +102,9 @@
               <div class="text-sm text-slate-700 mt-0.5">USCIS deadline in 4 days</div>
               <div class="text-xs text-slate-500 mt-1">Last contact: 8 days ago · I-130 family case · Spanish</div>
             </div>
-            <div class="flex gap-2 flex-shrink-0">
-              <button class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg hover:bg-slate-100 font-medium">Review</button>
-              <button class="px-3 py-1.5 text-xs bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium">Contact now</button>
+            <div class="flex gap-2 flex-shrink-0" onclick="event.preventDefault()">
+              <button onclick="toast('📋 Opening case file for María Rodríguez...', 'blue')" class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg hover:bg-slate-100 font-medium">Review</button>
+              <button onclick="contactNow('María Rodríguez', 'WhatsApp')" class="px-3 py-1.5 text-xs bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium">Contact now</button>
             </div>
           </a>
 
@@ -98,11 +113,11 @@
             <div class="flex-1 min-w-0">
               <div class="font-semibold text-slate-900">Roberto Méndez</div>
               <div class="text-sm text-slate-700 mt-0.5">Missing 3 docs for 2024 tax return</div>
-              <div class="text-xs text-slate-500 mt-1">Sofia has reminded 2× this week · Pattern: usually responds Thursdays</div>
+              <div class="text-xs text-slate-500 mt-1">Marco has reminded 2× this week · Pattern: usually responds Thursdays</div>
             </div>
             <div class="flex gap-2 flex-shrink-0">
-              <button class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg hover:bg-slate-100 font-medium">Review</button>
-              <button class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg hover:bg-slate-100 font-medium">Override</button>
+              <button onclick="toast('📋 Reviewing Roberto Méndez file...', 'blue')" class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg hover:bg-slate-100 font-medium">Review</button>
+              <button onclick="toast('✅ Override sent — Marco will pause reminders for 48h.', 'green')" class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg hover:bg-slate-100 font-medium">Override</button>
             </div>
           </div>
 
@@ -114,7 +129,7 @@
               <div class="text-xs text-slate-500 mt-1">Workers comp + retaliation case · Employer pushing for signature</div>
             </div>
             <div class="flex gap-2 flex-shrink-0">
-              <button class="px-3 py-1.5 text-xs bg-amber-500 text-white rounded-lg hover:bg-amber-600 font-medium">Review urgent</button>
+              <button onclick="contactNow('Ana López', 'phone')" class="px-3 py-1.5 text-xs bg-amber-500 text-white rounded-lg hover:bg-amber-600 font-medium">Review urgent</button>
             </div>
           </div>
 
@@ -126,11 +141,11 @@
               <div class="text-xs text-slate-500 mt-1">Sofia handled with last week's update · No action needed</div>
             </div>
             <div class="flex gap-2 flex-shrink-0">
-              <button class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg hover:bg-slate-100 font-medium">View thread</button>
+              <button onclick="showThread()" class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg hover:bg-slate-100 font-medium">View thread</button>
             </div>
           </div>
 
-          <div class="flex items-start gap-4 p-5 hover:bg-slate-50 transition cursor-pointer">
+          <div class="flex items-start gap-4 p-5 hover:bg-slate-50 transition cursor-pointer" id="patricia-row">
             <div class="w-2.5 h-2.5 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
             <div class="flex-1 min-w-0">
               <div class="font-semibold text-slate-900">Patricia Ruiz</div>
@@ -138,7 +153,7 @@
               <div class="text-xs text-slate-500 mt-1">2024 tax return now 100% complete · Ready to file</div>
             </div>
             <div class="flex gap-2 flex-shrink-0">
-              <button class="px-3 py-1.5 text-xs bg-green-600 text-white rounded-lg hover:bg-green-700 font-medium">Approve & file</button>
+              <button onclick="approveAndFile()" class="px-3 py-1.5 text-xs bg-green-600 text-white rounded-lg hover:bg-green-700 font-medium" id="approve-btn">Approve & file</button>
             </div>
           </div>
 
@@ -153,28 +168,28 @@
           </h2>
         </div>
         <div class="divide-y divide-slate-100">
-          <div class="p-4">
+          <div class="p-4 hover:bg-slate-50 cursor-pointer" onclick="toast('📅 José L. — Video call confirmed for 10:00 AM. Zoom link sent.', 'blue')">
             <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">TUE Mar 12</div>
             <div class="font-semibold text-slate-900 mt-1">10:00 AM</div>
             <div class="text-sm text-slate-600">José L. — Initial consultation</div>
-            <div class="text-xs text-slate-500 mt-1">Migratorio · Video call</div>
+            <div class="text-xs text-slate-500 mt-1">Immigration · Video call · Confirmed ✓</div>
           </div>
-          <div class="p-4">
+          <div class="p-4 hover:bg-slate-50 cursor-pointer" onclick="toast('📍 LA Superior Court Dept 5 — Directions sent to phone.', 'blue')">
             <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">WED Mar 13</div>
             <div class="font-semibold text-slate-900 mt-1">2:30 PM</div>
             <div class="text-sm text-slate-600">Court hearing — García case</div>
             <div class="text-xs text-slate-500 mt-1">LA Superior Court Dept 5</div>
           </div>
-          <div class="p-4">
+          <div class="p-4 hover:bg-slate-50 cursor-pointer" onclick="toast('🆕 Mendoza — new lead qualified by Axel. Personal injury intake.', 'green')">
             <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">THU Mar 14</div>
             <div class="font-semibold text-slate-900 mt-1">9:00 AM</div>
             <div class="text-sm text-slate-600">Mendoza intake (new lead)</div>
             <div class="text-xs text-slate-500 mt-1">Personal injury · In person</div>
           </div>
-          <div class="p-4 bg-red-50 border-l-4 border-red-500">
+          <div class="p-4 bg-red-50 border-l-4 border-red-500 hover:bg-red-100 cursor-pointer" onclick="toast('🚨 4 S-Corp returns to file by Friday. Marco has all docs ready.', 'red')">
             <div class="text-xs font-bold text-red-600 uppercase tracking-wider">FRI Mar 15 · 🚨 DEADLINE</div>
             <div class="font-semibold text-slate-900 mt-1">S-Corp filing deadline</div>
-            <div class="text-sm text-slate-600">4 returns to file today</div>
+            <div class="text-sm text-slate-600">4 returns ready to file</div>
           </div>
         </div>
       </div>
@@ -184,12 +199,15 @@
     <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
       <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between">
         <h2 class="font-bold text-slate-900 uppercase tracking-wider text-sm flex items-center gap-2">
-          <span>📈</span> Recent Activity
-          <span class="ml-2 text-xs text-teal-700 bg-teal-100 px-2 py-0.5 rounded-full font-semibold normal-case tracking-normal">Sofia & Marco automated</span>
+          <span>📈</span> Live Activity
+          <span class="ml-2 text-xs text-teal-700 bg-teal-100 px-2 py-0.5 rounded-full font-semibold normal-case tracking-normal flex items-center gap-1">
+            <span class="w-1.5 h-1.5 bg-teal-500 rounded-full pulse-dot inline-block"></span>
+            Sofia & Marco working now
+          </span>
         </h2>
-        <button class="text-xs text-blue-600 hover:underline font-medium">View all →</button>
+        <button onclick="toast('📊 Opening full activity report...', 'blue')" class="text-xs text-blue-600 hover:underline font-medium">View all →</button>
       </div>
-      <div class="divide-y divide-slate-100">
+      <div class="divide-y divide-slate-100" id="activity-feed">
         <div class="px-6 py-3 flex items-start gap-4">
           <div class="text-xs text-slate-500 font-mono w-20 flex-shrink-0 pt-0.5">6:42 AM</div>
           <div class="flex-1 text-sm">
@@ -208,7 +226,7 @@
           <div class="text-xs text-slate-500 font-mono w-20 flex-shrink-0 pt-0.5">11:32 PM</div>
           <div class="flex-1 text-sm">
             <span class="text-slate-900 font-medium">Sofia answered status question from Ana López</span>
-            <span class="text-slate-500"> — Bilingual: detected Spanish from message, responded in Spanish</span>
+            <span class="text-slate-500"> — Bilingual: detected Spanish, responded in Spanish</span>
           </div>
         </div>
         <div class="px-6 py-3 flex items-start gap-4">
@@ -237,9 +255,165 @@
 
     <!-- Demo footer note -->
     <div class="mt-8 text-center text-xs text-slate-400">
-      Mockup demostrativo · Datos ficticios · <a href="index.html" class="text-blue-600 hover:underline">← volver al index</a>
+      Interactive demo · Fictional data · <a href="../demo.html" class="text-blue-600 hover:underline">← back to demos</a>
     </div>
 
   </main>
+
+  <!-- Thread modal -->
+  <div id="thread-modal" class="hidden fixed inset-0 bg-black/50 z-40 flex items-center justify-center p-6">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden">
+      <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between">
+        <h3 class="font-bold text-slate-900">💬 WhatsApp Thread — Carlos Hernández</h3>
+        <button onclick="closeModal('thread-modal')" class="text-slate-400 hover:text-slate-600 text-xl font-bold">×</button>
+      </div>
+      <div class="p-6 space-y-4 max-h-80 overflow-y-auto">
+        <div class="flex gap-3">
+          <div class="w-8 h-8 bg-gradient-to-br from-slate-400 to-slate-600 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0">CH</div>
+          <div class="bg-slate-100 rounded-2xl rounded-tl-sm px-4 py-2.5 max-w-xs">
+            <p class="text-sm text-slate-900">Hola, ¿cómo va mi caso?</p>
+            <p class="text-xs text-slate-400 mt-1">Mon 9:14 AM</p>
+          </div>
+        </div>
+        <div class="flex gap-3 justify-end">
+          <div class="bg-teal-500 rounded-2xl rounded-tr-sm px-4 py-2.5 max-w-xs">
+            <p class="text-xs font-bold text-teal-100 mb-1">🤖 Sofia (automated)</p>
+            <p class="text-sm text-white">Hola Carlos, tu caso de working comp está activo. El último estatus: tu empleador respondió a nuestra demanda el viernes. El siguiente paso es la audiencia programada para el 20 de marzo. ¿Tienes alguna pregunta específica?</p>
+            <p class="text-xs text-teal-200 mt-1">Mon 9:14 AM · Instant</p>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <div class="w-8 h-8 bg-gradient-to-br from-slate-400 to-slate-600 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0">CH</div>
+          <div class="bg-slate-100 rounded-2xl rounded-tl-sm px-4 py-2.5 max-w-xs">
+            <p class="text-sm text-slate-900">¿Cuándo va a terminar esto?</p>
+            <p class="text-xs text-slate-400 mt-1">Mon 9:45 AM</p>
+          </div>
+        </div>
+        <div class="flex gap-3 justify-end">
+          <div class="bg-teal-500 rounded-2xl rounded-tr-sm px-4 py-2.5 max-w-xs">
+            <p class="text-xs font-bold text-teal-100 mb-1">🤖 Sofia (automated)</p>
+            <p class="text-sm text-white">Casos como el tuyo típicamente se resuelven entre 3 y 8 meses del inicio. Estamos en el mes 4 — vamos bien. El abogado te dará una proyección más precisa en tu próxima llamada del jueves. ¿Quieres que te confirme la hora?</p>
+            <p class="text-xs text-teal-200 mt-1">Mon 9:45 AM · Instant</p>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <div class="w-8 h-8 bg-gradient-to-br from-slate-400 to-slate-600 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0">CH</div>
+          <div class="bg-slate-100 rounded-2xl rounded-tl-sm px-4 py-2.5 max-w-xs">
+            <p class="text-sm text-slate-900">Ok, gracias 👍</p>
+            <p class="text-xs text-slate-400 mt-1">Mon 10:02 AM</p>
+          </div>
+        </div>
+        <div class="text-center text-xs text-teal-700 bg-teal-50 rounded-lg py-2 px-4">
+          ✅ 3 messages handled by Sofia — 0 attorney time used
+        </div>
+      </div>
+      <div class="px-6 py-4 border-t border-slate-200">
+        <button onclick="closeModal('thread-modal')" class="w-full px-4 py-2 bg-slate-900 text-white rounded-lg font-semibold text-sm hover:bg-slate-700">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Animated KPI counters
+    const targets = { 'kpi-1': 5, 'kpi-2': 12, 'kpi-3': 3, 'kpi-4': 2 };
+    Object.entries(targets).forEach(([id, target]) => {
+      let current = 0;
+      const el = document.getElementById(id);
+      const interval = setInterval(() => {
+        current++;
+        el.textContent = current;
+        if (current >= target) clearInterval(interval);
+      }, 120);
+    });
+
+    // Toast notification system
+    function toast(message, color = 'blue') {
+      const colors = {
+        blue: 'bg-blue-600',
+        green: 'bg-green-600',
+        red: 'bg-red-600',
+        amber: 'bg-amber-500'
+      };
+      const container = document.getElementById('toast-container');
+      const div = document.createElement('div');
+      div.className = `toast ${colors[color]} text-white text-sm px-5 py-3 rounded-xl shadow-xl max-w-sm font-medium`;
+      div.textContent = message;
+      container.prepend(div);
+      setTimeout(() => {
+        div.classList.add('toast-exit');
+        setTimeout(() => div.remove(), 350);
+      }, 3500);
+    }
+
+    function contactNow(name, channel) {
+      const channels = { WhatsApp: '📱', phone: '📞', email: '📧' };
+      toast(`${channels[channel] || '📱'} Message sent to ${name} via ${channel}. Sofia will track the response.`, 'green');
+    }
+
+    function showNotifications() {
+      document.getElementById('notif-badge').classList.add('hidden');
+      toast('🔔 Notifications: María deadline (4 days), Ana severance expiry (6 days).', 'blue');
+    }
+
+    function navClick(btn, name) {
+      document.querySelectorAll('nav button').forEach(b => {
+        b.className = 'px-4 py-1.5 text-sm text-slate-600 hover:bg-slate-100 rounded-lg';
+      });
+      btn.className = 'px-4 py-1.5 text-sm font-semibold text-slate-900 bg-slate-100 rounded-lg';
+      toast(`📂 Opening ${name}...`, 'blue');
+    }
+
+    function approveAndFile() {
+      const btn = document.getElementById('approve-btn');
+      const row = document.getElementById('patricia-row');
+      btn.textContent = '⏳ Filing...';
+      btn.disabled = true;
+      btn.className = 'px-3 py-1.5 text-xs bg-slate-400 text-white rounded-lg font-medium cursor-not-allowed';
+      setTimeout(() => {
+        btn.textContent = '✅ Filed!';
+        btn.className = 'px-3 py-1.5 text-xs bg-green-700 text-white rounded-lg font-medium';
+        row.querySelector('.text-slate-700').textContent = '2024 tax return filed ✓';
+        toast('✅ Patricia Ruiz — 2024 return filed successfully. Confirmation sent via email.', 'green');
+        // Update KPI
+        const docsKpi = document.getElementById('kpi-2');
+        docsKpi.textContent = parseInt(docsKpi.textContent) - 1;
+      }, 1800);
+    }
+
+    function showThread() {
+      document.getElementById('thread-modal').classList.remove('hidden');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.add('hidden');
+    }
+
+    // Live activity stream — new items appear every 8 seconds
+    const liveActivities = [
+      { time: 'Just now', agent: 'Sofia', text: 'qualified new lead via website chat', detail: 'Marcos V. — family law inquiry · Score 8/10 · Axel notified' },
+      { time: 'Just now', agent: 'Marco', text: 'processed W-2 from Patricia Ruiz', detail: 'Employer: Whole Foods Market · 2024 income: $48,200 · Filed correctly' },
+      { time: 'Just now', agent: 'Sofia', text: 'sent appointment reminder to José L.', detail: 'Tomorrow 10:00 AM · Zoom link included · Read ✓' },
+      { time: 'Just now', agent: 'Marco', text: 'detected deductible expense for Mendoza LLC', detail: '$2,400 office equipment — 100% deductible · Added to 2024 return' },
+    ];
+    let activityIndex = 0;
+    setInterval(() => {
+      const feed = document.getElementById('activity-feed');
+      const act = liveActivities[activityIndex % liveActivities.length];
+      const div = document.createElement('div');
+      div.className = 'new-activity px-6 py-3 flex items-start gap-4 bg-teal-50/60';
+      div.innerHTML = `
+        <div class="text-xs text-teal-600 font-mono w-20 flex-shrink-0 pt-0.5 font-bold">${act.time}</div>
+        <div class="flex-1 text-sm">
+          <span class="text-slate-900 font-medium">${act.agent} ${act.text}</span>
+          <span class="text-slate-500"> — ${act.detail}</span>
+        </div>`;
+      feed.prepend(div);
+      setTimeout(() => div.classList.remove('bg-teal-50/60'), 3000);
+      activityIndex++;
+      // Remove last item if feed gets too long
+      const items = feed.children;
+      if (items.length > 8) items[items.length - 1].remove();
+    }, 8000);
+  </script>
 </body>
 </html>
