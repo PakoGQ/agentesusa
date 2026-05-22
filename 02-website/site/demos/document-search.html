@@ -20,9 +20,20 @@
       font-size: 9px; font-weight: 700;
       padding: 2px 5px; border-radius: 3px;
     }
+    .toast { animation: slideIn 0.35s ease; }
+    @keyframes slideIn { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    .toast-exit { animation: slideOut 0.35s ease forwards; }
+    @keyframes slideOut { from { opacity: 1; } to { opacity: 0; transform: translateX(120%); } }
+    .result-item { animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .modal-enter { animation: scaleUp 0.2s ease; }
+    @keyframes scaleUp { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
   </style>
 </head>
 <body class="min-h-screen">
+
+  <!-- Toast container -->
+  <div id="toast-container" class="fixed top-6 right-6 z-50 space-y-2"></div>
 
   <!-- Top header -->
   <header class="bg-white border-b border-slate-200 sticky top-0 z-10">
@@ -31,15 +42,15 @@
         <div class="w-9 h-9 bg-gradient-to-br from-blue-500 to-teal-500 rounded-lg flex items-center justify-center text-white font-bold">N</div>
         <span class="text-xl font-bold text-slate-900">Nexus</span>
         <nav class="ml-8 flex gap-1">
-          <button class="px-4 py-1.5 text-sm text-slate-600 hover:bg-slate-100 rounded-lg">Dashboard</button>
-          <button class="px-4 py-1.5 text-sm text-slate-600 hover:bg-slate-100 rounded-lg">Clients</button>
+          <button onclick="toast('🏠 Dashboard', 'blue')" class="px-4 py-1.5 text-sm text-slate-600 hover:bg-slate-100 rounded-lg">Dashboard</button>
+          <button onclick="toast('👥 Clients — 142 active', 'blue')" class="px-4 py-1.5 text-sm text-slate-600 hover:bg-slate-100 rounded-lg">Clients</button>
           <button class="px-4 py-1.5 text-sm font-semibold text-slate-900 bg-slate-100 rounded-lg">Documents</button>
-          <button class="px-4 py-1.5 text-sm text-slate-600 hover:bg-slate-100 rounded-lg">Calendar</button>
-          <button class="px-4 py-1.5 text-sm text-slate-600 hover:bg-slate-100 rounded-lg">Reports</button>
+          <button onclick="toast('📅 Calendar — 3 this week', 'blue')" class="px-4 py-1.5 text-sm text-slate-600 hover:bg-slate-100 rounded-lg">Calendar</button>
+          <button onclick="toast('📊 Reports loading...', 'blue')" class="px-4 py-1.5 text-sm text-slate-600 hover:bg-slate-100 rounded-lg">Reports</button>
         </nav>
       </div>
       <div class="flex items-center gap-3">
-        <a href="index.html" class="text-xs text-blue-600 hover:underline">← demo index</a>
+        <a href="../demo.html" class="text-xs text-blue-600 hover:underline">← All demos</a>
         <div class="w-9 h-9 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center text-white font-bold text-sm">CH</div>
       </div>
     </div>
@@ -49,17 +60,27 @@
 
     <!-- Search bar -->
     <div class="mb-4">
-      <div class="bg-white rounded-xl border border-slate-200 px-5 py-4 flex items-center gap-3 shadow-sm">
-        <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-        <input type="text" value='medical bills 2024' class="flex-1 outline-none text-base font-medium text-slate-900" />
-        <span class="text-xs text-slate-500 bg-slate-100 px-2 py-1 rounded">⌘K</span>
+      <div class="bg-white rounded-xl border-2 border-blue-200 px-5 py-4 flex items-center gap-3 shadow-sm focus-within:border-blue-500 transition-colors">
+        <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        <input type="text" id="search-input" value="medical bills 2024" oninput="handleSearch(this.value)" class="flex-1 outline-none text-base font-medium text-slate-900 bg-transparent" placeholder="Search documents..." />
+        <button onclick="document.getElementById('search-input').value=''; handleSearch('')" class="text-slate-400 hover:text-slate-600 text-lg leading-none">×</button>
+        <span class="text-xs text-slate-500 bg-slate-100 px-2 py-1 rounded font-mono">⌘K</span>
       </div>
-      <div class="text-sm text-slate-500 mt-2 px-1 flex items-center gap-3">
-        <span><strong class="text-slate-900">47 results</strong> in 0.3s</span>
+      <div class="text-sm text-slate-500 mt-2 px-1 flex items-center gap-3 flex-wrap">
+        <span><strong id="result-count" class="text-slate-900">47</strong> results in <strong id="search-time" class="text-slate-900">0.3s</strong></span>
         <span class="text-slate-400">•</span>
         <span>Searching <strong class="text-slate-900">8,247 documents</strong> across all clients</span>
         <span class="text-slate-400">•</span>
         <span class="text-teal-700 bg-teal-50 px-2 py-0.5 rounded text-xs font-semibold">Sofia indexed all docs</span>
+      </div>
+      <!-- Quick suggestions -->
+      <div class="flex gap-2 mt-3 flex-wrap">
+        <span class="text-xs text-slate-500 font-medium pt-1">Try:</span>
+        <button onclick="setSearch('IRS notice 2025')" class="text-xs bg-slate-100 hover:bg-blue-50 hover:text-blue-700 px-3 py-1.5 rounded-full font-medium transition">IRS notice 2025</button>
+        <button onclick="setSearch('W-2 Rodríguez')" class="text-xs bg-slate-100 hover:bg-blue-50 hover:text-blue-700 px-3 py-1.5 rounded-full font-medium transition">W-2 Rodríguez</button>
+        <button onclick="setSearch('contract 2024')" class="text-xs bg-slate-100 hover:bg-blue-50 hover:text-blue-700 px-3 py-1.5 rounded-full font-medium transition">contract 2024</button>
+        <button onclick="setSearch('USCIS')" class="text-xs bg-slate-100 hover:bg-blue-50 hover:text-blue-700 px-3 py-1.5 rounded-full font-medium transition">USCIS</button>
+        <button onclick="setSearch('duplicate')" class="text-xs bg-red-50 hover:bg-red-100 text-red-700 px-3 py-1.5 rounded-full font-medium transition">⚠ duplicates</button>
       </div>
     </div>
 
@@ -70,287 +91,365 @@
       <aside class="col-span-3 bg-white rounded-xl border border-slate-200 p-5 h-fit sticky top-24">
         <div class="flex items-center justify-between mb-4">
           <h3 class="font-bold text-slate-900 uppercase tracking-wider text-xs">Filters</h3>
-          <button class="text-xs text-blue-600 hover:underline">Reset</button>
+          <button onclick="resetFilters()" class="text-xs text-blue-600 hover:underline">Reset</button>
         </div>
 
-        <!-- Type filter -->
         <div class="mb-5 pb-5 border-b border-slate-100">
           <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Type</div>
           <div class="space-y-1.5">
-            <label class="flex items-center gap-2 text-sm cursor-pointer">
-              <input type="checkbox" class="rounded border-slate-300 text-blue-600">
-              <span class="flex-1 text-slate-700">Invoice</span>
-              <span class="text-xs text-slate-400">23</span>
-            </label>
-            <label class="flex items-center gap-2 text-sm cursor-pointer">
-              <input type="checkbox" checked class="rounded border-slate-300 text-blue-600">
-              <span class="flex-1 text-slate-900 font-semibold">Medical bill</span>
-              <span class="text-xs text-slate-400">47</span>
-            </label>
-            <label class="flex items-center gap-2 text-sm cursor-pointer">
-              <input type="checkbox" class="rounded border-slate-300 text-blue-600">
-              <span class="flex-1 text-slate-700">W-2</span>
-              <span class="text-xs text-slate-400">8</span>
-            </label>
-            <label class="flex items-center gap-2 text-sm cursor-pointer">
-              <input type="checkbox" class="rounded border-slate-300 text-blue-600">
-              <span class="flex-1 text-slate-700">1099</span>
-              <span class="text-xs text-slate-400">12</span>
-            </label>
-            <label class="flex items-center gap-2 text-sm cursor-pointer">
-              <input type="checkbox" class="rounded border-slate-300 text-blue-600">
-              <span class="flex-1 text-slate-700">IRS notice</span>
-              <span class="text-xs text-slate-400">3</span>
-            </label>
-            <label class="flex items-center gap-2 text-sm cursor-pointer">
-              <input type="checkbox" class="rounded border-slate-300 text-blue-600">
-              <span class="flex-1 text-slate-700">USCIS notice</span>
-              <span class="text-xs text-slate-400">14</span>
-            </label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer hover:text-slate-900"><input type="checkbox" class="rounded border-slate-300 text-blue-600 filter-check"><span class="flex-1 text-slate-700">Invoice</span><span class="text-xs text-slate-400">23</span></label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer hover:text-slate-900"><input type="checkbox" checked class="rounded border-slate-300 text-blue-600 filter-check"><span class="flex-1 text-slate-900 font-semibold">Medical bill</span><span class="text-xs text-slate-400">47</span></label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer hover:text-slate-900"><input type="checkbox" class="rounded border-slate-300 text-blue-600 filter-check"><span class="flex-1 text-slate-700">W-2</span><span class="text-xs text-slate-400">8</span></label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer hover:text-slate-900"><input type="checkbox" class="rounded border-slate-300 text-blue-600 filter-check"><span class="flex-1 text-slate-700">1099</span><span class="text-xs text-slate-400">12</span></label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer hover:text-slate-900"><input type="checkbox" class="rounded border-slate-300 text-blue-600 filter-check"><span class="flex-1 text-slate-700">IRS notice</span><span class="text-xs text-slate-400">3</span></label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer hover:text-slate-900"><input type="checkbox" class="rounded border-slate-300 text-blue-600 filter-check"><span class="flex-1 text-slate-700">USCIS notice</span><span class="text-xs text-slate-400">14</span></label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer hover:text-slate-900"><input type="checkbox" class="rounded border-slate-300 text-blue-600 filter-check"><span class="flex-1 text-slate-700">Contract</span><span class="text-xs text-slate-400">31</span></label>
           </div>
         </div>
 
-        <!-- Year -->
         <div class="mb-5 pb-5 border-b border-slate-100">
           <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Year</div>
           <div class="space-y-1.5">
-            <label class="flex items-center gap-2 text-sm cursor-pointer">
-              <input type="checkbox" class="rounded border-slate-300 text-blue-600">
-              <span class="flex-1 text-slate-700">2025</span>
-            </label>
-            <label class="flex items-center gap-2 text-sm cursor-pointer">
-              <input type="checkbox" checked class="rounded border-slate-300 text-blue-600">
-              <span class="flex-1 text-slate-900 font-semibold">2024</span>
-            </label>
-            <label class="flex items-center gap-2 text-sm cursor-pointer">
-              <input type="checkbox" class="rounded border-slate-300 text-blue-600">
-              <span class="flex-1 text-slate-700">2023</span>
-            </label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer"><input type="checkbox" class="rounded border-slate-300 text-blue-600 filter-check"><span class="flex-1 text-slate-700">2026</span></label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer"><input type="checkbox" class="rounded border-slate-300 text-blue-600 filter-check"><span class="flex-1 text-slate-700">2025</span></label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer"><input type="checkbox" checked class="rounded border-slate-300 text-blue-600 filter-check"><span class="flex-1 text-slate-900 font-semibold">2024</span></label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer"><input type="checkbox" class="rounded border-slate-300 text-blue-600 filter-check"><span class="flex-1 text-slate-700">2023</span></label>
           </div>
         </div>
 
-        <!-- Client -->
         <div class="mb-5 pb-5 border-b border-slate-100">
-          <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Client</div>
-          <div class="space-y-1.5">
-            <label class="flex items-center gap-2 text-sm cursor-pointer">
-              <input type="radio" name="client" class="border-slate-300 text-blue-600">
-              <span class="flex-1 text-slate-700">All clients</span>
-            </label>
-            <label class="flex items-center gap-2 text-sm cursor-pointer">
-              <input type="radio" name="client" checked class="border-slate-300 text-blue-600">
-              <span class="flex-1 text-slate-900 font-semibold">Active cases only</span>
-            </label>
-            <label class="flex items-center gap-2 text-sm cursor-pointer">
-              <input type="radio" name="client" class="border-slate-300 text-blue-600">
-              <span class="flex-1 text-slate-700">Closed cases</span>
-            </label>
-          </div>
-        </div>
-
-        <!-- Tag -->
-        <div class="mb-5 pb-5 border-b border-slate-100">
-          <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Case Tag</div>
-          <div class="space-y-1.5">
-            <label class="flex items-center gap-2 text-sm cursor-pointer">
-              <input type="checkbox" checked class="rounded border-slate-300 text-blue-600">
-              <span class="flex-1 text-slate-900 font-semibold">PI case</span>
-              <span class="text-xs text-slate-400">47</span>
-            </label>
-            <label class="flex items-center gap-2 text-sm cursor-pointer">
-              <input type="checkbox" class="rounded border-slate-300 text-blue-600">
-              <span class="flex-1 text-slate-700">Auto accident</span>
-              <span class="text-xs text-slate-400">23</span>
-            </label>
-            <label class="flex items-center gap-2 text-sm cursor-pointer">
-              <input type="checkbox" class="rounded border-slate-300 text-blue-600">
-              <span class="flex-1 text-slate-700">Slip & fall</span>
-              <span class="text-xs text-slate-400">11</span>
-            </label>
-            <label class="flex items-center gap-2 text-sm cursor-pointer">
-              <input type="checkbox" class="rounded border-slate-300 text-blue-600">
-              <span class="flex-1 text-slate-700">Tax return</span>
-              <span class="text-xs text-slate-400">52</span>
-            </label>
-            <label class="flex items-center gap-2 text-sm cursor-pointer">
-              <input type="checkbox" class="rounded border-slate-300 text-blue-600">
-              <span class="flex-1 text-slate-700">Audit</span>
-              <span class="text-xs text-slate-400">3</span>
-            </label>
-          </div>
-        </div>
-
-        <!-- Source -->
-        <div>
           <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Source</div>
           <div class="space-y-1.5">
-            <label class="flex items-center gap-2 text-sm cursor-pointer">
-              <input type="checkbox" class="rounded border-slate-300 text-blue-600">
-              <span class="flex-1 text-slate-700">📱 WhatsApp</span>
-            </label>
-            <label class="flex items-center gap-2 text-sm cursor-pointer">
-              <input type="checkbox" class="rounded border-slate-300 text-blue-600">
-              <span class="flex-1 text-slate-700">📧 Email</span>
-            </label>
-            <label class="flex items-center gap-2 text-sm cursor-pointer">
-              <input type="checkbox" class="rounded border-slate-300 text-blue-600">
-              <span class="flex-1 text-slate-700">🖥 Web upload</span>
-            </label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer"><input type="checkbox" class="rounded border-slate-300 text-blue-600 filter-check"><span class="flex-1 text-slate-700">📱 WhatsApp</span></label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer"><input type="checkbox" class="rounded border-slate-300 text-blue-600 filter-check"><span class="flex-1 text-slate-700">📧 Email</span></label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer"><input type="checkbox" class="rounded border-slate-300 text-blue-600 filter-check"><span class="flex-1 text-slate-700">🖥 Web upload</span></label>
+          </div>
+        </div>
+
+        <div>
+          <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Sofia flags</div>
+          <div class="space-y-1.5">
+            <label class="flex items-center gap-2 text-sm cursor-pointer"><input type="checkbox" class="rounded border-slate-300 text-red-500 filter-check"><span class="flex-1 text-red-700">⚠ Anomalies only</span></label>
+            <label class="flex items-center gap-2 text-sm cursor-pointer"><input type="checkbox" class="rounded border-slate-300 text-blue-600 filter-check"><span class="flex-1 text-slate-700">Lien active</span></label>
           </div>
         </div>
       </aside>
 
       <!-- Results -->
-      <section class="col-span-9 space-y-4">
-
-        <!-- Result 1 -->
-        <div class="bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-md transition">
-          <div class="p-5 flex gap-5">
-            <div class="pdf-thumb w-32 h-44 rounded-lg flex items-center justify-center text-amber-800 font-bold text-2xl flex-shrink-0">📄</div>
-            <div class="flex-1">
-              <div class="flex items-start justify-between mb-2">
-                <div>
-                  <h3 class="font-bold text-slate-900 text-base">Cedars-Sinai_Bill_2024-08-15.pdf</h3>
-                  <div class="text-sm text-slate-500 mt-0.5">Hospital invoice · 2 pages · 1.2 MB</div>
-                </div>
-                <div class="flex gap-2">
-                  <button class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg hover:bg-slate-100 font-medium">Open</button>
-                  <button class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg hover:bg-slate-100 font-medium">Download</button>
-                </div>
-              </div>
-
-              <!-- Metadata grid -->
-              <div class="grid grid-cols-3 gap-x-4 gap-y-1 mb-3 text-sm">
-                <div><span class="text-slate-500">Client:</span> <span class="font-semibold text-slate-900">María Rodríguez</span></div>
-                <div><span class="text-slate-500">Date:</span> <span class="font-semibold text-slate-900">Aug 15, 2024</span></div>
-                <div><span class="text-slate-500">Amount:</span> <span class="font-semibold text-slate-900">$12,450.00</span></div>
-                <div class="col-span-3 mt-1 flex gap-2 flex-wrap">
-                  <span class="text-xs bg-purple-100 text-purple-800 px-2 py-0.5 rounded font-semibold">PI case</span>
-                  <span class="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded font-semibold">Auto accident</span>
-                  <span class="text-xs bg-slate-100 text-slate-700 px-2 py-0.5 rounded">Hospital</span>
-                  <span class="text-xs bg-slate-100 text-slate-700 px-2 py-0.5 rounded">CA</span>
-                </div>
-              </div>
-
-              <!-- Extracted by Sofia/Marco — THE MAGIC -->
-              <div class="bg-gradient-to-r from-teal-50 to-blue-50 border border-teal-200 rounded-lg p-3 mt-3">
-                <div class="text-xs font-bold text-teal-800 uppercase tracking-wider mb-2 flex items-center gap-1">
-                  <span>🧠</span> Extracted by Sofia
-                </div>
-                <div class="grid grid-cols-2 gap-x-6 gap-y-1 text-sm">
-                  <div><span class="text-slate-500">CPT codes:</span> <span class="font-mono text-slate-900">99284, 73721</span></div>
-                  <div><span class="text-slate-500">Treatment:</span> <span class="text-slate-900">ER + MRI</span></div>
-                  <div><span class="text-slate-500">Insurance billed:</span> <span class="text-slate-900">$8,450</span></div>
-                  <div><span class="text-slate-500">Patient responsibility:</span> <span class="text-slate-900 font-semibold">$4,000</span></div>
-                  <div class="col-span-2 pt-1 mt-1 border-t border-teal-200">
-                    <span class="text-slate-500">Lien tracking:</span>
-                    <span class="text-amber-700 font-semibold"> ⚠ Active lien — added to settlement calculator</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Result 2 -->
-        <div class="bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-md transition">
-          <div class="p-5 flex gap-5">
-            <div class="pdf-thumb w-32 h-44 rounded-lg flex items-center justify-center text-amber-800 font-bold text-2xl flex-shrink-0">📄</div>
-            <div class="flex-1">
-              <div class="flex items-start justify-between mb-2">
-                <div>
-                  <h3 class="font-bold text-slate-900 text-base">UCLA_Med_Center_2024-09-22.pdf</h3>
-                  <div class="text-sm text-slate-500 mt-0.5">Outpatient invoice · 1 page · 480 KB</div>
-                </div>
-                <div class="flex gap-2">
-                  <button class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg hover:bg-slate-100 font-medium">Open</button>
-                  <button class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg hover:bg-slate-100 font-medium">Download</button>
-                </div>
-              </div>
-
-              <div class="grid grid-cols-3 gap-x-4 gap-y-1 mb-3 text-sm">
-                <div><span class="text-slate-500">Client:</span> <span class="font-semibold text-slate-900">Roberto Méndez</span></div>
-                <div><span class="text-slate-500">Date:</span> <span class="font-semibold text-slate-900">Sep 22, 2024</span></div>
-                <div><span class="text-slate-500">Amount:</span> <span class="font-semibold text-slate-900">$3,890.00</span></div>
-                <div class="col-span-3 mt-1 flex gap-2 flex-wrap">
-                  <span class="text-xs bg-purple-100 text-purple-800 px-2 py-0.5 rounded font-semibold">PI case</span>
-                  <span class="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded font-semibold">Slip & fall</span>
-                  <span class="text-xs bg-slate-100 text-slate-700 px-2 py-0.5 rounded">Outpatient</span>
-                </div>
-              </div>
-
-              <div class="bg-gradient-to-r from-teal-50 to-blue-50 border border-teal-200 rounded-lg p-3 mt-3">
-                <div class="text-xs font-bold text-teal-800 uppercase tracking-wider mb-2 flex items-center gap-1">
-                  <span>🧠</span> Extracted by Sofia
-                </div>
-                <div class="grid grid-cols-2 gap-x-6 gap-y-1 text-sm">
-                  <div><span class="text-slate-500">CPT codes:</span> <span class="font-mono text-slate-900">99213, 97110</span></div>
-                  <div><span class="text-slate-500">Treatment:</span> <span class="text-slate-900">PT session #4</span></div>
-                  <div><span class="text-slate-500">Insurance:</span> <span class="text-slate-900">PIP exhausted</span></div>
-                  <div><span class="text-slate-500">Patient responsibility:</span> <span class="text-slate-900 font-semibold">$3,890</span></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Result 3 -->
-        <div class="bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-md transition">
-          <div class="p-5 flex gap-5">
-            <div class="pdf-thumb w-32 h-44 rounded-lg flex items-center justify-center text-amber-800 font-bold text-2xl flex-shrink-0">📄</div>
-            <div class="flex-1">
-              <div class="flex items-start justify-between mb-2">
-                <div>
-                  <h3 class="font-bold text-slate-900 text-base">Kaiser_Permanente_2024-11-04.pdf</h3>
-                  <div class="text-sm text-slate-500 mt-0.5">Specialist visit · 3 pages · 1.8 MB</div>
-                </div>
-                <div class="flex gap-2">
-                  <button class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg hover:bg-slate-100 font-medium">Open</button>
-                  <button class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg hover:bg-slate-100 font-medium">Download</button>
-                </div>
-              </div>
-
-              <div class="grid grid-cols-3 gap-x-4 gap-y-1 mb-3 text-sm">
-                <div><span class="text-slate-500">Client:</span> <span class="font-semibold text-slate-900">Diego Vargas</span></div>
-                <div><span class="text-slate-500">Date:</span> <span class="font-semibold text-slate-900">Nov 4, 2024</span></div>
-                <div><span class="text-slate-500">Amount:</span> <span class="font-semibold text-slate-900">$5,720.00</span></div>
-                <div class="col-span-3 mt-1 flex gap-2 flex-wrap">
-                  <span class="text-xs bg-purple-100 text-purple-800 px-2 py-0.5 rounded font-semibold">PI case</span>
-                  <span class="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded font-semibold">Auto accident</span>
-                  <span class="text-xs bg-red-100 text-red-700 px-2 py-0.5 rounded font-semibold">⚠ Duplicate suspected</span>
-                </div>
-              </div>
-
-              <div class="bg-gradient-to-r from-amber-50 to-red-50 border border-amber-300 rounded-lg p-3 mt-3">
-                <div class="text-xs font-bold text-amber-800 uppercase tracking-wider mb-2 flex items-center gap-1">
-                  <span>⚠</span> Sofia detected anomaly
-                </div>
-                <div class="text-sm text-slate-700">
-                  This invoice appears to be 87% similar to <span class="font-semibold text-slate-900">Kaiser_Permanente_2024-10-28.pdf</span>. Same CPT code, same provider, $20 amount difference. Possible billing error or duplicate.
-                  <button class="block mt-2 text-amber-800 hover:underline font-semibold text-xs">Compare side-by-side →</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Pagination -->
-        <div class="flex items-center justify-between bg-white rounded-xl border border-slate-200 px-5 py-3">
-          <div class="text-sm text-slate-500">Showing <strong class="text-slate-900">3</strong> of <strong class="text-slate-900">47</strong> results</div>
-          <div class="flex gap-2">
-            <button class="px-3 py-1.5 text-sm border border-slate-300 rounded-lg hover:bg-slate-100 font-medium">Load more</button>
-            <button class="px-3 py-1.5 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium">Export filtered (CSV)</button>
-          </div>
-        </div>
-
+      <section class="col-span-9 space-y-4" id="results-container">
+        <!-- Populated by JS -->
       </section>
     </div>
 
-    <!-- Demo footer note -->
+    <!-- Demo footer -->
     <div class="mt-8 text-center text-xs text-slate-400">
-      Mockup demostrativo · Datos ficticios · <a href="index.html" class="text-blue-600 hover:underline">← volver al index</a>
+      Interactive demo · Fictional data · <a href="../demo.html" class="text-blue-600 hover:underline">← back to demos</a>
     </div>
-
   </main>
+
+  <!-- Compare modal -->
+  <div id="modal-compare" class="hidden fixed inset-0 bg-black/50 z-40 flex items-center justify-center p-6">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-3xl w-full modal-enter overflow-hidden">
+      <div class="px-6 py-4 border-b border-slate-200 flex justify-between items-center">
+        <h3 class="font-bold text-slate-900">⚠ Duplicate Detection — Side by Side</h3>
+        <button onclick="document.getElementById('modal-compare').classList.add('hidden')" class="text-slate-400 hover:text-slate-600 text-xl font-bold">×</button>
+      </div>
+      <div class="p-6 grid grid-cols-2 gap-4">
+        <div class="border border-slate-200 rounded-xl p-4">
+          <div class="text-xs font-bold text-slate-500 uppercase mb-3">Document A</div>
+          <div class="text-sm font-semibold">Kaiser_Permanente_2024-10-28.pdf</div>
+          <div class="space-y-2 mt-3 text-sm">
+            <div class="flex justify-between"><span class="text-slate-500">Provider:</span><span>Kaiser Permanente</span></div>
+            <div class="flex justify-between"><span class="text-slate-500">Date:</span><span>Oct 28, 2024</span></div>
+            <div class="flex justify-between"><span class="text-slate-500">CPT Code:</span><span class="font-mono">99213</span></div>
+            <div class="flex justify-between"><span class="text-slate-500">Amount:</span><span class="font-bold">$5,700.00</span></div>
+            <div class="flex justify-between"><span class="text-slate-500">Patient:</span><span>Diego Vargas</span></div>
+          </div>
+        </div>
+        <div class="border-2 border-red-300 rounded-xl p-4 bg-red-50">
+          <div class="text-xs font-bold text-red-600 uppercase mb-3">Document B — Possible duplicate</div>
+          <div class="text-sm font-semibold">Kaiser_Permanente_2024-11-04.pdf</div>
+          <div class="space-y-2 mt-3 text-sm">
+            <div class="flex justify-between"><span class="text-slate-500">Provider:</span><span>Kaiser Permanente</span></div>
+            <div class="flex justify-between"><span class="text-slate-500">Date:</span><span class="font-semibold text-amber-700">Nov 4, 2024 ← different</span></div>
+            <div class="flex justify-between"><span class="text-slate-500">CPT Code:</span><span class="font-mono">99213</span></div>
+            <div class="flex justify-between"><span class="text-slate-500">Amount:</span><span class="font-bold text-red-700">$5,720.00 ← $20 diff</span></div>
+            <div class="flex justify-between"><span class="text-slate-500">Patient:</span><span>Diego Vargas</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="px-6 pb-6">
+        <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 mb-4 text-sm text-amber-800">
+          🧠 <strong>Sofia's analysis:</strong> Same provider, same CPT code, same patient. Amount difference of $20 — likely billing error. Recommend contacting Kaiser Permanente to clarify before including in settlement.
+        </div>
+        <div class="flex gap-2">
+          <button onclick="toast('✅ Document B marked as duplicate and flagged for review.', 'amber'); document.getElementById('modal-compare').classList.add('hidden')" class="flex-1 py-2.5 bg-amber-500 text-white rounded-xl font-semibold text-sm">Mark B as duplicate</button>
+          <button onclick="toast('✅ Both documents kept — attorney will review.', 'blue'); document.getElementById('modal-compare').classList.add('hidden')" class="flex-1 py-2.5 border border-slate-300 rounded-xl font-semibold text-sm hover:bg-slate-50">Keep both, flag for review</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Search datasets
+    const datasets = {
+      default: {
+        query: 'medical bills 2024', count: 47, time: '0.3s',
+        results: [
+          {
+            name: 'Cedars-Sinai_Bill_2024-08-15.pdf', sub: 'Hospital invoice · 2 pages · 1.2 MB',
+            client: 'María Rodríguez', date: 'Aug 15, 2024', amount: '$12,450.00',
+            tags: ['PI case', 'Auto accident', 'Hospital', 'CA'],
+            tagColors: ['purple', 'blue', 'slate', 'slate'],
+            extracted: { label: 'Extracted by Sofia', color: 'teal',
+              fields: [['CPT codes', '99284, 73721'], ['Treatment', 'ER + MRI'], ['Insurance billed', '$8,450'], ['Patient responsibility', '$4,000']],
+              note: { type: 'warn', text: 'Active lien — added to settlement calculator' } }
+          },
+          {
+            name: 'UCLA_Med_Center_2024-09-22.pdf', sub: 'Outpatient invoice · 1 page · 480 KB',
+            client: 'Roberto Méndez', date: 'Sep 22, 2024', amount: '$3,890.00',
+            tags: ['PI case', 'Slip & fall', 'Outpatient'],
+            tagColors: ['purple', 'blue', 'slate'],
+            extracted: { label: 'Extracted by Sofia', color: 'teal',
+              fields: [['CPT codes', '99213, 97110'], ['Treatment', 'PT session #4'], ['Insurance', 'PIP exhausted'], ['Patient responsibility', '$3,890']],
+              note: null }
+          },
+          {
+            name: 'Kaiser_Permanente_2024-11-04.pdf', sub: 'Specialist visit · 3 pages · 1.8 MB',
+            client: 'Diego Vargas', date: 'Nov 4, 2024', amount: '$5,720.00',
+            tags: ['PI case', 'Auto accident', '⚠ Duplicate suspected'],
+            tagColors: ['purple', 'blue', 'red'],
+            extracted: { label: '⚠ Sofia detected anomaly', color: 'amber',
+              fields: null,
+              note: { type: 'compare', text: 'This invoice appears to be 87% similar to Kaiser_Permanente_2024-10-28.pdf. Same CPT code, same provider, $20 amount difference.' } }
+          }
+        ]
+      },
+      irs: {
+        query: 'IRS notice 2025', count: 3, time: '0.1s',
+        results: [
+          {
+            name: 'IRS_CP2000_2025-02-10.pdf', sub: 'IRS Notice · 4 pages · 890 KB',
+            client: 'Mendoza Construction LLC', date: 'Feb 10, 2025', amount: '$8,200 proposed',
+            tags: ['IRS notice', 'CP2000', 'Urgent'],
+            tagColors: ['red', 'red', 'red'],
+            extracted: { label: '🚨 Marco — Immediate action required', color: 'red',
+              fields: [['Notice type', 'CP2000 — Underreported Income'], ['Tax year', '2023'], ['Proposed amount', '$8,200'], ['Response deadline', 'March 15, 2025']],
+              note: { type: 'warn', text: 'ESCALATED to CPA — Response deadline in 33 days. Recommend audit response prep.' } }
+          },
+          {
+            name: 'IRS_CP501_2025-01-05.pdf', sub: 'Balance due reminder · 1 page · 210 KB',
+            client: 'Patricia Ruiz', date: 'Jan 5, 2025', amount: '$1,240 owed',
+            tags: ['IRS notice', 'CP501', 'Balance due'],
+            tagColors: ['red', 'slate', 'amber'],
+            extracted: { label: 'Extracted by Marco', color: 'teal',
+              fields: [['Notice type', 'CP501 — Balance Due'], ['Tax year', '2022'], ['Amount owed', '$1,240'], ['Response deadline', 'Feb 4, 2025']],
+              note: { type: 'info', text: 'Resolved — client paid $1,240 on Jan 28, 2025. Marked closed.' } }
+          }
+        ]
+      },
+      w2: {
+        query: 'W-2 Rodríguez', count: 8, time: '0.2s',
+        results: [
+          {
+            name: 'W2_2024_María_Rodríguez.pdf', sub: 'W-2 Form · 1 page · 180 KB',
+            client: 'María Rodríguez', date: 'Jan 31, 2025', amount: 'Income: $32,400',
+            tags: ['W-2', 'Tax 2024', 'Verified ✓'],
+            tagColors: ['blue', 'slate', 'green'],
+            extracted: { label: 'Extracted by Marco', color: 'teal',
+              fields: [['Employer', 'Whole Foods Market #2211'], ['Wages (Box 1)', '$32,400'], ['Federal withheld', '$2,190'], ['State withheld', '$810']],
+              note: { type: 'info', text: 'Income matches client declaration. Included in 2024 tax return.' } }
+          },
+          {
+            name: 'W2_2024_Roberto_Rodríguez.pdf', sub: 'W-2 Form · 1 page · 175 KB',
+            client: 'Roberto Rodríguez', date: 'Jan 31, 2025', amount: 'Income: $78,600',
+            tags: ['W-2', 'Tax 2024', 'Verified ✓'],
+            tagColors: ['blue', 'slate', 'green'],
+            extracted: { label: 'Extracted by Marco', color: 'teal',
+              fields: [['Employer', 'Amazon Logistics CA'], ['Wages (Box 1)', '$78,600'], ['Federal withheld', '$9,180'], ['State withheld', '$3,140']],
+              note: null }
+          }
+        ]
+      },
+      contract: {
+        query: 'contract 2024', count: 31, time: '0.4s',
+        results: [
+          {
+            name: 'Engagement_Agreement_García_LLC.pdf', sub: 'Client contract · 8 pages · 1.4 MB',
+            client: 'García & Associates', date: 'Mar 3, 2024', amount: 'Retainer: $5,000',
+            tags: ['Contract', 'Retainer', 'Active'],
+            tagColors: ['purple', 'slate', 'green'],
+            extracted: { label: 'Extracted by Sofia', color: 'teal',
+              fields: [['Contract type', 'Retainer — ongoing'], ['Start date', 'March 3, 2024'], ['Monthly fee', '$5,000'], ['Scope', 'Corporate + employment law']],
+              note: { type: 'info', text: 'No termination clauses triggered. Auto-renewal Dec 31, 2024 (completed).' } }
+          },
+          {
+            name: 'Settlement_Agreement_López_v_Employer.pdf', sub: 'Settlement · 12 pages · 2.1 MB',
+            client: 'Ana López', date: 'Oct 15, 2024', amount: '$87,500 settlement',
+            tags: ['Contract', 'Settlement', 'Workers comp'],
+            tagColors: ['purple', 'blue', 'slate'],
+            extracted: { label: 'Extracted by Sofia', color: 'teal',
+              fields: [['Type', 'Workers comp settlement'], ['Gross amount', '$87,500'], ['Attorney fee (33%)', '$28,875'], ['Client net', '$58,625']],
+              note: { type: 'warn', text: 'Severance offer attached (expires Mar 17). Review before accepting.' } }
+          }
+        ]
+      },
+      uscis: {
+        query: 'USCIS', count: 14, time: '0.2s',
+        results: [
+          {
+            name: 'USCIS_Receipt_I360_MSC2519823.pdf', sub: 'USCIS Receipt · 1 page · 95 KB',
+            client: 'María Rodríguez', date: 'Feb 28, 2026', amount: 'I-360 Petition',
+            tags: ['USCIS', 'I-360', '🔴 Deadline 4 days'],
+            tagColors: ['blue', 'slate', 'red'],
+            extracted: { label: '🧠 Extracted by Sofia — Urgent', color: 'red',
+              fields: [['Receipt #', 'MSC2519823746'], ['Form', 'I-360 Widow Petition'], ['Priority Date', 'August 3, 2024'], ['Response due', 'March 15, 2026 · 4 days']],
+              note: { type: 'warn', text: 'Deadline tracker updated. Attorney notified. Client messaged via WhatsApp.' } }
+          },
+          {
+            name: 'USCIS_EAD_Approval_Pérez.pdf', sub: 'EAD Approval · 2 pages · 340 KB',
+            client: 'Carmen Pérez', date: 'Nov 12, 2025', amount: 'EAD valid 2 years',
+            tags: ['USCIS', 'EAD', 'Approved ✓'],
+            tagColors: ['blue', 'slate', 'green'],
+            extracted: { label: 'Extracted by Sofia', color: 'teal',
+              fields: [['Card type', 'Employment Authorization'], ['Valid from', 'Nov 12, 2025'], ['Expires', 'Nov 12, 2027'], ['Category', 'C09 — Pending AOS']],
+              note: { type: 'info', text: 'Renewal reminder set for Aug 2027 (90 days before expiry).' } }
+          }
+        ]
+      },
+      duplicate: {
+        query: 'duplicate', count: 4, time: '0.1s',
+        results: [
+          {
+            name: 'Kaiser_Permanente_2024-11-04.pdf', sub: '⚠ Suspected duplicate · 3 pages · 1.8 MB',
+            client: 'Diego Vargas', date: 'Nov 4, 2024', amount: '$5,720.00',
+            tags: ['⚠ Duplicate', 'Auto accident', 'Review needed'],
+            tagColors: ['red', 'blue', 'amber'],
+            extracted: { label: '⚠ Sofia detected anomaly', color: 'amber',
+              fields: null,
+              note: { type: 'compare', text: '87% match with Kaiser_Permanente_2024-10-28.pdf. Same CPT, same provider, $20 difference.' } }
+          },
+          {
+            name: 'Cedars_ER_2024-07-15_v2.pdf', sub: '⚠ Suspected duplicate · 2 pages · 1.1 MB',
+            client: 'Roberto Méndez', date: 'Jul 15, 2024', amount: '$4,200.00',
+            tags: ['⚠ Duplicate', 'PI case', 'Resolved'],
+            tagColors: ['red', 'purple', 'green'],
+            extracted: { label: '⚠ Sofia detected anomaly', color: 'amber',
+              fields: [['Duplicate of', 'Cedars_ER_2024-07-15.pdf'], ['Difference', 'Same content, different filename'], ['Action', 'Marked resolved by attorney']],
+              note: { type: 'info', text: 'Resolved March 2, 2026 — same invoice received twice via WhatsApp and email.' } }
+          }
+        ]
+      }
+    };
+
+    let currentDataset = datasets.default;
+
+    function setSearch(q) {
+      document.getElementById('search-input').value = q;
+      handleSearch(q);
+    }
+
+    function handleSearch(q) {
+      const lower = q.toLowerCase().trim();
+      let ds;
+      if (lower.includes('irs')) ds = datasets.irs;
+      else if (lower.includes('w-2') || lower.includes('w2')) ds = datasets.w2;
+      else if (lower.includes('contract')) ds = datasets.contract;
+      else if (lower.includes('uscis')) ds = datasets.uscis;
+      else if (lower.includes('duplicat')) ds = datasets.duplicate;
+      else if (lower === '') ds = { query: '', count: 8247, time: '—', results: [] };
+      else ds = datasets.default;
+      currentDataset = ds;
+      document.getElementById('result-count').textContent = ds.count;
+      document.getElementById('search-time').textContent = ds.time;
+      renderResults(ds.results);
+    }
+
+    function renderResults(results) {
+      const container = document.getElementById('results-container');
+      if (results.length === 0) {
+        container.innerHTML = '<div class="bg-white rounded-xl border border-slate-200 p-12 text-center text-slate-400"><div class="text-4xl mb-3">🔍</div><p class="font-semibold text-slate-600">Type to search 8,247 documents</p><p class="text-sm mt-1">Sofia has indexed and tagged every document across all clients.</p></div>';
+        return;
+      }
+
+      const tagColorMap = { purple: 'bg-purple-100 text-purple-800', blue: 'bg-blue-100 text-blue-800', slate: 'bg-slate-100 text-slate-700', green: 'bg-green-100 text-green-700', red: 'bg-red-100 text-red-700', amber: 'bg-amber-100 text-amber-700' };
+
+      container.innerHTML = results.map((r, i) => {
+        const tags = r.tags.map((t, j) => `<span class="text-xs ${tagColorMap[r.tagColors[j]] || tagColorMap.slate} px-2 py-0.5 rounded font-semibold">${t}</span>`).join('');
+
+        let extractedHtml = '';
+        if (r.extracted) {
+          const bgColor = r.extracted.color === 'teal' ? 'from-teal-50 to-blue-50 border-teal-200' : r.extracted.color === 'amber' ? 'from-amber-50 to-red-50 border-amber-300' : 'from-red-50 to-red-100 border-red-300';
+          const labelColor = r.extracted.color === 'teal' ? 'text-teal-800' : r.extracted.color === 'amber' ? 'text-amber-800' : 'text-red-800';
+
+          let fieldsHtml = '';
+          if (r.extracted.fields) {
+            fieldsHtml = `<div class="grid grid-cols-2 gap-x-6 gap-y-1 text-sm">${r.extracted.fields.map(([k,v]) => `<div><span class="text-slate-500">${k}:</span> <span class="${k.includes('deadline') || k.includes('due') ? 'text-red-700 font-bold' : 'text-slate-900'}">${v}</span></div>`).join('')}</div>`;
+          }
+
+          let noteHtml = '';
+          if (r.extracted.note) {
+            if (r.extracted.note.type === 'compare') {
+              noteHtml = `<div class="text-sm text-slate-700 mt-2">${r.extracted.note.text} <button onclick="document.getElementById('modal-compare').classList.remove('hidden')" class="block mt-2 text-amber-800 hover:underline font-semibold text-xs">Compare side-by-side →</button></div>`;
+            } else if (r.extracted.note.type === 'warn') {
+              noteHtml = `<div class="col-span-2 pt-1 mt-1 border-t border-teal-200"><span class="text-slate-500">Note:</span><span class="text-amber-700 font-semibold"> ⚠ ${r.extracted.note.text}</span></div>`;
+              if (r.extracted.fields) { fieldsHtml = `<div class="grid grid-cols-2 gap-x-6 gap-y-1 text-sm">${r.extracted.fields.map(([k,v]) => `<div><span class="text-slate-500">${k}:</span> <span class="text-slate-900">${v}</span></div>`).join('')}${noteHtml}</div>`; noteHtml = ''; }
+            } else {
+              noteHtml = `<div class="col-span-2 pt-1 mt-1 border-t border-teal-200"><span class="text-teal-700 font-semibold">ℹ ${r.extracted.note.text}</span></div>`;
+              if (r.extracted.fields) { fieldsHtml = `<div class="grid grid-cols-2 gap-x-6 gap-y-1 text-sm">${r.extracted.fields.map(([k,v]) => `<div><span class="text-slate-500">${k}:</span> <span class="text-slate-900">${v}</span></div>`).join('')}${noteHtml}</div>`; noteHtml = ''; }
+            }
+          }
+
+          extractedHtml = `<div class="bg-gradient-to-r ${bgColor} border rounded-lg p-3 mt-3"><div class="text-xs font-bold ${labelColor} uppercase tracking-wider mb-2 flex items-center gap-1"><span>🧠</span> ${r.extracted.label}</div>${fieldsHtml}${noteHtml}</div>`;
+        }
+
+        return `<div class="result-item bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-md transition" style="animation-delay:${i*0.05}s">
+          <div class="p-5 flex gap-5">
+            <div class="pdf-thumb w-28 h-40 rounded-lg flex items-center justify-center text-amber-800 font-bold text-2xl flex-shrink-0">📄</div>
+            <div class="flex-1">
+              <div class="flex items-start justify-between mb-2">
+                <div><h3 class="font-bold text-slate-900 text-base">${r.name}</h3><div class="text-sm text-slate-500 mt-0.5">${r.sub}</div></div>
+                <div class="flex gap-2">
+                  <button onclick="toast('📄 Opening ${r.name}...', 'blue')" class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg hover:bg-slate-100 font-medium">Open</button>
+                  <button onclick="toast('📥 Downloading ${r.name}...', 'blue')" class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg hover:bg-slate-100 font-medium">Download</button>
+                </div>
+              </div>
+              <div class="grid grid-cols-3 gap-x-4 gap-y-1 mb-3 text-sm">
+                <div><span class="text-slate-500">Client:</span> <span class="font-semibold text-slate-900">${r.client}</span></div>
+                <div><span class="text-slate-500">Date:</span> <span class="font-semibold text-slate-900">${r.date}</span></div>
+                <div><span class="text-slate-500">Amount:</span> <span class="font-semibold text-slate-900">${r.amount}</span></div>
+                <div class="col-span-3 mt-1 flex gap-2 flex-wrap">${tags}</div>
+              </div>
+              ${extractedHtml}
+            </div>
+          </div>
+        </div>`;
+      }).join('') + `<div class="flex items-center justify-between bg-white rounded-xl border border-slate-200 px-5 py-3">
+        <div class="text-sm text-slate-500">Showing <strong class="text-slate-900">${results.length}</strong> of <strong class="text-slate-900">${currentDataset.count}</strong> results</div>
+        <div class="flex gap-2">
+          <button onclick="toast('📄 Loading more results...', 'blue')" class="px-3 py-1.5 text-sm border border-slate-300 rounded-lg hover:bg-slate-100 font-medium">Load more</button>
+          <button onclick="toast('📊 Exporting filtered results as CSV...', 'green')" class="px-3 py-1.5 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium">Export filtered (CSV)</button>
+        </div>
+      </div>`;
+    }
+
+    function resetFilters() {
+      document.querySelectorAll('.filter-check').forEach(c => c.checked = false);
+      toast('🔄 Filters reset.', 'blue');
+    }
+
+    function toast(message, color = 'blue') {
+      const colors = { blue: 'bg-blue-600', green: 'bg-green-600', red: 'bg-red-600', amber: 'bg-amber-500' };
+      const container = document.getElementById('toast-container');
+      const div = document.createElement('div');
+      div.className = `toast ${colors[color]} text-white text-sm px-5 py-3 rounded-xl shadow-xl max-w-sm font-medium`;
+      div.textContent = message;
+      container.prepend(div);
+      setTimeout(() => { div.classList.add('toast-exit'); setTimeout(() => div.remove(), 350); }, 3500);
+    }
+
+    // Initial render
+    renderResults(datasets.default.results);
+  </script>
 </body>
 </html>
