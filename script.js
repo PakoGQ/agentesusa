@@ -369,24 +369,24 @@ const translations = {
   'contact.lang.es':       { en: 'Spanish', es: 'Español' },
 
   // Founder
-  'founder.label': { en: 'The founder', es: 'El fundador' },
+  'founder.label': { en: 'Our story', es: 'Nuestra historia' },
   'founder.headline': {
-    en: 'Built by someone who\'s <span class="gradient-text">lived both worlds.</span>',
-    es: 'Construido por alguien que <span class="gradient-text">ha vivido ambos mundos.</span>'
+    en: 'Built at the intersection of <span class="gradient-text">two business cultures.</span>',
+    es: 'Construidos en la intersección de <span class="gradient-text">dos culturas de negocio.</span>'
   },
   'founder.body1': {
-    en: 'Francisco Gaitan was born in Los Angeles in 1984. He\'s spent his life moving between LA and Guadalajara — speaking English and Spanish natively, understanding both business cultures from the inside, running real businesses on both sides of the border.',
-    es: 'Francisco Gaitan nació en Los Ángeles en 1984. Ha pasado su vida entre LA y Guadalajara — hablando inglés y español nativos, entendiendo ambas culturas de negocio desde adentro, manejando empresas reales en ambos lados de la frontera.'
+    en: 'Nexus was built at the crossroads of the US and Mexico — where business cultures, languages, and legal systems overlap and often clash. We operate in both worlds natively: English and Spanish, both regulatory environments, and a firsthand understanding of what it takes to run a professional services firm in this market.',
+    es: 'Nexus fue construido en el cruce entre USA y México — donde las culturas de negocio, los idiomas y los sistemas legales se superponen y a veces chocan. Operamos en ambos mundos de forma nativa: inglés y español, ambos entornos regulatorios, y un entendimiento de primera mano de lo que se necesita para operar un despacho profesional en este mercado.'
   },
   'founder.body2': {
-    en: 'Nexus exists because Francisco saw the gap firsthand: bilingual Latino professionals in the US — attorneys, accountants, logistics companies — are running their businesses with tools designed for someone else. The Fortune 500 has enterprise AI consultants. They have generic chatbots. We close that gap.',
-    es: 'Nexus existe porque Francisco vio el gap de primera mano: profesionales latinos bilingües en USA — abogados, contadores, empresas de logística — están manejando sus negocios con herramientas diseñadas para alguien más. Las Fortune 500 tienen consultores de IA enterprise. Ellos tienen chatbots genéricos. Nosotros cerramos ese gap.'
+    en: 'We saw a clear gap: bilingual Latino professionals in the US — attorneys, accountants, logistics companies — are running serious businesses with tools designed for someone else. The Fortune 500 has enterprise AI consultants. They get generic chatbots. Nexus closes that gap with deep sector expertise and systems built to last.',
+    es: 'Vimos un gap claro: los profesionales latinos bilingües en USA — abogados, contadores, empresas de logística — están manejando negocios serios con herramientas diseñadas para alguien más. Las Fortune 500 tienen consultores de IA enterprise. Ellos tienen chatbots genéricos. Nexus cierra ese gap con experiencia profunda por sector y sistemas construidos para durar.'
   },
   'founder.body3': {
-    en: '"My clients aren\'t customers. They\'re partners. We build for the long game — because if we do this right, we\'re building together for the next decade."',
-    es: '"Mis clientes no son customers. Son partners. Construimos a largo plazo — porque si hacemos esto bien, estamos construyendo juntos para la próxima década."'
+    en: '"Our clients aren\'t customers. They\'re long-term partners. We build for the decade ahead — because a system that becomes part of your operation creates real value on both sides."',
+    es: '"Nuestros clientes no son customers. Son socios a largo plazo. Construimos para la próxima década — porque un sistema que se vuelve parte de tu operación crea valor real en ambos lados."'
   },
-  'founder.attribution': { en: '— Francisco Gaitan, Founder', es: '— Francisco Gaitan, Fundador' },
+  'founder.visual': { en: 'Bilingual · Bicultural · Built for both', es: 'Bilingüe · Bicultural · Para ambos mercados' },
 
   // CTA
   'cta.headline': {
@@ -394,8 +394,8 @@ const translations = {
     es: '¿Listo para ver cómo se vería <span class="gradient-text">tu despacho?</span>'
   },
   'cta.body': {
-    en: '30-minute strategy call with Francisco. No sales pitch. We map your operation and show you exactly how it would work for your firm.',
-    es: 'Llamada estratégica de 30 minutos con Francisco. Sin pitch de ventas. Mapeamos tu operación y te mostramos exactamente cómo funcionaría para tu despacho.'
+    en: '30-minute strategy call. No sales pitch. We map your operation and show you exactly how an agent would work for your firm.',
+    es: 'Llamada estratégica de 30 minutos. Sin pitch de ventas. Mapeamos tu operación y te mostramos exactamente cómo funcionaría un agente para tu despacho.'
   },
   'cta.button': { en: 'Book your strategy call', es: 'Agenda tu llamada estratégica' },
   'cta.note': {
