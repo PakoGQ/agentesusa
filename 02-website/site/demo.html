@@ -132,99 +132,148 @@
     </div>
   </section>
 
-  <!-- ─── INTERACTIVE CHAT ─── -->
+  <!-- ─── MAIN DEMO GRID ─── -->
   <section class="relative pb-20 px-4 md:px-6 z-10">
-    <div class="max-w-4xl mx-auto">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid lg:grid-cols-12 gap-6 items-start">
 
-      <!-- Agent selector tabs -->
-      <div class="flex gap-3 mb-4 justify-center">
-        <button id="tab-sofia" onclick="selectAgent('sofia')"
-          class="agent-tab-active flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold border transition-all">
-          <span>⚖️</span>
-          <span id="tab-sofia-label">Sofia — Law Firms</span>
-        </button>
-        <button id="tab-marco" onclick="selectAgent('marco')"
-          class="agent-tab-inactive flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold border transition-all">
-          <span>📊</span>
-          <span id="tab-marco-label">Marco — Accountants</span>
-        </button>
-      </div>
+        <!-- ══ LEFT: Chat (5 cols) ══ -->
+        <div class="lg:col-span-5">
 
-      <!-- Chat window -->
-      <div class="glow-border-card glass-card rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
-
-        <!-- Agent header -->
-        <div class="flex items-center justify-between px-6 py-4 border-b border-white/5 bg-slate-900/40">
-          <div class="flex items-center gap-3">
-            <div id="agent-avatar" class="w-9 h-9 rounded-full bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center text-sm font-black text-slate-900">S</div>
-            <div>
-              <div id="agent-name" class="text-sm font-bold text-white">Sofia — Law Firm Agent</div>
-              <div id="agent-sub" class="text-[10px] text-teal-400 font-semibold uppercase tracking-wider">Corporate · Family · Labor · Immigration</div>
-            </div>
-          </div>
-          <div class="flex items-center gap-2 text-xs text-emerald-400 font-semibold">
-            <span class="live-dot"></span>
-            <span id="online-label">Online</span>
-          </div>
-        </div>
-
-        <!-- Messages -->
-        <div id="chat-messages" class="px-5 py-5 space-y-4 overflow-y-auto" style="height: 380px;">
-          <!-- Welcome message injected by JS -->
-        </div>
-
-        <!-- Quick question chips -->
-        <div id="chip-row" class="px-5 pb-3 flex flex-wrap gap-2">
-          <!-- Injected by JS -->
-        </div>
-
-        <!-- Input -->
-        <div class="px-5 pb-5">
-          <div class="flex gap-3 items-center bg-slate-900/60 rounded-2xl p-2 border border-white/10">
-            <input
-              id="chat-input"
-              type="text"
-              class="flex-1 bg-transparent text-sm text-white placeholder-slate-500 px-3 py-2 rounded-xl"
-              placeholder="Type your question here..."
-              autocomplete="off"
-            >
-            <button id="send-btn" onclick="sendMessage()"
-              class="btn-shine px-5 py-2.5 bg-gradient-to-r from-teal-500 to-blue-600 rounded-xl text-sm font-bold hover:-translate-y-0.5 transition-all">
-              <span id="send-label">Send</span>
+          <!-- Agent tabs -->
+          <div class="flex gap-2 mb-3">
+            <button id="tab-sofia" onclick="selectAgent('sofia')"
+              class="agent-tab-active flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs font-bold border transition-all">
+              <span>⚖️</span><span id="tab-sofia-label">Sofia — Law Firms</span>
+            </button>
+            <button id="tab-marco" onclick="selectAgent('marco')"
+              class="agent-tab-inactive flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs font-bold border transition-all">
+              <span>📊</span><span id="tab-marco-label">Marco — Accountants</span>
             </button>
           </div>
-          <p id="demo-note" class="text-center text-xs text-slate-600 mt-3">This is a demo simulation · Real agents are powered by Claude AI</p>
+
+          <!-- Chat window -->
+          <div class="glow-border-card glass-card rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+
+            <!-- Agent header -->
+            <div class="flex items-center justify-between px-4 py-3 border-b border-white/5 bg-slate-900/40">
+              <div class="flex items-center gap-2">
+                <div id="agent-avatar" class="w-8 h-8 rounded-full bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center text-xs font-black text-slate-900">S</div>
+                <div>
+                  <div id="agent-name" class="text-xs font-bold text-white">Sofia — Law Firm Agent</div>
+                  <div id="agent-sub" class="text-[9px] text-teal-400 font-semibold uppercase tracking-wider">Corporate · Family · Labor · Immigration</div>
+                </div>
+              </div>
+              <div class="flex items-center gap-1.5 text-[10px] text-emerald-400 font-semibold">
+                <span class="live-dot" style="width:7px;height:7px;"></span>
+                <span id="online-label">Online</span>
+              </div>
+            </div>
+
+            <!-- Messages -->
+            <div id="chat-messages" class="px-4 py-4 space-y-3 overflow-y-auto" style="height:280px;">
+            </div>
+
+            <!-- Quick chips -->
+            <div id="chip-row" class="px-4 pb-2 flex flex-wrap gap-1.5">
+            </div>
+
+            <!-- Input -->
+            <div class="px-4 pb-4">
+              <div class="flex gap-2 items-center bg-slate-900/60 rounded-xl p-1.5 border border-white/10">
+                <input
+                  id="chat-input"
+                  type="text"
+                  class="flex-1 bg-transparent text-xs text-white placeholder-slate-500 px-2 py-1.5 rounded-lg"
+                  placeholder="Type your question here..."
+                  autocomplete="off"
+                >
+                <button id="send-btn" onclick="sendMessage()"
+                  class="btn-shine px-4 py-2 bg-gradient-to-r from-teal-500 to-blue-600 rounded-lg text-xs font-bold hover:-translate-y-0.5 transition-all">
+                  <span id="send-label">Send</span>
+                </button>
+              </div>
+              <p id="demo-note" class="text-center text-[10px] text-slate-600 mt-2">Demo simulation · Real agents powered by Claude AI</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ RIGHT: Static demos (7 cols) ══ -->
+        <div class="lg:col-span-7 flex flex-col gap-5">
+          <p id="explore-label" class="text-xs text-slate-500 font-bold uppercase tracking-widest">Explore the full system</p>
+
+          <!-- Dashboard -->
+          <a href="demos/dashboard-home.html" target="_blank" class="demo-card tilt-card glass-card rounded-3xl p-6 group flex flex-col justify-between border border-white/10">
+            <div>
+              <div class="aspect-video bg-gradient-to-br from-slate-100 to-white rounded-xl mb-4 p-3 overflow-hidden relative flex items-center">
+                <div class="bg-white rounded-lg shadow border border-slate-200/50 h-full w-full p-3 space-y-2">
+                  <div class="grid grid-cols-4 gap-1.5">
+                    <div class="bg-slate-100 rounded h-7"></div>
+                    <div class="bg-slate-100 rounded h-7"></div>
+                    <div class="bg-red-50 rounded h-7 border border-red-200/50"></div>
+                    <div class="bg-slate-100 rounded h-7"></div>
+                  </div>
+                  <div class="space-y-1.5">
+                    <div class="bg-slate-100 rounded h-3 w-full"></div>
+                    <div class="bg-slate-100 rounded h-3 w-5/6"></div>
+                    <div class="bg-amber-50 rounded h-3 w-11/12 border border-amber-200/50"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="text-xs font-bold text-teal-400 uppercase tracking-widest mb-1" data-i18n="demo.card2.label">Daily view</div>
+              <h3 class="text-lg font-bold mb-1 text-white" data-i18n="demo.card2.title">Monday Morning Dashboard</h3>
+              <p class="text-slate-300 text-sm" data-i18n="demo.card2.body">Priority inbox, deadlines, and automated weekly activity.</p>
+            </div>
+            <span class="text-teal-400 text-sm font-semibold inline-flex items-center gap-2 mt-4 group-hover:gap-3 transition-all" data-i18n="demo.open">Open demo →</span>
+          </a>
+
+          <!-- Client Detail -->
+          <a href="demos/client-detail.html" target="_blank" class="demo-card tilt-card glass-card rounded-3xl p-6 group flex flex-col justify-between border border-white/10 relative">
+            <div class="absolute top-5 right-5 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-[10px] px-2.5 py-1 rounded-full font-bold" data-i18n="demo.card3.badge">⭐ Most impactful</div>
+            <div>
+              <div class="aspect-video bg-gradient-to-br from-slate-100 to-white rounded-xl mb-4 p-3 overflow-hidden relative flex items-center">
+                <div class="bg-white rounded-lg shadow border border-slate-200/50 h-full w-full p-3 space-y-2">
+                  <div class="bg-purple-50 rounded-lg h-8 border border-purple-200/50"></div>
+                  <div class="grid grid-cols-2 gap-2">
+                    <div class="bg-slate-100 rounded h-14"></div>
+                    <div class="bg-teal-50 rounded-lg h-14 border-2 border-teal-400/80"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="text-xs font-bold text-teal-400 uppercase tracking-widest mb-1" data-i18n="demo.card3.label">Deep view</div>
+              <h3 class="text-lg font-bold mb-1 text-white" data-i18n="demo.card3.title">Client Profile — The Moat</h3>
+              <p class="text-slate-300 text-sm" data-i18n="demo.card3.body">24 months of context no competitor can replicate quickly.</p>
+            </div>
+            <span class="text-teal-400 text-sm font-semibold inline-flex items-center gap-2 mt-4 group-hover:gap-3 transition-all" data-i18n="demo.open">Open demo →</span>
+          </a>
+
+          <!-- Document Search -->
+          <a href="demos/document-search.html" target="_blank" class="demo-card tilt-card glass-card rounded-3xl p-6 group flex flex-col justify-between border border-white/10">
+            <div>
+              <div class="aspect-video bg-gradient-to-br from-slate-100 to-white rounded-xl mb-4 p-3 overflow-hidden relative flex items-center">
+                <div class="bg-white rounded-lg shadow border border-slate-200/50 h-full w-full p-3 space-y-2">
+                  <div class="bg-blue-50 rounded h-5 border border-blue-200/50"></div>
+                  <div class="grid grid-cols-3 gap-1.5">
+                    <div class="space-y-1">
+                      <div class="bg-slate-100 rounded h-2"></div>
+                      <div class="bg-slate-100 rounded h-2"></div>
+                      <div class="bg-blue-100 rounded h-2"></div>
+                    </div>
+                    <div class="col-span-2">
+                      <div class="bg-amber-50 rounded-lg h-10 border border-amber-200/50"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="text-xs font-bold text-teal-400 uppercase tracking-widest mb-1" data-i18n="demo.card4.label">Knowledge base</div>
+              <h3 class="text-lg font-bold mb-1 text-white" data-i18n="demo.card4.title">Global Document Search</h3>
+              <p class="text-slate-300 text-sm" data-i18n="demo.card4.body">8,247 documents indexed, tagged, and searchable in 0.3s.</p>
+            </div>
+            <span class="text-teal-400 text-sm font-semibold inline-flex items-center gap-2 mt-4 group-hover:gap-3 transition-all" data-i18n="demo.open">Open demo →</span>
+          </a>
+
         </div>
       </div>
-
-      <!-- Secondary: static demo links -->
-      <div class="mt-12">
-        <p id="explore-label" class="text-center text-xs text-slate-500 font-bold uppercase tracking-widest mb-5">Explore the full system</p>
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-          <a href="demos/dashboard-home.html" target="_blank" class="tilt-card glass-card rounded-2xl p-4 flex items-center gap-3 hover:border-teal-500/30 transition-all group">
-            <span class="text-2xl">📊</span>
-            <div>
-              <div class="text-xs font-bold text-white" data-i18n="demo.card2.title">Monday Dashboard</div>
-              <div class="text-[10px] text-slate-500 group-hover:text-teal-400 transition" data-i18n="demo.open">Open demo →</div>
-            </div>
-          </a>
-          <a href="demos/client-detail.html" target="_blank" class="tilt-card glass-card rounded-2xl p-4 flex items-center gap-3 hover:border-teal-500/30 transition-all group">
-            <span class="text-2xl">👤</span>
-            <div>
-              <div class="text-xs font-bold text-white" data-i18n="demo.card3.title">Client Profile</div>
-              <div class="text-[10px] text-slate-500 group-hover:text-teal-400 transition" data-i18n="demo.open">Open demo →</div>
-            </div>
-          </a>
-          <a href="demos/document-search.html" target="_blank" class="tilt-card glass-card rounded-2xl p-4 flex items-center gap-3 hover:border-teal-500/30 transition-all group">
-            <span class="text-2xl">🔍</span>
-            <div>
-              <div class="text-xs font-bold text-white" data-i18n="demo.card4.title">Document Search</div>
-              <div class="text-[10px] text-slate-500 group-hover:text-teal-400 transition" data-i18n="demo.open">Open demo →</div>
-            </div>
-          </a>
-        </div>
-      </div>
-
     </div>
   </section>
 
