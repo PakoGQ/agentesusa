@@ -463,6 +463,9 @@ function setLang(lang) {
   // Update pricing display
   setVertical(currentVertical);
 
+  // Sync typewriter to new language
+  if (window._updateTypewriter) window._updateTypewriter(lang);
+
   // Save preference
   localStorage.setItem('nexus_lang', lang);
 }
@@ -749,11 +752,18 @@ function initCardTilt() {
 function initTypewriter() {
   const badge = document.getElementById('hero-badge-text');
   if (!badge) return;
-  const full = badge.dataset.full || badge.textContent;
-  badge.dataset.full = full;
+  badge.dataset.full = badge.dataset.full || badge.textContent;
   badge.textContent = '';
 
   let i = 0;
+  let currentFull = badge.dataset.full;
+
+  // Expose language updater so setLang() can switch the typed text
+  window._updateTypewriter = function(lang) {
+    currentFull = (lang === 'es' && badge.dataset.fullEs) ? badge.dataset.fullEs : badge.dataset.full;
+    i = 0; // restart from beginning in new language
+  };
+
   const cursor = document.createElement('span');
   cursor.className = 'inline-block w-[2px] h-[0.85em] bg-teal-400 align-bottom ml-0.5';
   cursor.style.animation = 'blink 1s step-end infinite';
@@ -768,9 +778,9 @@ function initTypewriter() {
   })();
 
   function type() {
-    if (i <= full.length) {
-      badge.textContent = full.slice(0, i++);
-      setTimeout(type, i < full.length ? 38 : 1800);
+    if (i <= currentFull.length) {
+      badge.textContent = currentFull.slice(0, i++);
+      setTimeout(type, i < currentFull.length ? 38 : 1800);
     } else {
       i = 0;
       setTimeout(type, 400);
