@@ -31,8 +31,8 @@ const translations = {
     es: 'La ventaja de IA<br>que tu despacho <span class="gradient-text">merece.</span>'
   },
   'hero.sub': {
-    en: 'We build AI allies — not chatbots — for the firms that have been priced out of enterprise software. Bilingual by design. Sector-specialized. Built in Mexico, deployed in the US.',
-    es: 'Construimos aliados de IA — no chatbots — para los despachos que el software empresarial dejó fuera. Bilingüe por diseño. Especialistas por sector. Hecho en México, operado en USA.'
+    en: 'We build AI allies — not chatbots — for the firms that have been priced out of enterprise software. Bilingual by design. Sector-specialized. Built for the US professional market.',
+    es: 'Construimos aliados de IA — no chatbots — para los despachos que el software empresarial dejó fuera. Bilingüe por diseño. Especialistas por sector. Construido para el mercado profesional de USA.'
   },
   'hero.cta_primary': { en: 'Schedule strategy call', es: 'Agenda llamada estratégica' },
   'hero.cta_secondary': { en: 'See the live demo', es: 'Ver el demo en vivo' },
@@ -207,8 +207,8 @@ const translations = {
 
   'industries.logistics.label': { en: 'For logistics', es: 'Para logística' },
   'industries.logistics.title': {
-    en: 'Mexico-USA corridor specialists',
-    es: 'Especialistas del corredor México-USA'
+    en: 'Cross-border logistics specialists',
+    es: 'Especialistas en logística cross-border'
   },
   'industries.logistics.body': {
     en: 'Two languages, two timezones, two regulatory systems. Our agent speaks both fluently, reads pedimentos and bills of lading, catches inconsistencies before they hit customs.',
@@ -249,15 +249,15 @@ const translations = {
     en: 'Built different.<br><span class="gradient-text">For a reason.</span>',
     es: 'Construido distinto.<br><span class="gradient-text">Por una razón.</span>'
   },
-  'diff.point1.title': { en: 'Bicultural by design', es: 'Bicultural por diseño' },
+  'diff.point1.title': { en: 'Bilingual by design', es: 'Bilingüe por diseño' },
   'diff.point1.body': {
-    en: 'Spanish and English, natively. We don\'t translate — we understand. We grew up between LA and Guadalajara. We know how your Latino clients think because we ARE your Latino clients.',
-    es: 'Español e inglés, nativos. No traducimos — entendemos. Crecimos entre LA y Guadalajara. Sabemos cómo piensan tus clientes latinos porque SOMOS tus clientes latinos.'
+    en: 'Spanish and English, natively. We don\'t translate — we understand. We know how your Latino clients think, what they need, and how to earn their trust. That\'s built into every agent we deliver.',
+    es: 'Español e inglés, nativos. No traducimos — entendemos. Sabemos cómo piensan tus clientes latinos, qué necesitan y cómo ganarse su confianza. Eso está integrado en cada agente que entregamos.'
   },
   'diff.point2.title': { en: 'Enterprise depth, SMB pricing', es: 'Profundidad enterprise, precio PyME' },
   'diff.point2.body': {
-    en: 'The Fortune 500 pays $50K+/month for what we deliver for under $4K. We\'re not cheaper because we\'re worse — we\'re cheaper because we operate from Mexico with USA-grade quality.',
-    es: 'Las Fortune 500 pagan $50K+/mes por lo que nosotros entregamos en menos de $4K. No somos más baratos porque seamos peores — somos más baratos porque operamos desde México con calidad USA.'
+    en: 'The Fortune 500 pays $50K+/month for what we deliver for under $4K. We\'re not cheaper because we\'re worse — we\'re a lean specialist firm that passes those savings directly to you.',
+    es: 'Las Fortune 500 pagan $50K+/mes por lo que nosotros entregamos en menos de $4K. No somos más baratos porque seamos peores — somos una firma especializada que traslada ese ahorro directamente a ti.'
   },
   'diff.point3.title': { en: 'Sector specialists, not generalists', es: 'Especialistas por sector, no generalistas' },
   'diff.point3.body': {
@@ -375,8 +375,8 @@ const translations = {
     es: 'Construidos en la intersección de <span class="gradient-text">dos culturas de negocio.</span>'
   },
   'founder.body1': {
-    en: 'Nexus was built at the crossroads of the US and Mexico — where business cultures, languages, and legal systems overlap and often clash. We operate in both worlds natively: English and Spanish, both regulatory environments, and a firsthand understanding of what it takes to run a professional services firm in this market.',
-    es: 'Nexus fue construido en el cruce entre USA y México — donde las culturas de negocio, los idiomas y los sistemas legales se superponen y a veces chocan. Operamos en ambos mundos de forma nativa: inglés y español, ambos entornos regulatorios, y un entendimiento de primera mano de lo que se necesita para operar un despacho profesional en este mercado.'
+    en: 'Nexus was built for the bilingual professional market in the US — where business cultures, languages, and legal systems intersect every day. We operate natively in English and Spanish, with deep knowledge of the regulatory environment and a firsthand understanding of what it takes to run a professional services firm in this market.',
+    es: 'Nexus fue construido para el mercado profesional bilingüe en USA — donde las culturas de negocio, los idiomas y los sistemas legales se cruzan todos los días. Operamos nativamente en inglés y español, con conocimiento profundo del entorno regulatorio y un entendimiento de primera mano de lo que se necesita para operar un despacho profesional en este mercado.'
   },
   'founder.body2': {
     en: 'We saw a clear gap: bilingual Latino professionals in the US — attorneys, accountants, logistics companies — are running serious businesses with tools designed for someone else. The Fortune 500 has enterprise AI consultants. They get generic chatbots. Nexus closes that gap with deep sector expertise and systems built to last.',
@@ -386,7 +386,7 @@ const translations = {
     en: '"Our clients aren\'t customers. They\'re long-term partners. We build for the decade ahead — because a system that becomes part of your operation creates real value on both sides."',
     es: '"Nuestros clientes no son customers. Son socios a largo plazo. Construimos para la próxima década — porque un sistema que se vuelve parte de tu operación crea valor real en ambos lados."'
   },
-  'founder.visual': { en: 'Bilingual · Bicultural · Built for both', es: 'Bilingüe · Bicultural · Para ambos mercados' },
+  'founder.visual': { en: 'Bilingual · Specialized · Built for the US', es: 'Bilingüe · Especializado · Para el mercado USA' },
 
   // CTA
   'cta.headline': {
@@ -405,8 +405,8 @@ const translations = {
 
   // Footer
   'footer.tagline': {
-    en: 'Enterprise AI for the firms that deserve it. Built in Mexico, deployed in the US.',
-    es: 'IA empresarial para los despachos que la merecen. Hecho en México, operado en USA.'
+    en: 'Enterprise AI for the firms that deserve it.',
+    es: 'IA empresarial para los despachos que la merecen.'
   },
   'footer.industries.label': { en: 'Industries', es: 'Industrias' },
   'footer.industries.attorneys': { en: 'Law firms', es: 'Despachos legales' },
@@ -421,8 +421,8 @@ const translations = {
   'footer.legal.terms': { en: 'Terms of Service', es: 'Términos de Servicio' },
   'footer.legal.data': { en: 'Data export', es: 'Export de datos' },
   'footer.copyright': {
-    en: '© 2026 Nexus. Built in Mexico for the US market.',
-    es: '© 2026 Nexus. Hecho en México para el mercado de USA.'
+    en: '© 2026 Nexus. All rights reserved.',
+    es: '© 2026 Nexus. Todos los derechos reservados.'
   },
   'footer.contact': { en: 'contact@nexus.ai', es: 'contact@nexus.ai' }
 };
