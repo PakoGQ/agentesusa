@@ -62,10 +62,10 @@ const translations = {
     en: 'For decades, the most powerful AI tools have lived inside Fortune 500 companies and their $50K/month consultants. Small and medium firms — the ones that drive most of the economy — have been locked out by cost and complexity. We exist to break that lock.',
     es: 'Por décadas, las herramientas de IA más poderosas han vivido dentro de las Fortune 500 y sus consultores de $50K/mes. Las pequeñas y medianas empresas — las que mueven la mayor parte de la economía — han quedado fuera por costo y complejidad. Existimos para romper esa barrera.'
   },
-  'mission.pillar1.title': { en: 'Build, don\'t sell', es: 'Construir, no vender' },
+  'mission.pillar1.title': { en: 'Built around you', es: 'Construido a tu medida' },
   'mission.pillar1.body': {
-    en: 'We construct your AI infrastructure end-to-end. You own the data, the workflows, the intelligence. We just keep making it better.',
-    es: 'Construimos tu infraestructura de IA de principio a fin. Tú eres dueño de la data, los procesos, la inteligencia. Nosotros solo seguimos mejorándola.'
+    en: 'We adapt to your operation, not the other way around. Every workflow, every integration, every response is built hand in hand with your team — so the system fits exactly how you work.',
+    es: 'Nos adaptamos a tu operación, no al revés. Cada flujo, cada integración, cada respuesta se construye de la mano contigo — para que el sistema encaje exactamente a cómo trabajas.'
   },
   'mission.pillar2.title': { en: 'Specialize, don\'t generalize', es: 'Especializar, no generalizar' },
   'mission.pillar2.body': {
