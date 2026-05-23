@@ -14,6 +14,12 @@
 </head>
 <body>
 
+  <!-- Noise grain overlay -->
+  <div class="noise"></div>
+
+  <!-- Cursor glow -->
+  <div id="cursor-glow"></div>
+
   <!-- Background orbs & Grid -->
   <div class="fixed inset-0 grid-pattern pointer-events-none z-0"></div>
   <div class="fixed inset-0 pointer-events-none z-0">
@@ -26,7 +32,7 @@
   <nav id="nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
       <a href="index.html" class="flex items-center gap-3">
-        <div class="w-9 h-9 bg-gradient-to-br from-teal-500 to-blue-600 rounded-lg flex items-center justify-center font-black text-white text-lg">N</div>
+        <div class="logo-cube w-9 h-9 bg-gradient-to-br from-teal-500 to-blue-600 rounded-lg flex items-center justify-center font-black text-white text-lg">N</div>
         <span class="text-xl font-bold tracking-tight">Nexus</span>
       </a>
 
@@ -56,11 +62,12 @@
       
       <!-- Hero Content -->
       <div class="lg:col-span-7 space-y-8">
-        <div class="inline-flex items-center gap-2 bg-teal-500/10 border border-teal-500/30 px-4 py-1.5 rounded-full text-xs font-bold text-teal-400 tracking-wide" data-i18n="hero.badge">
-          Now serving law firms, accountants, and logistics companies
+        <div class="badge-pulse inline-flex items-center gap-2 bg-teal-500/10 border border-teal-500/30 px-4 py-1.5 rounded-full text-xs font-bold text-teal-400 tracking-wide">
+          <span class="live-dot"></span>
+          <span id="hero-badge-text" data-full="Now serving law firms, accountants, and logistics companies" data-i18n="hero.badge">Now serving law firms, accountants, and logistics companies</span>
         </div>
-        
-        <h1 class="heading-display text-5xl md:text-7xl font-black text-white" data-i18n="hero.headline">
+
+        <h1 class="headline-glow heading-display text-5xl md:text-7xl font-black text-white" data-i18n="hero.headline">
           The AI advantage<br>your firm <span class="gradient-text">deserves.</span>
         </h1>
         
@@ -69,10 +76,10 @@
         </p>
         
         <div class="flex flex-wrap gap-4">
-          <a href="contact.html" class="px-8 py-4 bg-gradient-to-r from-teal-500 to-blue-600 rounded-xl font-bold hover:shadow-lg hover:shadow-teal-500/30 transition" data-i18n="hero.cta_primary">
+          <a href="contact.html" class="btn-shine px-8 py-4 bg-gradient-to-r from-teal-500 to-blue-600 rounded-xl font-bold hover:shadow-xl hover:shadow-teal-500/40 hover:-translate-y-0.5 transition-all" data-i18n="hero.cta_primary">
             Schedule strategy call
           </a>
-          <a href="demo.html" class="px-8 py-4 glass-card hover:bg-slate-800/80 rounded-xl font-bold transition" data-i18n="hero.cta_secondary">
+          <a href="demo.html" class="px-8 py-4 glass-card hover:bg-slate-800/80 hover:-translate-y-0.5 rounded-xl font-bold transition-all" data-i18n="hero.cta_secondary">
             See the live demo
           </a>
         </div>
@@ -80,26 +87,51 @@
         <!-- Quick stats preview grid -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8 border-t border-white/10">
           <div>
-            <div class="text-3xl font-black text-white">24/7</div>
+            <div class="stat-num text-3xl font-black">24/7</div>
             <div class="text-xs text-slate-400 font-medium" data-i18n="hero.stat1">Bilingual coverage</div>
           </div>
           <div>
-            <div class="text-3xl font-black text-white">14d</div>
+            <div class="stat-num text-3xl font-black">14d</div>
             <div class="text-xs text-slate-400 font-medium" data-i18n="hero.stat2">From signing to live</div>
           </div>
           <div>
-            <div class="text-3xl font-black text-white">3</div>
+            <div class="stat-num text-3xl font-black">3</div>
             <div class="text-xs text-slate-400 font-medium" data-i18n="hero.stat3">Specialized industries</div>
           </div>
           <div>
-            <div class="text-3xl font-black text-white">-90%</div>
+            <div class="stat-num text-3xl font-black">-90%</div>
             <div class="text-xs text-slate-400 font-medium" data-i18n="hero.stat4">Cost advantage</div>
           </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="hidden md:flex items-center gap-2 text-slate-500 text-xs mt-4 scroll-cue">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          <span>Scroll to explore</span>
         </div>
       </div>
       
       <!-- Interactive Mockup Feed (WOW factor) -->
-      <div class="lg:col-span-5 relative">
+      <div class="lg:col-span-5 relative" style="padding: 32px 20px 0;">
+
+        <!-- Floating tech badges -->
+        <div class="tech-badge float-a" style="top:-10px; left:-16px;">
+          <span style="font-size:14px;">🧠</span>
+          <span class="text-teal-400">Claude API</span>
+        </div>
+        <div class="tech-badge float-b" style="top:20px; right:-18px;">
+          <span style="font-size:14px; color:#25D366;">💬</span>
+          <span class="text-slate-200">WhatsApp API</span>
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block"></span>
+        </div>
+        <div class="tech-badge float-c" style="bottom:60px; left:-24px;">
+          <span style="font-size:13px;">⚡</span>
+          <span class="text-violet-400">Make.com</span>
+        </div>
+        <div class="tech-badge float-a" style="bottom:24px; right:-12px; animation-delay:2s;">
+          <span style="font-size:14px;">🌎</span>
+          <span class="text-blue-300">Bilingual</span>
+        </div>
 
         <!-- Agent Tabs -->
         <div class="flex gap-2 mb-3">
@@ -114,7 +146,7 @@
         </div>
 
         <!-- SOFIA MOCKUP — Law Firms -->
-        <div id="mockup-sofia" class="glass-card rounded-3xl p-6 border border-white/10 shadow-2xl relative overflow-hidden backdrop-blur-2xl">
+        <div id="mockup-sofia" class="tilt-card glow-border-card glass-card rounded-3xl p-6 border border-white/10 shadow-2xl relative overflow-hidden backdrop-blur-2xl">
           <div class="flex items-center justify-between border-b border-white/5 pb-4 mb-4">
             <div class="flex items-center gap-2">
               <span class="w-7 h-7 rounded-full bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center text-[11px] font-black text-slate-900">S</span>
@@ -123,7 +155,7 @@
                 <span class="block text-[10px] text-teal-400 font-semibold uppercase tracking-wider" data-i18n="hero.sofia.sub">Corporate · Family · Labor · Criminal</span>
               </div>
             </div>
-            <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
+            <div class="live-dot"></div>
           </div>
 
           <div class="space-y-3 font-mono text-[11px] leading-relaxed mb-5">
@@ -158,7 +190,7 @@
         </div>
 
         <!-- MARCO MOCKUP — Accountants -->
-        <div id="mockup-marco" class="glass-card rounded-3xl p-6 border border-white/10 shadow-2xl relative overflow-hidden backdrop-blur-2xl hidden">
+        <div id="mockup-marco" class="tilt-card glow-border-card glass-card rounded-3xl p-6 border border-white/10 shadow-2xl relative overflow-hidden backdrop-blur-2xl hidden">
           <div class="flex items-center justify-between border-b border-white/5 pb-4 mb-4">
             <div class="flex items-center gap-2">
               <span class="w-7 h-7 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-[11px] font-black text-slate-900">M</span>
@@ -167,7 +199,7 @@
                 <span class="block text-[10px] text-blue-400 font-semibold uppercase tracking-wider" data-i18n="hero.marco.sub">Tax Returns · Bookkeeping · IRS · Payroll</span>
               </div>
             </div>
-            <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
+            <div class="live-dot"></div>
           </div>
 
           <div class="space-y-3 font-mono text-[11px] leading-relaxed mb-5">
@@ -214,9 +246,9 @@
         <p class="text-slate-400 mt-4 max-w-xl mx-auto text-sm" data-i18n="offer.sub">Each layer compounds on the previous one. After 12 months, this is how your firm runs.</p>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-6">
+      <div class="grid md:grid-cols-3 gap-6 stagger">
         <!-- Layer 1 Teaser -->
-        <div class="glass-card rounded-2xl p-8 flex flex-col justify-between reveal">
+        <div class="tilt-card glow-border-card glass-card rounded-2xl p-8 flex flex-col justify-between">
           <div>
             <div class="text-3xl font-black text-teal-400 mb-4">01</div>
             <h3 class="text-xl font-bold mb-3 text-white" data-i18n="offer.layer1.label">Communication Layer</h3>
@@ -226,7 +258,7 @@
         </div>
 
         <!-- Layer 2 Teaser -->
-        <div class="glass-card rounded-2xl p-8 flex flex-col justify-between reveal">
+        <div class="tilt-card glow-border-card glass-card rounded-2xl p-8 flex flex-col justify-between">
           <div>
             <div class="text-3xl font-black text-blue-400 mb-4">02</div>
             <h3 class="text-xl font-bold mb-3 text-white" data-i18n="offer.layer2.label">Automation Layer</h3>
@@ -236,7 +268,7 @@
         </div>
 
         <!-- Layer 3 Teaser -->
-        <div class="glass-card rounded-2xl p-8 flex flex-col justify-between reveal">
+        <div class="tilt-card glow-border-card glass-card rounded-2xl p-8 flex flex-col justify-between">
           <div>
             <div class="text-3xl font-black text-purple-400 mb-4">03</div>
             <h3 class="text-xl font-bold mb-3 text-white" data-i18n="offer.layer3.label">Intelligence Layer</h3>

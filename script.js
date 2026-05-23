@@ -693,20 +693,217 @@ function switchAgent(agent) {
 }
 
 // ────────────────────────────────────────────────────────────
+// CURSOR GLOW
+// ────────────────────────────────────────────────────────────
+
+function initCursorGlow() {
+  const glow = document.getElementById('cursor-glow');
+  if (!glow) return;
+  let raf;
+  let tx = window.innerWidth / 2, ty = window.innerHeight / 2;
+  let cx = tx, cy = ty;
+
+  document.addEventListener('mousemove', e => {
+    tx = e.clientX; ty = e.clientY;
+  });
+
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  function tick() {
+    cx = lerp(cx, tx, 0.08);
+    cy = lerp(cy, ty, 0.08);
+    glow.style.left = cx + 'px';
+    glow.style.top  = cy + 'px';
+    raf = requestAnimationFrame(tick);
+  }
+  tick();
+}
+
+// ────────────────────────────────────────────────────────────
+// CARD 3D TILT
+// ────────────────────────────────────────────────────────────
+
+function initCardTilt() {
+  document.querySelectorAll('.tilt-card').forEach(card => {
+    let animId;
+
+    card.addEventListener('mousemove', e => {
+      const r   = card.getBoundingClientRect();
+      const dx  = (e.clientX - r.left  - r.width  / 2) / (r.width  / 2);
+      const dy  = (e.clientY - r.top   - r.height / 2) / (r.height / 2);
+      card.style.transition = 'transform 0.1s ease';
+      card.style.transform  = `perspective(900px) rotateY(${dx * 7}deg) rotateX(${-dy * 4}deg) translateZ(12px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transition = 'transform 0.55s cubic-bezier(0.23,1,0.32,1)';
+      card.style.transform  = 'perspective(900px) rotateY(0deg) rotateX(0deg) translateZ(0)';
+    });
+  });
+}
+
+// ────────────────────────────────────────────────────────────
+// TYPEWRITER FOR HERO BADGE
+// ────────────────────────────────────────────────────────────
+
+function initTypewriter() {
+  const badge = document.getElementById('hero-badge-text');
+  if (!badge) return;
+  const full = badge.dataset.full || badge.textContent;
+  badge.dataset.full = full;
+  badge.textContent = '';
+
+  let i = 0;
+  const cursor = document.createElement('span');
+  cursor.className = 'inline-block w-[2px] h-[0.85em] bg-teal-400 align-bottom ml-0.5';
+  cursor.style.animation = 'blink 1s step-end infinite';
+  badge.parentElement.appendChild(cursor);
+
+  const style = document.getElementById('tw-blink-style') || (() => {
+    const s = document.createElement('style');
+    s.id = 'tw-blink-style';
+    s.textContent = '@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }';
+    document.head.appendChild(s);
+    return s;
+  })();
+
+  function type() {
+    if (i <= full.length) {
+      badge.textContent = full.slice(0, i++);
+      setTimeout(type, i < full.length ? 38 : 1800);
+    } else {
+      i = 0;
+      setTimeout(type, 400);
+    }
+  }
+  setTimeout(type, 600);
+}
+
+// ────────────────────────────────────────────────────────────
+// ENHANCED CANVAS — brighter, mouse-attract
+// ────────────────────────────────────────────────────────────
+
+// (overrides the simple version above — same function name works because
+//  this block runs after the original definition, so we reassign)
+const _origInitCanvas = initHeroCanvas;
+function initHeroCanvas() {
+  const canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  let W = canvas.width  = canvas.parentElement.offsetWidth;
+  let H = canvas.height = canvas.parentElement.offsetHeight;
+
+  window.addEventListener('resize', () => {
+    if (!canvas.parentElement) return;
+    W = canvas.width  = canvas.parentElement.offsetWidth;
+    H = canvas.height = canvas.parentElement.offsetHeight;
+  });
+
+  const COUNT = 60;
+  const mouse = { x: null, y: null };
+  window.addEventListener('mousemove', e => {
+    const r = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - r.left;
+    mouse.y = e.clientY - r.top;
+  });
+
+  class P {
+    constructor() { this.reset(); }
+    reset() {
+      this.x  = Math.random() * W;
+      this.y  = Math.random() * H;
+      this.vx = (Math.random() - 0.5) * 0.4;
+      this.vy = (Math.random() - 0.5) * 0.4;
+      this.r  = Math.random() * 1.8 + 0.4;
+      this.hue = Math.random() > 0.5 ? '166,184,20' : '130,59,246'; // teal / blue-violet
+    }
+    update() {
+      // slight mouse attraction
+      if (mouse.x !== null) {
+        const dx = mouse.x - this.x, dy = mouse.y - this.y;
+        const d  = Math.sqrt(dx*dx + dy*dy);
+        if (d < 200) {
+          this.vx += dx / d * 0.012;
+          this.vy += dy / d * 0.012;
+        }
+      }
+      // damping
+      this.vx *= 0.995; this.vy *= 0.995;
+      this.x  += this.vx; this.y += this.vy;
+      if (this.x < 0 || this.x > W) this.vx *= -1;
+      if (this.y < 0 || this.y > H) this.vy *= -1;
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${this.hue},0.55)`;
+      ctx.fill();
+    }
+  }
+
+  const pts = Array.from({ length: COUNT }, () => new P());
+
+  function frame() {
+    ctx.clearRect(0, 0, W, H);
+
+    for (let i = 0; i < COUNT; i++) {
+      for (let j = i + 1; j < COUNT; j++) {
+        const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
+        const d  = Math.sqrt(dx*dx + dy*dy);
+        if (d < 120) {
+          ctx.beginPath();
+          ctx.moveTo(pts[i].x, pts[i].y);
+          ctx.lineTo(pts[j].x, pts[j].y);
+          ctx.strokeStyle = `rgba(20,184,166,${0.12 * (1 - d/120)})`;
+          ctx.lineWidth = 0.6;
+          ctx.stroke();
+        }
+      }
+      // line to mouse
+      if (mouse.x !== null) {
+        const dx = mouse.x - pts[i].x, dy = mouse.y - pts[i].y;
+        const d  = Math.sqrt(dx*dx + dy*dy);
+        if (d < 180) {
+          ctx.beginPath();
+          ctx.moveTo(pts[i].x, pts[i].y);
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.strokeStyle = `rgba(139,92,246,${0.18 * (1 - d/180)})`;
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+        }
+      }
+    }
+    pts.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+// ────────────────────────────────────────────────────────────
 // INITIALIZATION
 // ────────────────────────────────────────────────────────────
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Set up reveal animations
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  // Reveal animations
+  document.querySelectorAll('.reveal, .stagger').forEach(el => observer.observe(el));
 
-  // Initialize particles if present
+  // Particles
   initHeroCanvas();
 
-  // Set initial language (from localStorage or default to EN)
+  // Cursor glow
+  initCursorGlow();
+
+  // Card tilt
+  initCardTilt();
+
+  // Typewriter badge
+  initTypewriter();
+
+  // Language
   const savedLang = localStorage.getItem('nexus_lang') || 'en';
   setLang(savedLang);
 
-  // Set initial vertical
+  // Pricing vertical
   setVertical('accountants');
 });
