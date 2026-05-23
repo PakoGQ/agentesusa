@@ -34,6 +34,10 @@ const translations = {
     en: 'We build AI allies — not chatbots — for the firms that have been priced out of enterprise software. Bilingual by design. Sector-specialized. Built for the US professional market.',
     es: 'Construimos aliados de IA — no chatbots — para los despachos que el software empresarial dejó fuera. Bilingüe por diseño. Especialistas por sector. Construido para el mercado profesional de USA.'
   },
+  'hero.whatsapp_note': {
+    en: 'Your clients can have this exact conversation from <span class="text-[#25D366] font-bold">WhatsApp</span> — no app downloads, no logins.',
+    es: 'Tus clientes pueden tener esta conversación exacta desde <span class="text-[#25D366] font-bold">WhatsApp</span> — sin descargar apps, sin registros.'
+  },
   'hero.cta_primary': { en: 'Schedule strategy call', es: 'Agenda llamada estratégica' },
   'hero.cta_secondary': { en: 'See the live demo', es: 'Ver el demo en vivo' },
   'hero.stat1': { en: 'Bilingual coverage', es: 'Cobertura bilingüe' },
