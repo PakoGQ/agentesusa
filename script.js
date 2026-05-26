@@ -31,8 +31,12 @@ const translations = {
     es: 'La ventaja de IA<br>que tu despacho <span class="gradient-text">merece.</span>'
   },
   'hero.sub': {
-    en: 'We build AI allies — not chatbots — for the firms that have been priced out of enterprise software. Bilingual by design. Sector-specialized. Built in Mexico, deployed in the US.',
-    es: 'Construimos aliados de IA — no chatbots — para los despachos que el software empresarial dejó fuera. Bilingüe por diseño. Especialistas por sector. Hecho en México, operado en USA.'
+    en: 'We build AI allies — not chatbots — for the firms that have been priced out of enterprise software. Bilingual by design. Sector-specialized. Built for the US professional market.',
+    es: 'Construimos aliados de IA — no chatbots — para los despachos que el software empresarial dejó fuera. Bilingüe por diseño. Especialistas por sector. Construido para el mercado profesional de USA.'
+  },
+  'hero.whatsapp_note': {
+    en: 'Your clients can have this exact conversation from <span class="text-[#25D366] font-bold">WhatsApp</span> — no app downloads, no logins.',
+    es: 'Tus clientes pueden tener esta conversación exacta desde <span class="text-[#25D366] font-bold">WhatsApp</span> — sin descargar apps, sin registros.'
   },
   'hero.cta_primary': { en: 'Schedule strategy call', es: 'Agenda llamada estratégica' },
   'hero.cta_secondary': { en: 'See the live demo', es: 'Ver el demo en vivo' },
@@ -62,10 +66,10 @@ const translations = {
     en: 'For decades, the most powerful AI tools have lived inside Fortune 500 companies and their $50K/month consultants. Small and medium firms — the ones that drive most of the economy — have been locked out by cost and complexity. We exist to break that lock.',
     es: 'Por décadas, las herramientas de IA más poderosas han vivido dentro de las Fortune 500 y sus consultores de $50K/mes. Las pequeñas y medianas empresas — las que mueven la mayor parte de la economía — han quedado fuera por costo y complejidad. Existimos para romper esa barrera.'
   },
-  'mission.pillar1.title': { en: 'Build, don\'t sell', es: 'Construir, no vender' },
+  'mission.pillar1.title': { en: 'Built around you', es: 'Construido a tu medida' },
   'mission.pillar1.body': {
-    en: 'We construct your AI infrastructure end-to-end. You own the data, the workflows, the intelligence. We just keep making it better.',
-    es: 'Construimos tu infraestructura de IA de principio a fin. Tú eres dueño de la data, los procesos, la inteligencia. Nosotros solo seguimos mejorándola.'
+    en: 'We adapt to your operation, not the other way around. Every workflow, every integration, every response is built hand in hand with your team — so the system fits exactly how you work.',
+    es: 'Nos adaptamos a tu operación, no al revés. Cada flujo, cada integración, cada respuesta se construye de la mano contigo — para que el sistema encaje exactamente a cómo trabajas.'
   },
   'mission.pillar2.title': { en: 'Specialize, don\'t generalize', es: 'Especializar, no generalizar' },
   'mission.pillar2.body': {
@@ -207,8 +211,8 @@ const translations = {
 
   'industries.logistics.label': { en: 'For logistics', es: 'Para logística' },
   'industries.logistics.title': {
-    en: 'Mexico-USA corridor specialists',
-    es: 'Especialistas del corredor México-USA'
+    en: 'Cross-border logistics specialists',
+    es: 'Especialistas en logística cross-border'
   },
   'industries.logistics.body': {
     en: 'Two languages, two timezones, two regulatory systems. Our agent speaks both fluently, reads pedimentos and bills of lading, catches inconsistencies before they hit customs.',
@@ -249,15 +253,15 @@ const translations = {
     en: 'Built different.<br><span class="gradient-text">For a reason.</span>',
     es: 'Construido distinto.<br><span class="gradient-text">Por una razón.</span>'
   },
-  'diff.point1.title': { en: 'Bicultural by design', es: 'Bicultural por diseño' },
+  'diff.point1.title': { en: 'Bilingual by design', es: 'Bilingüe por diseño' },
   'diff.point1.body': {
-    en: 'Spanish and English, natively. We don\'t translate — we understand. We grew up between LA and Guadalajara. We know how your Latino clients think because we ARE your Latino clients.',
-    es: 'Español e inglés, nativos. No traducimos — entendemos. Crecimos entre LA y Guadalajara. Sabemos cómo piensan tus clientes latinos porque SOMOS tus clientes latinos.'
+    en: 'Spanish and English, natively. We don\'t translate — we understand. We know how your Latino clients think, what they need, and how to earn their trust. That\'s built into every agent we deliver.',
+    es: 'Español e inglés, nativos. No traducimos — entendemos. Sabemos cómo piensan tus clientes latinos, qué necesitan y cómo ganarse su confianza. Eso está integrado en cada agente que entregamos.'
   },
   'diff.point2.title': { en: 'Enterprise depth, SMB pricing', es: 'Profundidad enterprise, precio PyME' },
   'diff.point2.body': {
-    en: 'The Fortune 500 pays $50K+/month for what we deliver for under $4K. We\'re not cheaper because we\'re worse — we\'re cheaper because we operate from Mexico with USA-grade quality.',
-    es: 'Las Fortune 500 pagan $50K+/mes por lo que nosotros entregamos en menos de $4K. No somos más baratos porque seamos peores — somos más baratos porque operamos desde México con calidad USA.'
+    en: 'The Fortune 500 pays $50K+/month for what we deliver for under $4K. We\'re not cheaper because we\'re worse — we\'re a lean specialist firm that passes those savings directly to you.',
+    es: 'Las Fortune 500 pagan $50K+/mes por lo que nosotros entregamos en menos de $4K. No somos más baratos porque seamos peores — somos una firma especializada que traslada ese ahorro directamente a ti.'
   },
   'diff.point3.title': { en: 'Sector specialists, not generalists', es: 'Especialistas por sector, no generalistas' },
   'diff.point3.body': {
@@ -369,24 +373,24 @@ const translations = {
   'contact.lang.es':       { en: 'Spanish', es: 'Español' },
 
   // Founder
-  'founder.label': { en: 'The founder', es: 'El fundador' },
+  'founder.label': { en: 'Our story', es: 'Nuestra historia' },
   'founder.headline': {
-    en: 'Built by someone who\'s <span class="gradient-text">lived both worlds.</span>',
-    es: 'Construido por alguien que <span class="gradient-text">ha vivido ambos mundos.</span>'
+    en: 'Built at the intersection of <span class="gradient-text">two business cultures.</span>',
+    es: 'Construidos en la intersección de <span class="gradient-text">dos culturas de negocio.</span>'
   },
   'founder.body1': {
-    en: 'Francisco Gaitan was born in Los Angeles in 1984. He\'s spent his life moving between LA and Guadalajara — speaking English and Spanish natively, understanding both business cultures from the inside, running real businesses on both sides of the border.',
-    es: 'Francisco Gaitan nació en Los Ángeles en 1984. Ha pasado su vida entre LA y Guadalajara — hablando inglés y español nativos, entendiendo ambas culturas de negocio desde adentro, manejando empresas reales en ambos lados de la frontera.'
+    en: 'Nexus was built for the bilingual professional market in the US — where business cultures, languages, and legal systems intersect every day. We operate natively in English and Spanish, with deep knowledge of the regulatory environment and a firsthand understanding of what it takes to run a professional services firm in this market.',
+    es: 'Nexus fue construido para el mercado profesional bilingüe en USA — donde las culturas de negocio, los idiomas y los sistemas legales se cruzan todos los días. Operamos nativamente en inglés y español, con conocimiento profundo del entorno regulatorio y un entendimiento de primera mano de lo que se necesita para operar un despacho profesional en este mercado.'
   },
   'founder.body2': {
-    en: 'Nexus exists because Francisco saw the gap firsthand: bilingual Latino professionals in the US — attorneys, accountants, logistics companies — are running their businesses with tools designed for someone else. The Fortune 500 has enterprise AI consultants. They have generic chatbots. We close that gap.',
-    es: 'Nexus existe porque Francisco vio el gap de primera mano: profesionales latinos bilingües en USA — abogados, contadores, empresas de logística — están manejando sus negocios con herramientas diseñadas para alguien más. Las Fortune 500 tienen consultores de IA enterprise. Ellos tienen chatbots genéricos. Nosotros cerramos ese gap.'
+    en: 'We saw a clear gap: bilingual Latino professionals in the US — attorneys, accountants, logistics companies — are running serious businesses with tools designed for someone else. The Fortune 500 has enterprise AI consultants. They get generic chatbots. Nexus closes that gap with deep sector expertise and systems built to last.',
+    es: 'Vimos un gap claro: los profesionales latinos bilingües en USA — abogados, contadores, empresas de logística — están manejando negocios serios con herramientas diseñadas para alguien más. Las Fortune 500 tienen consultores de IA enterprise. Ellos tienen chatbots genéricos. Nexus cierra ese gap con experiencia profunda por sector y sistemas construidos para durar.'
   },
   'founder.body3': {
-    en: '"My clients aren\'t customers. They\'re partners. We build for the long game — because if we do this right, we\'re building together for the next decade."',
-    es: '"Mis clientes no son customers. Son partners. Construimos a largo plazo — porque si hacemos esto bien, estamos construyendo juntos para la próxima década."'
+    en: '"Our clients aren\'t customers. They\'re long-term partners. We build for the decade ahead — because a system that becomes part of your operation creates real value on both sides."',
+    es: '"Nuestros clientes no son customers. Son socios a largo plazo. Construimos para la próxima década — porque un sistema que se vuelve parte de tu operación crea valor real en ambos lados."'
   },
-  'founder.attribution': { en: '— Francisco Gaitan, Founder', es: '— Francisco Gaitan, Fundador' },
+  'founder.visual': { en: 'Bilingual · Specialized · Built for the US', es: 'Bilingüe · Especializado · Para el mercado USA' },
 
   // CTA
   'cta.headline': {
@@ -394,8 +398,8 @@ const translations = {
     es: '¿Listo para ver cómo se vería <span class="gradient-text">tu despacho?</span>'
   },
   'cta.body': {
-    en: '30-minute strategy call with Francisco. No sales pitch. We map your operation and show you exactly how it would work for your firm.',
-    es: 'Llamada estratégica de 30 minutos con Francisco. Sin pitch de ventas. Mapeamos tu operación y te mostramos exactamente cómo funcionaría para tu despacho.'
+    en: '30-minute strategy call. No sales pitch. We map your operation and show you exactly how an agent would work for your firm.',
+    es: 'Llamada estratégica de 30 minutos. Sin pitch de ventas. Mapeamos tu operación y te mostramos exactamente cómo funcionaría un agente para tu despacho.'
   },
   'cta.button': { en: 'Book your strategy call', es: 'Agenda tu llamada estratégica' },
   'cta.note': {
@@ -405,8 +409,8 @@ const translations = {
 
   // Footer
   'footer.tagline': {
-    en: 'Enterprise AI for the firms that deserve it. Built in Mexico, deployed in the US.',
-    es: 'IA empresarial para los despachos que la merecen. Hecho en México, operado en USA.'
+    en: 'Enterprise AI for the firms that deserve it.',
+    es: 'IA empresarial para los despachos que la merecen.'
   },
   'footer.industries.label': { en: 'Industries', es: 'Industrias' },
   'footer.industries.attorneys': { en: 'Law firms', es: 'Despachos legales' },
@@ -421,8 +425,8 @@ const translations = {
   'footer.legal.terms': { en: 'Terms of Service', es: 'Términos de Servicio' },
   'footer.legal.data': { en: 'Data export', es: 'Export de datos' },
   'footer.copyright': {
-    en: '© 2026 Nexus. Built in Mexico for the US market.',
-    es: '© 2026 Nexus. Hecho en México para el mercado de USA.'
+    en: '© 2026 Nexus. All rights reserved.',
+    es: '© 2026 Nexus. Todos los derechos reservados.'
   },
   'footer.contact': { en: 'contact@nexus.ai', es: 'contact@nexus.ai' }
 };
@@ -462,6 +466,9 @@ function setLang(lang) {
 
   // Update pricing display
   setVertical(currentVertical);
+
+  // Sync typewriter to new language
+  if (window._updateTypewriter) window._updateTypewriter(lang);
 
   // Save preference
   localStorage.setItem('nexus_lang', lang);
@@ -693,20 +700,224 @@ function switchAgent(agent) {
 }
 
 // ────────────────────────────────────────────────────────────
+// CURSOR GLOW
+// ────────────────────────────────────────────────────────────
+
+function initCursorGlow() {
+  const glow = document.getElementById('cursor-glow');
+  if (!glow) return;
+  let raf;
+  let tx = window.innerWidth / 2, ty = window.innerHeight / 2;
+  let cx = tx, cy = ty;
+
+  document.addEventListener('mousemove', e => {
+    tx = e.clientX; ty = e.clientY;
+  });
+
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  function tick() {
+    cx = lerp(cx, tx, 0.08);
+    cy = lerp(cy, ty, 0.08);
+    glow.style.left = cx + 'px';
+    glow.style.top  = cy + 'px';
+    raf = requestAnimationFrame(tick);
+  }
+  tick();
+}
+
+// ────────────────────────────────────────────────────────────
+// CARD 3D TILT
+// ────────────────────────────────────────────────────────────
+
+function initCardTilt() {
+  document.querySelectorAll('.tilt-card').forEach(card => {
+    let animId;
+
+    card.addEventListener('mousemove', e => {
+      const r   = card.getBoundingClientRect();
+      const dx  = (e.clientX - r.left  - r.width  / 2) / (r.width  / 2);
+      const dy  = (e.clientY - r.top   - r.height / 2) / (r.height / 2);
+      card.style.transition = 'transform 0.1s ease';
+      card.style.transform  = `perspective(900px) rotateY(${dx * 7}deg) rotateX(${-dy * 4}deg) translateZ(12px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transition = 'transform 0.55s cubic-bezier(0.23,1,0.32,1)';
+      card.style.transform  = 'perspective(900px) rotateY(0deg) rotateX(0deg) translateZ(0)';
+    });
+  });
+}
+
+// ────────────────────────────────────────────────────────────
+// TYPEWRITER FOR HERO BADGE
+// ────────────────────────────────────────────────────────────
+
+function initTypewriter() {
+  const badge = document.getElementById('hero-badge-text');
+  if (!badge) return;
+  badge.dataset.full = badge.dataset.full || badge.textContent;
+  badge.textContent = '';
+
+  let i = 0;
+  let currentFull = badge.dataset.full;
+
+  // Expose language updater so setLang() can switch the typed text
+  window._updateTypewriter = function(lang) {
+    currentFull = (lang === 'es' && badge.dataset.fullEs) ? badge.dataset.fullEs : badge.dataset.full;
+    i = 0; // restart from beginning in new language
+  };
+
+  const cursor = document.createElement('span');
+  cursor.className = 'inline-block w-[2px] h-[0.85em] bg-teal-400 align-bottom ml-0.5';
+  cursor.style.animation = 'blink 1s step-end infinite';
+  badge.parentElement.appendChild(cursor);
+
+  const style = document.getElementById('tw-blink-style') || (() => {
+    const s = document.createElement('style');
+    s.id = 'tw-blink-style';
+    s.textContent = '@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }';
+    document.head.appendChild(s);
+    return s;
+  })();
+
+  function type() {
+    if (i <= currentFull.length) {
+      badge.textContent = currentFull.slice(0, i++);
+      setTimeout(type, i < currentFull.length ? 38 : 1800);
+    } else {
+      i = 0;
+      setTimeout(type, 400);
+    }
+  }
+  setTimeout(type, 600);
+}
+
+// ────────────────────────────────────────────────────────────
+// ENHANCED CANVAS — brighter, mouse-attract
+// ────────────────────────────────────────────────────────────
+
+// (overrides the simple version above — same function name works because
+//  this block runs after the original definition, so we reassign)
+const _origInitCanvas = initHeroCanvas;
+function initHeroCanvas() {
+  const canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  let W = canvas.width  = canvas.parentElement.offsetWidth;
+  let H = canvas.height = canvas.parentElement.offsetHeight;
+
+  window.addEventListener('resize', () => {
+    if (!canvas.parentElement) return;
+    W = canvas.width  = canvas.parentElement.offsetWidth;
+    H = canvas.height = canvas.parentElement.offsetHeight;
+  });
+
+  const COUNT = 60;
+  const mouse = { x: null, y: null };
+  window.addEventListener('mousemove', e => {
+    const r = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - r.left;
+    mouse.y = e.clientY - r.top;
+  });
+
+  class P {
+    constructor() { this.reset(); }
+    reset() {
+      this.x  = Math.random() * W;
+      this.y  = Math.random() * H;
+      this.vx = (Math.random() - 0.5) * 0.4;
+      this.vy = (Math.random() - 0.5) * 0.4;
+      this.r  = Math.random() * 1.8 + 0.4;
+      this.hue = Math.random() > 0.5 ? '166,184,20' : '130,59,246'; // teal / blue-violet
+    }
+    update() {
+      // slight mouse attraction
+      if (mouse.x !== null) {
+        const dx = mouse.x - this.x, dy = mouse.y - this.y;
+        const d  = Math.sqrt(dx*dx + dy*dy);
+        if (d < 200) {
+          this.vx += dx / d * 0.012;
+          this.vy += dy / d * 0.012;
+        }
+      }
+      // damping
+      this.vx *= 0.995; this.vy *= 0.995;
+      this.x  += this.vx; this.y += this.vy;
+      if (this.x < 0 || this.x > W) this.vx *= -1;
+      if (this.y < 0 || this.y > H) this.vy *= -1;
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${this.hue},0.55)`;
+      ctx.fill();
+    }
+  }
+
+  const pts = Array.from({ length: COUNT }, () => new P());
+
+  function frame() {
+    ctx.clearRect(0, 0, W, H);
+
+    for (let i = 0; i < COUNT; i++) {
+      for (let j = i + 1; j < COUNT; j++) {
+        const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
+        const d  = Math.sqrt(dx*dx + dy*dy);
+        if (d < 120) {
+          ctx.beginPath();
+          ctx.moveTo(pts[i].x, pts[i].y);
+          ctx.lineTo(pts[j].x, pts[j].y);
+          ctx.strokeStyle = `rgba(20,184,166,${0.12 * (1 - d/120)})`;
+          ctx.lineWidth = 0.6;
+          ctx.stroke();
+        }
+      }
+      // line to mouse
+      if (mouse.x !== null) {
+        const dx = mouse.x - pts[i].x, dy = mouse.y - pts[i].y;
+        const d  = Math.sqrt(dx*dx + dy*dy);
+        if (d < 180) {
+          ctx.beginPath();
+          ctx.moveTo(pts[i].x, pts[i].y);
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.strokeStyle = `rgba(139,92,246,${0.18 * (1 - d/180)})`;
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+        }
+      }
+    }
+    pts.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+// ────────────────────────────────────────────────────────────
 // INITIALIZATION
 // ────────────────────────────────────────────────────────────
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Set up reveal animations
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  // Reveal animations
+  document.querySelectorAll('.reveal, .stagger').forEach(el => observer.observe(el));
 
-  // Initialize particles if present
+  // Particles
   initHeroCanvas();
 
-  // Set initial language (from localStorage or default to EN)
+  // Cursor glow
+  initCursorGlow();
+
+  // Card tilt
+  initCardTilt();
+
+  // Typewriter badge
+  initTypewriter();
+
+  // Language
   const savedLang = localStorage.getItem('nexus_lang') || 'en';
   setLang(savedLang);
 
-  // Set initial vertical
+  // Pricing vertical
   setVertical('accountants');
 });

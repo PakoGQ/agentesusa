@@ -11,10 +11,80 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* Chat scroll */
+    #chat-messages {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(20,184,166,0.3) transparent;
+    }
+    #chat-messages::-webkit-scrollbar { width: 4px; }
+    #chat-messages::-webkit-scrollbar-thumb { background: rgba(20,184,166,0.3); border-radius: 2px; }
+
+    /* Typing dots */
+    .dot-1, .dot-2, .dot-3 {
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #14B8A6;
+      animation: dot-bounce 1.2s ease-in-out infinite;
+    }
+    .dot-2 { animation-delay: 0.2s; }
+    .dot-3 { animation-delay: 0.4s; }
+    @keyframes dot-bounce {
+      0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+      30%           { transform: translateY(-6px); opacity: 1; }
+    }
+
+    /* Message slide-in */
+    @keyframes msg-in {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .msg-in { animation: msg-in 0.3s cubic-bezier(0.16,1,0.3,1) forwards; }
+
+    /* Quick chip hover */
+    .chip {
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .chip:hover {
+      border-color: rgba(20,184,166,0.5);
+      background: rgba(20,184,166,0.1);
+      color: #2dd4bf;
+    }
+
+    /* Input focus */
+    #chat-input:focus { outline: none; box-shadow: 0 0 0 2px rgba(20,184,166,0.3); }
+
+    /* Send button pulse on hover */
+    #send-btn:hover { box-shadow: 0 0 16px rgba(20,184,166,0.4); }
+
+    /* Agent tab active */
+    .agent-tab-active {
+      background: rgba(20,184,166,0.15);
+      border-color: rgba(20,184,166,0.5);
+      color: #2dd4bf;
+    }
+    .agent-tab-inactive {
+      background: rgba(30,41,59,0.6);
+      border-color: rgba(255,255,255,0.1);
+      color: #94a3b8;
+    }
+    .agent-tab-active-blue {
+      background: rgba(59,130,246,0.15);
+      border-color: rgba(59,130,246,0.5);
+      color: #60a5fa;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Background orbs -->
+  <div class="noise"></div>
+  <div id="cursor-glow"></div>
+
+  <!-- Background -->
   <div class="fixed inset-0 grid-pattern pointer-events-none z-0"></div>
   <div class="fixed inset-0 pointer-events-none z-0">
     <div class="orb orb-1"></div>
@@ -22,14 +92,13 @@
     <div class="orb orb-3"></div>
   </div>
 
-  <!-- ─────────────────────────────────── NAV ─────────────────────────────────── -->
+  <!-- ─── NAV ─── -->
   <nav id="nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
       <a href="index.html" class="flex items-center gap-3">
-        <div class="w-9 h-9 bg-gradient-to-br from-teal-500 to-blue-600 rounded-lg flex items-center justify-center font-black text-white text-lg">N</div>
+        <div class="logo-cube w-9 h-9 bg-gradient-to-br from-teal-500 to-blue-600 rounded-lg flex items-center justify-center font-black text-white text-lg">N</div>
         <span class="text-xl font-bold tracking-tight">Nexus</span>
       </a>
-
       <div class="hidden md:flex items-center gap-8 text-sm">
         <a href="mission.html" class="text-slate-300 hover:text-white transition" data-i18n="nav.mission">Mission</a>
         <a href="what-we-build.html" class="text-slate-300 hover:text-white transition" data-i18n="nav.offer">What we build</a>
@@ -37,7 +106,6 @@
         <a href="demo.html" class="text-teal-400 font-semibold transition" data-i18n="nav.demo">Demo</a>
         <a href="pricing.html" class="text-slate-300 hover:text-white transition" data-i18n="nav.pricing">Pricing</a>
       </div>
-
       <div class="flex items-center gap-3">
         <div class="flex gap-1 bg-slate-800/60 backdrop-blur p-1 rounded-lg text-xs">
           <button onclick="setLang('en')" id="lang-en" class="px-3 py-1 rounded font-bold text-white bg-slate-700">EN</button>
@@ -48,120 +116,257 @@
     </div>
   </nav>
 
-  <!-- ─────────────────────────────────── DEMO HERO ─────────────────────────────────── -->
-  <section class="relative pt-40 pb-32 px-6 z-10">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-20">
-        <div class="text-sm font-bold text-teal-400 uppercase tracking-widest mb-4 reveal" data-i18n="demo.label">Live Demo</div>
-        <h1 class="heading-display text-6xl md:text-7xl font-black mb-6 reveal" data-i18n="demo.headline">
-          Don't take our word.<br><span class="gradient-text">See it work.</span>
-        </h1>
-        <p class="text-xl md:text-2xl text-slate-300 max-w-2xl mx-auto leading-relaxed reveal" data-i18n="demo.sub">
-          Interactive product demos. Click any view to explore exactly how your firm would operate with Nexus.
-        </p>
+  <!-- ─── HERO ─── -->
+  <section class="relative pt-28 pb-6 px-6 z-10 text-center">
+    <div class="max-w-3xl mx-auto">
+      <div class="inline-flex items-center gap-2 bg-teal-500/10 border border-teal-500/30 px-3 py-1 rounded-full text-xs font-bold text-teal-400 tracking-wide mb-4">
+        <span class="live-dot"></span>
+        <span id="demo-badge-text">Agents online · Try them now</span>
       </div>
+      <h1 class="headline-glow heading-display text-4xl md:text-5xl font-black mb-3" data-i18n="demo.headline">
+        Don't take our word.<br><span class="gradient-text">Talk to the agent.</span>
+      </h1>
+      <p class="text-sm text-slate-400 max-w-xl mx-auto" data-i18n="demo.sub">
+        Pick an agent and type any question. Bilingual, instant, intelligent.
+      </p>
+    </div>
+  </section>
 
-      <div class="grid md:grid-cols-2 gap-8">
-        <!-- The Moat Slide -->
-        <a href="demos/slide-4-capas.html" target="_blank" class="demo-card glass-card rounded-3xl p-8 group reveal flex flex-col justify-between">
-          <div>
-            <div class="aspect-video bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl mb-6 flex items-center justify-center text-5xl overflow-hidden relative">
-              <div class="space-y-2 w-full px-12 z-10">
-                <div class="h-3 rounded bg-gradient-to-r from-orange-400 to-orange-600 ml-16"></div>
-                <div class="h-3 rounded bg-gradient-to-r from-purple-400 to-purple-600 ml-10"></div>
-                <div class="h-3 rounded bg-gradient-to-r from-blue-400 to-blue-600 ml-5"></div>
-                <div class="h-3 rounded bg-gradient-to-r from-teal-400 to-teal-600"></div>
-              </div>
-            </div>
-            <div class="text-xs font-bold text-teal-400 uppercase tracking-widest mb-2" data-i18n="demo.card1.label">Conceptual</div>
-            <h3 class="text-2xl font-bold mb-3 text-white" data-i18n="demo.card1.title">The 4 Layers of Lock-in</h3>
-            <p class="text-slate-300 text-base mb-6" data-i18n="demo.card1.body">Visual explanation of why our clients stay. The moat that compounds over time.</p>
-          </div>
-          <div>
-            <span class="text-teal-400 text-sm font-semibold group-hover:gap-3 inline-flex items-center gap-2 transition-all" data-i18n="demo.open">Open demo →</span>
-          </div>
-        </a>
+  <!-- ─── MAIN DEMO GRID ─── -->
+  <section class="relative pb-10 px-4 md:px-6 z-10">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid lg:grid-cols-2 gap-5 items-start">
 
-        <!-- Dashboard Home -->
-        <a href="demos/dashboard-home.html" target="_blank" class="demo-card glass-card rounded-3xl p-8 group reveal flex flex-col justify-between">
-          <div>
-            <div class="aspect-video bg-gradient-to-br from-slate-100 to-white rounded-2xl mb-6 p-4 overflow-hidden relative flex items-center">
-              <div class="bg-white rounded-xl shadow-lg border border-slate-200/50 h-full w-full p-4 space-y-3">
-                <div class="grid grid-cols-4 gap-2">
-                  <div class="bg-slate-100 rounded h-8"></div>
-                  <div class="bg-slate-100 rounded h-8"></div>
-                  <div class="bg-red-50 rounded h-8 border border-red-200/50"></div>
-                  <div class="bg-slate-100 rounded h-8"></div>
-                </div>
-                <div class="space-y-2">
-                  <div class="bg-slate-100 rounded h-4 w-full"></div>
-                  <div class="bg-slate-100 rounded h-4 w-5/6"></div>
-                  <div class="bg-amber-50 rounded h-4 w-11/12 border border-amber-200/50"></div>
+        <!-- ══ LEFT: Chat ══ -->
+        <div>
+          <div class="flex gap-2 mb-2">
+            <button id="tab-sofia" onclick="selectAgent('sofia')"
+              class="agent-tab-active flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold border transition-all">
+              <span>⚖️</span><span id="tab-sofia-label">Sofia — Law Firms</span>
+            </button>
+            <button id="tab-marco" onclick="selectAgent('marco')"
+              class="agent-tab-inactive flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold border transition-all">
+              <span>📊</span><span id="tab-marco-label">Marco — Accountants</span>
+            </button>
+          </div>
+
+          <div class="glow-border-card glass-card rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+            <!-- Agent header -->
+            <div class="flex items-center justify-between px-4 py-2.5 border-b border-white/5 bg-slate-900/40">
+              <div class="flex items-center gap-2">
+                <div id="agent-avatar" class="w-7 h-7 rounded-full bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center text-[10px] font-black text-slate-900">S</div>
+                <div>
+                  <div id="agent-name" class="text-xs font-bold text-white">Sofia — Law Firm Agent</div>
+                  <div id="agent-sub" class="text-[9px] text-teal-400 font-semibold uppercase tracking-wider">Corporate · Family · Labor · Immigration</div>
                 </div>
               </div>
+              <div class="flex items-center gap-1.5 text-[10px] text-emerald-400 font-semibold">
+                <span class="live-dot" style="width:7px;height:7px;"></span>
+                <span id="online-label">Online</span>
+              </div>
             </div>
-            <div class="text-xs font-bold text-teal-400 uppercase tracking-widest mb-2" data-i18n="demo.card2.label">Daily view</div>
-            <h3 class="text-2xl font-bold mb-3 text-white" data-i18n="demo.card2.title">Monday Morning Dashboard</h3>
-            <p class="text-slate-300 text-base mb-6" data-i18n="demo.card2.body">What your team sees when they open Nexus each Monday. Priority inbox, deadlines, automated activity.</p>
+            <!-- Messages -->
+            <div id="chat-messages" class="px-3 py-3 space-y-3 overflow-y-auto" style="height:230px;"></div>
+            <!-- Chips -->
+            <div id="chip-row" class="px-3 pb-2 flex flex-wrap gap-1.5"></div>
+            <!-- Input -->
+            <div class="px-3 pb-3">
+              <div class="flex gap-2 items-center bg-slate-900/60 rounded-xl p-1.5 border border-white/10">
+                <input id="chat-input" type="text"
+                  class="flex-1 bg-transparent text-xs text-white placeholder-slate-500 px-2 py-1.5 rounded-lg"
+                  placeholder="Type your question here..." autocomplete="off">
+                <button id="send-btn" onclick="sendMessage()"
+                  class="btn-shine px-4 py-1.5 bg-gradient-to-r from-teal-500 to-blue-600 rounded-lg text-xs font-bold hover:-translate-y-0.5 transition-all">
+                  <span id="send-label">Send</span>
+                </button>
+              </div>
+              <p id="demo-note" class="text-center text-[10px] text-slate-600 mt-1.5">Demo simulation · Real agents powered by Claude AI</p>
+            </div>
           </div>
-          <div>
-            <span class="text-teal-400 text-sm font-semibold group-hover:gap-3 inline-flex items-center gap-2 transition-all" data-i18n="demo.open">Open demo →</span>
-          </div>
-        </a>
 
-        <!-- Client Detail -->
-        <a href="demos/client-detail.html" target="_blank" class="demo-card glass-card rounded-3xl p-8 group reveal relative flex flex-col justify-between">
-          <div class="absolute top-6 right-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs px-3 py-1.5 rounded-full font-bold" data-i18n="demo.card3.badge">⭐ Most impactful</div>
-          <div>
-            <div class="aspect-video bg-gradient-to-br from-slate-100 to-white rounded-2xl mb-6 p-4 overflow-hidden relative flex items-center">
-              <div class="bg-white rounded-xl shadow-lg border border-slate-200/50 h-full w-full p-4 space-y-3">
-                <div class="bg-purple-50 rounded-lg h-10 border border-purple-200/50"></div>
-                <div class="grid grid-cols-2 gap-2">
-                  <div class="bg-slate-100 rounded h-20"></div>
-                  <div class="bg-teal-50 rounded-lg h-20 border-2 border-teal-400/80"></div>
+          <!-- WhatsApp note -->
+          <div class="mt-3 flex items-center gap-3 px-4 py-3 rounded-2xl bg-[#25D366]/8 border border-[#25D366]/25 backdrop-blur">
+            <svg class="flex-shrink-0 w-5 h-5" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 2C8.268 2 2 8.268 2 16c0 2.478.666 4.8 1.83 6.8L2 30l7.38-1.8A13.93 13.93 0 0016 30c7.732 0 14-6.268 14-14S23.732 2 16 2z" fill="#25D366"/>
+              <path d="M22.5 19.4c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47-.89-.79-1.49-1.76-1.66-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51-.17-.01-.37-.01-.57-.01-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.47 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.09 4.49.71.31 1.27.49 1.7.63.72.23 1.37.2 1.89.12.58-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35z" fill="#fff"/>
+            </svg>
+            <p id="whatsapp-note" class="text-xs text-slate-300 leading-snug">
+              Your clients can have this exact conversation from <span class="text-[#25D366] font-bold">WhatsApp</span> — no app downloads, no logins.
+            </p>
+          </div>
+        </div>
+
+        <!-- ══ RIGHT: 3 Demo Cards ══ -->
+        <div class="flex flex-col gap-3">
+          <p id="explore-label" class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mb-1">Explore the full system</p>
+
+          <!-- ── Dashboard ── -->
+          <a href="demos/dashboard-home.html" target="_blank"
+            class="demo-card tilt-card glass-card rounded-2xl p-4 group flex gap-4 items-center border border-white/10 hover:border-teal-500/30 transition-all">
+            <!-- Mini preview -->
+            <div class="flex-shrink-0 w-40 h-24 rounded-xl overflow-hidden bg-[#0f172a] border border-white/10 relative">
+              <!-- Nav bar -->
+              <div class="flex items-center gap-1 px-2 py-1.5 bg-[#1e293b] border-b border-white/10">
+                <div class="w-4 h-4 rounded bg-gradient-to-br from-teal-500 to-blue-600 flex items-center justify-center text-[6px] font-black text-white">N</div>
+                <div class="flex gap-1 ml-1">
+                  <div class="w-8 h-1.5 rounded bg-slate-600"></div>
+                  <div class="w-6 h-1.5 rounded bg-slate-600"></div>
+                  <div class="w-8 h-1.5 rounded bg-teal-500/60"></div>
+                </div>
+              </div>
+              <!-- KPI row -->
+              <div class="grid grid-cols-4 gap-1 px-2 pt-1.5">
+                <div class="bg-[#1e293b] rounded p-1 border border-white/10">
+                  <div class="text-[5px] text-slate-500 mb-0.5">Cases</div>
+                  <div class="text-[7px] font-black text-teal-400">348</div>
+                </div>
+                <div class="bg-[#1e293b] rounded p-1 border border-red-500/30">
+                  <div class="text-[5px] text-slate-500 mb-0.5">Urgent</div>
+                  <div class="text-[7px] font-black text-red-400">12</div>
+                </div>
+                <div class="bg-[#1e293b] rounded p-1 border border-white/10">
+                  <div class="text-[5px] text-slate-500 mb-0.5">Docs</div>
+                  <div class="text-[7px] font-black text-blue-400">94</div>
+                </div>
+                <div class="bg-[#1e293b] rounded p-1 border border-white/10">
+                  <div class="text-[5px] text-slate-500 mb-0.5">Appts</div>
+                  <div class="text-[7px] font-black text-purple-400">7</div>
+                </div>
+              </div>
+              <!-- Activity rows -->
+              <div class="px-2 pt-1 space-y-0.5">
+                <div class="flex items-center gap-1">
+                  <div class="w-1 h-1 rounded-full bg-red-400"></div>
+                  <div class="w-16 h-1.5 rounded bg-slate-700"></div>
+                  <div class="w-6 h-1.5 rounded bg-red-900/60 ml-auto"></div>
+                </div>
+                <div class="flex items-center gap-1">
+                  <div class="w-1 h-1 rounded-full bg-amber-400"></div>
+                  <div class="w-14 h-1.5 rounded bg-slate-700"></div>
+                  <div class="w-8 h-1.5 rounded bg-amber-900/60 ml-auto"></div>
+                </div>
+                <div class="flex items-center gap-1">
+                  <div class="w-1 h-1 rounded-full bg-teal-400"></div>
+                  <div class="w-12 h-1.5 rounded bg-slate-700"></div>
+                  <div class="w-6 h-1.5 rounded bg-teal-900/60 ml-auto"></div>
                 </div>
               </div>
             </div>
-            <div class="text-xs font-bold text-teal-400 uppercase tracking-widest mb-2" data-i18n="demo.card3.label">Deep view</div>
-            <h3 class="text-2xl font-bold mb-3 text-white" data-i18n="demo.card3.title">Client Profile — The Moat</h3>
-            <p class="text-slate-300 text-base mb-6" data-i18n="demo.card3.body">See the "Sofia knows" panel — 24 months of context that no competitor can replicate quickly.</p>
-          </div>
-          <div>
-            <span class="text-teal-400 text-sm font-semibold group-hover:gap-3 inline-flex items-center gap-2 transition-all" data-i18n="demo.open">Open demo →</span>
-          </div>
-        </a>
+            <!-- Text -->
+            <div class="flex-1 min-w-0">
+              <div class="text-[10px] font-bold text-teal-400 uppercase tracking-widest mb-1" data-i18n="demo.card2.label">Daily view</div>
+              <h3 class="text-sm font-bold text-white mb-1" data-i18n="demo.card2.title">Monday Dashboard</h3>
+              <p class="text-xs text-slate-400 leading-relaxed" data-i18n="demo.card2.body">Priority inbox, deadlines, and automated weekly activity.</p>
+              <span class="text-teal-400 text-xs font-semibold inline-flex items-center gap-1 mt-2 group-hover:gap-2 transition-all" data-i18n="demo.open">Open demo →</span>
+            </div>
+          </a>
 
-        <!-- Document Search -->
-        <a href="demos/document-search.html" target="_blank" class="demo-card glass-card rounded-3xl p-8 group reveal flex flex-col justify-between">
-          <div>
-            <div class="aspect-video bg-gradient-to-br from-slate-100 to-white rounded-2xl mb-6 p-4 overflow-hidden relative flex items-center">
-              <div class="bg-white rounded-xl shadow-lg border border-slate-200/50 h-full w-full p-4 space-y-3">
-                <div class="bg-blue-50 rounded h-6 border border-blue-200/50"></div>
-                <div class="grid grid-cols-3 gap-2">
-                  <div class="space-y-1 col-span-1">
-                    <div class="bg-slate-100 rounded h-3"></div>
-                    <div class="bg-slate-100 rounded h-3"></div>
-                    <div class="bg-blue-100 rounded h-3"></div>
+          <!-- ── Client Detail ── -->
+          <a href="demos/client-detail.html" target="_blank"
+            class="demo-card tilt-card glass-card rounded-2xl p-4 group flex gap-4 items-center border border-white/10 hover:border-teal-500/30 transition-all relative">
+            <div class="absolute top-3 right-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-[8px] px-2 py-0.5 rounded-full font-bold">⭐ Most impactful</div>
+            <!-- Mini preview -->
+            <div class="flex-shrink-0 w-40 h-24 rounded-xl overflow-hidden bg-[#0f172a] border border-white/10">
+              <!-- Client header -->
+              <div class="px-2 py-1.5 bg-[#1e293b] border-b border-white/10 flex items-center gap-1.5">
+                <div class="w-5 h-5 rounded-full bg-gradient-to-br from-teal-400 to-blue-500 flex items-center justify-center text-[6px] font-black text-white">MR</div>
+                <div>
+                  <div class="text-[7px] font-bold text-white">Maria Rodriguez</div>
+                  <div class="flex items-center gap-1 mt-0.5">
+                    <div class="text-[5px] text-teal-400 bg-teal-500/15 px-1 rounded">Green Card</div>
+                    <div class="text-[5px] text-red-400 bg-red-500/15 px-1 rounded">Deadline: 30d</div>
                   </div>
-                  <div class="col-span-2 space-y-2">
-                    <div class="bg-amber-50 rounded-lg h-12 border border-amber-200/50"></div>
+                </div>
+              </div>
+              <!-- Tabs -->
+              <div class="flex gap-1 px-2 pt-1">
+                <div class="text-[5px] text-teal-400 border-b border-teal-400 pb-0.5 px-1">Overview</div>
+                <div class="text-[5px] text-slate-600 pb-0.5 px-1">Documents</div>
+                <div class="text-[5px] text-slate-600 pb-0.5 px-1">Notes</div>
+              </div>
+              <!-- Content panels -->
+              <div class="grid grid-cols-2 gap-1 px-2 pt-1">
+                <div class="bg-[#1e293b] rounded p-1 space-y-0.5">
+                  <div class="w-full h-1 rounded bg-slate-700"></div>
+                  <div class="w-3/4 h-1 rounded bg-slate-700"></div>
+                  <div class="w-full h-1 rounded bg-slate-700"></div>
+                  <div class="w-2/3 h-1 rounded bg-slate-700"></div>
+                </div>
+                <div class="bg-teal-500/10 rounded border border-teal-500/40 p-1 space-y-0.5">
+                  <div class="text-[5px] text-teal-400 font-bold">Sofia knows</div>
+                  <div class="w-full h-1 rounded bg-teal-900/60"></div>
+                  <div class="w-3/4 h-1 rounded bg-teal-900/60"></div>
+                  <div class="w-full h-1 rounded bg-teal-900/60"></div>
+                </div>
+              </div>
+            </div>
+            <!-- Text -->
+            <div class="flex-1 min-w-0">
+              <div class="text-[10px] font-bold text-teal-400 uppercase tracking-widest mb-1" data-i18n="demo.card3.label">Deep view</div>
+              <h3 class="text-sm font-bold text-white mb-1" data-i18n="demo.card3.title">Client Profile</h3>
+              <p class="text-xs text-slate-400 leading-relaxed" data-i18n="demo.card3.body">24 months of context no competitor can replicate quickly.</p>
+              <span class="text-teal-400 text-xs font-semibold inline-flex items-center gap-1 mt-2 group-hover:gap-2 transition-all" data-i18n="demo.open">Open demo →</span>
+            </div>
+          </a>
+
+          <!-- ── Document Search ── -->
+          <a href="demos/document-search.html" target="_blank"
+            class="demo-card tilt-card glass-card rounded-2xl p-4 group flex gap-4 items-center border border-white/10 hover:border-teal-500/30 transition-all">
+            <!-- Mini preview -->
+            <div class="flex-shrink-0 w-40 h-24 rounded-xl overflow-hidden bg-[#0f172a] border border-white/10">
+              <!-- Search bar -->
+              <div class="px-2 pt-2 pb-1">
+                <div class="flex items-center gap-1 bg-[#1e293b] rounded-lg px-2 py-1 border border-blue-500/30">
+                  <div class="text-[7px] text-blue-400">🔍</div>
+                  <div class="flex-1 h-1.5 rounded bg-slate-600"></div>
+                  <div class="text-[5px] text-slate-500 bg-slate-700 px-1 rounded">↵</div>
+                </div>
+              </div>
+              <!-- Chips -->
+              <div class="flex gap-1 px-2 pb-1">
+                <div class="text-[5px] text-amber-400 bg-amber-500/15 border border-amber-500/30 px-1.5 py-0.5 rounded-full">IRS 2025</div>
+                <div class="text-[5px] text-slate-400 bg-slate-800 border border-white/10 px-1.5 py-0.5 rounded-full">Contract</div>
+              </div>
+              <!-- Results area -->
+              <div class="grid grid-cols-4 gap-1 px-2">
+                <!-- Filters -->
+                <div class="space-y-1">
+                  <div class="text-[5px] text-slate-500 font-bold uppercase">Filters</div>
+                  <div class="w-full h-1 rounded bg-teal-500/50"></div>
+                  <div class="w-full h-1 rounded bg-slate-700"></div>
+                  <div class="w-full h-1 rounded bg-slate-700"></div>
+                </div>
+                <!-- Doc card -->
+                <div class="col-span-3 bg-[#1e293b] rounded p-1 border border-amber-500/30 space-y-0.5">
+                  <div class="flex items-center gap-1">
+                    <div class="text-[6px]">📄</div>
+                    <div class="w-12 h-1.5 rounded bg-slate-600"></div>
+                    <div class="text-[5px] text-amber-400 bg-amber-500/15 px-0.5 rounded ml-auto">⚠️</div>
+                  </div>
+                  <div class="grid grid-cols-2 gap-0.5">
+                    <div class="h-1 rounded bg-slate-700"></div>
+                    <div class="h-1 rounded bg-slate-700"></div>
+                    <div class="h-1 rounded bg-teal-900/60"></div>
+                    <div class="h-1 rounded bg-slate-700"></div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="text-xs font-bold text-teal-400 uppercase tracking-widest mb-2" data-i18n="demo.card4.label">Knowledge base</div>
-            <h3 class="text-2xl font-bold mb-3 text-white" data-i18n="demo.card4.title">Global Document Search</h3>
-            <p class="text-slate-300 text-base mb-6" data-i18n="demo.card4.body">8,247 documents indexed, tagged, and intelligent. Find any record in 0.3 seconds.</p>
-          </div>
-          <div>
-            <span class="text-teal-400 text-sm font-semibold group-hover:gap-3 inline-flex items-center gap-2 transition-all" data-i18n="demo.open">Open demo →</span>
-          </div>
-        </a>
+            <!-- Text -->
+            <div class="flex-1 min-w-0">
+              <div class="text-[10px] font-bold text-teal-400 uppercase tracking-widest mb-1" data-i18n="demo.card4.label">Knowledge base</div>
+              <h3 class="text-sm font-bold text-white mb-1" data-i18n="demo.card4.title">Document Search</h3>
+              <p class="text-xs text-slate-400 leading-relaxed" data-i18n="demo.card4.body">8,247 documents indexed, tagged, searchable in 0.3s.</p>
+              <span class="text-teal-400 text-xs font-semibold inline-flex items-center gap-1 mt-2 group-hover:gap-2 transition-all" data-i18n="demo.open">Open demo →</span>
+            </div>
+          </a>
+
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ─────────────────────────────────── FOOTER ─────────────────────────────────── -->
+  <!-- ─── FOOTER ─── -->
   <footer class="relative py-16 px-6 border-t border-white/10 z-10">
     <div class="max-w-6xl mx-auto">
       <div class="grid md:grid-cols-4 gap-12 mb-12">
@@ -170,18 +375,16 @@
             <div class="w-9 h-9 bg-gradient-to-br from-teal-500 to-blue-600 rounded-lg flex items-center justify-center font-black text-white">N</div>
             <span class="text-xl font-bold">Nexus</span>
           </div>
-          <p class="text-sm text-slate-400 leading-relaxed" data-i18n="footer.tagline">Enterprise AI for the firms that deserve it. Built in Mexico, deployed in the US.</p>
+          <p class="text-sm text-slate-400 leading-relaxed" data-i18n="footer.tagline">Enterprise AI for the firms that deserve it.</p>
         </div>
-
         <div>
           <div class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4" data-i18n="footer.industries.label">Industries</div>
           <ul class="space-y-2 text-sm">
-            <li><a href="industries.html" class="text-slate-300 hover:text-white" data-i18n="footer.industries.attorneys">Immigration attorneys</a></li>
+            <li><a href="industries.html" class="text-slate-300 hover:text-white" data-i18n="footer.industries.attorneys">Law firms</a></li>
             <li><a href="industries.html" class="text-slate-300 hover:text-white" data-i18n="footer.industries.accountants">Accounting practices</a></li>
             <li><a href="industries.html" class="text-slate-300 hover:text-white" data-i18n="footer.industries.logistics">Logistics companies</a></li>
           </ul>
         </div>
-
         <div>
           <div class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4" data-i18n="footer.company.label">Company</div>
           <ul class="space-y-2 text-sm">
@@ -190,7 +393,6 @@
             <li><a href="contact.html" class="text-slate-300 hover:text-white" data-i18n="footer.company.contact">Contact</a></li>
           </ul>
         </div>
-
         <div>
           <div class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4" data-i18n="footer.legal.label">Legal</div>
           <ul class="space-y-2 text-sm">
@@ -200,14 +402,437 @@
           </ul>
         </div>
       </div>
-
       <div class="pt-8 border-t border-white/10 flex flex-wrap justify-between items-center gap-4 text-sm text-slate-500">
-        <div data-i18n="footer.copyright">© 2026 Nexus. Built in Mexico for the US market.</div>
+        <div data-i18n="footer.copyright">© 2026 Nexus. All rights reserved.</div>
         <div data-i18n="footer.contact">contact@nexus.ai</div>
       </div>
     </div>
   </footer>
 
   <script src="script.js"></script>
+  <script>
+  // ═══════════════════════════════════════════════
+  // DEMO CHAT ENGINE
+  // ═══════════════════════════════════════════════
+
+  let currentAgent = 'sofia';
+  let isTyping = false;
+  let msgCount = 0;
+
+  // ── Agent metadata ──────────────────────────────
+  const AGENTS = {
+    sofia: {
+      name_en: 'Sofia — Law Firm Agent',
+      name_es: 'Sofia — Agente Legal',
+      sub_en:  'Corporate · Family · Labor · Immigration',
+      sub_es:  'Corporativo · Familiar · Laboral · Migratorio',
+      avatar:  'S',
+      color:   'teal',
+      tab_active:   'agent-tab-active',
+      tab_inactive: 'agent-tab-inactive',
+    },
+    marco: {
+      name_en: 'Marco — Accounting Agent',
+      name_es: 'Marco — Agente Contable',
+      sub_en:  'Tax Returns · Bookkeeping · IRS · Payroll',
+      sub_es:  'Declaraciones · Contabilidad · IRS · Nómina',
+      avatar:  'M',
+      color:   'blue',
+      tab_active:   'agent-tab-active-blue',
+      tab_inactive: 'agent-tab-inactive',
+    }
+  };
+
+  // ── Quick chips ─────────────────────────────────
+  const CHIPS = {
+    sofia: {
+      en: ["What documents do I need?", "How long does it take?", "I got a letter from USCIS", "Can I reschedule my appointment?"],
+      es: ["¿Qué documentos necesito?", "¿Cuánto tarda el proceso?", "Recibí una carta de USCIS", "¿Puedo cambiar mi cita?"]
+    },
+    marco: {
+      en: ["When is my refund coming?", "What documents do I need for taxes?", "I got an IRS letter", "I have a small business"],
+      es: ["¿Cuándo llega mi reembolso?", "¿Qué documentos necesito?", "Recibí una carta del IRS", "Tengo un negocio pequeño"]
+    }
+  };
+
+  // ── Welcome messages ────────────────────────────
+  const WELCOME = {
+    sofia: {
+      en: "Hi! I'm Sofia, the assistant at this law firm. I'm here to help you with your case status, required documents, appointments, or any general legal questions. How can I help you today?",
+      es: "¡Hola! Soy Sofia, la asistente del despacho. Estoy aquí para ayudarte con el estatus de tu caso, documentos requeridos, citas, o cualquier pregunta general. ¿En qué te puedo ayudar hoy?"
+    },
+    marco: {
+      en: "Hello! I'm Marco, the assistant at this accounting practice. I can help you with your tax return, document requests, IRS notices, refund status, or general tax questions. What can I do for you?",
+      es: "¡Hola! Soy Marco, el asistente del despacho contable. Puedo ayudarte con tu declaración, documentos requeridos, cartas del IRS, estado de tu reembolso, o preguntas fiscales en general. ¿Qué necesitas?"
+    }
+  };
+
+  // ── Response engine ─────────────────────────────
+  const RESPONSES = {
+    sofia: {
+      en: [
+        {
+          keys: ['status','case','update','progress','hearing','my case','when will','where is'],
+          msg: "Your case status depends on your specific case number and filing date. I have access to all active files in the system. Could you share your full name or case number? I'll pull up your latest status right away — including the next action required and any upcoming deadlines."
+        },
+        {
+          keys: ['document','documents','paperwork','papers','need','missing','what do i need'],
+          msg: "Great question. The exact documents depend on your case type, but here's what most immigration matters require to get started:\n\n• Valid government-issued photo ID or passport\n• Proof of continuous US residence (utility bills, bank statements — last 2 years)\n• Employment verification letter\n• Any previous immigration filings or notices\n\nCould you tell me what type of case you have? I'll send you a precise, personalized checklist immediately."
+        },
+        {
+          keys: ['how long','time','timeline','wait','process','months','years'],
+          msg: "Processing times vary by case type and current USCIS backlogs. Here's a general guide:\n\n• DACA renewal: 5–7 months\n• Work visa (H-1B): 3–9 months\n• Family petition (immediate relative): 12–24 months\n• Green card (employment-based): 2–5 years\n\nOnce I have your file open, I can give you a specific timeline and flag any critical deadlines. Would you like to schedule a consultation?"
+        },
+        {
+          keys: ['uscis','letter','notice','received','got','mail','nta','rfe','response'],
+          msg: "⚠️ USCIS correspondence is time-sensitive — please don't wait.\n\nYou can upload the letter directly here and I'll analyze it within seconds. I'll extract:\n✓ The exact deadline for your response\n✓ What USCIS is requesting\n✓ The next required action\n\nI'll have a full summary ready for the attorney immediately. These notices are routine for us — we handle them all the time. Upload the letter and let's get started."
+        },
+        {
+          keys: ['appointment','reschedule','cancel','change','schedule','meeting','consult','available'],
+          msg: "Of course! I can take care of that right now. Our next available slots are:\n\n📅 Tomorrow — 2:00 PM\n📅 Thursday — 10:30 AM\n📅 Friday — 3:00 PM\n\nAll appointments are 45 minutes and available in person or by video. Which option works best for you? I'll send a confirmation and reminder 24 hours before."
+        },
+        {
+          keys: ['cost','price','fee','how much','charge','pay','money','expensive'],
+          msg: "Initial consultations are 45 minutes. I'd like to connect you with the attorney directly to give you an accurate fee based on your specific situation — pricing depends on the complexity and type of case.\n\nWhat I can tell you is that we offer structured flat-fee packages for most immigration matters, so there are no surprise bills. Would you like me to schedule a free 20-minute intro call first?"
+        },
+        {
+          keys: ['deport','ice','detention','scared','afraid','urgent','emergency','arrested','help'],
+          msg: "I understand this is an extremely stressful situation. You're in the right place.\n\n🚨 I'm flagging this as URGENT for the attorney right now.\n\nWhile I do that — two quick questions that will help immediately:\n1. Do you have a hearing date or any official notice?\n2. Is this for yourself or someone in your family?\n\nThe attorney handles exactly these cases and will prioritize your situation. You're not alone in this."
+        },
+        {
+          keys: ['hi','hello','hey','good','morning','afternoon','hola','buenas'],
+          msg: "Hi there! Great to have you here. I'm Sofia — I help manage cases, documents, and appointments for the firm.\n\nI can answer questions about case status, required documents, timelines, appointments, and general immigration topics. What would you like to know?"
+        }
+      ],
+      es: [
+        {
+          keys: ['estatus','caso','avance','expediente','cómo va','mi caso','cuándo','audiencia'],
+          msg: "El estatus de tu caso depende de tu número de expediente y fecha de presentación. Tengo acceso a todos los archivos activos del sistema. ¿Puedes compartirme tu nombre completo o número de caso? Lo consulto ahora mismo — incluyendo la próxima acción requerida y las fechas límite próximas."
+        },
+        {
+          keys: ['documento','documentos','papeles','necesito','qué necesito','cuáles','falta','lista'],
+          msg: "Buena pregunta. Los documentos exactos dependen del tipo de caso, pero esto es lo que la mayoría de trámites migratorios requieren para iniciar:\n\n• Identificación oficial con foto o pasaporte vigente\n• Comprobantes de residencia continua en USA (recibos, estados de cuenta — últimos 2 años)\n• Carta de verificación de empleo\n• Cualquier trámite o notificación migratoria previa\n\n¿Puedes decirme qué tipo de caso tienes? Te mando una lista personalizada y precisa de inmediato."
+        },
+        {
+          keys: ['cuánto tarda','tiempo','plazo','cuánto tiempo','meses','años','proceso','espera'],
+          msg: "Los tiempos de proceso varían según el tipo de caso y los tiempos actuales de USCIS. Aquí una guía general:\n\n• Renovación DACA: 5–7 meses\n• Visa de trabajo (H-1B): 3–9 meses\n• Petición familiar (familiar inmediato): 12–24 meses\n• Residencia permanente (por empleo): 2–5 años\n\nEn cuanto tenga tu expediente abierto, te doy un plazo específico y marco cualquier fecha crítica. ¿Quieres agendar una consulta?"
+        },
+        {
+          keys: ['carta','uscis','notificación','recibí','llegó','aviso','rfe','nta','responder'],
+          msg: "⚠️ Las cartas de USCIS son urgentes — no esperes para atenderlas.\n\nPuedes subir la carta directamente aquí y la analizo en segundos. Extraigo:\n✓ La fecha límite exacta para responder\n✓ Qué está solicitando USCIS\n✓ La próxima acción requerida\n\nTengo el resumen listo para el abogado de inmediato. Estos avisos son rutinarios para nosotros — los manejamos constantemente. Sube la carta y empezamos."
+        },
+        {
+          keys: ['cita','reagendar','cancelar','cambiar','agendar','consulta','disponible','horario'],
+          msg: "¡Claro! Lo arreglo ahora mismo. Los próximos horarios disponibles son:\n\n📅 Mañana — 2:00 PM\n📅 Jueves — 10:30 AM\n📅 Viernes — 3:00 PM\n\nTodas las consultas duran 45 minutos y están disponibles en persona o por videollamada. ¿Cuál te funciona mejor? Te mando confirmación y recordatorio 24 horas antes."
+        },
+        {
+          keys: ['costo','precio','cuánto cobran','cuánto cuesta','honorarios','pago','cobran'],
+          msg: "Las consultas iniciales son de 45 minutos. Me gustaría conectarte directamente con el abogado para darte una tarifa exacta basada en tu situación — los honorarios dependen del tipo y complejidad del caso.\n\nLo que sí te puedo decir es que manejamos paquetes de tarifa fija para la mayoría de trámites migratorios, sin cobros sorpresa. ¿Quieres que agende primero una llamada introductoria gratuita de 20 minutos?"
+        },
+        {
+          keys: ['deportación','ice','detención','miedo','urgente','emergencia','arrestado','auxilio','ayuda'],
+          msg: "Entiendo que esta situación es muy difícil. Estás en el lugar correcto.\n\n🚨 Estoy marcando esto como URGENTE para el abogado ahora mismo.\n\nMientras lo hago — dos preguntas rápidas que nos ayudarán inmediatamente:\n1. ¿Tienes una fecha de audiencia o alguna notificación oficial?\n2. ¿Es para ti o para un familiar?\n\nEl abogado atiende exactamente estos casos y priorizará tu situación. No estás solo/a en esto."
+        },
+        {
+          keys: ['hola','buenos','buenas','hi','hey','buen día'],
+          msg: "¡Hola! Qué bueno que estás aquí. Soy Sofia — me encargo de los casos, documentos y citas del despacho.\n\nPuedo ayudarte con el estatus de tu caso, documentos requeridos, plazos, citas y preguntas generales sobre migración. ¿En qué te puedo ayudar?"
+        }
+      ]
+    },
+
+    marco: {
+      en: [
+        {
+          keys: ['refund','return','money back','when','irs refund','where is my'],
+          msg: "IRS refunds take 10–21 business days from the date of electronic filing. The fastest way to check your exact status:\n\n🔗 irs.gov/refunds → use your SSN, filing status, and expected refund amount.\n\nIf it's been more than 21 days and you still haven't received it, I'll flag it for review with the CPA. Would you like me to do that?"
+        },
+        {
+          keys: ['ready','tax return','when is','declaration','filing','prepare','done','finish'],
+          msg: "Your return timeline depends on when we receive your complete document package. Once everything is in:\n\n✓ W-2 from each employer\n✓ All 1099 forms (freelance, dividends, interest)\n✓ Any deductible expenses\n\nReturns are typically ready in 3–5 business days. Could you share your full name? I'll check your file status right now and tell you exactly what (if anything) is still missing."
+        },
+        {
+          keys: ['document','documents','papers','need','w2','1099','what do i','paperwork'],
+          msg: "For a standard individual return, here's what we'll need — I'll request these one at a time so it's not overwhelming:\n\n1. W-2 from each employer (employers must send these by Jan 31)\n2. Any 1099 forms (freelance income, bank interest, investments, unemployment)\n3. Last year's tax return (for new clients)\n4. SSN for all dependents\n5. Receipts for deductible expenses (medical, mortgage interest, charity)\n\nWhat's your name? I'll open your file and tell you exactly where you stand."
+        },
+        {
+          keys: ['irs','letter','notice','received','audit','cp','ltr','mail','got a'],
+          msg: "⚠️ IRS letters are always time-sensitive. Please don't ignore them.\n\nSend me a photo or scan of the letter right now. I'll:\n✓ Identify the notice type (CP2000, CP3219, LTR 525, etc.)\n✓ Extract the exact deadline\n✓ Summarize what the IRS is asking for\n✓ Have it in the CPA's review queue within minutes\n\nWhat's the notice number shown on the letter? (usually starts with CP or LTR)"
+        },
+        {
+          keys: ['cost','how much','price','fee','charge','pay','rate','pricing'],
+          msg: "Our pricing depends on the complexity of your return:\n\n• Individual return (W-2 only): starts at a flat fee\n• Self-employed / freelance: moderate fee\n• Business return (LLC, S-Corp): higher fee depending on activity\n\nThe best way is a free 20-minute consultation — we'll give you an exact quote with no surprises. Would you like me to schedule that?"
+        },
+        {
+          keys: ['business','llc','company','self-employed','freelance','contractor','1099','s-corp'],
+          msg: "Great — we specialize in small business accounting. Here's what we typically handle for businesses:\n\n📌 Monthly bookkeeping & categorization\n📌 Quarterly estimated tax payments (Apr 15 · Jun 15 · Sep 15 · Jan 15)\n📌 Payroll processing & W-2 filing\n📌 Annual business return (Schedule C, LLC, or S-Corp)\n📌 IRS representation if needed\n\nWhat type of entity do you have? (sole proprietor, LLC, S-Corp) I'll set up your file and schedule your first consultation."
+        },
+        {
+          keys: ['deadline','april','extension','late','when is','due date','tax day'],
+          msg: "Key tax dates to keep in mind:\n\n📅 January 31 — Employers must send your W-2\n📅 April 15 — Federal tax deadline (and Q1 estimated taxes)\n📅 June 15 — Q2 estimated taxes\n📅 September 15 — Q3 estimated taxes\n📅 October 15 — Extension deadline\n\nIf you need more time, we can file an extension by April 15 — this gives you until October 15, but it does NOT extend the time to pay any taxes owed. Are you getting close to a deadline? I can prioritize your file."
+        },
+        {
+          keys: ['hi','hello','hey','good','morning','afternoon'],
+          msg: "Hi there! I'm Marco — the assistant at this accounting practice.\n\nI can help you with your tax return status, document requests, IRS notices, refund tracking, and general tax questions. Whether it's personal or business taxes, I've got you covered. What do you need?"
+        }
+      ],
+      es: [
+        {
+          keys: ['reembolso','devolución','cuándo llega','cuándo me','irs','dinero','devuelve'],
+          msg: "Los reembolsos del IRS tardan entre 10 y 21 días hábiles a partir de la fecha de presentación electrónica. La forma más rápida de verificar tu estatus exacto:\n\n🔗 irs.gov/refunds → ingresa tu SSN, estatus de declaración y monto esperado.\n\nSi han pasado más de 21 días y aún no llega, lo marco para revisión con el CPA. ¿Quieres que lo haga?"
+        },
+        {
+          keys: ['declaración','cuando estará','cuándo está','lista','termina','preparar','lista mi'],
+          msg: "El plazo de tu declaración depende de cuándo recibamos tu paquete completo de documentos. Una vez que esté todo:\n\n✓ W-2 de cada empleador\n✓ Todos los formularios 1099\n✓ Gastos deducibles\n\nLas declaraciones generalmente están listas en 3 a 5 días hábiles. ¿Puedes compartirme tu nombre completo? Reviso el estatus de tu expediente ahora mismo y te digo exactamente qué (si algo) todavía falta."
+        },
+        {
+          keys: ['documento','documentos','qué necesito','papeles','w2','1099','necesito','lista'],
+          msg: "Para una declaración individual estándar, esto es lo que necesitamos — te lo pido de uno en uno para que no sea abrumador:\n\n1. W-2 de cada empleador (los empleadores deben enviarlo antes del 31 de enero)\n2. Formularios 1099 (ingresos freelance, intereses bancarios, inversiones, desempleo)\n3. Declaración del año pasado (si eres cliente nuevo)\n4. SSN de todos los dependientes\n5. Recibos de gastos deducibles (médicos, intereses hipotecarios, donativos)\n\n¿Cuál es tu nombre? Abro tu expediente y te digo exactamente en qué punto estás."
+        },
+        {
+          keys: ['carta','irs','aviso','notificación','recibí','auditoría','cp','ltr','llegó'],
+          msg: "⚠️ Las cartas del IRS siempre tienen plazos. No las ignores.\n\nMándame una foto o escaneo de la carta ahora mismo. Yo:\n✓ Identifico el tipo de aviso (CP2000, CP3219, LTR 525, etc.)\n✓ Extraigo la fecha límite exacta\n✓ Resumo qué está pidiendo el IRS\n✓ Lo pongo en la cola de revisión del CPA en minutos\n\n¿Cuál es el número de aviso que aparece en la carta? (generalmente empieza con CP o LTR)"
+        },
+        {
+          keys: ['cuánto cobran','precio','costo','cuánto cuesta','honorarios','pago','tarifa'],
+          msg: "Nuestros precios dependen de la complejidad de tu declaración:\n\n• Declaración individual (solo W-2): tarifa fija desde un precio base\n• Trabajador independiente / freelance: tarifa moderada\n• Declaración empresarial (LLC, S-Corp): tarifa mayor según actividad\n\nLa mejor opción es una consulta inicial gratuita de 20 minutos — te damos el costo exacto sin sorpresas. ¿Te la agendo?"
+        },
+        {
+          keys: ['negocio','empresa','llc','autónomo','independiente','contratista','sociedad','s-corp'],
+          msg: "Perfecto — nos especializamos en contabilidad para pequeños negocios. Esto es lo que típicamente manejamos para empresas:\n\n📌 Contabilidad mensual y categorización\n📌 Pagos estimados trimestrales (15 abr · 15 jun · 15 sep · 15 ene)\n📌 Procesamiento de nómina y entrega de W-2\n📌 Declaración anual de negocio (Schedule C, LLC o S-Corp)\n📌 Representación ante el IRS si es necesario\n\n¿Qué tipo de entidad tienes? (propietario único, LLC, S-Corp) Abro tu expediente y agendo tu primera consulta."
+        },
+        {
+          keys: ['fecha límite','abril','extensión','tarde','cuándo es','plazo','vence','15 de'],
+          msg: "Fechas clave de impuestos que debes tener en mente:\n\n📅 31 de enero — Tu empleador debe enviar tu W-2\n📅 15 de abril — Fecha límite federal (y pago trimestral Q1)\n📅 15 de junio — Pago trimestral Q2\n📅 15 de septiembre — Pago trimestral Q3\n📅 15 de octubre — Fecha límite con extensión\n\nSi necesitas más tiempo, podemos presentar una extensión antes del 15 de abril — te da hasta el 15 de octubre, pero NO extiende el plazo para pagar impuestos adeudados. ¿Tienes una fecha límite próxima? Puedo priorizar tu expediente."
+        },
+        {
+          keys: ['hola','buenos','buenas','hi','hey','buen día','buenas tardes'],
+          msg: "¡Hola! Soy Marco — el asistente del despacho contable.\n\nPuedo ayudarte con el estatus de tu declaración, documentos requeridos, cartas del IRS, seguimiento de reembolso y preguntas fiscales en general. Ya sea declaración personal o empresarial, aquí estamos. ¿Qué necesitas?"
+        }
+      ]
+    }
+  };
+
+  // ── Language detection ──────────────────────────
+  function detectLang(text) {
+    const spanishSignals = /[áéíóúüñ¿¡]|(qué|cómo|cuándo|cuánto|necesito|tengo|mi caso|carta|cita|plazo|reembolso|negocio|documentos|declaración|puedo|puede|ayuda|hola|buenas|gracias|por favor)/i;
+    return spanishSignals.test(text) ? 'es' : 'en';
+  }
+
+  // ── Match response ──────────────────────────────
+  function getResponse(agent, text) {
+    const lang = detectLang(text);
+    const lower = text.toLowerCase();
+    const rules = RESPONSES[agent][lang];
+
+    for (const rule of rules) {
+      if (rule.keys.some(k => lower.includes(k))) {
+        return { msg: rule.msg, lang };
+      }
+    }
+
+    // Default
+    const defaults = {
+      sofia: {
+        en: "I'm here to help! You can ask me about your case status, required documents, appointment scheduling, timelines, or any immigration question. What would you like to know?",
+        es: "¡Estoy aquí para ayudarte! Puedes preguntarme sobre el estatus de tu caso, documentos requeridos, agendar citas, plazos, o cualquier pregunta migratoria. ¿Qué necesitas saber?"
+      },
+      marco: {
+        en: "I'm here to help! Ask me about your tax return status, required documents, IRS notices, refund tracking, deadlines, or anything tax-related. What do you need?",
+        es: "¡Estoy aquí para ayudarte! Pregúntame sobre tu declaración, documentos requeridos, cartas del IRS, reembolsos, fechas límite, o cualquier tema fiscal. ¿Qué necesitas?"
+      }
+    };
+
+    return { msg: defaults[agent][lang], lang };
+  }
+
+  // ── Render helpers ──────────────────────────────
+  function ts() {
+    return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  }
+
+  function renderUserMsg(text) {
+    const box = document.getElementById('chat-messages');
+    const div = document.createElement('div');
+    div.className = 'flex justify-end msg-in';
+    div.innerHTML = `
+      <div class="max-w-[78%]">
+        <div class="bg-gradient-to-r from-teal-500/20 to-blue-600/20 border border-teal-500/25 rounded-2xl rounded-tr-sm px-4 py-3 text-sm text-white">${escHtml(text)}</div>
+        <div class="text-[10px] text-slate-600 text-right mt-1 pr-1">${ts()}</div>
+      </div>`;
+    box.appendChild(div);
+    box.scrollTop = box.scrollHeight;
+  }
+
+  function renderTyping() {
+    const box = document.getElementById('chat-messages');
+    const div = document.createElement('div');
+    div.id = 'typing-indicator';
+    div.className = 'flex items-start gap-2 msg-in';
+    const ag = AGENTS[currentAgent];
+    const col = ag.color === 'blue' ? 'from-blue-400 to-blue-600' : 'from-teal-400 to-teal-600';
+    div.innerHTML = `
+      <div class="w-7 h-7 rounded-full bg-gradient-to-br ${col} flex items-center justify-center text-xs font-black text-slate-900 flex-shrink-0">${ag.avatar}</div>
+      <div class="bg-slate-800/60 border border-white/10 rounded-2xl rounded-tl-sm px-4 py-3 flex items-center gap-1.5">
+        <span class="dot-1"></span><span class="dot-2"></span><span class="dot-3"></span>
+      </div>`;
+    box.appendChild(div);
+    box.scrollTop = box.scrollHeight;
+  }
+
+  function removeTyping() {
+    const t = document.getElementById('typing-indicator');
+    if (t) t.remove();
+  }
+
+  function renderAgentMsg(text) {
+    const box = document.getElementById('chat-messages');
+    const ag = AGENTS[currentAgent];
+    const col = ag.color === 'blue' ? 'from-blue-400 to-blue-600' : 'from-teal-400 to-teal-600';
+    const textCol = ag.color === 'blue' ? 'text-blue-400' : 'text-teal-400';
+    const label = ag.color === 'blue' ? 'Marco' : 'Sofia';
+    const div = document.createElement('div');
+    div.className = 'flex items-start gap-2 msg-in';
+    // Convert newlines to <br> and preserve bullet formatting
+    const formatted = escHtml(text)
+      .replace(/\n•/g, '<br>•')
+      .replace(/\n✓/g, '<br>✓')
+      .replace(/\n📅/g, '<br>📅')
+      .replace(/\n📌/g, '<br>📌')
+      .replace(/\n\n/g, '<br><br>')
+      .replace(/\n/g, '<br>');
+    div.innerHTML = `
+      <div class="w-7 h-7 rounded-full bg-gradient-to-br ${col} flex items-center justify-center text-xs font-black text-slate-900 flex-shrink-0">${ag.avatar}</div>
+      <div class="max-w-[82%]">
+        <div class="bg-slate-800/60 border border-white/10 rounded-2xl rounded-tl-sm px-4 py-3 text-sm text-slate-100 leading-relaxed">${formatted}</div>
+        <div class="text-[10px] ${textCol} mt-1 pl-1">${label} · ${ts()}</div>
+      </div>`;
+    box.appendChild(div);
+    box.scrollTop = box.scrollHeight;
+  }
+
+  function escHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  // ── Send message ────────────────────────────────
+  function sendMessage(prefill) {
+    if (isTyping) return;
+    const input = document.getElementById('chat-input');
+    const text = (prefill || input.value).trim();
+    if (!text) return;
+
+    input.value = '';
+    renderUserMsg(text);
+
+    // Hide chips after first real interaction
+    if (++msgCount > 0) {
+      const cr = document.getElementById('chip-row');
+      if (cr) cr.style.display = 'none';
+    }
+
+    const { msg } = getResponse(currentAgent, text);
+
+    isTyping = true;
+    const delay = 900 + Math.min(text.length * 18, 1200);
+    renderTyping();
+
+    setTimeout(() => {
+      removeTyping();
+      renderAgentMsg(msg);
+      isTyping = false;
+    }, delay);
+  }
+
+  // ── Chips ───────────────────────────────────────
+  function renderChips() {
+    const row = document.getElementById('chip-row');
+    if (!row) return;
+    const lang = currentLang || 'en';
+    const chips = CHIPS[currentAgent][lang] || CHIPS[currentAgent]['en'];
+    row.innerHTML = chips.map(c =>
+      `<button class="chip px-3 py-1.5 rounded-xl text-xs text-slate-300 bg-slate-800/60 font-medium" onclick="sendMessage('${c.replace(/'/g,"\\'")}'">${c}</button>`
+    ).join('');
+  }
+
+  // ── Select agent ────────────────────────────────
+  function selectAgent(agent) {
+    currentAgent = agent;
+    msgCount = 0;
+    const ag = AGENTS[agent];
+    const lang = currentLang || 'en';
+
+    // Update tabs
+    const tabSofia = document.getElementById('tab-sofia');
+    const tabMarco = document.getElementById('tab-marco');
+    if (agent === 'sofia') {
+      tabSofia.className = 'agent-tab-active flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold border transition-all';
+      tabMarco.className = 'agent-tab-inactive flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold border transition-all';
+    } else {
+      tabMarco.className = 'agent-tab-active-blue flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold border transition-all';
+      tabSofia.className = 'agent-tab-inactive flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold border transition-all';
+    }
+
+    // Update header
+    const col = ag.color === 'blue' ? 'from-blue-400 to-blue-600' : 'from-teal-400 to-teal-600';
+    const subCol = ag.color === 'blue' ? 'text-blue-400' : 'text-teal-400';
+    document.getElementById('agent-avatar').className = `w-9 h-9 rounded-full bg-gradient-to-br ${col} flex items-center justify-center text-sm font-black text-slate-900`;
+    document.getElementById('agent-avatar').textContent = ag.avatar;
+    document.getElementById('agent-name').textContent  = ag['name_' + lang];
+    document.getElementById('agent-sub').className     = `text-[10px] ${subCol} font-semibold uppercase tracking-wider`;
+    document.getElementById('agent-sub').textContent   = ag['sub_' + lang];
+
+    // Clear and reset chat
+    const box = document.getElementById('chat-messages');
+    box.innerHTML = '';
+    const chipRow = document.getElementById('chip-row');
+    if (chipRow) chipRow.style.display = '';
+
+    // Welcome
+    const welcome = WELCOME[agent][lang];
+    renderAgentMsg(welcome);
+    renderChips();
+  }
+
+  // ── Enter key ───────────────────────────────────
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('chat-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter') sendMessage();
+    });
+
+    // Init
+    selectAgent('sofia');
+    updateDemoUI();
+  });
+
+  // ── UI strings update on lang change ─────────────
+  function updateDemoUI() {
+    const lang = currentLang || 'en';
+
+    // Re-init current agent in new language
+    selectAgent(currentAgent);
+
+    // Tabs
+    document.getElementById('tab-sofia-label').textContent = lang === 'es' ? 'Sofia — Despachos Legales' : 'Sofia — Law Firms';
+    document.getElementById('tab-marco-label').textContent = lang === 'es' ? 'Marco — Contadores' : 'Marco — Accountants';
+    document.getElementById('online-label').textContent    = lang === 'es' ? 'En línea' : 'Online';
+    document.getElementById('send-label').textContent      = lang === 'es' ? 'Enviar' : 'Send';
+    document.getElementById('demo-note').textContent       = lang === 'es'
+      ? 'Esta es una simulación demo · Los agentes reales usan Claude AI'
+      : 'This is a demo simulation · Real agents are powered by Claude AI';
+    document.getElementById('explore-label').textContent   = lang === 'es' ? 'Explorar el sistema completo' : 'Explore the full system';
+    document.getElementById('demo-badge-text').textContent = lang === 'es' ? 'Agentes en línea · Pruébalos ahora' : 'Agents online · Try them now';
+    document.getElementById('chat-input').placeholder      = lang === 'es' ? 'Escribe tu pregunta aquí...' : 'Type your question here...';
+    document.getElementById('whatsapp-note').innerHTML     = lang === 'es'
+      ? 'Tus clientes pueden tener esta conversación exacta desde <span class="text-[#25D366] font-bold">WhatsApp</span> — sin descargar apps, sin registros.'
+      : 'Your clients can have this exact conversation from <span class="text-[#25D366] font-bold">WhatsApp</span> — no app downloads, no logins.';
+  }
+
+  // Hook into global setLang
+  const _origSetLang = window.setLang;
+  window.setLang = function(lang) {
+    _origSetLang(lang);
+    updateDemoUI();
+  };
+  </script>
 </body>
 </html>
